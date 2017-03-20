@@ -1,0 +1,103 @@
+{
+  "name": "react-chart",
+  "version": "0.0.1",
+  "description": "Simple, immersive & interactive charts for React",
+  "license": "MIT",
+  "homepage": "https://github.com/react-chart/react-chart#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-chart/react-chart.git"
+  },
+  "keywords": [
+    "react",
+    "form",
+    "forms",
+    "form builder",
+    "nested forms"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "react-chart.js",
+    "react-chart.css",
+    "media/*.png"
+  ],
+  "scripts": {
+    "build:node": "babel src --out-dir lib --source-maps inline",
+    "watch": "onchange 'src/**' -i -- npm-run-all build:*",
+    "test": "standard",
+    "umd": "rm -rf react-chart.js && browserify lib/index.js -s reactChart -x react -t babelify -g uglifyify -o react-chart.js",
+    "prepublish": "npm-run-all build:* && npm run umd",
+    "postpublish": "git push --tags",
+    "storybook": "start-storybook -p 8000 -c .storybook",
+    "storybook:prod": "yarn run docs && pushd docs; python -m SimpleHTTPServer 8001; popd",
+    "docs": "build-storybook -o docs"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "d3-ease": "^1.0.3",
+    "d3-interpolate": "^1.1.3",
+    "d3-interpolate-path": "^1.1.1",
+    "d3-scale": "^1.0.4",
+    "d3-shape": "^1.0.5",
+    "d3-timer": "^1.0.5",
+    "d3-voronoi": "^1.1.1",
+    "javascript-detect-element-resize": "^0.5.3",
+    "performance-now": "^2.1.0",
+    "raf": "^3.3.0",
+    "react-motion": "^0.4.7"
+  },
+  "peerDependencies": {
+    "react": "^15.3.1"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.1",
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-2": "^6.13.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "github-markdown-css": "^2.4.1",
+    "html-loader": "^0.4.4",
+    "lodash": "^4.17.4",
+    "markdown-loader": "^0.1.7",
+    "nib": "^1.1.2",
+    "npm-run-all": "^3.1.1",
+    "onchange": "^3.0.2",
+    "react": "^15.4.1",
+    "react-addons-perf": "^15.4.2",
+    "react-dom": "^15.4.1",
+    "react-resizable": "^1.6.0",
+    "standard": "^8.0.0",
+    "stylus": "^0.54.5",
+    "uglifyify": "^3.0.3"
+  },
+  "browserify-shim": {
+    "react": "global:React"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "node_modules",
+      "dist",
+      "lib",
+      "example",
+      "react-chart.js",
+      "stories",
+      "docs"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-assign"
+    ]
+  }
+}
