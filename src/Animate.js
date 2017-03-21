@@ -26,11 +26,10 @@ export default React.createClass({
       data
     } = this.props
     // Remove any springs from the default data
-    this.origin = defaultState || data
     this.destination = data
     // Start velocity map off with zeros
     return {
-      current: this.origin
+      current: defaultState || data
     }
   },
 
@@ -89,10 +88,11 @@ export default React.createClass({
     this.easer = Easing[easing] || Easing[defaultEasing]
 
     // Update the origins and destinations
-    this.origin = {...this.state.current}
-    this.destination = {...data}
-    this.progressOrigin = this.progress
-    this.progressDestination = this.progressOrigin + 1
+    this.origin = this.state.current
+    this.destination = data
+    this.progressOrigin = 0
+    this.progress = 0
+    this.progressDestination = 1
 
     // Update the interpolators
     for (let key in this.destination) {

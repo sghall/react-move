@@ -168,6 +168,6 @@ function makeItems () {
     _.map(_.range(10), d => ({
       value: d
     })),
-    (d, i) => include
+    (d, i) => Math.random() * 10 > i
   )
 }
