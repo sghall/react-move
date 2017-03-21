@@ -1,6 +1,6 @@
 {
   "name": "react-move",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Beautifully animate anything in react with interia or time + easing.",
   "license": "MIT",
   "homepage": "https://github.com/react-move/react-move#readme",
