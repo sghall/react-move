@@ -1,11 +1,3 @@
-<!-- <div align="center">
-  <a href="https://github.com/tannerlinsley/react-move" target="\_parent">
-    <img src="https://github.com/tannerlinsley/tannerlinsley/raw/master/media/banner.png" alt="React Table Logo" style="width:550px;"/>
-  </a>
-  <br />
-  <br />
-</div> -->
-
 # react-move
 
 <a href="https://travis-ci.org/tannerlinsley/react-move" target="\_parent">
@@ -30,7 +22,7 @@ Beautifully animate anything in react with interia or time + easing.
 
 - **12kb!** (minified)
 
-## [Demo](https://github.com/react-move.js.org/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
+## [Demo](https://tannerlinsley.github.io/react-animate/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -41,35 +33,114 @@ Beautifully animate anything in react with interia or time + easing.
 $ yarn add react-move
 ```
 
-## Example
+## <Animate />
+A component used for animating any property of any object.
 ```javascript
 import React from 'react'
-import { Line } from 'react-move'
+import { Animate } from 'react-move'
 
-const myChart = (
-  <Line
-    data={[...]}
-  />
-)
+<Animate
+  // Set some default data
+  default={{
+    scale: 0,
+    color: 'blue',
+    rotate: 0
+  }}
+  // Update your data to whatever you want
+  data={{
+    scale: Math.random() * 1,
+    color: ['red', 'blue', 'yellow'].find((d, i) => i === Math.round(Math.random() * 2)),
+    rotate: Math.random() > 0.5 ? 360 : 0
+  }}
+  // Set the params for inertia animation
+  tension={100}
+  damping={5}
+  // or simply use a duration
+  duration={800}
+  easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
+>
+  {data => { // the child function is passed the current state of the data as an object
+    return (
+      <div
+        style={{
+          borderRadius: ((data.rotate / 360) * 100) + 'px',
+          transform: `translate(${data.scale * 50}%, ${data.scale * 50}%) scale(${data.scale}) rotate(${data.rotate}deg)`,
+          background: data.color
+        }}
+      >
+        {Math.round(data.scale * 100) / 100}
+      </div>
+    )
+  }}
+</Animate>
 ```
 
+## <Transition />
+A component that enables animating multiple elements, including enter and exit animations.
 ```javascript
 import React from 'react'
-import { Chart, Axis, Scale, Series, Toltip } from 'react-move'
+import { Transition } from 'react-move'
 
-const myCustomChart = (
-  <Chart>
-    <Axis>
-      <Scale>
-        <Series />
-        <Series />
-        <Series />
-      </Scale>
-    </Axis>
-    <Tooltip />
-  </Chart>
-)
+const items = _.filter(items, (d, i) => i > Math.random() * 10)
+
+<Transition
+  // pass an array of items to "data"
+  data={items}
+  // use "getKey" to return a unique ID for each item
+  getKey={d => d}
+  // the "update" function returns the items normal state to animate
+  update={d => ({
+    translate: 1,
+    opacity: 1,
+    color: 'grey'
+  })}
+  // the "enter" function returns the items origin state when entering
+  enter={d => ({
+    translate: 0,
+    opacity: 0,
+    color: 'blue'
+  })}
+  // the "leave" function returns the items destination state when leaving
+  leave={d => ({
+    translate: 2,
+    opacity: 0,
+    color: 'red'
+  })}
+  // Set the params for inertia animation
+  tension={100}
+  damping={5}
+  // or simply use a duration
+  duration={800}
+  easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
+  // you can also stagger by a percentage of the animation
+  stagger={0.3}
+  staggerGroup // use this prop to stagger by enter/exit/update group index instead of by overall index
+>
+  {data => { // the child function is passed an array of items to be displayed
+    // data[0] === { key: 0, data: 0, state: {...} }
+    return (
+      <div style={{height: (20 * 10) + 'px'}}>
+        {data.map(d => {
+          return (
+            <div
+              key={d.key}
+              style={{
+                position: 'absolute',
+                transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`,
+                opacity: d.state.opacity,
+                color: d.state.color
+              }}
+            >
+              {d.data} - {Math.round(d.percentage * 100)}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }}
+</Transition>
 ```
+
 
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.
