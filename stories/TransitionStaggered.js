@@ -56,7 +56,6 @@ class Line extends Component {
             color: 'red'
           })}
           stagger={0.1}
-          duration={1000}
           staggerGroups
         >
           {data => (
