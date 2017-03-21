@@ -24,17 +24,15 @@ Beautifully animate anything in react with interia or time + easing.
 
 ## [Demo](https://tannerlinsley.github.io/react-animate/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
-## Table of Contents
-- [Installation](#installation)
-- [Example](#example)
-
 ## Installation
 ```bash
 $ yarn add react-move
 ```
 
 ## <Animate />
+
 A component used for animating any property of any object.
+
 ```javascript
 import React from 'react'
 import { Animate } from 'react-move'
@@ -76,7 +74,9 @@ import { Animate } from 'react-move'
 ```
 
 ## <Transition />
+
 A component that enables animating multiple elements, including enter and exit animations.
+
 ```javascript
 import React from 'react'
 import { Transition } from 'react-move'
