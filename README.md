@@ -29,7 +29,7 @@ Beautifully animate anything in react with interia or time + easing.
 $ yarn add react-move
 ```
 
-## <Animate />
+## Animate
 
 A component used for animating any property of any object.
 
@@ -73,7 +73,7 @@ import { Animate } from 'react-move'
 </Animate>
 ```
 
-## <Transition />
+## Transition
 
 A component that enables animating multiple elements, including enter and exit animations.
 
