@@ -37,7 +37,6 @@ export default React.createClass({
     this.wasAnimating = false
     this.animationID = null
     this.prevTime = 0
-    this.accumulatedTime = 0
     this.interpolators = {}
     this.progress = 0
     this.progressOrigin = 0
@@ -107,8 +106,9 @@ export default React.createClass({
     }
 
     // Reset the startTime and (if using duration) the progress
+    this.prevTime = now()
+    this.startTime = now()
     if (duration) {
-      this.startTime = now()
       this.progress = 0
     }
 
@@ -149,7 +149,6 @@ export default React.createClass({
         // no need to cancel animationID here shouldn't have any in flight
         this.animationID = null
         this.wasAnimating = false
-        this.accumulatedTime = 0
         return
       }
 
@@ -160,25 +159,19 @@ export default React.createClass({
       let currentTime = timestamp || now()
       const timeSinceLastFrame = currentTime - this.prevTime
       this.prevTime = currentTime
-      this.accumulatedTime = this.accumulatedTime + timeSinceLastFrame
 
       // more than 10 frames? they probably switched browser tabs
       // just carry on from this point in time
-      if (this.accumulatedTime > msPerFrame * 10) {
+      if (timeSinceLastFrame > msPerFrame * 10) {
         // TODO: need to adjust startTime here for intertia based animation
         this.startTime = now()
-        this.accumulatedTime = 0
         this.animationID = null
         this.animate()
         return
       }
 
       // How many milliseconds behind are we?
-      const timeToCatchUp = Math.max(Math.floor(this.accumulatedTime - msPerFrame), 0)
-      // Add that to the previous time and currentTime
-      currentTime += timeToCatchUp
-      // Make sure the previous time is caught up too
-      this.prevTime = this.prevTime + timeToCatchUp
+      const timeToCatchUp = Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
 
       let percentage
 
@@ -215,7 +208,6 @@ export default React.createClass({
       // Mark the frame as done
       this.animationID = null
       // Reset the accumulatedTime
-      this.accumulatedTime = 0
 
       this.animate()
     })

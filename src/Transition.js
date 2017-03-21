@@ -36,7 +36,6 @@ const TransitionMotion = React.createClass({
     this.unmounting = false
     this.animationID = null
     this.prevTime = 0
-    this.accumulatedTime = 0
   },
 
   componentDidMount () {
@@ -177,9 +176,8 @@ const TransitionMotion = React.createClass({
     })
 
     // Reset the startTime if using duration
-    if (duration) {
-      this.startTime = now()
-    }
+    this.startTime = now()
+    this.prevTime = now()
 
     // Animate if needed
     this.animate()
@@ -238,7 +236,6 @@ const TransitionMotion = React.createClass({
 
         this.animationID = null
         this.wasAnimating = false
-        this.accumulatedTime = 0
 
         return
       }
@@ -250,24 +247,18 @@ const TransitionMotion = React.createClass({
       let currentTime = timestamp || now()
       const timeSinceLastFrame = currentTime - this.prevTime
       this.prevTime = currentTime
-      this.accumulatedTime = this.accumulatedTime + timeSinceLastFrame
 
       // more than 10 frames? they probably switched browser tabs
       // just carry on from this point in time
-      if (this.accumulatedTime > msPerFrame * 10) {
+      if (timeSinceLastFrame > msPerFrame * 10) {
         this.startTime = now()
-        this.accumulatedTime = 0
         this.animationID = null
         this.animate()
         return
       }
 
       // How many milliseconds behind are we?
-      const timeToCatchUp = Math.max(Math.floor(this.accumulatedTime - msPerFrame), 0)
-      // Add that to the previous time and currentTime
-      currentTime += timeToCatchUp
-      // Make sure the previous time is caught up too
-      this.prevTime = this.prevTime + timeToCatchUp
+      const timeToCatchUp = Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
 
       this.allItems = this.allItems.map((item, i) => {
         let progress = item.progress
@@ -277,7 +268,6 @@ const TransitionMotion = React.createClass({
 
         // If we need to stagger for physics based animations,
         // find the last item with the same enter/update/exit state
-        let staggerParentIndex = i
         if (!duration && stagger && i > 0) {
           for (let ii = i - 1; ii >= 0; ii--) {
             let staggerParent = this.allItems[ii]
@@ -373,8 +363,6 @@ const TransitionMotion = React.createClass({
 
       // Mark the frame as done
       this.animationID = null
-      // Reset the accumulatedTime
-      this.accumulatedTime = 0
 
       this.animate()
     })
