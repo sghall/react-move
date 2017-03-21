@@ -111,45 +111,73 @@ class Line extends Component {
 
         Code:
         <CodeHighlight>{() => `
-<Transition
-  data={items}
-  getKey={d => d.value}
-  update={d => ({
-    translate: 1,
-    opacity: 1,
-    color: 'blue'
-  })}
-  enter={d => ({
-    translate: 0,
-    opacity: 0,
-    color: 'green'
-  })}
-  exit={d => ({
-    translate: 2,
-    opacity: 0,
-    color: 'red'
-  })}
-  duration={1000}
+<Animate
+  data={{
+    background: Math.random() > 0.5 ? '#6748cd' : '#1bc38d'
+  }}
 >
   {data => (
-    <ul style={{height: (20 * 10) + 'px'}}>
-      {data.map(d => (
-        <li
-          key={d.key}
-          style={{
-            fontWeight: 'bold',
-            position: 'absolute',
-            transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
-            opacity: d.state.opacity,
-            color: d.state.color
-          }}
-        >
-          {d.key}
-        </li>
-      ))}
-    </ul>
+    <div style={{
+      padding: '20px',
+      background: data.background
+    }}>
+      <Transition
+        data={items}
+        getKey={d => d.value}
+        update={d => ({
+          translate: 1,
+          opacity: 1,
+          color: 'white'
+        })}
+        enter={d => ({
+          translate: 0,
+          opacity: 0,
+          color: '#79cfff'
+        })}
+        leave={d => ({
+          translate: 2,
+          opacity: 0,
+          color: '#ff7d7d'
+        })}
+        ignore={['opacity']}
+      >
+        {data => (
+          <div style={{
+            height: (20 * 10) + 'px'
+          }}>
+            {data.map(d => (
+              <div
+                key={d.key}
+                style={{
+                  fontWeight: 'bold',
+                  position: 'absolute',
+                  transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
+                  color: d.state.color
+                }}
+              >
+                <Animate
+                  data={{
+                    opacity: d.state.opacity
+                  }}
+                >
+                  {data => {
+                    return (
+                      <span
+                        style={{
+                          opacity: data.opacity
+                        }}
+                      >{d.key} - {Math.round(d.percentage * 100)}</span>
+                    )
+                  }}
+                </Animate>
+              </div>
+            ))}
+          </div>
+        )}
+      </Transition>
+    </div>
   )}
-</Transition>
+</Animate>
         `}</CodeHighlight>
 
         <br />

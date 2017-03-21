@@ -83,45 +83,46 @@ class Line extends Component {
 
         Code:
         <CodeHighlight>{() => `
-<Transition
-  data={items}
-  getKey={d => d.value}
-  update={d => ({
-    translate: 1,
-    opacity: 1,
-    color: 'blue'
-  })}
-  enter={d => ({
-    translate: 0,
-    opacity: 0,
-    color: 'green'
-  })}
-  exit={d => ({
-    translate: 2,
-    opacity: 0,
-    color: 'red'
-  })}
-  duration={1000}
->
-  {data => (
-    <ul style={{height: (20 * 10) + 'px'}}>
-      {data.map(d => (
-        <li
-          key={d.key}
-          style={{
-            fontWeight: 'bold',
-            position: 'absolute',
-            transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
-            opacity: d.state.opacity,
-            color: d.state.color
-          }}
-        >
-          {d.key}
-        </li>
-      ))}
-    </ul>
-  )}
-</Transition>
+  <Transition
+    data={items}
+    getKey={d => d.value}
+    update={d => ({
+      translate: 1,
+      opacity: 1,
+      color: 'grey'
+    })}
+    enter={d => ({
+      translate: 0,
+      opacity: 0,
+      color: 'blue'
+    })}
+    leave={d => ({
+      translate: 2,
+      opacity: 0,
+      color: 'red'
+    })}
+    stagger={0.1}
+    staggerGroups
+  >
+    {data => (
+      <div style={{height: (20 * 10) + 'px'}}>
+        {data.map(d => (
+          <div
+            key={d.key}
+            style={{
+              fontWeight: 'bold',
+              position: 'absolute',
+              transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
+              color: d.state.color,
+              opacity: d.state.opacity
+            }}
+          >
+            {d.key} - {Math.round(d.percentage * 100)}
+          </div>
+        ))}
+      </div>
+    )}
+  </Transition>
         `}</CodeHighlight>
 
         <br />
