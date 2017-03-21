@@ -1,5 +1,6 @@
 node_modules
 lib
 dist
-react-chart.js
+react-move.js
+react-move.min.js
 *.log
