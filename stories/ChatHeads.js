@@ -56,14 +56,10 @@ class Line extends Component {
           }}
         >
           <Transition
-            data={_.range(6).map(d => ({x: 0, y: 0}))}
+            data={_.range(6)}
             getKey={(d, i) => i}
-            // default={{
-            //   scale: 0,
-            //   color: 'blue',
-            //   rotate: 0
-            // }}
             update={d => this.state}
+            stagger={0.5}
           >
             {data => {
               return (
@@ -77,7 +73,8 @@ class Line extends Component {
                         height: '50px',
                         top: '0',
                         left: '0',
-                        background: 'black',
+                        borderRadius: '50px',
+                        background: 'grey',
                         transform: `translate3d(${x - 25}px, ${y - 25}px, 0)`,
                         zIndex: data.length - i
                       }}

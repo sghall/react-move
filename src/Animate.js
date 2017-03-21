@@ -113,7 +113,7 @@ export default React.createClass({
     }
 
     // Be sure to render the origin frame
-    this.updateProgress(0)
+    this.renderProgress(0)
 
     // Animate if needed
     this.animate()
@@ -210,7 +210,7 @@ export default React.createClass({
         percentage = progress / span // 0.25
       }
 
-      this.updateProgress(percentage)
+      this.renderProgress(percentage)
 
       // Mark the frame as done
       this.animationID = null
@@ -221,7 +221,7 @@ export default React.createClass({
     })
   },
 
-  updateProgress (percentage) {
+  renderProgress (percentage) {
     const {
       data,
       duration

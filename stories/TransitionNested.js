@@ -17,10 +17,11 @@ class Line extends Component {
     const {
       items
     } = this.state
+
     return (
       <div>
         <p>
-          Transition can be used to animate just about anything. Here is an example:
+          You can easily layer animation components within each other. Here, the background, the item positions, and the item opacities are all controlled with different nested components.
         </p>
 
         <br />
@@ -39,37 +40,38 @@ class Line extends Component {
 
         <Animate
           data={{
-            background: Math.random() > 0.5 ? 'pink' : 'lightgrey'
+            background: Math.random() > 0.5 ? '#6748cd' : '#1bc38d'
           }}
-          damping={14}
         >
           {data => (
-            <div style={{background: data.background}}>
+            <div style={{
+              padding: '20px',
+              background: data.background
+            }}>
               <Transition
                 data={items}
                 getKey={d => d.value}
                 update={d => ({
                   translate: 1,
                   opacity: 1,
-                  color: 'grey'
+                  color: 'white'
                 })}
                 enter={d => ({
                   translate: 0,
                   opacity: 0,
-                  color: 'blue'
+                  color: '#79cfff'
                 })}
                 leave={d => ({
                   translate: 2,
                   opacity: 0,
-                  color: 'red'
+                  color: '#ff7d7d'
                 })}
-                // duration={1000}
-                tension={50}
-                damping={10}
                 ignore={['opacity']}
               >
                 {data => (
-                  <div style={{height: (20 * 10) + 'px'}}>
+                  <div style={{
+                    height: (20 * 10) + 'px'
+                  }}>
                     {data.map(d => (
                       <div
                         key={d.key}
@@ -86,13 +88,12 @@ class Line extends Component {
                           }}
                         >
                           {data => {
-                            // console.log(data.opacity)
                             return (
                               <span
                                 style={{
                                   opacity: data.opacity
                                 }}
-                              >{d.key} - {d.state.opacity} - {data.opacity}</span>
+                              >{d.key} - {Math.round(d.percentage * 100)}</span>
                             )
                           }}
                         </Animate>
@@ -160,11 +161,13 @@ class Line extends Component {
 
 export default () => <Line />
 
+let include
 function makeItems () {
+  include = !include
   return _.filter(
     _.map(_.range(10), d => ({
       value: d
     })),
-    (d, i) => i > Math.random() * 10
+    (d, i) => include
   )
 }

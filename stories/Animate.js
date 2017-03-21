@@ -16,7 +16,7 @@ class Line extends Component {
     return (
       <div>
         <p>
-          The "Animate" component, inspired by react-motion, can animate anything you throw at it.
+          Animate anything you want by passing in an object to the "Animate" component.
         </p>
 
         <br />
@@ -35,7 +35,7 @@ class Line extends Component {
 
         <div
           style={{
-            height: '500px'
+            height: '120px'
           }}
         >
           {this.state.items.map((d, i) => (
@@ -49,7 +49,6 @@ class Line extends Component {
               data={d}
               tension={100}
               damping={5}
-              // duration={1000}
             >
               {data => {
                 return (
@@ -69,7 +68,7 @@ class Line extends Component {
                       background: data.color
                     }}
                   >
-                    {Math.round(data.scale * 100) / 100}
+                    {Math.round(data.scale * 100)}
                   </div>
                 )
               }}
@@ -82,7 +81,34 @@ class Line extends Component {
 
         Code:
         <CodeHighlight>{() => `
-TDB
+<Animate
+  default={{
+    scale: 0,
+    color: 'blue',
+    rotate: 0
+  }}
+  data={{
+    scale: Math.random() * 1,
+    color: RandomColor('red', 'blue', 'yellow'),
+    rotate: Math.random() > 0.5 ? 360 : 0
+  }}
+  tension={100}
+  damping={5}
+>
+  {data => {
+    return (
+      <div
+        style={{
+          borderRadius: ((data.rotate / 360) * 100) + 'px',
+          transform: \`translate(\${data.scale * 50}%, \${data.scale * 50}%) scale(\${data.scale}) rotate(\${data.rotate}deg)\`,
+          background: data.color
+        }}
+      >
+        {Math.round(data.scale * 100) / 100}
+      </div>
+    )
+  }}
+</Animate>
         `}</CodeHighlight>
 
         <br />

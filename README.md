@@ -1,36 +1,36 @@
 <!-- <div align="center">
-  <a href="https://github.com/react-chart/react-chart" target="\_parent">
-    <img src="https://github.com/react-chart/react-chart/raw/master/media/banner.png" alt="React Table Logo" style="width:550px;"/>
+  <a href="https://github.com/tannerlinsley/react-move" target="\_parent">
+    <img src="https://github.com/tannerlinsley/tannerlinsley/raw/master/media/banner.png" alt="React Table Logo" style="width:550px;"/>
   </a>
   <br />
   <br />
 </div> -->
 
-# react-chart
+# react-move
 
-<a href="https://travis-ci.org/react-chart/react-chart" target="\_parent">
-  <img alt="" src="https://travis-ci.org/react-chart/react-chart.svg?branch=master" />
+<a href="https://travis-ci.org/tannerlinsley/react-move" target="\_parent">
+  <img alt="" src="https://travis-ci.org/tannerlinsley/react-move.svg?branch=master" />
 </a>
-<a href="https://npmjs.com/package/react-chart" target="\_parent">
-  <img alt="" src="https://img.shields.io/npm/dm/react-chart.svg" />
+<a href="https://npmjs.com/package/react-move" target="\_parent">
+  <img alt="" src="https://img.shields.io/npm/dm/react-move.svg" />
 </a>
 <a href="https://react-chat-signup.herokuapp.com/" target="\_parent">
   <img alt="" src="https://img.shields.io/badge/slack-react--chat-blue.svg" />
 </a>
-<a href="https://github.com/react-chart/react-chart" target="\_parent">
-  <img alt="" src="https://img.shields.io/github/stars/react-chart/react-chart.svg?style=social&label=Star" />
+<a href="https://github.com/tannerlinsley/react-move" target="\_parent">
+  <img alt="" src="https://img.shields.io/github/stars/tannerlinsley/react-move.svg?style=social&label=Star" />
 </a>
 <a href="https://twitter.com/tannerlinsley" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/tannerlinsley.svg?style=social&label=Follow" />
 </a>
 
-Simple, immersive &amp; interactive charts for React
+Beautifully animate anything in react with interia or time + easing.
 
 ## Features
 
-- **1kb!** (minified)
+- **12kb!** (minified)
 
-## [Demo](https://react-chart.js.org/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
+## [Demo](https://github.com/react-move.js.org/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -38,13 +38,13 @@ Simple, immersive &amp; interactive charts for React
 
 ## Installation
 ```bash
-$ yarn add react-chart
+$ yarn add react-move
 ```
 
 ## Example
 ```javascript
 import React from 'react'
-import { Line } from 'react-chart'
+import { Line } from 'react-move'
 
 const myChart = (
   <Line
@@ -55,7 +55,7 @@ const myChart = (
 
 ```javascript
 import React from 'react'
-import { Chart, Axis, Scale, Series, Toltip } from 'react-chart'
+import { Chart, Axis, Scale, Series, Toltip } from 'react-move'
 
 const myCustomChart = (
   <Chart>

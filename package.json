@@ -1,32 +1,31 @@
 {
-  "name": "react-chart",
+  "name": "react-move",
   "version": "0.0.1",
-  "description": "Simple, immersive & interactive charts for React",
+  "description": "Beautifully animate anything in react with interia or time + easing.",
   "license": "MIT",
-  "homepage": "https://github.com/react-chart/react-chart#readme",
+  "homepage": "https://github.com/react-move/react-move#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-chart/react-chart.git"
+    "url": "git+https://github.com/react-move/react-move.git"
   },
   "keywords": [
     "react",
-    "form",
-    "forms",
-    "form builder",
-    "nested forms"
+    "animate",
+    "move",
+    "inertia",
+    "time"
   ],
   "main": "lib/index.js",
   "files": [
     "lib/",
-    "react-chart.js",
-    "react-chart.css",
+    "react-move.js",
     "media/*.png"
   ],
   "scripts": {
     "build:node": "babel src --out-dir lib --source-maps inline",
     "watch": "onchange 'src/**' -i -- npm-run-all build:*",
     "test": "standard",
-    "umd": "rm -rf react-chart.js && browserify lib/index.js -s reactChart -x react -t babelify -g uglifyify -o react-chart.js",
+    "umd": "rm -rf react-move.js && browserify lib/index.js -s reactMove -x react -t babelify -g uglifyify -o react-move.js",
     "prepublish": "npm-run-all build:* && npm run umd",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 8000 -c .storybook",
@@ -34,18 +33,10 @@
     "docs": "build-storybook -o docs"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
     "d3-ease": "^1.0.3",
     "d3-interpolate": "^1.1.3",
-    "d3-interpolate-path": "^1.1.1",
-    "d3-scale": "^1.0.4",
-    "d3-shape": "^1.0.5",
-    "d3-timer": "^1.0.5",
-    "d3-voronoi": "^1.1.1",
-    "javascript-detect-element-resize": "^0.5.3",
     "performance-now": "^2.1.0",
-    "raf": "^3.3.0",
-    "react-motion": "^0.4.7"
+    "raf": "^3.3.0"
   },
   "peerDependencies": {
     "react": "^15.3.1"
@@ -85,7 +76,7 @@
       "dist",
       "lib",
       "example",
-      "react-chart.js",
+      "react-move.js",
       "stories",
       "docs"
     ]

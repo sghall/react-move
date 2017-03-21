@@ -19,7 +19,7 @@ class Line extends Component {
     return (
       <div>
         <p>
-          Transition can be used to animate just about anything. Here is an example:
+          The "Transition" component enables animating multiple elements, including enter and exit animations.
         </p>
 
         <br />
@@ -54,16 +54,13 @@ class Line extends Component {
             opacity: 0,
             color: 'red'
           })}
-          damping={10}
-          // duration={1000}
         >
           {data => {
             return (
-              <ul style={{height: (20 * 10) + 'px'}}>
+              <div style={{height: (20 * 10) + 'px'}}>
                 {data.map(d => {
-                  // console.log(d.state)
                   return (
-                    <li
+                    <div
                       key={d.key}
                       style={{
                         fontWeight: 'bold',
@@ -73,11 +70,11 @@ class Line extends Component {
                         color: d.state.color
                       }}
                     >
-                      {d.key}
-                    </li>
+                      {d.key} - {Math.round(d.percentage * 100)}
+                    </div>
                   )
                 })}
-              </ul>
+              </div>
             )
           }}
         </Transition>
@@ -88,43 +85,44 @@ class Line extends Component {
         Code:
         <CodeHighlight>{() => `
 <Transition
-  data={items}
+  data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
   getKey={d => d.value}
   update={d => ({
     translate: 1,
     opacity: 1,
-    color: 'blue'
+    color: 'grey'
   })}
   enter={d => ({
     translate: 0,
     opacity: 0,
-    color: 'green'
+    color: 'blue'
   })}
-  exit={d => ({
+  leave={d => ({
     translate: 2,
     opacity: 0,
     color: 'red'
   })}
-  duration={1000}
 >
-  {data => (
-    <ul style={{height: (20 * 10) + 'px'}}>
-      {data.map(d => (
-        <li
-          key={d.key}
-          style={{
-            fontWeight: 'bold',
-            position: 'absolute',
-            transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
-            opacity: d.state.opacity,
-            color: d.state.color
-          }}
-        >
-          {d.key}
-        </li>
-      ))}
-    </ul>
-  )}
+  {data => {
+    return (
+      <ul>
+        {data.map(d => {
+          return (
+            <li
+              key={d.key}
+              style={{
+                transform: \`translate(\${100 * d.state.translate}px, \${20 * d.key}px)\`,
+                opacity: d.state.opacity,
+                color: d.state.color
+              }}
+            >
+              {d.key}
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }}
 </Transition>
         `}</CodeHighlight>
 
@@ -139,7 +137,7 @@ export default () => <Line />
 
 function makeItems () {
   return _.filter(
-    _.map(_.range(10), d => ({
+    _.map(_.range(11), d => ({
       value: d
     })),
     (d, i) => i > Math.random() * 10
