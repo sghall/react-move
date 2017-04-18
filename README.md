@@ -1,4 +1,8 @@
-# [react-move](https://github.com/tannerlinsley/react-move)
+<div align="center">
+  <a href="https://github.com/tannerlinsley/react-move" target="\_parent"><img src="https://github.com/tannerlinsley/react-move/raw/master/media/Banner.png" alt="React Move Logo" style="width:450px;"/></a>
+  <br />
+  <br />
+</div>
 
 <a href="https://travis-ci.org/tannerlinsley/react-move" target="\_parent">
   <img alt="" src="https://travis-ci.org/tannerlinsley/react-move.svg?branch=master" />
