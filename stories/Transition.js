@@ -70,7 +70,7 @@ class Line extends Component {
                         color: d.state.color
                       }}
                     >
-                      {d.key} - {Math.round(d.percentage * 100)}
+                      {d.key} - {Math.round(d.progress * 100)}
                     </div>
                   )
                 })}

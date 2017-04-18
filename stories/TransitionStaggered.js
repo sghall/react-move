@@ -71,7 +71,7 @@ class Line extends Component {
                     opacity: d.state.opacity
                   }}
                 >
-                  {d.key} - {Math.round(d.percentage * 100)}
+                  {d.key} - {Math.round(d.progress * 100)}
                 </div>
               ))}
             </div>

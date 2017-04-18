@@ -47,8 +47,6 @@ class Line extends Component {
                 rotate: 0
               }}
               data={d}
-              tension={100}
-              damping={5}
             >
               {data => {
                 return (
@@ -92,8 +90,6 @@ class Line extends Component {
     color: RandomColor('red', 'blue', 'yellow'),
     rotate: Math.random() > 0.5 ? 360 : 0
   }}
-  tension={100}
-  damping={5}
 >
   {data => {
     return (

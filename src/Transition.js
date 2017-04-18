@@ -1,51 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react'
 import now from 'performance-now'
 import RAF from 'raf'
 import { interpolate } from 'd3-interpolate'
 import * as Easing from 'd3-ease'
 //
-import { addIntertia } from './Animate'
-//
 const msPerFrame = 1000 / 60
 
 const defaultEasing = 'easeCubicOut'
 
-const TransitionMotion = React.createClass({
-  getDefaultProps () {
-    return {
-      data: [],
-      tension: 170,
-      damping: 26,
-      precision: 0.01,
-      ignore: [],
-      easing: defaultEasing,
-      enter: () => null,
-      leave: () => null,
-      onRest: () => null,
-      stagger: null
-    }
-  },
+export default class Transition extends Component {
+  static defaultProps = {
+    data: [],
+    ignore: [],
+    duration: 500,
+    easing: defaultEasing,
+    enter: () => null,
+    leave: () => null,
+    onRest: () => null,
+    stagger: null
+  }
 
-  getInitialState () {
-    return {
+  constructor () {
+    super()
+    this.state = {
       items: []
     }
-  },
+  }
 
   componentWillMount () {
     this.unmounting = false
     this.animationID = null
-    this.prevTime = 0
-  },
+    this.lastRenderTime = 0
+  }
 
   componentDidMount () {
     this.pivot(this.props)
     this.ranFirst = true
-  },
+  }
 
   componentWillReceiveProps (props) {
     this.pivot(props)
-  },
+  }
 
   componentWillUnmount () {
     this.unmounting = true
@@ -53,7 +48,7 @@ const TransitionMotion = React.createClass({
       RAF.cancel(this.animationID)
       this.animationID = null
     }
-  },
+  }
 
   pivot (props, first) {
     const {
@@ -63,8 +58,7 @@ const TransitionMotion = React.createClass({
       enter,
       leave,
       easing,
-      ignore,
-      duration
+      ignore
     } = props
 
     // Detect if we need to animate
@@ -78,7 +72,8 @@ const TransitionMotion = React.createClass({
     // Update the easing function
     this.easer = Easing[easing] || Easing[defaultEasing]
 
-    // Get the original items from the current state
+    // Get the current items from the state (which is the visual
+    // representation of our items)
     const currentItems = this.state.items.map(d => ({
       ...d,
       entering: false, // Be sure to reset their status
@@ -90,9 +85,7 @@ const TransitionMotion = React.createClass({
       return {
         key: getKey(d, i),
         data: d,
-        progress: 0,
-        percentage: 0,
-        progressVelocity: 0
+        progress: 0
       }
     })
 
@@ -114,9 +107,6 @@ const TransitionMotion = React.createClass({
       item.leaving = true
     })
 
-    // Merge all of the items together
-    this.allItems = mergeItems(currentItems, newItems)
-
     // Used to make all the interpolators from origin to destination states
     const makeInterpolators = (originState, destState) => {
       // Make sure we interpolate new and old keys
@@ -132,17 +122,12 @@ const TransitionMotion = React.createClass({
       return interpolators
     }
 
-    // Give each items it's proper origin/destination states
-    // and corresponding interpolators
-
-    this.allItems = this.allItems.map((item, i) => {
-      // If using duration, reset the progress on the item
-      const progress = duration ? 0 : item.progress
-      // If using physics, save current progress and increment destination progress
-      const progressOrigin = item.progress
-      const progressDestination = item.progress + 1
-
-      const percentage = 0
+    // Merge all of the items together and
+    // give each item it's new origin/destination states
+    // with corresponding interpolators
+    this.items = mergeItems(currentItems, newItems).map((item, i) => {
+      // Reset the progress on the item
+      const progress = 0
 
       let originState
       let destState
@@ -166,22 +151,22 @@ const TransitionMotion = React.createClass({
       return {
         ...item,
         progress,
-        progressOrigin,
-        progressDestination,
-        percentage,
         originState,
         destState,
         interpolators
       }
     })
 
-    // Reset the startTime if using duration
+    // Reset the startTime and lastRenderTime
     this.startTime = now()
-    this.prevTime = now()
+    this.lastRenderTime = this.startTime
+
+    // Be sure to render the origin frame
+    this.renderProgress()
 
     // Animate if needed
     this.animate()
-  },
+  }
 
   animate () {
     // If we're unmounting, bail out.
@@ -197,16 +182,9 @@ const TransitionMotion = React.createClass({
     const {
       onRest,
       duration,
-      tension,
-      damping,
-      precision,
       stagger,
       staggerGroups
     } = this.props
-
-    if (!this.wasAnimating) {
-      this.renderProgress()
-    }
 
     this.animationID = RAF((timestamp) => {
       // Double check that we are still mounted, since RAF can perform
@@ -215,18 +193,9 @@ const TransitionMotion = React.createClass({
         return
       }
 
-      let needsAnimation = true
-      if (duration) {
-        // this is for time based animations
-        needsAnimation = this.state.items.reduce((d, item) => {
-          return d || item.progress !== 1
-        }, false)
-      } else {
-        // this is for physics based animations
-        needsAnimation = this.state.items.reduce((d, item) => {
-          return d || (item.progress !== item.progressDestination || item.progressVelocity !== 0)
-        }, false)
-      }
+      const needsAnimation = this.items.reduce((d, item) => {
+        return d || item.progress !== 1
+      }, false)
 
       // If the animation is complete, tie up any loose ends...
       if (!needsAnimation) {
@@ -245,59 +214,22 @@ const TransitionMotion = React.createClass({
 
       // Keep track of time
       let currentTime = timestamp || now()
-      const timeSinceLastFrame = currentTime - this.prevTime
-      this.prevTime = currentTime
-
-      // more than 10 frames? they probably switched browser tabs
-      // just carry on from this point in time
-      if (timeSinceLastFrame > msPerFrame * 10) {
-        this.startTime = now()
-        this.animationID = null
-        this.animate()
-        return
-      }
+      const timeSinceLastFrame = currentTime - this.lastRenderTime
 
       // How many milliseconds behind are we?
       const timeToCatchUp = Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
+      const adjustedCurrentTime = currentTime + timeToCatchUp
 
-      this.allItems = this.allItems.map((item, i) => {
+      this.items = this.items.map((item, i) => {
         let progress = item.progress
-        let progressVelocity = item.progressVelocity
-        let progressDestination = item.progressDestination
-        let percentage = item.percentage
-
-        // If we need to stagger for physics based animations,
-        // find the last item with the same enter/update/exit state
-        if (!duration && stagger && i > 0) {
-          for (let ii = i - 1; ii >= 0; ii--) {
-            let staggerParent = this.allItems[ii]
-            if (duration) {
-              if (
-                staggerParent.entering === item.entering &&
-                staggerParent.exiting === item.exiting
-              ) {
-                staggerParent = this.allItems[ii]
-              } else {
-                staggerParent = null
-              }
-            }
-            if (staggerParent) {
-              // Only allow the destination to be set when the staggerParent reaches this stagger threshold
-              progressDestination = staggerParent.percentage >= Math.min(stagger, 0.99)
-              ? item.progressDestination
-              : false
-              break
-            }
-          }
-        }
 
         // For staggering time based animations, we just need the index
         let staggerIndex = i + 1
         // But if we are staggering by group, we will instead need the type index of the item
-        if (duration && stagger && staggerGroups) {
+        if (stagger && staggerGroups) {
           staggerIndex = 0
           for (var ii = 0; ii < i; ii++) {
-            let staggerItem = this.allItems[ii]
+            let staggerItem = this.items[ii]
             if (
               staggerItem.entering === item.entering &&
               staggerItem.exiting === item.exiting
@@ -307,94 +239,60 @@ const TransitionMotion = React.createClass({
           }
         }
 
-        if (duration) {
-          // Set the progress percentage
-          if (stagger) {
-            // If its staggered, we need base the percentage off of
-            // the staggered time, instead of the currentTime
-            progress = percentage = Math.min(
-              (
-                Math.max(
-                  currentTime - // Adjusted Current time minus
-                  (
-                    (duration * stagger) * // percentage of duration times
-                    staggerIndex // index
-                  ),
-                  this.startTime // but don't go below the original start time
-                ) - this.startTime // minus the start time
-              ) / duration, 1
-            )
-          } else {
-            // or just calculate normal time based percentage
-            progress = percentage = Math.min((currentTime - this.startTime) / duration, 1)
-          }
-        } else if (progressDestination !== false) {
-          // If we are using physics, start by looping over any
-          // frames we used to catch up. There will always be one frame,
-          // but if we are behind, it could be more.
-          const framesToCatchUp = Math.floor(timeToCatchUp / msPerFrame) + 1
-          for (let ii = 0; ii < framesToCatchUp; ii++) {
-            [progress, progressVelocity] = addIntertia(
-              progress,
-              progressVelocity,
-              progressDestination,
-              tension,
-              damping,
-              precision
-            )
-          }
-
-          // To get the percentage, we take the spanProgress and divide it from the spanLength
-          const span = item.progressDestination - item.progressOrigin // (7 - 3) == 4
-          const spanProgress = progress - item.progressOrigin // (4 - 3) == 1
-          percentage = spanProgress / span // 0.25
+        // Set the progress
+        if (stagger) {
+          // If its staggered, we need base the progress off of
+          // the staggered time, instead of the currentTime
+          progress = Math.min(
+            (
+              Math.max(
+                adjustedCurrentTime - // Adjusted Current time minus
+                (
+                  (duration * stagger) * // progress of duration times
+                  staggerIndex // index
+                ),
+                this.startTime // but don't go below the original start time
+              ) - this.startTime // minus the start time
+            ) / duration, 1
+          )
+        } else {
+          // or just calculate normal time based progress
+          progress = Math.min((adjustedCurrentTime - this.startTime) / duration, 1)
         }
 
         return {
           ...item,
-          progress,
-          progressVelocity,
-          percentage
+          progress
         }
       })
 
-      // Render with the percentage
+      // Render with the progress
       this.renderProgress()
+
+      // Update the lastRenderTime
+      this.lastRenderTime = currentTime
 
       // Mark the frame as done
       this.animationID = null
 
       this.animate()
     })
-  },
+  }
 
   renderProgress () {
-    const {
-      duration
-    } = this.props
-
-    this.allItems = this.allItems
+    const items = this.items
       .filter(item => // Remove the items that have exited
         (
           !item.leaving ||
           item.entering
-        ) || (
-          duration
-            ? (
-              item.progress !== 1
-            )
-            : (
-              item.progress !== item.progressDestination ||
-              item.progressVelocity !== 0
-            )
-        )
+        ) || item.progress !== 1
       )
       .map(item => {
         const state = {}
         const allKeys = dedupe(Object.keys(item.originState), Object.keys(item.destState))
 
         allKeys.forEach(key => {
-          if (!item.percentage) {
+          if (!item.progress) {
             // If at absolute 0, draw the origin state
             state[key] = item.originState[key]
           } else if (!item.interpolators[key]) {
@@ -402,9 +300,7 @@ const TransitionMotion = React.createClass({
             state[key] = item.destState[key]
           } else {
             // Otherwise, interpolate with the progress
-            state[key] = duration
-              ? item.interpolators[key](this.easer(item.percentage))
-              : item.interpolators[key](item.percentage)
+            state[key] = item.interpolators[key](this.easer(item.progress))
           }
         })
 
@@ -414,18 +310,14 @@ const TransitionMotion = React.createClass({
         }
       })
 
-    this.setState({
-      items: this.allItems
-    })
-  },
+    this.setState({ items })
+  }
 
   render () {
     const renderedChildren = this.props.children(this.state.items)
     return renderedChildren && React.Children.only(renderedChildren)
   }
-})
-
-export default TransitionMotion
+}
 
 // Taken from react-motion's mergeDiff (https://github.com/chenglou/react-motion/blob/446a8d0130072c4a59fec1ab788bfc2cc5c5b788/src/mergeDiff.js)
 function mergeItems (prev, next) {
