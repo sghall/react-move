@@ -71,9 +71,9 @@ class Line extends Component {
           leave={d => ({
             className: 'leave'
           })}
-          ignore={['className']}
+          ignore={['className']} // This is to supress interpolation on the className string
           duration={400} // This duration must be the same as your css transition :)
-          stagger={0.1}
+          stagger={100}
         >
           {data => (
             <div style={{
@@ -119,7 +119,7 @@ class Line extends Component {
   })}
   ignore={['className']}
   duration={600} // This duration must be the same as your css transition :)
-  stagger={0.1}
+  stagger={100}
 >
   {data => (
     <ul>

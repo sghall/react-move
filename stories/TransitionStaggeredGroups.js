@@ -19,7 +19,7 @@ class Line extends Component {
     return (
       <div>
         <p>
-          Transitions can be staggered by having each item wait for its predecessor to reach the stagger point before starting it's own animation. Just set the "stagger" prop to the decimal percentage that you want the predecessor to have before starting. We also have "staggerGroups" turned on here, which staggers the items based on their entering or exit state instead of index
+          Stagger groups behave relative to the 'entering', 'updating' and 'leaving' groups. This way items coming in and out can start to animate at the same time, rather than waiting for the other to complete.
         </p>
 
         <br />
@@ -55,7 +55,7 @@ class Line extends Component {
             color: 'red'
           })}
           stagger={100}
-          // staggerGroups // staggers items relative to their 'entering', 'updating', or 'leaving' group
+          staggerGroups // staggers items relative to their 'entering', 'updating', or 'leaving' group
         >
           {data => (
             <div style={{height: (20 * 10) + 'px'}}>

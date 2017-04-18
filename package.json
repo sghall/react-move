@@ -25,7 +25,7 @@
     "build:node": "babel src --out-dir lib --source-maps inline",
     "watch": "onchange 'src/**' -i -- npm-run-all build:*",
     "test": "standard",
-    "umd": "rm -rf react-move.js && browserify lib/index.js -s reactMove -x react -t babelify -g uglifyify -o react-move.js",
+    "umd": "rimraf react-move.js && webpack --config umd.webpack.js",
     "prepublish": "npm-run-all build:* && npm run umd",
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 8000 -c .storybook",
@@ -62,9 +62,11 @@
     "react-addons-perf": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-resizable": "^1.6.0",
+    "rimraf": "^2.6.1",
     "standard": "^8.0.0",
     "stylus": "^0.54.5",
-    "uglifyify": "^3.0.3"
+    "uglifyify": "^3.0.3",
+    "webpack": "^2.4.1"
   },
   "browserify-shim": {
     "react": "global:React"

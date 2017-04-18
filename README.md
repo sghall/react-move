@@ -16,13 +16,14 @@
   <img alt="" src="https://img.shields.io/twitter/follow/tannerlinsley.svg?style=social&label=Follow" />
 </a>
 
-Beautifully animate anything in react with interia or time + easing.
+Beautifully and deterministically animate anything in react.
 
 ## Features
 
 - **12kb!** (minified)
 
-## [Demo](https://tannerlinsley.github.io/react-animate/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
+## Demos
+[Codepen](#) [Storybook](https://tannerlinsley.github.io/react-animate/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
 ## Installation
 ```bash
@@ -30,7 +31,6 @@ $ yarn add react-move
 ```
 
 ## Animate
-
 A component used for animating any property of any object.
 
 ```javascript
@@ -50,10 +50,6 @@ import { Animate } from 'react-move'
     color: ['red', 'blue', 'yellow'].find((d, i) => i === Math.round(Math.random() * 2)),
     rotate: Math.random() > 0.5 ? 360 : 0
   }}
-  // Set the params for inertia animation
-  tension={100}
-  damping={5}
-  // or simply use a duration
   duration={800}
   easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
 >
@@ -74,7 +70,6 @@ import { Animate } from 'react-move'
 ```
 
 ## Transition
-
 A component that enables animating multiple elements, including enter and exit animations.
 
 ```javascript
@@ -106,14 +101,10 @@ const items = _.filter(items, (d, i) => i > Math.random() * 10)
     opacity: 0,
     color: 'red'
   })}
-  // Set the params for inertia animation
-  tension={100}
-  damping={5}
-  // or simply use a duration
   duration={800}
   easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
   // you can also stagger by a percentage of the animation
-  stagger={0.3}
+  stagger={200}
   staggerGroup // use this prop to stagger by enter/exit/update group index instead of by overall index
 >
   {data => { // the child function is passed an array of items to be displayed
@@ -141,6 +132,17 @@ const items = _.filter(items, (d, i) => i > Math.random() * 10)
 </Transition>
 ```
 
+##### Transition Staggering
+With the `Transition` component you can stagger the timing of the items. Simply set the `stagger` prop to a number of milliseconds for each item to wait relative to it's preceding item.
+
+##### Stagger by Group
+With the `Transition` component in stagger mode, you can turn on `staggerGroups`, which will delay item animation relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
+
+## Duration
+The default duration is set to `500` milliseconds. To customize the animation duration, pass the `duration` prop any positive number of milliseconds.
+
+## Easing
+To customize the easing for an animation, you can pass the`easing` prop a string that references any [d3-ease](https://github.com/d3/d3-ease) function.
 
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.

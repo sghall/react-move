@@ -246,11 +246,7 @@ export default class Transition extends Component {
           progress = Math.min(
             (
               Math.max(
-                adjustedCurrentTime - // Adjusted Current time minus
-                (
-                  (duration * stagger) * // progress of duration times
-                  staggerIndex // index
-                ),
+                adjustedCurrentTime - (stagger * staggerIndex),
                 this.startTime // but don't go below the original start time
               ) - this.startTime // minus the start time
             ) / duration, 1
