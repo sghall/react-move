@@ -93,7 +93,7 @@ class Line extends Component {
                                 style={{
                                   opacity: data.opacity
                                 }}
-                              >{d.key} - {Math.round(d.percentage * 100)}</span>
+                              >{d.key} - {Math.round(d.progress * 100)}</span>
                             )
                           }}
                         </Animate>
