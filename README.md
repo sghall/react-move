@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/tannerlinsley/react-move" target="\_parent"><img src="https://github.com/tannerlinsley/react-move/raw/master/media/Banner.png" alt="React Move Logo" style="width:450px;"/></a>
+  <a href="https://github.com/tannerlinsley/react-move" target="\_parent"><img src="https://unpkg.com/react-move@latest/media/Banner.png" alt="React Move Logo" style="width:450px;"/></a>
   <br />
   <br />
 </div>
