@@ -18,7 +18,7 @@ export default class Animate extends Component {
     easing: defaultEasing,
     onRest: () => null,
     flexDuration: false,
-    immutable: false
+    immutable: true
   }
 
   constructor (props) {

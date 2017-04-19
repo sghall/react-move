@@ -72,6 +72,8 @@ A component for animating any single object.
   - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
 - `flexDuration={ Boolean }` | `false`
   - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
+- `immutable={ Boolean }` | `true`
+  - By default, strict equality `===` between the old `data` and new `data` is used to detect when an animation should occur. If you wish, you can disable `immutable` mode which falls back to using `JSON.stringify` to determine if an animation should occur.
 
 ##### Example
 ```javascript
