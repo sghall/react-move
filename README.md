@@ -41,6 +41,7 @@ Beautifully and deterministically animate anything in react.
 
 ## Demos
 - [Codepen](http://codepen.io/tannerlinsley/pen/dWYEwd?editors=0010)
+- [CodeSandbox](https://codesandbox.io/s/jogkyXGP)
 - [Storybook](https://react-move.js.org/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
 ## Installation
