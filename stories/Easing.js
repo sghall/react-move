@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 //
 import Animate from '../src/Animate'
 //
-import CodeHighlight from './components/codeHighlight.js'
+import source from '!raw-loader!./CustomEasing'
+import CodeHighlight from './components/codeHighlight'
 
-class Line extends Component {
+class Story extends Component {
   constructor () {
     super()
     this.state = {
@@ -70,41 +71,8 @@ class Line extends Component {
         <br />
         <br />
 
-        Code:
-        <CodeHighlight>{() => `
-<Animate
-  default={{
-    left: 0,
-    color: 'blue'
-  }}
-  data={this.state.item}
-  duration={2000}
-  easing='easeElasticOut'
->
-  {data => {
-    return (
-      <div
-        style={{
-          float: 'left',
-          width: '100px',
-          height: '100px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 'bold',
-          color: 'white',
-          textAlign: 'center',
-          borderRadius: '10px',
-          transform: \`translate(\${data.left * 300}%, 0%)\`,
-          background: data.color
-        }}
-      >
-        {Math.round(data.left * 100)}
-      </div>
-    )
-  }}
-</Animate>
-        `}</CodeHighlight>
+        Source:
+        <CodeHighlight>{() => source}</CodeHighlight>
 
         <br />
         <br />
@@ -113,7 +81,7 @@ class Line extends Component {
   }
 }
 
-export default () => <Line />
+export default () => <Story />
 
 function makeItem () {
   const colorNum = Math.random()

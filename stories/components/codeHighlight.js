@@ -1,5 +1,5 @@
 import React from 'react'
-import '../utils/prism'
+import '../../.storybook/prism.js'
 
 export default React.createClass({
   render () {

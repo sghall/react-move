@@ -4,7 +4,7 @@ import { configure, storiesOf } from '@kadira/storybook'
 import './reset.css'
 import './fonts.css'
 import './layout.css'
-import '../stories/utils/prism.css'
+import './prism.css'
 import 'react-resizable/css/styles.css'
 import 'github-markdown-css/github-markdown.css'
 //
@@ -18,6 +18,7 @@ import TransitionStaggered from '../stories/TransitionStaggered.js'
 import TransitionStaggeredGroups from '../stories/TransitionStaggeredGroups.js'
 import TransitionClasses from '../stories/TransitionClasses.js'
 import FlexDuration from '../stories/FlexDuration.js'
+import CustomEasing from '../stories/CustomEasing.js'
 //
 configure(() => {
   storiesOf('1. Docs')
@@ -41,4 +42,5 @@ configure(() => {
     .add('Staggered Group Transition', TransitionStaggeredGroups)
     .add('Transition with Classes', TransitionClasses)
     .add('Flex Duration (Frame Dropping)', FlexDuration)
+    .add('Custom Easing', CustomEasing)
 }, module)

@@ -71,7 +71,7 @@ export default class Transition extends Component {
     }
 
     // Update the easing function
-    this.easer = Easing[easing] || Easing[defaultEasing]
+    this.easer = typeof easing === 'function' ? easing : Easing[easing] || Easing[defaultEasing]
 
     // Get the current items from the state (which is the visual
     // representation of our items)

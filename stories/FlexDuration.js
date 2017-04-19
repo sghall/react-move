@@ -3,9 +3,10 @@ import _ from 'lodash'
 //
 import Animate from '../src/Animate'
 //
-import CodeHighlight from './components/codeHighlight.js'
+import source from '!raw-loader!./CustomEasing'
+import CodeHighlight from './components/codeHighlight'
 
-class Line extends Component {
+class Story extends Component {
   constructor () {
     super()
     this.state = {
@@ -17,7 +18,7 @@ class Line extends Component {
     return (
       <div>
         <p>
-          By using a self-looping RAF animation loop, react-motion lets you control how to handle dropped frames with the "flexDuration" prop. If it is set to "true", dropped frames will lengthen the animation to ensure execution of every frame of the animation. Using the default ("false"), frames will drop intermittently to keep up with the duration of the animation.
+          React-move lets you control how to handle dropped frames with the "flexDuration" prop. If it is set to "true", dropped frames will lengthen the animation to ensure execution of every frame of the animation. Using the default ("false"), frames will drop intermittently to keep up with the duration of the animation.
         </p>
 
         <br />
@@ -88,44 +89,8 @@ class Line extends Component {
 
         <div style={{clear: 'both'}} />
 
-        Code:
-        <CodeHighlight>{() => `
-<Animate
-  key={i}
-  default={{
-    scale: 0,
-    color: 'blue',
-    rotate: 0
-  }}
-  data={d}
-  flexDuration={this.state.flexDuration}
->
-  {data => {
-    return (
-      <div
-        style={{
-          width: '30px',
-          height: '30px',
-          float: 'left'
-        }}
-      >
-        <div
-          style={{
-            fontWeight: 'bold',
-            color: 'white',
-            textAlign: 'center',
-            borderRadius: ((data.rotate / 360) * 100) + 'px',
-            transform: \`translate(\${data.scale * 15}%, \${data.scale * 15}%) scale(\${data.scale}) rotate(\${data.rotate}deg)\`,
-            background: data.color
-          }}
-        >
-          {Math.round(data.scale * 100)}
-        </div>
-      </div>
-    )
-  }}
-</Animate>
-        `}</CodeHighlight>
+        Source:
+        <CodeHighlight>{() => source}</CodeHighlight>
 
         <br />
         <br />
@@ -134,7 +99,7 @@ class Line extends Component {
   }
 }
 
-export default () => <Line />
+export default () => <Story />
 
 function makeItems () {
   return _.range(500).map(d => {

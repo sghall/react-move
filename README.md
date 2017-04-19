@@ -25,7 +25,8 @@ Beautifully and deterministically animate anything in react.
 ## Features
 
 - **12kb!** (minified)
-- Animate anything you want.
+- Supports React-Native
+- Animate anything you want
 - List Transitions eg. "enter", "update", and "leaving"
 - Staggering and Stagger Groups
 - Custom Easing
@@ -160,7 +161,24 @@ With the `Transition` component in stagger mode, you can turn on `staggerGroups`
 The default duration is set to `500` milliseconds. To customize the animation duration, pass the `duration` prop any positive number of milliseconds.
 
 ## Easing
-To customize the easing for an animation, you can pass the`easing` prop a string that references any [d3-ease](https://github.com/d3/d3-ease) function.
+##### Built-in Easings
+To customize the easing for an animation, you can pass the `easing` prop a string that references any [d3-ease](https://github.com/d3/d3-ease) function.
+##### Custom Easing Functions
+If you would rather use a different easing function or just build your own, you can! Simply pass a function to the `easing` prop and you're off!
+```javascript
+<Animate
+  easing={(t) => { // This is Chart.js's easeOutBounce function :)
+    if ((t /= 1) < (1 / 2.75)) {
+      return 1 * (7.5625 * t * t)
+    } else if (t < (2 / 2.75)) {
+      return 1 * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75)
+    } else if (t < (2.5 / 2.75)) {
+      return 1 * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375)
+    }
+    return 1 * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375)
+  }}
+>
+```
 
 ## Flex Duration
 If the animation loop gets over-saturated, normally frames will be dropped to keep up with the duration. If you would rather not drop frames and instead dynamically increase the duration of the animation to fit each frame, set the `flexDuration` prop to true

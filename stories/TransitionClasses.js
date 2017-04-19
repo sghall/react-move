@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 //
+import source from '!raw-loader!./CustomEasing'
 import Transition from '../src/Transition'
 //
-import CodeHighlight from './components/codeHighlight.js'
+import CodeHighlight from './components/codeHighlight'
 
 const style = `
 .item {
@@ -26,7 +27,7 @@ const style = `
 }
 `
 
-class Line extends Component {
+class Story extends Component {
   constructor () {
     super()
     this.state = {
@@ -100,41 +101,8 @@ class Line extends Component {
         <br />
         <br />
 
-        Styles:
-        <CodeHighlight>{() => style}</CodeHighlight>
-
-        Code:
-        <CodeHighlight>{() => `
-<Transition
-  data={items}
-  getKey={d => d.value}
-  update={d => ({
-    className: 'stable'
-  })}
-  enter={d => ({
-    className: 'enter'
-  })}
-  leave={d => ({
-    className: 'leave'
-  })}
-  ignore={['className']}
-  duration={600} // This duration must be the same as your css transition :)
-  stagger={100}
->
-  {data => (
-    <ul>
-      {data.map(d => (
-        <li
-          key={d.key}
-          className={\`item \${d.state.className}\`}
-        >
-          {d.key}
-        </li>
-      ))}
-    </ul>
-  )}
-</Transition>
-        `}</CodeHighlight>
+        Source:
+        <CodeHighlight>{() => source}</CodeHighlight>
         <br />
         <br />
       </div>
@@ -142,7 +110,7 @@ class Line extends Component {
   }
 }
 
-export default () => <Line />
+export default () => <Story />
 
 function makeItems () {
   return _.filter(

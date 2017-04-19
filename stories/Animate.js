@@ -3,9 +3,10 @@ import _ from 'lodash'
 //
 import Animate from '../src/Animate'
 //
-import CodeHighlight from './components/codeHighlight.js'
+import source from '!raw-loader!./Animate'
+import CodeHighlight from './components/codeHighlight'
 
-class Line extends Component {
+class Story extends Component {
   constructor () {
     super()
     this.state = {
@@ -77,36 +78,8 @@ class Line extends Component {
         <br />
         <br />
 
-        Code:
-        <CodeHighlight>{() => `
-<Animate
-  default={{
-    scale: 0,
-    color: 'blue',
-    rotate: 0
-  }}
-  data={{
-    scale: Math.random() * 1,
-    color: RandomColor('red', 'blue', 'yellow'),
-    rotate: Math.random() > 0.5 ? 360 : 0
-  }}
->
-  {data => {
-    return (
-      <div
-        style={{
-          borderRadius: ((data.rotate / 360) * 100) + 'px',
-          transform: \`translate(\${data.scale * 50}%, \${data.scale * 50}%) scale(\${data.scale}) rotate(\${data.rotate}deg)\`,
-          background: data.color
-        }}
-      >
-        {Math.round(data.scale * 100) / 100}
-      </div>
-    )
-  }}
-</Animate>
-        `}</CodeHighlight>
-
+        Source:
+        <CodeHighlight>{() => source}</CodeHighlight>
         <br />
         <br />
       </div>
@@ -114,7 +87,7 @@ class Line extends Component {
   }
 }
 
-export default () => <Line />
+export default () => <Story />
 
 function makeItems () {
   return _.range(5).map(d => {
