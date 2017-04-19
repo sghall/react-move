@@ -4,6 +4,8 @@ import RAF from 'raf'
 import { interpolate } from 'd3-interpolate'
 import * as Easing from 'd3-ease'
 //
+import Utils from './Utils'
+//
 const msPerFrame = 1000 / 60
 
 const defaultEasing = 'easeCubicOut'
@@ -15,7 +17,8 @@ export default class Animate extends Component {
     duration: 500,
     easing: defaultEasing,
     onRest: () => null,
-    flexDuration: false
+    flexDuration: false,
+    immutable: false
   }
 
   constructor (props) {
@@ -60,20 +63,12 @@ export default class Animate extends Component {
     const {
       data,
       easing,
-      ignore
+      ignore,
+      immutable
     } = props
 
     // Detect non-change render
-    let needsUpdate = false
-    for (let key in data) {
-      if (!Object.prototype.hasOwnProperty.call(this.destination, key)) {
-        continue
-      }
-      if (this.props.data[key] !== data[key]) {
-        needsUpdate = true
-      }
-    }
-
+    let needsUpdate = immutable ? this.props.data !== data : !Utils.deepEquals(this.props.data, data)
     if (this.ranFirst && !needsUpdate) {
       return
     }

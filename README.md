@@ -58,8 +58,22 @@ $ npm install react-move --only=dev
 
 
 ## Animate
-A component used for animating any property of any object.
+A component for animating any single object.
+##### Props
+- `data={ Object }` | *Required*
+  - An object of keys that that you wish to animate. When these values are changed, each and every value in this object will be interpolated (unless its key is found in the `ignore` prop)
+- `default={ Object }`
+  - An object of keys to be used as the initial state of the animation.
+- `duration={ Number }` | `500`
+  - The duration in milliseconds for each item to animate
+- `easing={ string | function }` | `easeCubicOut`
+  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function, or a custom easing function that receives a progress decimal and returns a new progress decimal.
+- `ignore={ []String }` | `false`
+  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
+- `flexDuration={ Boolean }` | `false`
+  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
 
+##### Example
 ```javascript
 import React from 'react'
 import { Animate } from 'react-move'
@@ -91,9 +105,35 @@ import { Animate } from 'react-move'
 </Animate>
 ```
 
+
+
 ## Transition
 A component that enables animating multiple elements, including enter and exit animations.
+##### Props
+- `data={ []Objects }` | `[]` | *Required*
+  - An array of objects you wish to track. These are not necessarily the exact values you wish to animate, but will used to produce the animated values.
+- `getKey={ function }` | `(d, i) => i`
+  - A function that returns a unique identifier for each item. This is used to track `enter`, `update` and `leave` states/groups.
+- `update={ function }` | *Required*
+  - A function that returns the state for an item if it is neither `entering` or `leaving` the list of items.
+- `enter={ function }` | `() => null`
+  - A function that returns the state for an item if it is `entering` the list of items. If nothing is returned, the `update` state is used.
+- `leave={ function }` | `() => null`
+  - A function that returns the state for an item if it is `leaving` the list of items. If nothing is returned, the `update` state is used.
+- `duration={ Number }` | `500`
+  - The duration in milliseconds for each item to animate
+- `easing={ string | function }` | `easeCubicOut`
+  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function, or a custom easing function that receives a progress decimal and returns a new progress decimal.
+- `stagger={ Number }` | `0`
+  - Number of milliseconds for each item to wait relative to it's preceding item.
+- `staggerGroups={ Boolean }` | `false`
+  - Delays item animation relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
+- `ignore={ []String }` | `false`
+  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
+- `flexDuration={ Boolean }` | `false`
+  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
 
+##### Example
 ```javascript
 import React from 'react'
 import { Transition } from 'react-move'
@@ -151,19 +191,7 @@ const items = _.filter(items, (d, i) => i > Math.random() * 10)
 </Transition>
 ```
 
-##### Transition Staggering
-With the `Transition` component you can stagger the timing of the items. Simply set the `stagger` prop to a number of milliseconds for each item to wait relative to it's preceding item.
-
-##### Stagger by Group
-With the `Transition` component in stagger mode, you can turn on `staggerGroups`, which will delay item animation relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
-
-## Duration
-The default duration is set to `500` milliseconds. To customize the animation duration, pass the `duration` prop any positive number of milliseconds.
-
-## Easing
-##### Built-in Easings
-To customize the easing for an animation, you can pass the `easing` prop a string that references any [d3-ease](https://github.com/d3/d3-ease) function.
-##### Custom Easing Functions
+## Custom Easing
 If you would rather use a different easing function or just build your own, you can! Simply pass a function to the `easing` prop and you're off!
 ```javascript
 <Animate
@@ -178,21 +206,6 @@ If you would rather use a different easing function or just build your own, you 
     return 1 * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375)
   }}
 >
-```
-
-## Flex Duration
-If the animation loop gets over-saturated, normally frames will be dropped to keep up with the duration. If you would rather not drop frames and instead dynamically increase the duration of the animation to fit each frame, set the `flexDuration` prop to true
-
-## Ignore keys
-Anything and everything you pass to `data`, `update`, `enter`, and `leave` will be interpolated. If you have keys that you don't want interpolated, such as a regular string or a boolean, you can pass these keys to the `ignore` prop. For example:
-```javascript
-<Animate
-  data={{
-    interpolatedValue: 27
-    name: 'Tanner'
-  }}
-  ignore={['name']}
-/>
 ```
 
 ## Contributing
