@@ -181,8 +181,8 @@ If you would like to help develop a suggested feature follow these steps:
 - `$ yarn run prepublish` Builds for NPM distribution
 - `$ yarn run docs` Builds the website/docs from the storybook for github pages
 
-<!-- ## Used By
+## Used By
 
 <a href='https://nozzle.io' target="\_parent">
   <img src='https://nozzle.io/img/logo-blue.png' alt='Nozzle Logo' style='width:300px;'/>
-</a> -->
+</a>
