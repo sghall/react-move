@@ -18,17 +18,30 @@
 </a>
 <a href="https://twitter.com/tannerlinsley" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/tannerlinsley.svg?style=social&label=Follow" />
-</a>
+</a>readme
 
 Beautifully and deterministically animate anything in react.
 
 ## Features
 
 - **12kb!** (minified)
+- Animate anything you want.
+- List Transitions eg. "enter", "update", and "leaving"
+- Staggering and Stagger Groups
+- Custom Easing
+- Supports auto interpolation of
+  - Numbers
+  - Colors
+  - SVG paths
+  - Any string with embedded numbers
+  - Arrays of any of these
+  - Objects of any of these
+  - Arrays of objects of any of these... you get the point
+  - Anything [d3-interpolate](https://github.com/d3/d3-interpolate) can handle
 
 ## Demos
 - [Codepen](http://codepen.io/tannerlinsley/pen/dWYEwd?editors=0010)
-- [Storybook](https://tannerlinsley.github.io/react-move/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
+- [Storybook](https://react-move.js.org/?selectedKind=2.%20Demos&selectedStory=Kitchen%20Sink&full=0&down=0&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 
 ## Installation
 ```bash

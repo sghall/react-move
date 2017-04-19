@@ -3,10 +3,10 @@
   "version": "1.0.1",
   "description": "Beautifully animate anything in react with interia or time + easing.",
   "license": "MIT",
-  "homepage": "https://github.com/react-move/react-move#readme",
+  "homepage": "https://github.com/tannerlinsley/react-move#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-move/react-move.git"
+    "url": "git+https://github.com/tannerlinsley/react-move.git"
   },
   "keywords": [
     "react",
@@ -30,7 +30,7 @@
     "postpublish": "git push --tags",
     "storybook": "start-storybook -p 8000 -c .storybook",
     "storybook:prod": "yarn run docs && pushd docs; python -m SimpleHTTPServer 8001; popd",
-    "docs": "build-storybook -o docs"
+    "docs": "build-storybook -o docs && cp .storybook/CNAME docs/CNAME"
   },
   "dependencies": {
     "d3-ease": "^1.0.3",
