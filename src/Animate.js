@@ -39,8 +39,6 @@ export default class Animate extends Component {
     this.lastRenderTime = 0
     this.interpolators = {}
     this.progress = 0
-    this.progressOrigin = 0
-    this.progressDestination = 0
   }
 
   componentDidMount () {
@@ -79,9 +77,6 @@ export default class Animate extends Component {
     // Update the origins and destinations
     this.origin = this.state.current
     this.destination = data
-    this.progressOrigin = 0
-    this.progress = 0
-    this.progressDestination = 1
 
     // Update the interpolators
     for (let key in this.destination) {
@@ -95,13 +90,15 @@ export default class Animate extends Component {
       this.interpolators[key] = interpolate(this.origin[key], this.destination[key])
     }
 
-    // Reset the startTime and (if using duration) the progress
-    this.lastRenderTime = now()
+    // Reset the startTime and the progress
     this.startTime = now()
     this.progress = 0
+    if (!this.wasAnimating) {
+      this.lastRenderTime = now()
+    }
 
     // Be sure to render the origin frame
-    this.renderProgress(0)
+    this.renderProgress()
 
     // Animate if needed
     this.animate()
@@ -120,7 +117,7 @@ export default class Animate extends Component {
 
     this.animationID = RAF(() => {
       // If the animation is complete, tie up any loose ends...
-      if (this.progress === 1) {
+      if (this.progress >= 1) {
         if (this.wasAnimating) {
           onRest()
         }
@@ -146,10 +143,10 @@ export default class Animate extends Component {
       }
 
       // Update the progress
-      this.progress = Math.min((currentTime - this.startTime) / duration, 1)
+      this.progress = Math.max(Math.min((currentTime - this.startTime) / duration, 1), 0)
 
       // Render the progress
-      this.renderProgress(this.progress)
+      this.renderProgress()
 
       // Update the lastRenderTime
       this.lastRenderTime = currentTime
@@ -162,7 +159,7 @@ export default class Animate extends Component {
     })
   }
 
-  renderProgress (percentage) {
+  renderProgress () {
     const {
       data,
       duration
@@ -182,8 +179,8 @@ export default class Animate extends Component {
       } else {
         // Otherwise, interpolate with the progress
         newCurrent[key] = duration
-          ? this.interpolators[key](this.easer(percentage))
-          : this.interpolators[key](percentage)
+          ? this.interpolators[key](this.easer(this.progress))
+          : this.interpolators[key](this.progress)
       }
     }
 

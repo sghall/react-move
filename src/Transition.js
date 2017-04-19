@@ -160,7 +160,9 @@ export default class Transition extends Component {
 
     // Reset the startTime and lastRenderTime
     this.startTime = now()
-    this.lastRenderTime = this.startTime
+    if (!this.wasAnimating) {
+      this.lastRenderTime = this.startTime
+    }
 
     // Be sure to render the origin frame
     this.renderProgress()
@@ -196,7 +198,7 @@ export default class Transition extends Component {
       }
 
       const needsAnimation = this.items.reduce((d, item) => {
-        return d || item.progress !== 1
+        return d || item.progress < 1
       }, false)
 
       // If the animation is complete, tie up any loose ends...
@@ -226,7 +228,7 @@ export default class Transition extends Component {
       }
 
       this.items = this.items.map((item, i) => {
-        let progress = item.progress
+        let progress
 
         // For staggering time based animations, we just need the index
         let staggerIndex = i + 1
@@ -248,18 +250,16 @@ export default class Transition extends Component {
         if (stagger) {
           // If its staggered, we need base the progress off of
           // the staggered time, instead of the currentTime
-          progress = Math.min(
-            (
-              Math.max(
-                currentTime - (stagger * staggerIndex),
-                this.startTime // but don't go below the original start time
-              ) - this.startTime // minus the start time
-            ) / duration, 1
-          )
+          const staggerOffset = stagger * staggerIndex
+          const adjustedCurrentTime = currentTime - staggerOffset
+          progress = (adjustedCurrentTime - this.startTime) / duration
         } else {
           // or just calculate normal time based progress
-          progress = Math.min((currentTime - this.startTime) / duration, 1)
+          progress = (currentTime - this.startTime) / duration
         }
+
+        // Make sure progress is between 0 and 1
+        progress = Math.max(Math.min(progress, 1), 0)
 
         return {
           ...item,
