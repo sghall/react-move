@@ -65,7 +65,7 @@ import { Animate } from 'react-move'
   // Update your data to whatever you want
   data={{
     scale: Math.random() * 1,
-    color: ['red', 'blue', 'yellow'].find((d, i) => i === Math.round(Math.random() * 2)),
+    color: ['red', 'blue', 'yellow'][Math.floor(Math.random() * 3)],
     rotate: Math.random() > 0.5 ? 360 : 0
   }}
   duration={800}
