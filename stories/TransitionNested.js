@@ -43,6 +43,7 @@ class Story extends Component {
           data={{
             background: Math.random() > 0.5 ? '#6748cd' : '#1bc38d'
           }}
+          immutable={false}
         >
           {data => (
             <div style={{
@@ -71,7 +72,7 @@ class Story extends Component {
               >
                 {data => (
                   <div style={{
-                    height: (20 * 100) + 'px'
+                    height: (20 * 10) + 'px'
                   }}>
                     {data.map(d => (
                       <div
@@ -87,6 +88,7 @@ class Story extends Component {
                           data={{
                             opacity: d.state.opacity
                           }}
+                          immutable={false}
                         >
                           {data => {
                             return (
@@ -126,9 +128,9 @@ let include
 function makeItems () {
   include = !include
   return _.filter(
-    _.map(_.range(100), d => ({
+    _.map(_.range(10), d => ({
       value: d
     })),
-    (d, i) => Math.random() * 100 > i
+    (d, i) => Math.random() * 10 > i
   )
 }
