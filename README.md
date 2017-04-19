@@ -46,7 +46,15 @@ Beautifully and deterministically animate anything in react.
 ## Installation
 ```bash
 $ yarn add react-move
+# or
+$ npm install react-move --only=dev
 ```
+##### CDN
+```html
+<script src='https://npmcdn.com/react-move@latest/react-move.js'></script>
+```
+
+
 
 ## Animate
 A component used for animating any property of any object.
@@ -59,31 +67,26 @@ import { Animate } from 'react-move'
   // Set some default data
   default={{
     scale: 0,
-    color: 'blue',
-    rotate: 0
+    color: 'blue'
   }}
   // Update your data to whatever you want
   data={{
     scale: Math.random() * 1,
-    color: ['red', 'blue', 'yellow'].find((d, i) => i === Math.round(Math.random() * 2)),
-    rotate: Math.random() > 0.5 ? 360 : 0
+    color: _.sample(['red', 'blue', 'yellow']),
   }}
   duration={800}
   easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
 >
-  {data => { // the child function is passed the current state of the data as an object
-    return (
-      <div
-        style={{
-          borderRadius: ((data.rotate / 360) * 100) + 'px',
-          transform: `translate(${data.scale * 50}%, ${data.scale * 50}%) scale(${data.scale}) rotate(${data.rotate}deg)`,
-          background: data.color
-        }}
-      >
-        {Math.round(data.scale * 100) / 100}
-      </div>
-    )
-  }}
+  {data => (
+    <div
+      style={{
+        transform: `scale(${data.scale})`,
+        background: data.color
+      }}
+    >
+      {data.scale * 100}
+    </div>
+  )}
 </Animate>
 ```
 
@@ -100,53 +103,50 @@ const items = _.filter(items, (d, i) => i > Math.random() * 10)
   // pass an array of items to "data"
   data={items}
   // use "getKey" to return a unique ID for each item
-  getKey={d => d}
+  getKey={(item, index) => index}
   // the "update" function returns the items normal state to animate
-  update={d => ({
+  update={item => ({
     translate: 1,
     opacity: 1,
     color: 'grey'
   })}
   // the "enter" function returns the items origin state when entering
-  enter={d => ({
+  enter={item => ({
     translate: 0,
     opacity: 0,
     color: 'blue'
   })}
   // the "leave" function returns the items destination state when leaving
-  leave={d => ({
+  leave={item => ({
     translate: 2,
     opacity: 0,
     color: 'red'
   })}
+  //
   duration={800}
   easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
-  // you can also stagger by a percentage of the animation
-  stagger={200}
+  stagger={200} // you can also stagger by a percentage of the animation
   staggerGroup // use this prop to stagger by enter/exit/update group index instead of by overall index
 >
-  {data => { // the child function is passed an array of items to be displayed
-    // data[0] === { key: 0, data: 0, state: {...} }
-    return (
-      <div style={{height: (20 * 10) + 'px'}}>
-        {data.map(d => {
-          return (
-            <div
-              key={d.key}
-              style={{
-                position: 'absolute',
-                transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`,
-                opacity: d.state.opacity,
-                color: d.state.color
-              }}
-            >
-              {d.data} - {Math.round(d.percentage * 100)}
-            </div>
-          )
-        })}
-      </div>
-    )
-  }}
+  {data => ( // the child function is passed an array of itemStates
+    <div>
+      {data.map(item => {
+        // data[0] === { key: 0, data: 0, state: {...} }
+        return (
+          <div
+            key={item.key}
+            style={{
+              transform: `translateX(${100 * item.state.translate}px)`,
+              opacity: item.state.opacity,
+              color: item.state.color
+            }}
+          >
+            {item.data} - {Math.round(item.percentage * 100)}
+          </div>
+        )
+      })}
+    </div>
+  )}
 </Transition>
 ```
 
@@ -161,6 +161,21 @@ The default duration is set to `500` milliseconds. To customize the animation du
 
 ## Easing
 To customize the easing for an animation, you can pass the`easing` prop a string that references any [d3-ease](https://github.com/d3/d3-ease) function.
+
+## Flex Duration
+If the animation loop gets over-saturated, normally frames will be dropped to keep up with the duration. If you would rather not drop frames and instead dynamically increase the duration of the animation to fit each frame, set the `flexDuration` prop to true
+
+## Ignore keys
+Anything and everything you pass to `data`, `update`, `enter`, and `leave` will be interpolated. If you have keys that you don't want interpolated, such as a regular string or a boolean, you can pass these keys to the `ignore` prop. For example:
+```javascript
+<Animate
+  data={{
+    interpolatedValue: 27
+    name: 'Tanner'
+  }}
+  ignore={['name']}
+/>
+```
 
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.

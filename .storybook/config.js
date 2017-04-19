@@ -17,6 +17,7 @@ import TransitionNested from '../stories/TransitionNested.js'
 import TransitionStaggered from '../stories/TransitionStaggered.js'
 import TransitionStaggeredGroups from '../stories/TransitionStaggeredGroups.js'
 import TransitionClasses from '../stories/TransitionClasses.js'
+import FlexDuration from '../stories/FlexDuration.js'
 //
 configure(() => {
   storiesOf('1. Docs')
@@ -39,5 +40,5 @@ configure(() => {
     .add('Staggered Transition', TransitionStaggered)
     .add('Staggered Group Transition', TransitionStaggeredGroups)
     .add('Transition with Classes', TransitionClasses)
-    // .add('Chat Heads', ChatHeads)
+    .add('Flex Duration (Frame Dropping)', FlexDuration)
 }, module)

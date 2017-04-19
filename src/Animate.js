@@ -14,7 +14,8 @@ export default class Animate extends Component {
     ignore: [],
     duration: 500,
     easing: defaultEasing,
-    onRest: () => null
+    onRest: () => null,
+    flexDuration: false
   }
 
   constructor (props) {
@@ -118,7 +119,8 @@ export default class Animate extends Component {
 
     const {
       onRest,
-      duration
+      duration,
+      flexDuration
     } = this.props
 
     this.animationID = RAF(() => {
@@ -141,12 +143,15 @@ export default class Animate extends Component {
       let currentTime = now()
       const timeSinceLastFrame = currentTime - this.lastRenderTime
 
-      // How many milliseconds behind are we?
-      const timeToCatchUp = Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
-      const adjustedCurrentTime = currentTime + timeToCatchUp
+      // Are we using flexDuration?
+      if (flexDuration) {
+        // Add however many milliseconds behind we are to the startTime to offset
+        // any dropped frames
+        this.startTime += Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
+      }
 
       // Update the progress
-      this.progress = Math.min((adjustedCurrentTime - this.startTime) / duration, 1)
+      this.progress = Math.min((currentTime - this.startTime) / duration, 1)
 
       // Render the progress
       this.renderProgress(this.progress)

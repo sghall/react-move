@@ -17,7 +17,8 @@ export default class Transition extends Component {
     enter: () => null,
     leave: () => null,
     onRest: () => null,
-    stagger: null
+    stagger: null,
+    flexDuration: false
   }
 
   constructor () {
@@ -183,7 +184,8 @@ export default class Transition extends Component {
       onRest,
       duration,
       stagger,
-      staggerGroups
+      staggerGroups,
+      flexDuration
     } = this.props
 
     this.animationID = RAF((timestamp) => {
@@ -216,9 +218,12 @@ export default class Transition extends Component {
       let currentTime = timestamp || now()
       const timeSinceLastFrame = currentTime - this.lastRenderTime
 
-      // How many milliseconds behind are we?
-      const timeToCatchUp = Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
-      const adjustedCurrentTime = currentTime + timeToCatchUp
+      // Are we using flexDuration?
+      if (flexDuration) {
+        // Add however many milliseconds behind we are to the startTime to offset
+        // any dropped frames
+        this.startTime += Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
+      }
 
       this.items = this.items.map((item, i) => {
         let progress = item.progress
@@ -246,14 +251,14 @@ export default class Transition extends Component {
           progress = Math.min(
             (
               Math.max(
-                adjustedCurrentTime - (stagger * staggerIndex),
+                currentTime - (stagger * staggerIndex),
                 this.startTime // but don't go below the original start time
               ) - this.startTime // minus the start time
             ) / duration, 1
           )
         } else {
           // or just calculate normal time based progress
-          progress = Math.min((adjustedCurrentTime - this.startTime) / duration, 1)
+          progress = Math.min((currentTime - this.startTime) / duration, 1)
         }
 
         return {
