@@ -71,7 +71,7 @@ export default class Animate extends Component {
     }
 
     // Update the easing function
-    this.easer = typeof easing === 'function' ? easing : Easing[easing] || Easing[defaultEasing]
+    this.easer = typeof easing === 'function' ? easing : Easing[easing] || Easing[defaults.easing]
 
     // Update the origins and destinations
     this.origin = this.state.current
