@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //
 import Animate from '../src/Animate'
 //
-import source from '!raw-loader!./CustomEasing'
+import source from '!raw-loader!./Easing'
 import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {

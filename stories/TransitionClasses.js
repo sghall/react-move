@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 //
-import source from '!raw-loader!./CustomEasing'
+import source from '!raw-loader!./TransitionClasses'
 import Transition from '../src/Transition'
 //
 import CodeHighlight from './components/codeHighlight'

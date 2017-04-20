@@ -8,19 +8,18 @@ import Utils from './Utils'
 //
 const msPerFrame = 1000 / 60
 
-const defaultEasing = 'easeCubicOut'
+const defaults = {
+  data: {},
+  ignore: [],
+  duration: 500,
+  easing: 'easeCubicOut',
+  onRest: () => null,
+  flexDuration: false,
+  immutable: true
+}
 
 export default class Animate extends Component {
-  static defaultProps = {
-    data: {},
-    ignore: [],
-    duration: 500,
-    easing: defaultEasing,
-    onRest: () => null,
-    flexDuration: false,
-    immutable: true
-  }
-
+  static defaultProps = defaults
   constructor (props) {
     super()
     const {
@@ -194,3 +193,5 @@ export default class Animate extends Component {
     return renderedChildren && React.Children.only(renderedChildren)
   }
 }
+
+Animate.defaults = defaults

@@ -19,6 +19,7 @@ import TransitionStaggeredGroups from '../stories/TransitionStaggeredGroups.js'
 import TransitionClasses from '../stories/TransitionClasses.js'
 import FlexDuration from '../stories/FlexDuration.js'
 import CustomEasing from '../stories/CustomEasing.js'
+import CustomDefaults from '../stories/CustomDefaults.js'
 //
 configure(() => {
   storiesOf('1. Docs')
@@ -43,4 +44,5 @@ configure(() => {
     .add('Transition with Classes', TransitionClasses)
     .add('Flex Duration (Frame Dropping)', FlexDuration)
     .add('Custom Easing', CustomEasing)
+    .add('Custom Defaults', CustomDefaults)
 }, module)

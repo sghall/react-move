@@ -3,7 +3,7 @@ import _ from 'lodash'
 //
 import Transition from '../src/Transition'
 //
-import source from '!raw-loader!./CustomEasing'
+import source from '!raw-loader!./TransitionStaggeredGroups'
 import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {

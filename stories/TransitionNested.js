@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Transition from '../src/Transition'
 import Animate from '../src/Animate'
 //
-import source from '!raw-loader!./CustomEasing'
+import source from '!raw-loader!./TransitionNested'
 import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {

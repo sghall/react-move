@@ -6,20 +6,20 @@ import * as Easing from 'd3-ease'
 //
 const msPerFrame = 1000 / 60
 
-const defaultEasing = 'easeCubicOut'
+const defaults = {
+  data: [],
+  ignore: [],
+  duration: 500,
+  easing: 'easeCubicOut',
+  enter: () => null,
+  leave: () => null,
+  onRest: () => null,
+  stagger: null,
+  flexDuration: false
+}
 
 export default class Transition extends Component {
-  static defaultProps = {
-    data: [],
-    ignore: [],
-    duration: 500,
-    easing: defaultEasing,
-    enter: () => null,
-    leave: () => null,
-    onRest: () => null,
-    stagger: null,
-    flexDuration: false
-  }
+  static defaultProps = defaults
 
   constructor () {
     super()
@@ -396,6 +396,8 @@ function mergeItems (prev, next) {
     return -1
   })
 }
+
+Transition.defaults = defaults
 
 function dedupe (...arrs) {
   const allItems = arrs.reduce((a, b) => a.concat(b), [])

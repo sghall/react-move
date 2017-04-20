@@ -211,6 +211,48 @@ If you would rather use a different easing function or just build your own, you 
 >
 ```
 
+## Custom Defaults
+Want to change the defaults for either `Animate` or `Transition`?
+```javascript
+import { Animate, Transition } from 'react-move'
+
+
+// Before using either component, change any property in the Component's 'defaults' object
+Object.assign(Animate.defaults, {
+  duration: 3000,
+  easing: 'easeElasticOut'
+})
+
+Object.assign(Transition.defaults, {
+  stagger: 100
+})
+
+
+// Or create your own wrapped versions!
+class MyAnimate extends React.Component {
+  render () {
+    return (  
+      <Animate
+        duration={3000}
+        easing='easeElasticOut'
+        {...this.props}
+      />
+    )
+  }
+}
+
+class MyTransition extends React.Component {
+  render () {
+    return (  
+      <Animate
+        stagger={100}
+        {...this.props}
+      />
+    )
+  }
+}
+```
+
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.
 If you would like to help develop a suggested feature follow these steps:

@@ -3,7 +3,7 @@ import _ from 'lodash'
 //
 import Animate from '../src/Animate'
 //
-import source from '!raw-loader!./CustomEasing'
+import source from '!raw-loader!./FlexDuration'
 import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {
