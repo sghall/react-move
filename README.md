@@ -244,7 +244,7 @@ class MyAnimate extends React.Component {
 class MyTransition extends React.Component {
   render () {
     return (  
-      <Animate
+      <Transition
         stagger={100}
         {...this.props}
       />
