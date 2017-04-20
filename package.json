@@ -52,6 +52,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
+    "deep-equal": "^1.0.1",
     "github-markdown-css": "^2.4.1",
     "html-loader": "^0.4.4",
     "lodash": "^4.17.4",

@@ -1,7 +1,9 @@
+import DeepEqual from 'deep-equal'
+
 export default {
   deepEquals
 }
 
 function deepEquals (a, b) {
-  return JSON.stringify(a) === JSON.stringify(b)
+  return DeepEqual(a, b)
 }
