@@ -1,7 +1,5 @@
 <div align="center">
   <a href="https://github.com/tannerlinsley/react-move" target="\_parent"><img src="https://unpkg.com/react-move@latest/media/Banner.png" alt="React Move Logo" style="width:450px;"/></a>
-  <br />
-  <br />
 </div>
 
 <a href="https://travis-ci.org/tannerlinsley/react-move" target="\_parent">
@@ -23,7 +21,7 @@
   <img alt="" src="https://img.shields.io/badge/%24-Donate-brightgreen.svg" />
 </a>
 
-Beautifully and deterministically animate anything in react.
+#### Beautifully and deterministically animate anything in react.
 
 ## Features
 
