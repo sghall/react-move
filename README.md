@@ -18,7 +18,10 @@
 </a>
 <a href="https://twitter.com/tannerlinsley" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/tannerlinsley.svg?style=social&label=Follow" />
-</a>readme
+</a>
+<a href="https://cash.me/$tannerlinsley" target="\_parent">
+  <img alt="" src="https://img.shields.io/badge/%24-Donate-brightgreen.svg" />
+</a>
 
 Beautifully and deterministically animate anything in react.
 
