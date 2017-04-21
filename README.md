@@ -26,7 +26,7 @@
 ## Features
 
 - **12kb!** (minified)
-- Supports React-Native
+- Supported in React, React-Native & React-VR
 - Animate anything you want
 - List Transitions eg. "enter", "update", and "leaving"
 - Staggering and Stagger Groups
