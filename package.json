@@ -37,7 +37,8 @@
     "d3-ease": "^1.0.3",
     "d3-interpolate": "^1.1.3",
     "performance-now": "^2.1.0",
-    "raf": "^3.3.0"
+    "raf": "^3.3.0",
+    "deep-equal": "^1.0.1"
   },
   "peerDependencies": {
     "react": "^15.3.1"
@@ -52,7 +53,6 @@
     "babel-preset-stage-2": "^6.13.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
-    "deep-equal": "^1.0.1",
     "github-markdown-css": "^2.4.1",
     "html-loader": "^0.4.4",
     "lodash": "^4.17.4",
