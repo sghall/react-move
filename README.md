@@ -211,6 +211,24 @@ If you would rather use a different easing function or just build your own, you 
 >
 ```
 
+## Physics Easing
+Using one of our favorite tools called [Springer](https://github.com/tannerlinsley/springer), you can effortlessly build your own realistic spring-based easing functions, and achieve a look and feel similar that of React-Motion.
+```javascript
+import React from 'react'
+import { Animate } from 'react-move'
+import Springer from 'springer'
+
+const normalSpring = Springer()
+const hardSpring = Springer(0.9, 0.3)
+const wobblySpring = Springer(0.5, 0.9)
+
+<Animate
+  easing={wobblySpring}
+/>
+```
+
+*Notes: Springer does not deliver eventual and interruptible animation. For animations requiring those characteristics, we suggest using [React-Motion](https://github.com/chenglou/react-motion).*
+
 ## Custom Defaults
 Want to change the defaults for either `Animate` or `Transition`?
 ```javascript
