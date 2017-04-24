@@ -20,8 +20,10 @@
   "files": [
     "lib/",
     "react-move.js",
-    "media/*.png"
+    "media/*.png",
+    "index.d.ts"
   ],
+  "types": "./index.d.ts",
   "scripts": {
     "build:node": "babel src --out-dir lib --source-maps inline",
     "watch": "onchange 'src/**' -i -- npm-run-all build:*",
@@ -34,6 +36,7 @@
     "docs": "build-storybook -o docs && cp .storybook/CNAME docs/CNAME"
   },
   "dependencies": {
+    "@types/react": "^15.0.22",
     "d3-ease": "^1.0.3",
     "d3-interpolate": "^1.1.3",
     "performance-now": "^2.1.0",
