@@ -22,6 +22,7 @@
     "react-move.js",
     "media/*.png"
   ],
+  "typings": "./index.d.ts",
   "scripts": {
     "build:node": "babel src --out-dir lib --source-maps inline",
     "watch": "onchange 'src/**' -i -- npm-run-all build:*",
