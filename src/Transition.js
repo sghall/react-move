@@ -190,7 +190,7 @@ export default class Transition extends Component {
       flexDuration
     } = this.props
 
-    this.animationID = RAF((timestamp) => {
+    this.animationID = RAF(() => {
       // Double check that we are still mounted, since RAF can perform
       // asyncronously sometimes
       if (this.unmounting) {
@@ -217,7 +217,7 @@ export default class Transition extends Component {
       this.wasAnimating = true
 
       // Keep track of time
-      let currentTime = timestamp || now()
+      let currentTime = now()
       const timeSinceLastFrame = currentTime - this.lastRenderTime
 
       // Are we using flexDuration?
