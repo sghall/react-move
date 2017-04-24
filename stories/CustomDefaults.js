@@ -5,10 +5,24 @@ import Animate from '../src/Animate'
 import source from '!raw-loader!./CustomDefaults'
 import CodeHighlight from './components/codeHighlight'
 
-Object.assign(Animate.defaults, {
-  duration: 3000,
-  easing: 'easeBackOut'
-})
+class MyAnimate extends Component {
+  render () {
+    return (
+      <Animate
+        duration={3000}
+        easing='easeBackOut'
+        {...this.props}
+      />
+    )
+  }
+}
+
+// OR
+
+// Object.assign(Animate.defaults, {
+//   duration: 3000,
+//   easing: 'easeBackOut'
+// })
 
 class Story extends Component {
   constructor () {
@@ -39,7 +53,7 @@ class Story extends Component {
             height: '120px'
           }}
         >
-          <Animate
+          <MyAnimate
             default={{
               left: 0,
               color: 'blue'
@@ -68,7 +82,7 @@ class Story extends Component {
                 </div>
               )
             }}
-          </Animate>
+          </MyAnimate>
         </div>
 
         <br />
