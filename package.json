@@ -20,7 +20,8 @@
   "files": [
     "lib/",
     "react-move.js",
-    "media/*.png"
+    "media/*.png",
+    "index.d.ts"
   ],
   "types": "./index.d.ts",
   "scripts": {
