@@ -86,6 +86,10 @@ export default class Animate extends Component {
         this.interpolators[key] = null
         continue
       }
+      if (this.origin[key] === this.destination[key]) {
+        this.interpolators[key] = null
+        continue
+      }
       this.interpolators[key] = interpolate(this.origin[key], this.destination[key])
     }
 
@@ -172,8 +176,8 @@ export default class Animate extends Component {
         continue
       }
 
-      // If ignored, skip right to the value
-      if (!this.interpolators[key]) {
+      // If ignored or no change needed, skip right to the value
+      if (this.interpolators[key] === null) {
         newCurrent[key] = data[key]
       } else {
         // Otherwise, interpolate with the progress

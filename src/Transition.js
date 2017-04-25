@@ -118,6 +118,10 @@ export default class Transition extends Component {
           interpolators[key] = null
           return
         }
+        if (originState[key] === destState[key]) {
+          interpolators[key] = null
+          return
+        }
         interpolators[key] = interpolate(originState[key], destState[key])
       })
       return interpolators
