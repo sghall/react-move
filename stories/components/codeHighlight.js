@@ -2,20 +2,36 @@ import React from 'react'
 import '../../.storybook/prism.js'
 
 export default React.createClass({
+  getInitialState () {
+    return {
+      show: false
+    }
+  },
   render () {
+    const { show } = this.state
     const { language, children } = this.props
     return (
-      <pre>
-        <code className={'language-' + (language || 'jsx')}>
-          {children()}
-        </code>
-      </pre>
+      <div>
+        <button
+          onClick={() => this.setState(state => ({
+            show: !state.show
+          }))}
+        >
+          {show ? 'Hide Source' : 'Show Source'}
+        </button>
+        {!!show && (
+          <pre>
+            <code className={'language-' + (language || 'jsx')}>
+              {children()}
+            </code>
+          </pre>
+        )}
+      </div>
     )
   },
-  componentDidMount () {
-    window.Prism.highlightAll()
-  },
   componentDidUpdate () {
-    window.Prism.highlightAll()
+    if (this.state.show) {
+      window.Prism && window.Prism.highlightAll()
+    }
   }
 })

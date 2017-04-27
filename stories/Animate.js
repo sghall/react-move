@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 //
 import Animate from '../src/Animate'
-//
-import source from '!raw-loader!./Animate'
-import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {
   constructor () {
@@ -74,20 +71,23 @@ class Story extends Component {
             </Animate>
           ))}
         </div>
-
-        <br />
-        <br />
-
-        Source:
-        <CodeHighlight>{() => source}</CodeHighlight>
-        <br />
-        <br />
       </div>
     )
   }
 }
 
-export default () => <Story />
+const source = require('!raw-loader!./Animate')
+const CodeHighlight = require('./components/codeHighlight').default
+export default () => (
+  <div>
+    <Story />
+    <br />
+    <br />
+
+
+    <CodeHighlight>{() => source}</CodeHighlight>
+  </div>
+)
 
 function makeItems () {
   return _.range(5).map(d => {

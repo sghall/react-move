@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 //
-import source from '!raw-loader!./TransitionClasses'
 import Transition from '../src/Transition'
-//
-import CodeHighlight from './components/codeHighlight'
 
 const style = `
 .item {
@@ -97,20 +94,23 @@ class Story extends Component {
             </div>
           )}
         </Transition>
-
-        <br />
-        <br />
-
-        Source:
-        <CodeHighlight>{() => source}</CodeHighlight>
-        <br />
-        <br />
       </div>
     )
   }
 }
 
-export default () => <Story />
+const source = require('!raw-loader!./TransitionClasses')
+const CodeHighlight = require('./components/codeHighlight').default
+export default () => (
+  <div>
+    <Story />
+    <br />
+    <br />
+
+    
+    <CodeHighlight>{() => source}</CodeHighlight>
+  </div>
+)
 
 function makeItems () {
   return _.filter(

@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 //
 import Transition from '../src/Transition'
-//
-import source from '!raw-loader!./TransitionStaggeredGroups'
-import CodeHighlight from './components/codeHighlight'
 
 class Story extends Component {
   constructor () {
@@ -77,21 +74,23 @@ class Story extends Component {
             </div>
           )}
         </Transition>
-
-        <br />
-        <br />
-
-        Source:
-        <CodeHighlight>{() => source}</CodeHighlight>
-
-        <br />
-        <br />
       </div>
     )
   }
 }
 
-export default () => <Story />
+const source = require('!raw-loader!./TransitionStaggeredGroups')
+const CodeHighlight = require('./components/codeHighlight').default
+export default () => (
+  <div>
+    <Story />
+    <br />
+    <br />
+
+
+    <CodeHighlight>{() => source}</CodeHighlight>
+  </div>
+)
 
 let include
 function makeItems () {

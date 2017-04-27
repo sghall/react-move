@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 //
 import Animate from '../src/Animate'
-//
-import source from '!raw-loader!./CustomDefaults'
-import CodeHighlight from './components/codeHighlight'
 
 class MyAnimate extends Component {
   render () {
@@ -84,21 +81,23 @@ class Story extends Component {
             }}
           </MyAnimate>
         </div>
-
-        <br />
-        <br />
-
-        Source:
-        <CodeHighlight>{() => source}</CodeHighlight>
-
-        <br />
-        <br />
       </div>
     )
   }
 }
 
-export default () => <Story />
+const source = require('!raw-loader!./CustomDefaults')
+const CodeHighlight = require('./components/codeHighlight').default
+export default () => (
+  <div>
+    <Story />
+    <br />
+    <br />
+
+    
+    <CodeHighlight>{() => source}</CodeHighlight>
+  </div>
+)
 
 function makeItem () {
   const colorNum = Math.random()
