@@ -51,7 +51,7 @@ export default class Transition extends Component {
     }
   }
 
-  pivot (props, first) {
+  pivot (props) {
     const {
       getKey,
       data,
