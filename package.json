@@ -36,7 +36,6 @@
     "docs": "build-storybook -o docs && cp .storybook/CNAME docs/CNAME"
   },
   "dependencies": {
-    "@types/react": "^15.0.22",
     "d3-ease": "^1.0.3",
     "d3-interpolate": "^1.1.3",
     "performance-now": "^2.1.0",
@@ -44,6 +43,7 @@
     "deep-equal": "^1.0.1"
   },
   "peerDependencies": {
+    "@types/react": "^15.0.22",
     "react": "^15.3.1"
   },
   "devDependencies": {
