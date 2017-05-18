@@ -44,6 +44,7 @@
 ## Demos
 - [Codepen](http://codepen.io/tannerlinsley/pen/dWYEwd?editors=0010)
 - [Storybook](https://react-move.js.org)
+- [`<Animated />` Scrimba Tutorial](https://scrimba.com/casts/cast-1924)
 
 ## Installation
 ```bash

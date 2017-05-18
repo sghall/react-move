@@ -51,7 +51,7 @@ export default class Transition extends Component {
     }
   }
 
-  pivot (props, first) {
+  pivot (props) {
     const {
       getKey,
       data,
@@ -63,7 +63,7 @@ export default class Transition extends Component {
     } = props
 
     // Detect if we need to animate
-    let noChanges = this.props.data === data
+    const noChanges = this.props.data === data
 
     // If this is the first time, animate regardless
     if (this.ranFirst && noChanges) {
@@ -147,7 +147,7 @@ export default class Transition extends Component {
         originState = enter(item.data, item.key) || destState
         interpolators = makeInterpolators(originState, destState)
       } else {
-        let previous = currentItems.find(d => d.key === item.key)
+        const previous = currentItems.find(d => d.key === item.key)
         destState = update(item.data, item.key)
         originState = previous.state
         interpolators = makeInterpolators(originState, destState)
@@ -221,7 +221,7 @@ export default class Transition extends Component {
       this.wasAnimating = true
 
       // Keep track of time
-      let currentTime = now()
+      const currentTime = now()
       const timeSinceLastFrame = currentTime - this.lastRenderTime
 
       // Are we using flexDuration?
@@ -239,8 +239,8 @@ export default class Transition extends Component {
         // But if we are staggering by group, we will instead need the type index of the item
         if (stagger && staggerGroups) {
           staggerIndex = 0
-          for (var ii = 0; ii < i; ii++) {
-            let staggerItem = this.items[ii]
+          for (let ii = 0; ii < i; ii++) {
+            const staggerItem = this.items[ii]
             if (
               staggerItem.entering === item.entering &&
               staggerItem.exiting === item.exiting
@@ -326,16 +326,16 @@ export default class Transition extends Component {
 
 // Taken from react-motion's mergeDiff (https://github.com/chenglou/react-motion/blob/446a8d0130072c4a59fec1ab788bfc2cc5c5b788/src/mergeDiff.js)
 function mergeItems (prev, next) {
-  let prevKeyIndex = {}
+  const prevKeyIndex = {}
   for (let i = 0; i < prev.length; i++) {
     prevKeyIndex[prev[i].key] = i
   }
-  let nextKeyIndex = {}
+  const nextKeyIndex = {}
   for (let i = 0; i < next.length; i++) {
     nextKeyIndex[next[i].key] = i
   }
   // Merge the arrays
-  let allItems = []
+  const allItems = []
   for (let i = 0; i < next.length; i++) {
     allItems[i] = next[i]
   }
@@ -346,10 +346,10 @@ function mergeItems (prev, next) {
   }
   // now all the items all present. Core sorting logic to have the right order
   return allItems.sort(function (a, b) {
-    let nextOrderA = nextKeyIndex[a.key]
-    let nextOrderB = nextKeyIndex[b.key]
-    let prevOrderA = prevKeyIndex[a.key]
-    let prevOrderB = prevKeyIndex[b.key]
+    const nextOrderA = nextKeyIndex[a.key]
+    const nextOrderB = nextKeyIndex[b.key]
+    const prevOrderA = prevKeyIndex[a.key]
+    const prevOrderB = prevKeyIndex[b.key]
     if (nextOrderA != null && nextOrderB != null) {
       // both keys in next
       return nextKeyIndex[a.key] - nextKeyIndex[b.key]
@@ -363,7 +363,7 @@ function mergeItems (prev, next) {
       // a and b. In the context of our above example, if we're comparing a and
       // d, b's (the only) pivot
       for (let i = 0; i < next.length; i++) {
-        let pivot = next[i].key
+        const pivot = next[i].key
         if (!Object.prototype.hasOwnProperty.call(prevKeyIndex, pivot)) {
           continue
         }
@@ -382,7 +382,7 @@ function mergeItems (prev, next) {
     }
     // prevOrderA, nextOrderB
     for (let i = 0; i < next.length; i++) {
-      let pivot = next[i].key
+      const pivot = next[i].key
       if (!Object.prototype.hasOwnProperty.call(prevKeyIndex, pivot)) {
         continue
       }
