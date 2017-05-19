@@ -55,7 +55,8 @@
     "onchange": "^3.0.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "webpack: "^2.0.0"
   },
   "standard": {
     "parser": "babel-eslint",
