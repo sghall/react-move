@@ -15,20 +15,17 @@ const defaults = {
   easing: 'easeCubicOut',
   onRest: () => null,
   flexDuration: false,
-  immutable: true
+  immutable: true,
 }
 
 export default class Animate extends Component {
   static defaultProps = defaults
   constructor (props) {
     super()
-    const {
-      default: defaultState,
-      data
-    } = props
+    const { default: defaultState, data } = props
     this.destination = data
     this.state = {
-      current: defaultState || data
+      current: defaultState || data,
     }
   }
 
@@ -57,21 +54,21 @@ export default class Animate extends Component {
   }
 
   pivot (props) {
-    const {
-      data,
-      easing,
-      ignore,
-      immutable
-    } = props
+    const { data, easing, ignore, immutable } = props
 
     // Detect non-change render
-    let needsUpdate = immutable ? this.props.data !== data : !Utils.deepEquals(this.props.data, data)
+    let needsUpdate = immutable
+      ? this.props.data !== data
+      : !Utils.deepEquals(this.props.data, data)
+
     if (this.ranFirst && !needsUpdate) {
       return
     }
 
     // Update the easing function
-    this.easer = typeof easing === 'function' ? easing : Easing[easing] || Easing[defaults.easing]
+    this.easer = typeof easing === 'function'
+      ? easing
+      : Easing[easing] || Easing[defaults.easing]
 
     // Update the origins and destinations
     this.origin = this.state.current
@@ -90,7 +87,10 @@ export default class Animate extends Component {
         this.interpolators[key] = null
         continue
       }
-      this.interpolators[key] = interpolate(this.origin[key], this.destination[key])
+      this.interpolators[key] = interpolate(
+        this.origin[key],
+        this.destination[key]
+      )
     }
 
     // Reset the startTime and the progress
@@ -112,11 +112,7 @@ export default class Animate extends Component {
       return
     }
 
-    const {
-      onRest,
-      duration,
-      flexDuration
-    } = this.props
+    const { onRest, duration, flexDuration } = this.props
 
     this.animationID = RAF(() => {
       // If the animation is complete, tie up any loose ends...
@@ -142,11 +138,17 @@ export default class Animate extends Component {
       if (flexDuration) {
         // Add however many milliseconds behind we are to the startTime to offset
         // any dropped frames
-        this.startTime += Math.max(Math.floor(timeSinceLastFrame - msPerFrame), 0)
+        this.startTime += Math.max(
+          Math.floor(timeSinceLastFrame - msPerFrame),
+          0
+        )
       }
 
       // Update the progress
-      this.progress = Math.max(Math.min((currentTime - this.startTime) / duration, 1), 0)
+      this.progress = Math.max(
+        Math.min((currentTime - this.startTime) / duration, 1),
+        0
+      )
 
       // Render the progress
       this.renderProgress()
@@ -163,10 +165,7 @@ export default class Animate extends Component {
   }
 
   renderProgress () {
-    const {
-      data,
-      duration
-    } = this.props
+    const { data, duration } = this.props
 
     const newCurrent = {}
 
@@ -188,7 +187,7 @@ export default class Animate extends Component {
     }
 
     this.setState({
-      current: newCurrent
+      current: newCurrent,
     })
   }
 

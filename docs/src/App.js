@@ -11,7 +11,7 @@ import Easing from './stories/Easing.js'
 import Transition from './stories/Transition.js'
 import TransitionNested from './stories/TransitionNested.js'
 import TransitionStaggered from './stories/TransitionStaggered.js'
-import TransitionStaggeredGroups from './stories/TransitionStaggeredGroups.js'
+import TransitionStaggeredLinear from './stories/TransitionStaggeredLinear.js'
 import TransitionClasses from './stories/TransitionClasses.js'
 import FlexDuration from './stories/FlexDuration.js'
 import CustomEasing from './stories/CustomEasing.js'
@@ -66,8 +66,8 @@ export default class App extends React.Component {
           { name: 'Nested Transition', component: TransitionNested },
           { name: 'Staggered Transition', component: TransitionStaggered },
           {
-            name: 'Staggered Group Transition',
-            component: TransitionStaggeredGroups
+            name: 'Staggered Linear Transition',
+            component: TransitionStaggeredLinear
           },
           { name: 'Transition with Classes', component: TransitionClasses },
           { name: 'Flex Duration (Frame Dropping)', component: FlexDuration },

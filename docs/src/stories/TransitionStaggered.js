@@ -16,7 +16,7 @@ class Story extends Component {
     return (
       <div>
         <p>
-          Transitions can be staggered by having each item wait for its predecessor to reach the stagger point before starting it's own animation. Just set the "stagger" prop to the decimal percentage that you want the predecessor to have before starting. We also have "staggerGroups" turned on here, which staggers the items based on their entering or exit state instead of index
+          Transitions can be staggered by having each item wait for its predecessor to reach the stagger point before starting it's own animation. Just set the "stagger" prop to the decimal percentage that you want the predecessor to have before starting. We also have "staggerGroups" turned on by default, which staggers the items based on their entering or exit state instead of index
         </p>
 
         <br />

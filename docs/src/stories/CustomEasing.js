@@ -42,7 +42,8 @@ class Story extends Component {
             duration={1000}
             easing={t => {
               // Chart's easeOutBounce function
-              if ((t /= 1) < 1 / 2.75) {
+              t /= 1
+              if (t < 1 / 2.75) {
                 return 1 * (7.5625 * t * t)
               } else if (t < 2 / 2.75) {
                 return 1 * (7.5625 * (t -= 1.5 / 2.75) * t + 0.75)
