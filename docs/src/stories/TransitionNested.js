@@ -66,7 +66,6 @@ class Story extends Component {
                   opacity: 0
                 })}
                 ignore={['opacity']}
-                duration={3000}
               >
                 {data => (
                   <div

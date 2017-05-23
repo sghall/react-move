@@ -16,7 +16,7 @@ class Story extends Component {
     return (
       <div>
         <p>
-          Stagger groups behave relative to the 'entering', 'updating' and 'leaving' groups. This way items coming in and out can start to animate at the same time, rather than waiting for the other to complete.
+          Stagger groups behave relative to the 'entering', 'updating' and 'leaving' groups. If you would prefer that items come in and out linearly, rather than in their respective groups, you can turn 'staggerGroups' off.
         </p>
 
         <br />
@@ -53,7 +53,7 @@ class Story extends Component {
             color: 'red'
           })}
           stagger={100}
-          staggerGroups // staggers items relative to their 'entering', 'updating', or 'leaving' group
+          staggerGroups={false} // staggers items linearly instead of by group
         >
           {data => (
             <div style={{ height: 20 * 10 + 'px', position: 'relative' }}>
@@ -79,7 +79,7 @@ class Story extends Component {
   }
 }
 
-const source = require('!raw!./TransitionStaggeredGroups')
+const source = require('!raw!./TransitionStaggeredLinear')
 const CodeHighlight = require('./components/codeHighlight').default
 export default () => (
   <div>

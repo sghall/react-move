@@ -18,13 +18,14 @@ const defaults = {
   onRest: () => null,
   stagger: null,
   flexDuration: false,
-  immutable: true
+  immutable: true,
+  staggerGroups: true,
 }
 
 // Used to make all the interpolators from origin to destination states
 const makeInterpolators = (originState, destState, ignore) => {
   // Make sure we interpolate new and old keys
-  const allKeys = dedupe(Object.keys(orderiginState), Object.keys(destState))
+  const allKeys = dedupe(Object.keys(originState), Object.keys(destState))
   const interpolators = {}
   allKeys.forEach(key => {
     if (ignore.indexOf(key) > -1) {
@@ -43,30 +44,30 @@ const makeInterpolators = (originState, destState, ignore) => {
 export default class Transition extends Component {
   static defaultProps = defaults
 
-  constructor() {
+  constructor () {
     super()
     this.items = []
     this.state = {
-      items: []
+      items: [],
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.unmounting = false
     this.animationID = null
     this.lastRenderTime = 0
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.pivot(this.props)
     this.ranFirst = true
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     this.pivot(props)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.unmounting = true
     if (this.animationID != null) {
       RAF.cancel(this.animationID)
@@ -74,8 +75,16 @@ export default class Transition extends Component {
     }
   }
 
-  pivot(props) {
-    const { getKey, data, easing, immutable, stagger, staggerGroups } = props
+  pivot (props) {
+    const {
+      getKey,
+      data,
+      easing,
+      update,
+      immutable,
+      stagger,
+      staggerGroups,
+    } = props
 
     // Detect if we need to animate
     let noChanges = immutable
@@ -100,7 +109,7 @@ export default class Transition extends Component {
     let newItems = data.map((d, i) => {
       return {
         key: getKey(d, i),
-        data: d
+        data: d,
       }
     })
 
@@ -111,9 +120,7 @@ export default class Transition extends Component {
     )
 
     enteringItems.forEach((item, i) => {
-      if (!item.entering) {
-        item.willEnter = true
-      }
+      item.willEnter = true
     })
 
     // Find items that should leave
@@ -122,9 +129,7 @@ export default class Transition extends Component {
     )
 
     leavingItems.forEach((item, i) => {
-      if (!item.leaving) {
-        item.willLeave = true
-      }
+      item.willLeave = true
     })
 
     // Find items that are staying
@@ -133,8 +138,15 @@ export default class Transition extends Component {
     )
 
     stayingItems.forEach(item => {
+      // If the item was leaving, and is now staying, update it
       if (item.leaving) {
-        item.willChange = true
+        item.willUpdate = true
+      }
+      // If the item's update function returns something new, update it
+      const newDestState = update(item.data, item.key)
+      if (!Utils.deepEquals(item.destState, newDestState)) {
+        item.destState = newDestState
+        item.willUpdate = true
       }
       item.willLeave = false
       item.willEnter = false
@@ -172,10 +184,7 @@ export default class Transition extends Component {
       }
 
       // For every item that needs to be reset, set a new startTime
-      if (item.willEnter || item.willLeave || item.willChange) {
-        item.leaving = false
-        item.entering = false
-        item.updating = false
+      if (item.willEnter || item.willLeave || item.willUpdate) {
         item.nextUpdate = staggerOffset ? now() + staggerOffset : true
       }
     })
@@ -187,7 +196,7 @@ export default class Transition extends Component {
     this.animate()
   }
 
-  animate() {
+  animate () {
     // If we're unmounting, bail out.
     if (this.unmounting) {
       return
@@ -241,19 +250,12 @@ export default class Transition extends Component {
           item.nextUpdate === true ||
           (item.nextUpdate && item.nextUpdate <= currentTime)
         ) {
+          item.entering = false
+          item.leaving = false
+          item.updating = false
           // Update leaving, entering, and changed items with their new origins,
           // destinations and interpolators
-          if (item.willLeave) {
-            item.willLeave = false
-            item.leaving = true
-            item.destState = leave(item.data, item.key)
-            item.originState = item.state || enter(item.data, item.key)
-            item.interpolators = makeInterpolators(
-              item.originState,
-              item.destState,
-              ignore
-            )
-          } else if (item.willEnter) {
+          if (item.willEnter) {
             item.willEnter = false
             item.entering = true
             item.destState = item.state || update(item.data, item.key)
@@ -263,19 +265,25 @@ export default class Transition extends Component {
               item.destState,
               ignore
             )
-          } else {
-            // If the update definition for a staying item has changed, reset it as well
-            const newDestState = update(item.data, item.key)
-            if (!Utils.deepEquals(item.destState, newDestState)) {
-              item.updating = true
-              item.originState = item.state || enter(item.data, item.key)
-              item.destState = newDestState
-              item.interpolators = makeInterpolators(
-                item.originState,
-                item.destState,
-                ignore
-              )
-            }
+          } else if (item.willLeave) {
+            item.willLeave = false
+            item.leaving = true
+            item.destState = leave(item.data, item.key)
+            item.originState = item.state || enter(item.data, item.key)
+            item.interpolators = makeInterpolators(
+              item.originState,
+              item.destState,
+              ignore
+            )
+          } else if (item.willUpdate) {
+            item.willUpdate = false
+            item.updating = true
+            item.originState = item.state || enter(item.data, item.key)
+            item.interpolators = makeInterpolators(
+              item.originState,
+              item.destState,
+              ignore
+            )
           }
 
           // For every item that needs to be reset, set a new startTime
@@ -307,7 +315,7 @@ export default class Transition extends Component {
     })
   }
 
-  renderProgress() {
+  renderProgress () {
     // Don't show items that are entering
     const items = this.items.filter(item => item.originState && item.destState)
 
@@ -335,14 +343,14 @@ export default class Transition extends Component {
     this.setState({ items })
   }
 
-  render() {
+  render () {
     const renderedChildren = this.props.children(this.state.items)
     return renderedChildren && React.Children.only(renderedChildren)
   }
 }
 
 // Taken from react-motion's mergeDiff (https://github.com/chenglou/react-motion/blob/446a8d0130072c4a59fec1ab788bfc2cc5c5b788/src/mergeDiff.js)
-function mergeItems(prev, next) {
+function mergeItems (prev, next) {
   const prevKeyIndex = {}
   for (let i = 0; i < prev.length; i++) {
     prevKeyIndex[prev[i].key] = i
@@ -362,7 +370,7 @@ function mergeItems(prev, next) {
     }
   }
   // now all the items all present. Core sorting logic to have the right order
-  return allItems.sort(function(a, b) {
+  return allItems.sort(function (a, b) {
     const nextOrderA = nextKeyIndex[a.key]
     const nextOrderB = nextKeyIndex[b.key]
     const prevOrderA = prevKeyIndex[a.key]
@@ -424,7 +432,7 @@ function mergeItems(prev, next) {
 
 Transition.defaults = defaults
 
-function dedupe(...arrs) {
+function dedupe (...arrs) {
   const allItems = arrs.reduce((a, b) => a.concat(b), [])
   for (let i = 0; i < allItems.length; ++i) {
     for (let j = i + 1; j < allItems.length; ++j) {
