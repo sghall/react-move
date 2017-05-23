@@ -3,5 +3,5 @@ import Transition from './Transition'
 
 module.exports = {
   Animate,
-  Transition
+  Transition,
 }

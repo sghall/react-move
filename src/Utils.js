@@ -1,7 +1,7 @@
 import DeepEqual from 'deep-equal'
 
 export default {
-  deepEquals
+  deepEquals,
 }
 
 function deepEquals (a, b) {

@@ -27,7 +27,7 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline --presets=es2015,react,stage-2 --plugins=transform-object-assign",
     "watch": "onchange 'src/**' -i -- npm run build",
-    "test": "standard",
+    "test": "eslint src",
     "umd": "rimraf react-move.js && webpack --config umd.webpack.js",
     "prepublish": "npm run build && npm run umd",
     "postpublish": "git push --tags",
