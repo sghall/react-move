@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "d3-ease": "^1.0.3",
-    "d3-interpolate": "^1.1.3",
+    "d3-interpolate": "^1.1.5",
+    "deep-equal": "^1.0.1",
     "performance-now": "^2.1.0",
-    "raf": "^3.3.0",
-    "deep-equal": "^1.0.1"
+    "raf": "^3.3.2"
   },
   "peerDependencies": {
     "@types/react": "^15.0.22",
