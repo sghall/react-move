@@ -12,6 +12,8 @@ import Transition from './stories/Transition.js'
 import TransitionNested from './stories/TransitionNested.js'
 import TransitionStaggered from './stories/TransitionStaggered.js'
 import TransitionStaggeredLinear from './stories/TransitionStaggeredLinear.js'
+import TransitionDynamicDuration from './stories/TransitionDynamicDuration.js'
+import TransitionDynamicEasing from './stories/TransitionDynamicEasing.js'
 import TransitionClasses from './stories/TransitionClasses.js'
 import FlexDuration from './stories/FlexDuration.js'
 import CustomEasing from './stories/CustomEasing.js'
@@ -42,7 +44,7 @@ export default class App extends React.Component {
               }}
             >
               <img
-                src="//npmcdn.com/react-move/media/Banner.png"
+                src="//npmcdn.com/react-move/media/banner.png"
                 alt="React Table Logo"
                 style={{
                   width: '200px',
@@ -68,6 +70,14 @@ export default class App extends React.Component {
           {
             name: 'Staggered Linear Transition',
             component: TransitionStaggeredLinear
+          },
+          {
+            name: 'Transition - Dynamic Duration',
+            component: TransitionDynamicDuration
+          },
+          {
+            name: 'Transition - Dynamic Easing',
+            component: TransitionDynamicEasing
           },
           { name: 'Transition with Classes', component: TransitionClasses },
           { name: 'Flex Duration (Frame Dropping)', component: FlexDuration },

@@ -16,7 +16,7 @@ class Story extends Component {
     return (
       <div>
         <p>
-          The "Transition" component enables animating multiple elements, including enter and exit animations.
+          The "Transition" component supports a 'getEasing' prop that supplies you the item and item key and expects you to return the easing for that item. Thus, you can easily customize the easing of individual items. This overrides the global 'easing' prop.
         </p>
 
         <br />
@@ -37,6 +37,11 @@ class Story extends Component {
         <Transition
           data={items}
           getKey={d => d.value}
+          duration={1000}
+          getEasing={(item, key) =>
+            item.value % 3 === 0
+              ? 'easeElasticIn'
+              : item.value % 2 === 0 ? 'easeLinear' : 'easeElasticOut'}
           update={d => ({
             translate: 1,
             opacity: 1,

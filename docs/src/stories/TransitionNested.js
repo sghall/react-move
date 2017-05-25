@@ -55,15 +55,18 @@ class Story extends Component {
                 getKey={d => d.value}
                 update={d => ({
                   translate: 1,
-                  opacity: 1
+                  opacity: 1,
+                  color: `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`
                 })}
                 enter={d => ({
                   translate: 0,
-                  opacity: 0
+                  opacity: 0,
+                  color: 'white'
                 })}
                 leave={d => ({
                   translate: 2,
-                  opacity: 0
+                  opacity: 0,
+                  color: 'black'
                 })}
                 ignore={['opacity']}
               >
@@ -80,7 +83,7 @@ class Story extends Component {
                           fontWeight: 'bold',
                           position: 'absolute',
                           transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`,
-                          color: 'white'
+                          color: d.state.color
                         }}
                       >
                         <Animate

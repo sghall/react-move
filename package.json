@@ -31,8 +31,8 @@
     "umd": "rimraf react-move.js && webpack --config umd.webpack.js",
     "prepublish": "npm run build && npm run umd",
     "postpublish": "git push --tags",
-    "docs": "cd docs && yarn && yarn start",
-    "docs:build": "cd docs && yarn && yarn run build"
+    "docs": "yarn watch & cd docs && yarn && yarn start",
+    "docs:build": "yarn build && cd docs && yarn && yarn run build"
   },
   "dependencies": {
     "d3-ease": "^1.0.3",

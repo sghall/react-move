@@ -80,11 +80,13 @@ export default class Transition extends Component {
       getKey,
       data,
       easing,
+      duration,
+      getDuration,
+      getEasing,
       update,
       immutable,
       stagger,
       staggerGroups,
-      duration,
     } = props
 
     // Detect if we need to animate
@@ -96,11 +98,6 @@ export default class Transition extends Component {
     if (this.ranFirst && noChanges) {
       return
     }
-
-    // Update the easing function
-    this.easer = typeof easing === 'function'
-      ? easing
-      : Easing[easing] || Easing[defaults.easing]
 
     // Get the current items from the state (which is the visual
     // representation of our items)
@@ -187,7 +184,17 @@ export default class Transition extends Component {
       // For every item that needs to be reset, set a new startTime
       if (item.willEnter || item.willLeave || item.willUpdate) {
         item.nextUpdate = staggerOffset ? now() + staggerOffset : true
-        item.duration = duration
+        item.duration = typeof getDuration === 'function'
+          ? getDuration(item.data, item.key)
+          : duration
+        item.easing = typeof getEasing === 'function'
+          ? getEasing(item.data, item.key)
+          : easing
+
+        // Update the easing function
+        item.easer = typeof item.easing === 'function'
+          ? item.easing
+          : Easing[item.easing] || Easing[defaults.easing]
       }
     })
 
@@ -209,7 +216,7 @@ export default class Transition extends Component {
       return
     }
 
-    const { duration, flexDuration, ignore, enter, leave, update } = this.props
+    const { flexDuration, ignore, enter, leave, update } = this.props
 
     this.animationID = RAF(() => {
       // Double check that we are still mounted, since RAF can perform
@@ -337,7 +344,7 @@ export default class Transition extends Component {
           item.state[key] = item.destState[key]
         } else {
           // Otherwise, interpolate with the progress
-          item.state[key] = item.interpolators[key](this.easer(item.progress))
+          item.state[key] = item.interpolators[key](item.easer(item.progress))
         }
       })
     })

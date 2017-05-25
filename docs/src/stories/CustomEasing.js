@@ -13,6 +13,9 @@ class Story extends Component {
   render() {
     return (
       <div>
+        <p>
+          This animation is using Chart.js's easeOutBounce function :)
+        </p>
         <br />
         <br />
 

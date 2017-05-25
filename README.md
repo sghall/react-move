@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/tannerlinsley/react-move"><img src="https://unpkg.com/react-move@latest/media/Banner.png" alt="React Move Logo" style="width:450px;"/></a>
+  <a href="https://github.com/tannerlinsley/react-move"><img src="https://unpkg.com/react-move@latest/media/banner.png" alt="React Move Logo" style="width:450px;"/></a>
 </div>
 
 <a href="https://travis-ci.org/tannerlinsley/react-move">
@@ -116,7 +116,7 @@ A component that enables animating multiple elements, including enter and exit a
 ##### Props
 - `data={ []Objects }` | `[]` | *Required*
   - An array of objects you wish to track. These are not necessarily the exact values you wish to animate, but will used to produce the animated values.
-- `getKey={ function }` | `(d, i) => i`
+- `getKey={ function }` | `(item, i) => i`
   - A function that returns a unique identifier for each item. This is used to track `enter`, `update` and `leave` states/groups.
 - `update={ function }` | *Required*
   - A function that returns the state for an item if it is neither `entering` or `leaving` the list of items.
@@ -126,12 +126,21 @@ A component that enables animating multiple elements, including enter and exit a
   - A function that returns the state for an item if it is `leaving` the list of items. If nothing is returned, the `update` state is used.
 - `duration={ Number }` | `500`
   - The duration in milliseconds for each item to animate
-- `easing={ string | function }` | `easeCubicOut`
-  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function, or a custom easing function that receives a progress decimal and returns a new progress decimal.
+- `easing={ String | Function }` | `easeCubicOut`
+  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function
+  - A custom easing function that receives a progress decimal and returns a new progress decimal.
+- `getDuration={ Function }` | `(item, key) => null`
+  - A function that receives each `item` and its `key` and returns the duration in milliseconds for the item to animate
+  - Overrides the `duration` prop.
+- `getEasing={ Function }` | `(item, key) => null`
+  - A function that receives each `item` and its `key` and returns either:
+    - Astring that references a [d3-ease](https://github.com/d3/d3-ease) function
+    - A custom easing function that receives a progress decimal and returns a new progress decimal.
+  - Overrides the `easing` prop.
 - `stagger={ Number }` | `0`
   - Number of milliseconds for each item to wait relative to it's preceding item.
-- `staggerGroups={ Boolean }` | `false`
-  - Delays item animation relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
+- `staggerGroups={ Boolean }` | `true`
+  - If staggering, will delay item animations relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
 - `ignore={ []String }` | `false`
   - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
 - `flexDuration={ Boolean }` | `false`

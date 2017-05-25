@@ -40,7 +40,7 @@ class Story extends Component {
           update={d => ({
             translate: 1,
             opacity: 1,
-            color: 'grey'
+            color: `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`
           })}
           enter={d => ({
             translate: 0,

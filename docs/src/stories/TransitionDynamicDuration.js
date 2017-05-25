@@ -16,7 +16,7 @@ class Story extends Component {
     return (
       <div>
         <p>
-          The "Transition" component enables animating multiple elements, including enter and exit animations.
+          The "Transition" component supports a 'getDuration' prop that supplies you the item and item key and expects you to return the duration for that item. Thus, you can easily customize the duration of individual items. This overrides the global 'duration' prop.
         </p>
 
         <br />
@@ -37,6 +37,7 @@ class Story extends Component {
         <Transition
           data={items}
           getKey={d => d.value}
+          getDuration={(item, key) => (item.value & 2 ? 300 : 800)}
           update={d => ({
             translate: 1,
             opacity: 1,
