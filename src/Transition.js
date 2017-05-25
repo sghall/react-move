@@ -84,6 +84,7 @@ export default class Transition extends Component {
       immutable,
       stagger,
       staggerGroups,
+      duration,
     } = props
 
     // Detect if we need to animate
@@ -186,6 +187,7 @@ export default class Transition extends Component {
       // For every item that needs to be reset, set a new startTime
       if (item.willEnter || item.willLeave || item.willUpdate) {
         item.nextUpdate = staggerOffset ? now() + staggerOffset : true
+        item.duration = duration
       }
     })
 
@@ -289,7 +291,6 @@ export default class Transition extends Component {
           // For every item that needs to be reset, set a new startTime and durtaion
           item.startTime = now()
           item.nextUpdate = false
-          item.duration = duration
         }
 
         // Set the progress
