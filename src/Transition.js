@@ -286,14 +286,15 @@ export default class Transition extends Component {
             )
           }
 
-          // For every item that needs to be reset, set a new startTime
+          // For every item that needs to be reset, set a new startTime and durtaion
           item.startTime = now()
           item.nextUpdate = false
+          item.duration = duration
         }
 
         // Set the progress
         let progress = item.startTime
-          ? (currentTime - item.startTime) / duration
+          ? (currentTime - item.startTime) / item.duration
           : 0
 
         // Make sure progress is between 0 and 1
