@@ -267,7 +267,7 @@ export default class Transition extends Component {
           if (item.willEnter) {
             item.willEnter = false
             item.entering = true
-            item.destState = item.state || update(item.data, item.key)
+            item.destState = item.state || update(item.data, item.key) || {}
             item.originState = enter(item.data, item.key) || item.destState
             item.interpolators = makeInterpolators(
               item.originState,
@@ -277,7 +277,8 @@ export default class Transition extends Component {
           } else if (item.willLeave) {
             item.willLeave = false
             item.leaving = true
-            item.destState = leave(item.data, item.key)
+            item.destState = leave(item.data, item.key) ||
+            update(item.data, item.key) || {}
             item.originState = item.state || enter(item.data, item.key)
             item.interpolators = makeInterpolators(
               item.originState,
@@ -287,7 +288,7 @@ export default class Transition extends Component {
           } else if (item.willUpdate) {
             item.willUpdate = false
             item.updating = true
-            item.originState = item.state || enter(item.data, item.key)
+            item.originState = item.state || enter(item.data, item.key) || {}
             item.interpolators = makeInterpolators(
               item.originState,
               item.destState,
@@ -325,6 +326,7 @@ export default class Transition extends Component {
   }
 
   renderProgress () {
+    const { onRest } = this.props
     // Don't show items that are entering
     const items = this.items.filter(item => item.originState && item.destState)
 
@@ -347,6 +349,9 @@ export default class Transition extends Component {
           item.state[key] = item.interpolators[key](item.easer(item.progress))
         }
       })
+      if (item.progress === 1) {
+        onRest(item.data, item.key)
+      }
     })
 
     this.setState({ items })

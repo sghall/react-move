@@ -15,6 +15,7 @@ import TransitionStaggeredLinear from './stories/TransitionStaggeredLinear.js'
 import TransitionDynamicDuration from './stories/TransitionDynamicDuration.js'
 import TransitionDynamicEasing from './stories/TransitionDynamicEasing.js'
 import TransitionClasses from './stories/TransitionClasses.js'
+import OnRest from './stories/OnRest.js'
 import FlexDuration from './stories/FlexDuration.js'
 import CustomEasing from './stories/CustomEasing.js'
 import CustomDefaults from './stories/CustomDefaults.js'
@@ -80,6 +81,7 @@ export default class App extends React.Component {
             component: TransitionDynamicEasing
           },
           { name: 'Transition with Classes', component: TransitionClasses },
+          { name: 'onRest Callbacks', component: OnRest },
           { name: 'Flex Duration (Frame Dropping)', component: FlexDuration },
           { name: 'Custom Easing', component: CustomEasing },
           { name: 'Custom Defaults', component: CustomDefaults }

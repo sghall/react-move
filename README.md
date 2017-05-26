@@ -70,6 +70,8 @@ A component for animating any single object.
   - The duration in milliseconds for each item to animate
 - `easing={ string | function }` | `easeCubicOut`
   - A string that references a [d3-ease](https://github.com/d3/d3-ease) function, or a custom easing function that receives a progress decimal and returns a new progress decimal.
+- `onRest={ Function }` | `() => null`
+  - A function that is called every time the animation sequence is completed.
 - `ignore={ []String }` | `false`
   - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
 - `flexDuration={ Boolean }` | `false`
@@ -141,6 +143,8 @@ A component that enables animating multiple elements, including enter and exit a
   - Number of milliseconds for each item to wait relative to it's preceding item.
 - `staggerGroups={ Boolean }` | `true`
   - If staggering, will delay item animations relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
+- `onRest={ Function }` | `(item, key) => null`
+  - A function that is called every time an item completes its animation sequence. It is passed the item and its corresponding key.
 - `ignore={ []String }` | `false`
   - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
 - `flexDuration={ Boolean }` | `false`
