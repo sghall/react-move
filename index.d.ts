@@ -50,6 +50,12 @@ export interface IAnimateProps {
      * Default: true
      */
     immutable?: boolean;
+    
+    /**
+     * A function that is called every time an item completes its animation sequence.
+     * It is passed the item and its corresponding key.
+     */
+    onRest?: () => void;
 }
 export declare class Animate extends React.Component<IAnimateProps, {}> {
     static defaultProps: IAnimateProps;
@@ -109,6 +115,11 @@ export interface ITransitionProps {
      * increasing the duration of the animation loop becomes overwhelmed.
      */
     flexDuration?: boolean;
+    /**
+     * A function that is called every time an item completes its animation sequence.
+     * It is passed the item and its corresponding key.
+     */
+    onRest?: (item: any, key: any) => void;
 }
 export declare class Transition extends React.Component<ITransitionProps, {}> {
     static defaultProps: ITransitionProps;
