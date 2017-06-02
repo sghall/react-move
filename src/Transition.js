@@ -155,7 +155,6 @@ export default class Transition extends Component {
           Utils.pickBy(newDestState, (_, key) => ignore.indexOf(key) === -1)
         )
       ) {
-        console.log('not equal', item.destState, newDestState)
         item.destState = newDestState
         item.willUpdate = true
       }
