@@ -87,6 +87,7 @@ export default class Transition extends Component {
       immutable,
       stagger,
       staggerGroups,
+      ignore,
     } = props
 
     // Detect if we need to animate
@@ -109,6 +110,12 @@ export default class Transition extends Component {
         key: getKey(d, i),
         data: d,
       }
+    })
+
+    // Since the underlying data could have changed for currentItems, update them
+    currentItems.forEach(item => {
+      const found = newItems.find(d => d.key === item.key)
+      item.data = found ? found.data : item.data
     })
 
     // Find items that are entering
@@ -142,7 +149,13 @@ export default class Transition extends Component {
       }
       // If the item's update function returns something new, update it
       const newDestState = update(item.data, item.key)
-      if (!Utils.deepEquals(item.destState, newDestState)) {
+      if (
+        !Utils.deepEquals(
+          Utils.pickBy(item.destState, (_, key) => ignore.indexOf(key) === -1),
+          Utils.pickBy(newDestState, (_, key) => ignore.indexOf(key) === -1)
+        )
+      ) {
+        console.log('not equal', item.destState, newDestState)
         item.destState = newDestState
         item.willUpdate = true
       }

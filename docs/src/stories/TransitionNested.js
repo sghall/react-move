@@ -68,7 +68,7 @@ class Story extends Component {
                   opacity: 0,
                   color: 'black'
                 })}
-                ignore={['opacity']}
+                ignore={['opacity', 'color']}
               >
                 {data => (
                   <div
@@ -82,13 +82,13 @@ class Story extends Component {
                         style={{
                           fontWeight: 'bold',
                           position: 'absolute',
-                          transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`,
-                          color: d.state.color
+                          transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`
                         }}
                       >
                         <Animate
                           data={{
-                            opacity: d.state.opacity
+                            opacity: d.state.opacity,
+                            color: d.state.color
                           }}
                           immutable={false}
                         >
@@ -96,7 +96,8 @@ class Story extends Component {
                             return (
                               <span
                                 style={{
-                                  opacity: data.opacity
+                                  opacity: data.opacity,
+                                  color: data.color
                                 }}
                               >
                                 {d.key} - {Math.round(d.progress * 100)}
