@@ -5,15 +5,38 @@ import _ from 'lodash'
 import Transition from '../../../lib/Transition'
 import Animate from '../../../lib/Animate'
 
+const width = 300
+
 class Story extends Component {
   constructor() {
     super()
+    this.randomize = this.randomize.bind(this)
     this.state = {
-      items: makeItems()
+      items: []
     }
   }
+  componentDidMount() {
+    this.randomize()
+  }
+  randomize() {
+    const min = 0
+    const max = Math.round(Math.random() * width)
+
+    this.setState({
+      items: makeItems(min, max),
+      max,
+      prevMax: this.state.max || width
+    })
+  }
   render() {
-    const { items } = this.state
+    const { items, max, prevMax } = this.state
+
+    if (!items.length) {
+      return null
+    }
+
+    const scale = tick => tick / max * width
+    const prevScale = tick => tick / prevMax * width
 
     return (
       <div>
@@ -24,12 +47,7 @@ class Story extends Component {
         <br />
         <br />
 
-        <button
-          onClick={() =>
-            this.setState({
-              items: makeItems()
-            })}
-        >
+        <button onClick={() => this.randomize()}>
           Randomize Data
         </button>
 
@@ -38,80 +56,72 @@ class Story extends Component {
 
         <Animate
           data={{
-            background: Math.random() > 0.5 ? '#6748cd' : '#1bc38d'
+            one: Math.round(Math.random() * 20)
           }}
-          immutable={false}
         >
-          {data => (
-            <div
-              style={{
-                padding: '20px',
-                background: data.background,
-                position: 'relative'
-              }}
-            >
-              <Transition
-                data={items}
-                getKey={d => d.value}
-                update={d => ({
-                  translate: 1,
-                  opacity: 1,
-                  color: `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`
-                })}
-                enter={d => ({
-                  translate: 0,
-                  opacity: 0,
-                  color: 'white'
-                })}
-                leave={d => ({
-                  translate: 2,
-                  opacity: 0,
-                  color: 'black'
-                })}
-                ignore={['opacity', 'color']}
+          {({ one }) => {
+            return (
+              <div
+                style={{
+                  background: 'rgba(0,0,0,.2)',
+                  position: 'relative',
+                  transform: `translateX(${one}px)`
+                }}
               >
-                {data => (
-                  <div
-                    style={{
-                      height: 20 * 10 + 'px'
-                    }}
-                  >
-                    {data.map(d => (
-                      <div
-                        key={d.key}
-                        style={{
-                          fontWeight: 'bold',
-                          position: 'absolute',
-                          transform: `translate(${100 * d.state.translate}px, ${20 * d.key}px)`
-                        }}
-                      >
-                        <Animate
-                          data={{
-                            opacity: d.state.opacity,
-                            color: d.state.color
-                          }}
-                          immutable={false}
-                        >
-                          {data => {
-                            return (
-                              <span
-                                style={{
-                                  opacity: data.opacity,
-                                  color: data.color
-                                }}
-                              >
-                                {d.key} - {Math.round(d.progress * 100)}
-                              </span>
-                            )
-                          }}
-                        </Animate>
+                <Transition
+                  data={items}
+                  getKey={(d, i) => String(d)}
+                  update={function(d) {
+                    return {
+                      tick: d / max * width,
+                      visibility: 1,
+                      color: 'black'
+                    }
+                  }}
+                  enter={d => ({
+                    tick: d / prevMax * width,
+                    visibility: 0,
+                    color: 'blue'
+                  })}
+                  leave={d => ({
+                    tick: d / max * width,
+                    visibility: 0,
+                    color: 'red'
+                  })}
+                  duration={500}
+                >
+                  {inters => {
+                    return (
+                      <div>
+                        <pre>
+                          <code>
+                            {inters
+                              .map(d => Math.round(d.state.tick))
+                              .toString()}
+                          </code>
+                        </pre>
+                        {inters.map((inter, index) => {
+                          return (
+                            <div
+                              key={inter.key}
+                              style={{
+                                opacity: inter.state.visibility,
+                                position: 'absolute',
+                                transform: `translateX(${inter.state.tick}px)`,
+                                color: inter.state.color
+                              }}
+                            >
+                              {inter.data}
+                            </div>
+                          )
+                        })}
                       </div>
-                    ))}
-                  </div>
-                )}
-              </Transition>
-            </div>
-          )}
+                    )
+                  }}
+                </Transition>
+              </div>
+            )
+          }}
         </Animate>
       </div>
     )
@@ -130,13 +140,13 @@ export default () => (
   </div>
 )
 
-let include
-function makeItems() {
-  include = !include
-  return _.filter(
-    _.map(_.range(10), d => ({
-      value: d
-    })),
-    (d, i) => Math.random() * 10 > i
-  )
+function makeItems(min, max) {
+  const tickStep = 10
+  let tick = 0
+  const ticks = []
+  while (tick <= max) {
+    ticks.push(tick)
+    tick += tickStep
+  }
+  return ticks
 }

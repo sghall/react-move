@@ -83,11 +83,12 @@ export default class Transition extends Component {
       duration,
       getDuration,
       getEasing,
+      enter,
       update,
+      leave,
       immutable,
       stagger,
       staggerGroups,
-      ignore,
     } = props
 
     // Detect if we need to animate
@@ -109,13 +110,8 @@ export default class Transition extends Component {
       return {
         key: getKey(d, i),
         data: d,
+        next: {},
       }
-    })
-
-    // Since the underlying data could have changed for currentItems, update them
-    currentItems.forEach(item => {
-      const found = newItems.find(d => d.key === item.key)
-      item.data = found ? found.data : item.data
     })
 
     // Find items that are entering
@@ -149,13 +145,7 @@ export default class Transition extends Component {
       }
       // If the item's update function returns something new, update it
       const newDestState = update(item.data, item.key)
-      if (
-        !Utils.deepEquals(
-          Utils.pickBy(item.destState, (_, key) => ignore.indexOf(key) === -1),
-          Utils.pickBy(newDestState, (_, key) => ignore.indexOf(key) === -1)
-        )
-      ) {
-        item.destState = newDestState
+      if (!Utils.deepEquals(item.destState, newDestState)) {
         item.willUpdate = true
       }
       item.willLeave = false
@@ -208,6 +198,16 @@ export default class Transition extends Component {
           ? item.easing
           : Easing[item.easing] || Easing[defaults.easing]
       }
+
+      // Compile the possible states for each item
+      item.next.update = update(item.data, item.key)
+      item.next.enter = enter(item.data, item.key)
+      item.next.leave = leave(item.data, item.key)
+
+      // Since the underlying data could have changed for the currentItems
+      // update them all
+      const newItem = newItems.find(d => d.key === item.key)
+      item.data = newItem ? newItem.data : item.data
     })
 
     // Be sure to render the origin frame
@@ -228,7 +228,7 @@ export default class Transition extends Component {
       return
     }
 
-    const { flexDuration, ignore, enter, leave, update } = this.props
+    const { flexDuration, ignore } = this.props
 
     this.animationID = RAF(() => {
       // Double check that we are still mounted, since RAF can perform
@@ -240,9 +240,9 @@ export default class Transition extends Component {
       // Keep track of time
       let currentTime = now()
 
-      this.items = this.items.filter(
-        item => !(!item.willEnter && item.leaving && item.progress === 1)
-      )
+      // this.items = this.items.filter(
+      //   item => !(item.leaving && item.progress === 1)
+      // )
 
       const needsAnimation = this.items.some(
         item => item.nextUpdate || item.progress < 1
@@ -279,8 +279,8 @@ export default class Transition extends Component {
           if (item.willEnter) {
             item.willEnter = false
             item.entering = true
-            item.destState = item.state || update(item.data, item.key) || {}
-            item.originState = enter(item.data, item.key) || item.destState
+            item.originState = item.next.enter || item.next.update
+            item.destState = item.next.update
             item.interpolators = makeInterpolators(
               item.originState,
               item.destState,
@@ -289,9 +289,8 @@ export default class Transition extends Component {
           } else if (item.willLeave) {
             item.willLeave = false
             item.leaving = true
-            item.destState = leave(item.data, item.key) ||
-            update(item.data, item.key) || {}
-            item.originState = item.state || enter(item.data, item.key)
+            item.originState = item.state || item.next.update
+            item.destState = item.next.leave || item.next.update
             item.interpolators = makeInterpolators(
               item.originState,
               item.destState,
@@ -300,7 +299,8 @@ export default class Transition extends Component {
           } else if (item.willUpdate) {
             item.willUpdate = false
             item.updating = true
-            item.originState = item.state || enter(item.data, item.key) || {}
+            item.originState = item.state || item.next.update
+            item.destState = item.next.update
             item.interpolators = makeInterpolators(
               item.originState,
               item.destState,
@@ -339,8 +339,10 @@ export default class Transition extends Component {
 
   renderProgress () {
     const { onRest } = this.props
-    // Don't show items that are entering
-    const items = this.items.filter(item => item.originState && item.destState)
+    // Don't interpolate items that haven't entered yet
+    let items = this.items.filter(
+      item => !item.willEnter && item.originState && item.destState
+    )
 
     items.forEach(item => {
       item.state = {}
@@ -365,6 +367,16 @@ export default class Transition extends Component {
         onRest(item.data, item.key)
       }
     })
+
+    // Don't render items that haven't entered yet or have exited
+    items = items.filter(
+      item => !(item.willEnter || (item.leaving && item.progress === 1))
+    )
+
+    // Remove items that have exited
+    this.items = this.items.filter(
+      item => !(item.leaving && item.progress === 1)
+    )
 
     this.setState({ items })
   }

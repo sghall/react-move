@@ -34,20 +34,25 @@ class Story extends Component {
         <br />
         <br />
 
+        <pre><code>{items.map(d => d.number).toString()}</code></pre>
+
         <Transition
           data={items}
           getKey={d => d.value}
           update={d => ({
+            number: d.number,
             translate: 1,
             opacity: 1,
-            color: `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`
+            color: 'black'
           })}
           enter={d => ({
+            number: d.number,
             translate: 0,
             opacity: 0,
             color: 'blue'
           })}
           leave={d => ({
+            number: d.number,
             translate: 2,
             opacity: 0,
             color: 'red'
@@ -68,7 +73,7 @@ class Story extends Component {
                         color: d.state.color
                       }}
                     >
-                      {d.key} - {Math.round(d.progress * 100)}
+                      {d.key} - {Math.round(d.state.number * 100)}
                     </div>
                   )
                 })}
@@ -96,7 +101,8 @@ export default () => (
 function makeItems() {
   return _.filter(
     _.map(_.range(11), d => ({
-      value: d
+      value: d,
+      number: Math.round(Math.random() * 100)
     })),
     (d, i) => i > Math.random() * 10
   )
