@@ -104,7 +104,7 @@ class Story extends Component {
   }
 }
 
-const source = require('!raw!./Animate')
+const source = require('!raw!./OnRest')
 const CodeHighlight = require('./components/codeHighlight').default
 export default () => (
   <div>

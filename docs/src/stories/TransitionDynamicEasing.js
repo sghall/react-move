@@ -86,7 +86,7 @@ class Story extends Component {
   }
 }
 
-const source = require('!raw!./Transition')
+const source = require('!raw!./TransitionDynamicEasing')
 const CodeHighlight = require('./components/codeHighlight').default
 export default () => (
   <div>
