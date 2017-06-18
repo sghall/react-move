@@ -20,6 +20,12 @@
 <a href="https://cash.me/$tannerlinsley">
   <img alt="" src="https://img.shields.io/badge/%24-Donate-brightgreen.svg" />
 </a>
+<a href="https://cdnjs.com/libraries/react-move">
+  <img alt="" src="https://img.shields.io/cdnjs/v/react-move.svg" />
+</a>
+<a href="https://www.npmjs.com/package/react-move">
+  <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
+</a>
 
 #### Beautifully and deterministically animate anything in React.
 
