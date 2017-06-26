@@ -16,6 +16,7 @@ const defaults = {
   onRest: () => null,
   flexDuration: false,
   immutable: true,
+  trackDefaultChange: false,
 }
 
 export default class Animate extends Component {
@@ -72,7 +73,7 @@ export default class Animate extends Component {
         : Easing[easing] || Easing[defaults.easing]
 
     // Update the origins and destinations
-    this.origin = this.state.current
+    this.origin = props.trackDefaultChanges ? props.default : this.state.current
     this.destination = data
 
     // Update the interpolators

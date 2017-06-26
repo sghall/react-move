@@ -56,6 +56,13 @@ export interface IAnimateProps {
      * It is passed the item and its corresponding key.
      */
     onRest?: () => void;
+
+    /**
+     * By default, if you change the `default` property it will be ignored and the starting value for the next animation would be the current/last animation value
+     * If you wish, you can fore the component to use a new `default` object as the starting value for the animation
+     * Default: false
+     */
+    trackDefaultChanges?: boolean
 }
 export declare class Animate extends React.Component<IAnimateProps, {}> {
     static defaultProps: IAnimateProps;
