@@ -114,6 +114,18 @@ export default class Transition extends Component {
       }
     })
 
+    // Detect instant rendering
+    if (!duration) {
+      this.items = newItems
+      this.items.forEach(item => {
+        item.progress = 1
+        item.originState = update(item.data, item.key)
+        item.destState = { ...item.originState }
+      })
+      this.renderProgress()
+      return
+    }
+
     // Find items that are entering
     const enteringItems = newItems.filter(
       newItem =>
@@ -186,17 +198,20 @@ export default class Transition extends Component {
       // For every item that needs to be reset, set a new startTime
       if (item.willEnter || item.willLeave || item.willUpdate) {
         item.nextUpdate = staggerOffset ? now() + staggerOffset : true
-        item.duration = typeof getDuration === 'function'
-          ? getDuration(item.data, item.key)
-          : duration
-        item.easing = typeof getEasing === 'function'
-          ? getEasing(item.data, item.key)
-          : easing
+        item.duration =
+          typeof getDuration === 'function'
+            ? getDuration(item.data, item.key)
+            : duration
+        item.easing =
+          typeof getEasing === 'function'
+            ? getEasing(item.data, item.key)
+            : easing
 
         // Update the easing function
-        item.easer = typeof item.easing === 'function'
-          ? item.easing
-          : Easing[item.easing] || Easing[defaults.easing]
+        item.easer =
+          typeof item.easing === 'function'
+            ? item.easing
+            : Easing[item.easing] || Easing[defaults.easing]
       }
 
       // Compile the possible states for each item
@@ -355,7 +370,7 @@ export default class Transition extends Component {
         if (!item.progress) {
           // If at absolute 0, draw the origin state
           item.state[key] = item.originState[key]
-        } else if (!item.interpolators[key]) {
+        } else if (item.progress === 1 || !item.interpolators[key]) {
           // If ignored, skip right to the value
           item.state[key] = item.destState[key]
         } else {
