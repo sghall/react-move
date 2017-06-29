@@ -15,7 +15,8 @@ class Story extends Component {
     return (
       <div>
         <p>
-          Animate anything you want by passing in an object to the "Animate" component.
+          Animate anything you want by passing in an object to the "Animate"
+          component.
         </p>
 
         <br />
@@ -38,7 +39,7 @@ class Story extends Component {
             height: '120px'
           }}
         >
-          {this.state.items.map((d, i) => (
+          {this.state.items.map((d, i) =>
             <Animate
               key={i}
               default={{
@@ -62,7 +63,8 @@ class Story extends Component {
                       color: 'white',
                       textAlign: 'center',
                       borderRadius: data.rotate / 360 * 100 + 'px',
-                      transform: `translate(${data.scale * 50}%, ${data.scale * 50}%) scale(${data.scale}) rotate(${data.rotate}deg)`,
+                      transform: `translate(${data.scale * 50}%, ${data.scale *
+                        50}%) scale(${data.scale}) rotate(${data.rotate}deg)`,
                       background: data.color
                     }}
                   >
@@ -71,7 +73,7 @@ class Story extends Component {
                 )
               }}
             </Animate>
-          ))}
+          )}
         </div>
       </div>
     )
@@ -80,15 +82,16 @@ class Story extends Component {
 
 const source = require('!raw!./Animate')
 const CodeHighlight = require('./components/codeHighlight').default
-export default () => (
+export default () =>
   <div>
     <Story />
     <br />
     <br />
 
-    <CodeHighlight>{() => source}</CodeHighlight>
+    <CodeHighlight>
+      {() => source}
+    </CodeHighlight>
   </div>
-)
 
 function makeItems() {
   return _.range(5).map(d => {
