@@ -1,6 +1,6 @@
 {
-  "name": "react-move",
-  "version": "1.5.4",
+  "name": "react-move-fork",
+  "version": "1.5.5",
   "description": "Beautifully animate anything in react with interia or time + easing.",
   "license": "MIT",
   "homepage": "https://github.com/tannerlinsley/react-move#readme",
@@ -42,7 +42,7 @@
     "raf": "^3.3.2"
   },
   "peerDependencies": {
-    "@types/react": "^15.0.22",
+    "@types/react": "*",
     "react": "^15.3.1"
   },
   "devDependencies": {
