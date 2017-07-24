@@ -35,21 +35,18 @@ class Story extends Component {
       return null
     }
 
-    const scale = tick => tick / max * width
-    const prevScale = tick => tick / prevMax * width
-
     return (
       <div>
         <p>
-          You can easily layer animation components within each other. Here, the background, the item positions, and the item opacities are all controlled with different nested components.
+          You can easily layer animation components within each other. Here, the
+          background, the item positions, and the item opacities are all
+          controlled with different nested components.
         </p>
 
         <br />
         <br />
 
-        <button onClick={() => this.randomize()}>
-          Randomize Data
-        </button>
+        <button onClick={() => this.randomize()}>Randomize Data</button>
 
         <br />
         <br />
@@ -130,15 +127,16 @@ class Story extends Component {
 
 const source = require('!raw!./TransitionNested')
 const CodeHighlight = require('./components/codeHighlight').default
-export default () => (
+export default () =>
   <div>
     <Story />
     <br />
     <br />
 
-    <CodeHighlight>{() => source}</CodeHighlight>
+    <CodeHighlight>
+      {() => source}
+    </CodeHighlight>
   </div>
-)
 
 function makeItems(min, max) {
   const tickStep = 10

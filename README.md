@@ -214,6 +214,71 @@ const items = _.filter(items, (d, i) => i > Math.random() * 10)
 </Transition>
 ```
 
+
+
+## Appear
+A component that enables simple entering and exiting of a single element.
+##### Props
+- `show={ Boolean }` | `true` | *Required*
+  - An array of objects you wish to track. These are not necessarily the exact values you wish to animate, but will used to produce the animated values.
+- `update={ object }` | *Required*
+  - An object that represents the regular state when `show === true`.
+- `enter={ object }`
+  - An object that represents the `entering` state when `show === false`.
+- `leave={ object }`
+  - An object that represents the `leaving` state when `show === false`.
+- `duration={ Number }` | `500`
+  - The duration in milliseconds for each item to animate
+- `easing={ String | Function }` | `easeCubicOut`
+  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function
+  - A custom easing function that receives a progress decimal and returns a new progress decimal.
+- `onRest={ Function }` | `(item, key) => null`
+  - A function that is called any time interpolation comes to a halt.
+- `ignore={ []String }` | `false`
+  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
+- `flexDuration={ Boolean }` | `false`
+  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
+
+##### Example
+```javascript
+import React from 'react'
+import { Appear } from 'react-move'
+
+<Appear
+  show={true}
+  enter={{
+    scale: 0,
+    color: 'green',
+    rotate: -90
+  }}
+  update={{
+    scale: 1,
+    color: 'blue',
+    rotate: 0
+  }}
+  leave={{
+    scale: 0,
+    color: 'red',
+    rotate: 90
+  }}
+>
+  {data => {
+    return (
+      <div
+        style={{
+          width: 100 * data.scale + 'px',
+          height: 100 * data.scale + 'px',
+          transform: `rotate(${data.rotate}deg)`,
+          background: data.color,
+          color: 'white'
+        }}
+      />
+    )
+  }}
+</Appear>
+```
+
+
 ## Custom Easing
 If you would rather use a different easing function or just build your own, you can! Simply pass a function to the `easing` prop and you're off!
 ```javascript

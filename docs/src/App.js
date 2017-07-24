@@ -7,7 +7,7 @@ import './stories/utils/prism.css'
 import Readme from './stories/Readme.js'
 
 import Animate from './stories/Animate.js'
-import Easing from './stories/Easing.js'
+import Appear from './stories/Appear.js'
 import Transition from './stories/Transition.js'
 import TransitionNested from './stories/TransitionNested.js'
 import TransitionStaggered from './stories/TransitionStaggered.js'
@@ -15,6 +15,7 @@ import TransitionStaggeredLinear from './stories/TransitionStaggeredLinear.js'
 import TransitionDynamicDuration from './stories/TransitionDynamicDuration.js'
 import TransitionDynamicEasing from './stories/TransitionDynamicEasing.js'
 import TransitionClasses from './stories/TransitionClasses.js'
+import Easing from './stories/Easing.js'
 import OnRest from './stories/OnRest.js'
 import FlexDuration from './stories/FlexDuration.js'
 import CustomEasing from './stories/CustomEasing.js'
@@ -30,7 +31,7 @@ export default class App extends React.Component {
           height: '100%'
         }}
         pathPrefix="story/"
-        StoryWrapper={props => (
+        StoryWrapper={props =>
           <defaultProps.StoryWrapper
             css={{
               padding: 0
@@ -59,12 +60,11 @@ export default class App extends React.Component {
                 padding: '10px'
               }}
             />
-          </defaultProps.StoryWrapper>
-        )}
+          </defaultProps.StoryWrapper>}
         stories={[
           { name: 'Readme & Documentation', component: Readme },
           { name: 'Animate', component: Animate },
-          { name: 'Easing', component: Easing },
+          { name: 'Appear', component: Appear },
           { name: 'Transition', component: Transition },
           { name: 'Nested Transition', component: TransitionNested },
           { name: 'Staggered Transition', component: TransitionStaggered },
@@ -81,6 +81,7 @@ export default class App extends React.Component {
             component: TransitionDynamicEasing
           },
           { name: 'Transition with Classes', component: TransitionClasses },
+          { name: 'Easing', component: Easing },
           { name: 'onRest Callbacks', component: OnRest },
           { name: 'Flex Duration (Frame Dropping)', component: FlexDuration },
           { name: 'Custom Easing', component: CustomEasing },
