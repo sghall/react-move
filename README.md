@@ -1,6 +1,9 @@
-<div align="center">
-  <a href="https://github.com/react-tools/react-move"><img src="https://unpkg.com/react-move@latest/media/banner.png" alt="React Move Logo" style="width:450px;"/></a>
+<div style="text-align:center;">
+  <a href="https://github.com/react-tools/react-move" target="\_parent"><img src="https://github.com/react-tools/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
 </div>
+
+# React-Move
+Beautifully and deterministically animate anything in React.
 
 <a href="https://travis-ci.org/react-tools/react-move">
   <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
@@ -27,7 +30,6 @@
   <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
 </a>
 
-#### Beautifully and deterministically animate anything in React.
 
 ## Features
 
