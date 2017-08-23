@@ -1,4 +1,4 @@
-[Checkout the project on Github](https://github.com/sghall/resonance)
+[Checkout the project on Github](https://github.com/react-tools/react-move)
 
 ## Animate  
 

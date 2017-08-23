@@ -71,7 +71,7 @@ class AppNavDrawer extends Component {
         containerStyle={{ zIndex: zIndex.drawer - 100 }}
       >
         <div style={styles.logo} onTouchTap={this.handleTouchTapHeader}>
-          Resonance
+          React-Move
         </div>
         <SelectableList
           value={location.pathname}
@@ -114,42 +114,6 @@ class AppNavDrawer extends Component {
               />,
             ]}
           />
-          <ListItem
-            primaryText="Redux Examples"
-            primaryTogglesNestedList
-            nestedItems={[
-              <ListItem
-                primaryText="Alphabet"
-                value="/redux-examples/alphabet"
-                href="#/redux-examples/alphabet"
-              />,
-              <ListItem
-                primaryText="States Bar Chart"
-                value="/redux-examples/states-by-age"
-                href="#/redux-examples/states-by-age"
-              />,
-              <ListItem
-                primaryText="States Circle Pack"
-                value="/redux-examples/packed-by-age"
-                href="#/redux-examples/packed-by-age"
-              />,
-              <ListItem
-                primaryText="Stacked Area Chart"
-                value="/redux-examples/stacked-area"
-                href="#/redux-examples/stacked-area"
-              />,
-              <ListItem
-                primaryText="Alluvial Chart"
-                value="/redux-examples/alluvial-chart"
-                href="#/redux-examples/alluvial-chart"
-              />,
-              <ListItem
-                primaryText="Webpack Sunburst"
-                value="/redux-examples/webpack-sunburst"
-                href="#/redux-examples/webpack-sunburst"
-              />,
-            ]}
-          />
         </SelectableList>
         <Divider />
         <SelectableList
@@ -157,7 +121,7 @@ class AppNavDrawer extends Component {
           onChange={this.handleRequestChangeLink}
         >
           <Subheader>Resources</Subheader>
-          <ListItem primaryText="GitHub" value="https://github.com/sghall/resonance" />
+          <ListItem primaryText="GitHub" value="https://github.com/react-tools/react-move" />
           <ListItem primaryText="React" value="http://facebook.github.io/react" />
         </SelectableList>
       </Drawer>

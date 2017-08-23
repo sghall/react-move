@@ -166,7 +166,7 @@ class AppFrame extends Component {
           iconElementRight={
             <IconButton
               iconClassName="muidocs-icon-custom-github"
-              href="https://github.com/sghall/resonance"
+              href="https://github.com/react-tools/react-move"
             />
           }
           style={styles.appBar}
@@ -188,11 +188,11 @@ class AppFrame extends Component {
         <FullWidthSection style={styles.footer}>
           <IconButton
             iconStyle={styles.iconButton}
-            href="https://github.com/sghall/resonance"
+            href="https://github.com/react-tools/react-move"
           />
           <p style={prepareStyles(styles.browserstack)}>
             {'Check out the project on Github '}
-            <a href="https://github.com/sghall/resonance" style={prepareStyles(styles.browserstackLogo)}>
+            <a href="https://github.com/react-tools/react-move" style={prepareStyles(styles.browserstackLogo)}>
               Resonance
             </a>
           </p>

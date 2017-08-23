@@ -6,7 +6,6 @@ import AppFrame from '../components/AppFrame';
 import AnimateDocs from './documentation/Animate';
 import NodeGroupDocs from './documentation/NodeGroup';
 import TickGroupDocs from './documentation/TickGroup';
-import store, { injectReducer } from '../store';
 import Simple from './examples/Simple';
 import PieCharts from './examples/PieCharts';
 
@@ -69,22 +68,6 @@ const routes = {
           exampleContext,
           component: PieCharts,
         },
-      ],
-    },
-    {
-      path: 'redux-examples',
-      indexRoute: {
-        onEnter(nextState, replace) {
-          replace('/redux-examples/alphabet');
-        },
-      },
-      childRoutes: [
-        require('./reduxExamples/alphabet').default(store, injectReducer),
-        require('./reduxExamples/statesByAge').default(store, injectReducer),
-        require('./reduxExamples/packedByAge').default(store, injectReducer),
-        require('./reduxExamples/stackedArea').default(store, injectReducer),
-        require('./reduxExamples/alluvialChart').default(store, injectReducer),
-        require('./reduxExamples/webpackSunburst').default(store, injectReducer),
       ],
     },
   ],

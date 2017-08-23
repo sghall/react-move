@@ -96,7 +96,7 @@ class HomePage extends Component {
         <RaisedButton
           label="GitHub"
           primary
-          href="https://github.com/sghall/resonance"
+          href="https://github.com/react-tools/react-move"
           style={styles.button}
         />
         <RaisedButton
