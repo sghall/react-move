@@ -12,16 +12,13 @@ Beautiful, data-driven animations for React.
   <img alt="" src="https://img.shields.io/npm/dm/react-move.svg" />
 </a>
 <a href="https://react-chat-signup.herokuapp.com/">
-  <img alt="" src="https://img.shields.io/badge/slack-react--chat-blue.svg" />
+  <img alt="" src="https://img.shields.io/badge/slack-react--tools-blue.svg" />
 </a>
 <a href="https://github.com/react-tools/react-move">
   <img alt="" src="https://img.shields.io/github/stars/react-tools/react-move.svg?style=social&label=Star" />
 </a>
 <a href="https://twitter.com/react-tools">
   <img alt="" src="https://img.shields.io/twitter/follow/react-tools.svg?style=social&label=Follow" />
-</a>
-<a href="https://cash.me/$react-tools">
-  <img alt="" src="https://img.shields.io/badge/%24-Donate-brightgreen.svg" />
 </a>
 <a href="https://cdnjs.com/libraries/react-move">
   <img alt="" src="https://img.shields.io/cdnjs/v/react-move.svg" />
