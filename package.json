@@ -1,6 +1,7 @@
 {
   "name": "react-move",
   "version": "1.0.0-beta",
+  "private": true,
   "description": "Beautiful, data-driven animations for React.",
   "main": "index.js",
   "repository": "git+https://github.com/react-tools/react-move.git",
