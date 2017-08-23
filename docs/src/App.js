@@ -38,7 +38,7 @@ export default class App extends React.Component {
             }}
           >
             <a
-              href="//github.com/tannerlinsley/react-move"
+              href="//github.com/react-tools/react-move"
               style={{
                 display: 'block',
                 textAlign: 'center',

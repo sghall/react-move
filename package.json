@@ -3,10 +3,10 @@
   "version": "1.6.1",
   "description": "Beautifully animate anything in react with interia or time + easing.",
   "license": "MIT",
-  "homepage": "https://github.com/tannerlinsley/react-move#readme",
+  "homepage": "https://github.com/react-tools/react-move#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tannerlinsley/react-move.git"
+    "url": "git+https://github.com/react-tools/react-move.git"
   },
   "keywords": [
     "react",
@@ -17,12 +17,7 @@
     "time"
   ],
   "main": "lib/index.js",
-  "files": [
-    "lib/",
-    "react-move.js",
-    "media/*.png",
-    "index.d.ts"
-  ],
+  "files": ["lib/", "react-move.js", "media/*.png", "index.d.ts"],
   "types": "./index.d.ts",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline --presets=es2015,react,stage-2 --plugins=transform-object-assign",

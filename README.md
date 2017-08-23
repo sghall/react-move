@@ -1,9 +1,9 @@
 <div align="center">
-  <a href="https://github.com/tannerlinsley/react-move"><img src="https://unpkg.com/react-move@latest/media/banner.png" alt="React Move Logo" style="width:450px;"/></a>
+  <a href="https://github.com/react-tools/react-move"><img src="https://unpkg.com/react-move@latest/media/banner.png" alt="React Move Logo" style="width:450px;"/></a>
 </div>
 
-<a href="https://travis-ci.org/tannerlinsley/react-move">
-  <img alt="" src="https://travis-ci.org/tannerlinsley/react-move.svg?branch=master" />
+<a href="https://travis-ci.org/react-tools/react-move">
+  <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
 </a>
 <a href="https://npmjs.com/package/react-move">
   <img alt="" src="https://img.shields.io/npm/dm/react-move.svg" />
@@ -11,13 +11,13 @@
 <a href="https://react-chat-signup.herokuapp.com/">
   <img alt="" src="https://img.shields.io/badge/slack-react--chat-blue.svg" />
 </a>
-<a href="https://github.com/tannerlinsley/react-move">
-  <img alt="" src="https://img.shields.io/github/stars/tannerlinsley/react-move.svg?style=social&label=Star" />
+<a href="https://github.com/react-tools/react-move">
+  <img alt="" src="https://img.shields.io/github/stars/react-tools/react-move.svg?style=social&label=Star" />
 </a>
-<a href="https://twitter.com/tannerlinsley">
-  <img alt="" src="https://img.shields.io/twitter/follow/tannerlinsley.svg?style=social&label=Follow" />
+<a href="https://twitter.com/react-tools">
+  <img alt="" src="https://img.shields.io/twitter/follow/react-tools.svg?style=social&label=Follow" />
 </a>
-<a href="https://cash.me/$tannerlinsley">
+<a href="https://cash.me/$react-tools">
   <img alt="" src="https://img.shields.io/badge/%24-Donate-brightgreen.svg" />
 </a>
 <a href="https://cdnjs.com/libraries/react-move">
@@ -48,7 +48,7 @@
   - Anything [d3-interpolate](https://github.com/d3/d3-interpolate) can handle
 
 ## Demos
-- [Codepen](http://codepen.io/tannerlinsley/pen/dWYEwd?editors=0010)
+- [Codepen](http://codepen.io/react-tools/pen/dWYEwd?editors=0010)
 - [Storybook](https://react-move.js.org)
 - [`<Animated />` Scrimba Tutorial](https://scrimba.com/casts/cast-1924)
 
@@ -297,7 +297,7 @@ If you would rather use a different easing function or just build your own, you 
 ```
 
 ## Physics Easing
-Using one of our favorite tools called [Springer](https://github.com/tannerlinsley/springer), you can effortlessly build your own realistic spring-based easing functions, and achieve a look and feel similar that of React-Motion.
+Using one of our favorite tools called [Springer](https://github.com/react-tools/springer), you can effortlessly build your own realistic spring-based easing functions, and achieve a look and feel similar that of React-Motion.
 ```javascript
 import React from 'react'
 import { Animate } from 'react-move'
@@ -364,7 +364,7 @@ If you would like to help develop a suggested feature follow these steps:
 - Install dependencies with `$ yarn`
 - Auto-build files as you edit with `$ yarn run watch`
 - Implement your changes to files in the `src/` directory
-- Run the <a href="https://github.com/tannerlinsley/react-story">React Story</a> locally with `$ yarn run docs`
+- Run the <a href="https://github.com/react-tools/react-story">React Story</a> locally with `$ yarn run docs`
 - View changes as you edit `docs/src`,
 - Submit PR for review
 
