@@ -30,16 +30,18 @@ Beautiful, data-driven animations for React.
   <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
 </a>
 
+## Resonance is now React-Move!
+- [Resonance](https://github.com/sghall/resonance) has joined forces with react-move to make your animations even better! [Read about the collaboration here!](https://medium.com/@tannerlinsley/resonance-joins-forces-with-react-move-to-make-your-react-animations-even-better-d1090cd8dd40)
 
 ## Features
 
 - **12kb!** (minified)
 - Supported in React, React-Native & React-VR
-- Animate anything you want
-- List Transitions eg. "enter", "update", and "leaving"
-- Staggering and Stagger Groups
-- Custom Easing
-- Supports auto interpolation of
+- Animate anything. HTML, SVG, React-Native
+- Prop-level delays & duration customization
+- Animation lifecycle events eg. (start, interrupt, end)
+- Custom easing & tweening functions
+- Supports interpolation of
   - Numbers
   - Colors
   - SVG paths
@@ -65,298 +67,368 @@ $ npm install react-move --only=dev
 <script src='https://npmcdn.com/react-move@latest/react-move.js'></script>
 ```
 
+# Documentation
+The docs below are for version **2.x.x** of React-Move.
 
+Older versions:
+- [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
 
-## Animate
-A component for animating any single object.
-##### Props
-- `data={ Object }` | *Required*
-  - An object of keys that that you wish to animate. When these values are changed, each and every value in this object will be interpolated (unless its key is found in the `ignore` prop)
-- `default={ Object }`
-  - An object of keys to be used as the initial state of the animation.
-- `duration={ Number }` | `500`
-  - The duration in milliseconds for each item to animate
-- `easing={ string | function }` | `easeCubicOut`
-  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function, or a custom easing function that receives a progress decimal and returns a new progress decimal.
-- `onRest={ Function }` | `() => null`
-  - A function that is called every time the animation sequence is completed.
-- `ignore={ []String }` | `false`
-  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
-- `flexDuration={ Boolean }` | `false`
-  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
-- `immutable={ Boolean }` | `true`
-  - By default, strict equality `===` between the old `data` and new `data` is used to detect when an animation should occur. If you wish, you can disable `immutable` mode which falls back to using `JSON.stringify` to determine if an animation should occur.
+## < NodeGroup />
 
-##### Example
-```javascript
-import React from 'react'
-import { Animate } from 'react-move'
+The NodeGroup component allows you to create complex animated transitions.  You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
+The idea is similar to transition components like [react-transition-group](https://github.com/reactjs/react-transition-group) or [react-motion's TransitionMotion](https://github.com/chenglou/react-motion) but you use objects to express how you want your state to transition.
+Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing.
 
-<Animate
-  // Set some default data
-  default={{
-    scale: 0,
-    color: 'blue'
-  }}
-  // Update your data to whatever you want
-  data={{
-    scale: Math.random() * 1,
-    color: _.sample(['red', 'blue', 'yellow']),
-  }}
-  duration={800}
-  easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
+<a href="https://sghall.github.io/resonance/#/documentation/node-group">
+  <img src="https://user-images.githubusercontent.com/4615775/27489448-6ab3ed14-57ef-11e7-871e-a1fb621f2d96.png" height="500px"/>
+</a>
+
+### Usage
+
+A typical usage of NodeGroup looks like this...
+
+```js
+<NodeGroup
+  data={this.state.data} // array of data objects (required)
+  keyAccessor={(d) => d.name} // function to get the key of each object (required)
+
+  start={(data, index) => ({ // returns the starting state of node (required)
+    ...
+  })}
+
+  enter={(data, index) => ({ // how to transform node state on enter - runs immediately after start (optional)
+    ...
+  })}
+
+  update={(data, index) => ({ // how to transform node state on update - runs each time data updates and key remains (optional)
+    ...
+  })}
+
+  leave={(data, index) => ({ // how to transform node state on leave - run when data updates and key is gone (optional)
+    ...
+  })}
 >
-  {data => (
-    <div
-      style={{
-        transform: `scale(${data.scale})`,
-        background: data.color
-      }}
-    >
-      {data.scale * 100}
-    </div>
-  )}
-</Animate>
-```
-
-
-
-## Transition
-A component that enables animating multiple elements, including enter and exit animations.
-##### Props
-- `data={ []Objects }` | `[]` | *Required*
-  - An array of objects you wish to track. These are not necessarily the exact values you wish to animate, but will used to produce the animated values.
-- `getKey={ function }` | `(item, i) => i`
-  - A function that returns a unique identifier for each item. This is used to track `enter`, `update` and `leave` states/groups.
-- `update={ function }` | *Required*
-  - A function that returns the state for an item if it is neither `entering` or `leaving` the list of items.
-- `enter={ function }` | `() => null`
-  - A function that returns the state for an item if it is `entering` the list of items. If nothing is returned, the `update` state is used.
-- `leave={ function }` | `() => null`
-  - A function that returns the state for an item if it is `leaving` the list of items. If nothing is returned, the `update` state is used.
-- `duration={ Number }` | `500`
-  - The duration in milliseconds for each item to animate
-- `easing={ String | Function }` | `easeCubicOut`
-  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function
-  - A custom easing function that receives a progress decimal and returns a new progress decimal.
-- `getDuration={ Function }` | `(item, key) => null`
-  - A function that receives each `item` and its `key` and returns the duration in milliseconds for the item to animate
-  - Overrides the `duration` prop.
-- `getEasing={ Function }` | `(item, key) => null`
-  - A function that receives each `item` and its `key` and returns either:
-    - Astring that references a [d3-ease](https://github.com/d3/d3-ease) function
-    - A custom easing function that receives a progress decimal and returns a new progress decimal.
-  - Overrides the `easing` prop.
-- `stagger={ Number }` | `0`
-  - Number of milliseconds for each item to wait relative to it's preceding item.
-- `staggerGroups={ Boolean }` | `true`
-  - If staggering, will delay item animations relative to status groups instead of the entire list. The relative groups used in this mode are `entering`, `updating` and `leaving`.
-- `onRest={ Function }` | `(item, key) => null`
-  - A function that is called every time an item completes its animation sequence. It is passed the item and its corresponding key.
-- `ignore={ []String }` | `false`
-  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
-- `flexDuration={ Boolean }` | `false`
-  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
-
-##### Example
-```javascript
-import React from 'react'
-import { Transition } from 'react-move'
-
-const items = _.filter(items, (d, i) => i > Math.random() * 10)
-
-<Transition
-  // pass an array of items to "data"
-  data={items}
-  // use "getKey" to return a unique ID for each item
-  getKey={(item, index) => index}
-  // the "update" function returns the items normal state to animate
-  update={item => ({
-    translate: 1,
-    opacity: 1,
-    color: 'grey'
-  })}
-  // the "enter" function returns the items origin state when entering
-  enter={item => ({
-    translate: 0,
-    opacity: 0,
-    color: 'blue'
-  })}
-  // the "leave" function returns the items destination state when leaving
-  leave={item => ({
-    translate: 2,
-    opacity: 0,
-    color: 'red'
-  })}
-  //
-  duration={800}
-  easing='easeQuadIn' // anything from https://github.com/d3/d3-ease
-  stagger={200} // you can also stagger by a percentage of the animation
-  staggerGroup // use this prop to stagger by enter/exit/update group index instead of by overall index
->
-  {data => ( // the child function is passed an array of itemStates
-    <div>
-      {data.map(item => {
-        // data[0] === { key: 0, data: 0, state: {...} }
-        return (
-          <div
-            key={item.key}
-            style={{
-              transform: `translateX(${100 * item.state.translate}px)`,
-              opacity: item.state.opacity,
-              color: item.state.color
-            }}
-          >
-            {item.data} - {Math.round(item.percentage * 100)}
-          </div>
-        )
+  {(nodes) => ( // the only child of NodeGroup should be a function to render the nodes (required)
+    ...
+      {nodes.map(({ key, data, state }) => {
+        ...
       })}
-    </div>
+    ...
   )}
-</Transition>
+</NodeGroup>
 ```
 
+### Transitions
 
+You return an object or an array of objects in your **enter**, **update** and **leave** functions.
+Instead of simply returning the next state these objects describe how to transform the state.
+This is far more powerful than just returning a state object.  By approaching it this way, you can describe really complex transformations and handle interrupts easily.
 
-## Appear
-A component that enables simple entering and exiting of a single element.
-##### Props
-- `show={ Boolean }` | `true` | *Required*
-  - An array of objects you wish to track. These are not necessarily the exact values you wish to animate, but will used to produce the animated values.
-- `update={ object }` | *Required*
-  - An object that represents the regular state when `show === true`.
-- `enter={ object }`
-  - An object that represents the `entering` state when `show === false`.
-- `leave={ object }`
-  - An object that represents the `leaving` state when `show === false`.
-- `duration={ Number }` | `500`
-  - The duration in milliseconds for each item to animate
-- `easing={ String | Function }` | `easeCubicOut`
-  - A string that references a [d3-ease](https://github.com/d3/d3-ease) function
-  - A custom easing function that receives a progress decimal and returns a new progress decimal.
-- `onRest={ Function }` | `(item, key) => null`
-  - A function that is called any time interpolation comes to a halt.
-- `ignore={ []String }` | `false`
-  - Any keys found in this array will not be interpolated, and instead will be immediately set to the new value
-- `flexDuration={ Boolean }` | `false`
-  - Avoid dropping frames at all cost by dynamically increasing the duration of the animation loop becomes overwhelmed.
+If you're familiar with D3, this approach mimics selection/transition behavior.  In D3 your are really describing how the state should look on enter, update and exit and how to get there: set the value immediately or transition to it.
+D3 deals with the fact that transitions might be in-flight or the key is already at that value in the background without you having to worry about that.
+The NodeGroup takes the same approach but it's done in idiomatic React.
 
-##### Example
-```javascript
-import React from 'react'
-import { Appear } from 'react-move'
+Each object returned from your enter, update and leave functions can specify its own duration, delay, easing and events independently.
+To support that, inside your object there are two special keys you can use:  **timing** and **events**.  Both are optional.
+Timing and events are covered in more detail below.
+The rest of the keys in each object are assumed to be keys in your state.
 
-<Appear
-  show={true}
-  enter={{
-    scale: 0,
-    color: 'green',
-    rotate: -90
-  }}
-  update={{
-    scale: 1,
-    color: 'blue',
-    rotate: 0
-  }}
-  leave={{
-    scale: 0,
-    color: 'red',
-    rotate: 90
-  }}
+If you aren't transitioning anything then it wouldn't make sense to be using NodeGroup.
+That said, like in D3, it's also convenient to be able to set a key to value when a node enters, updates or leaves without transitioning.
+To support this you can return four different types of values to specify how you want to transform the state.
+
+* `string or number`: Set the key to the value immediately with no transition.
+
+* `array [value]`: Transition from the key's current value to the specified value. Value is a string or number.
+
+* `array [value, value]`: Transition from the first value to the second value. Each value is a string or number.
+
+* `function`: Function will be used as a custom tween function.
+
+In all cases above a "string" can be a color, path, transform (the key must be called "transform" see below), etc and it will be interpolated using the correct interpolator.
+See the interpolators section below.
+
+```js
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  // start - starting state of the node. Just return an object.
+  start={(data, index) => ({
+    opacity: 1e-6,
+    x: 1e-6,
+    fill: 'green',
+    width: scale.bandwidth(),
+  })}
+
+  // enter - return an object or array of objects describing how to transform the state.
+  enter={(data, index) => ({
+    opacity: [0.5], // transition opacity on enter
+    x: [scale(data.name)], // transition x on on enter
+    timing: { duration: 1500 }, // timing for transitions
+  })}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
 >
-  {data => {
+  {(nodes) => (
+    ...
+  )}
+</NodeGroup>
+```
+
+## Timing
+
+If there's no timing key in your object you'll get the timing defaults.
+You can specify just the things you want to override on your timing key.
+
+Here's the timing defaults...
+```js
+const defaultTiming = {
+  delay: 0,
+  duration: 250,
+  ease: easeLinear,
+};
+```
+For the ease key, just provide the function.  You can use any easing function, like those from d3-ease...
+
+[List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
+
+## Passing an array of objects
+
+Each object can define its own timing and it will be applied to any transitions in the object.
+
+```js
+import { easeQuadInOut } from 'd3-ease';
+
+...
+
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  // start - starting state of the node. Just return an object.
+  start={(data, index) => ({
+    opacity: 1e-6,
+    x: 1e-6,
+    fill: 'green',
+    width: scale.bandwidth(),
+  })}
+
+  // enter - return an object or array of objects describing how to transform the state.
+  enter={(data, index) => ([ // An array
+    {
+      opacity: [0.5], // transition opacity on enter
+      timing: { duration: 1000 }, // timing for transition
+    },
+    {
+      x: [scale(data.name)], // transition x on on enter
+      timing: { delay: 750, duration: 1500, ease: easeQuadInOut }, // timing for transition
+    },
+  ])}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+>
+  {(nodes) => (
+    ...
+  )}
+</NodeGroup>
+```
+
+## Events
+
+The events are the same as those on D3 transitions. You can fire a function on transition start, interrupt or end.
+```js
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={() => ({
+    ...
+  })}
+
+  enter={(data) => ({
+    ...
+  })}
+
+  update={(data) => ({
+    opacity: [0.5],
+    x: [scale(data.name)],
+    fill: 'blue',
+    width: [scale.bandwidth()],
+    timing: { duration: 1500, ease: easeQuadInOut },
+    events: {
+      start() { // runs in the context of the node
+        console.log('start!', data, this);
+      },
+      interrupt() { // runs in the context of the node
+        console.log('interrupt!', data, this);
+      },
+      end() { // runs in the context of the node
+        console.log('end!', data, this);
+        this.setState({ fill: 'tomato' }); // the node has a setState method on it!
+      },
+    },
+  })}
+
+  leave={() => ({
+    ...
+  })}
+>
+  {(nodes) => (
+    ...
+  )}
+</NodeGroup>
+```
+
+## Interpolators
+
+Interpolators are inferred from what you specify in your transition object.
+
+With the exceptions of "events" and "timing" you can name the keys that are transitioning whatever you want, but if you use the key "transform" it indicates that you want to use D3's SVG transform interpolator.
+Beyond that, the value will determine the interpolator.  This is essentially how D3 picks interpolators.
+
+The logic is as follows:
+1. If the value is a function, it will be used as a custom tween function.
+2. Then the key and value are passed to the function below:
+
+```js
+import {
+  interpolateRgb,
+  interpolateNumber,
+  interpolateString,
+  interpolateTransformSvg,
+} from 'd3-interpolate';
+import { color } from 'd3-color';
+
+export function getInterpolator(key, value) {
+  if (key === 'transform') {
+    return interpolateTransformSvg;
+  } else if (typeof value === 'number') {
+    return interpolateNumber;
+  } else if (value instanceof color || color(value) !== null) {
+    return interpolateRgb;
+  }
+
+  return interpolateString;
+}
+```
+
+## Namespacing your state
+
+You don't have to keep your state flat either.
+You can create "namespaces" that allow you to organize state in a way that makes sense for your component. In the example below, you can get sense of how this works.
+To see the full code and a live demo go to examples section of the docs site.
+
+What's nice about this is you can then just spread your state in the render function:
+```js
+...
+
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={() => ({
+    g: {
+      opacity: 1e-6,
+      transform: 'translate(0,0)',
+    },
+    circle: {
+      r: 1e-6,
+      strokeWidth: 1e-6,
+      fill: 'green',
+    },
+  })}
+
+  enter={(data, index) => ({
+    g: {
+      opacity: [0.4],
+      transform: [`translate(${scale(data.name) + (scale.bandwidth() / 2)},0)`],
+    },
+    circle: {
+      r: [scale.bandwidth() / 2],
+      strokeWidth: [(index + 1) * 2],
+      fill: 'green',
+    },
+    timing: { duration: 1000, ease: easeExpInOut },
+  })}
+
+  update={(data, index) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+>
+  {(nodes) => {
     return (
-      <div
-        style={{
-          width: 100 * data.scale + 'px',
-          height: 100 * data.scale + 'px',
-          transform: `rotate(${data.rotate}deg)`,
-          background: data.color,
-          color: 'white'
-        }}
-      />
-    )
+      <g>
+        {nodes.map(({ key, data, state }) => {
+          return (
+            <g key={key} {...state.g}> // spread the g object
+              <circle
+                stroke="grey"
+                cy={dims[1] / 2}
+                {...state.circle} // spread the circle object
+              />
+              <text
+                x="0"
+                y="20"
+                fill="#333"
+                transform="rotate(-45 5,20)"
+              >{`x: ${state.g.transform}`}</text>
+              <text
+                x="0"
+                y="5"
+                fill="#333"
+                transform="rotate(-45 5,20)"
+              >{`name: ${data.name}`}</text>
+            </g>
+          );
+        })}
+      </g>
+    );
   }}
-</Appear>
+</NodeGroup>
+
+...
 ```
 
+## SVG Chart Examples
 
-## Custom Easing
-If you would rather use a different easing function or just build your own, you can! Simply pass a function to the `easing` prop and you're off!
-```javascript
-<Animate
-  easing={(t) => { // This is Chart.js's easeOutBounce function :)
-    if ((t /= 1) < (1 / 2.75)) {
-      return 1 * (7.5625 * t * t)
-    } else if (t < (2 / 2.75)) {
-      return 1 * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75)
-    } else if (t < (2.5 / 2.75)) {
-      return 1 * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375)
-    }
-    return 1 * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375)
-  }}
->
-```
+You can animate anything with Resonance, but it was developed by experimenting with animated SVG charts and redux.
+This library is great for creating abstract animated data visualizations in React.
+You can view the [example code](https://github.com/sghall/resonance/tree/master/docs/src/routes/reduxExamples) here for the chart examples.
+Each example is a mini [redux](http://redux.js.org/) application with its actions and reducers defined in a small module.
+You can run these examples locally by following the direction above.
 
-## Physics Easing
-Using one of our favorite tools called [Springer](https://github.com/react-tools/springer), you can effortlessly build your own realistic spring-based easing functions, and achieve a look and feel similar that of React-Motion.
-```javascript
-import React from 'react'
-import { Animate } from 'react-move'
-import Springer from 'springer'
-
-const normalSpring = Springer()
-const hardSpring = Springer(0.9, 0.3)
-const wobblySpring = Springer(0.5, 0.9)
-
-<Animate
-  easing={wobblySpring}
-/>
-```
-
-*Notes: Springer does not deliver eventual and interruptible animation. For animations requiring those characteristics, we suggest using [React-Motion](https://github.com/chenglou/react-motion).*
-
-## Custom Defaults
-Want to change the defaults for either `Animate` or `Transition`?
-```javascript
-import { Animate, Transition } from 'react-move'
-
-
-// Before using either component, change any property in the Component's 'defaults' object
-Object.assign(Animate.defaults, {
-  duration: 3000,
-  easing: 'easeElasticOut'
-})
-
-Object.assign(Transition.defaults, {
-  stagger: 100
-})
-
-
-// Or create your own wrapped versions!
-class MyAnimate extends React.Component {
-  render () {
-    return (  
-      <Animate
-        duration={3000}
-        easing='easeElasticOut'
-        {...this.props}
-      />
-    )
-  }
-}
-
-class MyTransition extends React.Component {
-  render () {
-    return (  
-      <Transition
-        stagger={100}
-        {...this.props}
-      />
-    )
-  }
-}
-```
+<a href="https://sghall.github.io/resonance/#/redux-examples/webpack-sunburst">
+  <img src="https://cloud.githubusercontent.com/assets/4615775/25240281/45acec66-25a7-11e7-9e6a-83012473b748.png" height="150px"/>
+</a>
+<a href="https://sghall.github.io/resonance/#/redux-examples/alluvial-chart">
+  <img src="https://cloud.githubusercontent.com/assets/4615775/24084023/d736ddde-0c9f-11e7-8646-b953dd368c84.jpg" height="150px"/>
+</a>
+<a href="https://sghall.github.io/resonance/#/redux-examples/states-by-age">
+  <img src="https://cloud.githubusercontent.com/assets/4615775/24084025/d7397e86-0c9f-11e7-90b6-9a99f056f4c9.jpg" height="150px"/>
+</a>
+<a href="https://sghall.github.io/resonance/#/redux-examples/packed-by-age">
+  <img src="https://cloud.githubusercontent.com/assets/4615775/24084024/d7371ace-0c9f-11e7-8616-3941fd62aa55.jpg" height="150px"/>
+</a>
+<a href="https://sghall.github.io/resonance/#/redux-examples/stacked-area">
+  <img src="https://cloud.githubusercontent.com/assets/4615775/24084030/de9ec4e2-0c9f-11e7-85d8-3be0bbc5c7d0.jpg" height="150px"/>
+</a>
 
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.
@@ -373,11 +445,5 @@ If you would like to help develop a suggested feature follow these steps:
 #### Scripts
 
 - `$ yarn run watch` Watches files and builds via babel
-- `$ yarn run docs` Runs the storybook server
+- `$ yarn run docs` Serves the documentation/website
 - `$ yarn run test` Runs the test suite
-
-## Used By
-
-<a href='https://nozzle.io' target="\_parent">
-  <img src='https://nozzle.io/img/logo-blue.png' alt='Nozzle Logo' style='width:300px;'/>
-</a>
