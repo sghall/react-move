@@ -3,7 +3,7 @@
 </div>
 
 # React-Move
-Beautifully and deterministically animate anything in React.
+Beautiful, data-driven animations for React.
 
 <a href="https://travis-ci.org/react-tools/react-move">
   <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
