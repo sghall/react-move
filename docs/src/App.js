@@ -46,7 +46,7 @@ export default class App extends React.Component {
               }}
             >
               <img
-                src="//npmcdn.com/react-move/media/banner.png"
+                src="//github.com/react-tools/media/raw/master/logo-react-move.png"
                 alt="React Table Logo"
                 style={{
                   width: '200px',
