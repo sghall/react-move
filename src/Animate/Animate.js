@@ -6,21 +6,21 @@ import { transition, stop } from '../core/transition';
 
 type Props = {
   /**
-   * The data prop is treated as immutable. The component will run the update transition if prev.data !== next.data.
+   * The show prop is used to optionally toggle the visibility and enter/leave states.
    */
-  data: any,
+  show: boolean,
   /**
-  * A function that returns the starting state.  The function is passed the data and must return an object.
+  * An object or array representing the starting state.
   */
-  start: (data: any) => {} | Array<{}>,
+  enter: {} | Array<{}>,
   /**
-   * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data.
+   * An object or array representing the updated state. When changed, an animation will be triggered to transition to the new state.
    */
-  enter?: (data: any) => {} | Array<{}>,
+  update?: {} | Array<{}>,
   /**
-   * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data.
+   * An object or array representing the leaving state.
    */
-  update?: (data: any) => {} | Array<{}>,
+  leave?: {} | Array<{}>,
   /**
    * A function that renders the node.  The function is passed the data and state.
    */
@@ -33,18 +33,19 @@ class Animate extends Component {
     update: () => {},
   };
 
-  state = this.props.start(this.props.data)
+  state = this.props.enter;
 
   componentDidMount() {
-    const { data, enter } = this.props;
+    const { show, enter } = this.props;
 
-    if (enter && typeof enter === 'function') {
-      transition.call(this, enter(data));
+    if (show && enter) {
+      transition.call(this, enter);
     }
   }
 
   componentWillReceiveProps(next) {
-    if (next.data !== this.props.data) {
+    // TODO: immutable `update` object or deep change detection?
+    if (next.show !== this.props.show) {
       this.update(next);
     }
   }
@@ -56,12 +57,13 @@ class Animate extends Component {
   props: Props;
 
   update(props) {
-    const { data, update } = props;
-    transition.call(this, update(data));
+    const { show, update } = props;
+    // TODO: how to unmount the component is `show === false`
+    transition.call(this, update);
   }
 
   render() {
-    const renderedChildren = this.props.children(this.props.data, this.state);
+    const renderedChildren = this.props.children(this.state);
     return renderedChildren && React.Children.only(renderedChildren);
   }
 }
