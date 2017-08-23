@@ -1,0 +1,21 @@
+[ignore]
+
+.*/node_modules/fbjs/*
+.*/node_modules/react-event-listener/*
+.*/node_modules/babel-plugin-transform-react-remove-prop-types/*
+.*/scripts/*
+.*/docs/webpack.*
+
+[libs]
+flow/interfaces
+
+[options]
+
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+
+module.name_mapper='.*\.\(md\|html\|css\|svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/stubs/url-loader.js'
+module.name_mapper='^resonance\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=.

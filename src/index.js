@@ -1,9 +1,5 @@
-import Animate from './Animate'
-import Appear from './Appear'
-import Transition from './Transition'
+/* eslint-disable flowtype/require-valid-file-annotation */
 
-module.exports = {
-  Animate,
-  Appear,
-  Transition,
-}
+export Animate from './Animate';
+export NodeGroup from './NodeGroup';
+export TickGroup from './TickGroup';

@@ -1,0 +1,19 @@
+{
+  "presets": ["./scripts/babel-preset-es2015", "stage-1", "react"],
+  "plugins": [
+    ["transform-replace-object-assign", "simple-assign"]
+  ],
+  "env": {
+    "coverage": {
+      "plugins": [
+        ["istanbul"]
+      ]
+    },
+    "test": {
+      "sourceMaps": "both"
+    },
+    "production": {
+      "plugins": ["transform-runtime"]
+    }
+  }
+}

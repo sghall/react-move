@@ -1,0 +1,6 @@
+node_modules
+/build
+/flow
+/tmp
+/docs/build
+/test/coverage

@@ -1,76 +1,58 @@
 module.exports = {
-  parserOptions: {
-    ecmaVersion: 8,
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-      jsx: true,
-      node: false
-    },
-    sourceType: 'module'
+  root: true,
+  env: {
+    es6: true,
+    browser: true,
+    node: true,
+    mocha: true,
   },
-
+  extends: 'airbnb',
   parser: 'babel-eslint',
-
-  extends: ['standard'],
-
-  plugins: ['react'],
-
+  parserOptions: {
+    ecmaVersion: 7,
+    sourceType: 'module',
+  },
+  plugins: [
+    'babel',
+    'mocha',
+    'flowtype',
+  ],
   rules: {
-    // Nozzle
-    'jsx-quotes': [2, 'prefer-single'],
-    'comma-dangle': [2, 'always-multiline'],
-
-    // // React
-    'react/jsx-boolean-value': 2,
-    'react/jsx-curly-spacing': [2, 'never'],
-    'react/jsx-equals-spacing': [2, 'never'],
-    // 'react/jsx-indent': 2,
-    'react/jsx-indent-props': [2, 2],
-    'react/jsx-no-duplicate-props': 2,
-    'react/jsx-no-undef': 2,
-    'react/jsx-tag-spacing': [
-      2,
-      {
-        closingSlash: 'never',
-        beforeSelfClosing: 'always',
-        afterOpening: 'never'
-      }
-    ],
-    'react/jsx-uses-react': 2,
-    'react/jsx-uses-vars': 2,
-    'react/self-closing-comp': 2,
-    'react/jsx-no-bind': [
-      2,
-      {
-        allowArrowFunctions: true,
-        allowBind: false,
-        ignoreRefs: true
-      }
-    ],
-    'react/no-did-update-set-state': 2,
-    'react/no-unknown-property': 2,
-    'react/react-in-jsx-scope': 2,
-    'react/jsx-closing-bracket-location': [2, 'tag-aligned'],
-    'react/jsx-tag-spacing': [2, { beforeSelfClosing: 'always' }],
-    'react/jsx-wrap-multilines': 2,
-    'react/self-closing-comp': 2,
-    'react/jsx-key': 2,
-    'react/jsx-no-comment-textnodes': 2,
-    'react/jsx-no-duplicate-props': 2,
-    'react/jsx-no-target-blank': 2,
-    'react/jsx-no-undef': 2,
-    'react/jsx-uses-react': 2,
-    'react/jsx-uses-vars': 2,
-    'react/no-danger-with-children': 2,
-    'react/no-deprecated': 2,
-    'react/no-direct-mutation-state': 2,
-    'react/no-find-dom-node': 2,
-    'react/no-is-mounted': 2,
-    'react/no-render-return-value': 2,
-    'react/no-string-refs': 2,
-    'react/no-unknown-property': 2,
-    'react/react-in-jsx-scope': 2,
-    'react/require-render-return': 2
-    // 'react/jsx-max-props-per-line': [2, { maximum: 1 }]
-  }
-}
+    'arrow-body-style': 'off',
+    'no-plusplus': 'off',
+    'arrow-parens': ['error', 'always'], // airbnb use as-needed
+    'consistent-this': ['error', 'self'],
+    'object-curly-spacing': 'off', // use babel plugin rule
+    'babel/object-curly-spacing': ['error', 'always'],
+    'import/no-unresolved': 'off',
+    'import/no-named-as-default': 'off',
+    'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
+    'react/no-unused-prop-types': 'off', // buggy
+    'react/require-default-props': 'off', // airbnb use error
+    'react/forbid-prop-types': 'off', // airbnb use error
+    'react/jsx-filename-extension': ['error', {extensions: ['.js']}], // airbnb is using .jsx
+    'react/no-direct-mutation-state': 'error', // airbnb is disabling this rule
+    'react/sort-comp': [2, {
+      order: [
+        'static-methods',
+        'lifecycle',
+        'everything-else',
+        '/^render.+$/',
+        'render'
+      ],
+    }],
+    'mocha/handle-done-callback': 'error',
+    'mocha/no-exclusive-tests': 'error',
+    'mocha/no-global-tests': 'error',
+    'mocha/no-pending-tests': 'error',
+    'mocha/no-skipped-tests': 'error',
+    'flowtype/require-valid-file-annotation': ['error', 'always'],
+    'flowtype/require-parameter-type': 'off',
+    'flowtype/require-return-type': 'off',
+    'flowtype/space-after-type-colon': 'off',
+    'flowtype/space-before-type-colon': 'off',
+    'flowtype/type-id-match': 'off',
+  },
+};

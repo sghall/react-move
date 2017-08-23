@@ -1,6 +1,18 @@
+# Exclude compiled files
+build
+coverage
+/lib
+.eslintcache
+.nyc_output
+tmp
+
+# OS files
+.DS_STORE
+
+# npm files
 node_modules
-lib
-dist
-react-move.js
-react-move.min.js
 *.log
+
+# Editor files
+.idea
+.vscode

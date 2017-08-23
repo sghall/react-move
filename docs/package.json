@@ -1,23 +1,57 @@
 {
-  "name": "new",
-  "version": "0.1.0",
+  "name": "resonance-docs",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.9.5",
-    "standard": "^10.0.2"
-  },
-  "dependencies": {
-    "github-markdown-css": "^2.6.0",
-    "marked": "^0.3.6",
-    "raw-loader": "^0.5.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-story": "^0.0.6"
+  "version": "0.9.5",
+  "description": "Data-driven transitions in React",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sghall/resonance.git"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "npm run clean && npm run start:dll && node webpack.dev.server.js",
+    "start:dll": "webpack --config webpack.dev.dll.config.js",
+    "build": "npm run clean && npm run build:dll && cross-env NODE_ENV=production webpack --config webpack.prd.config.js",
+    "build:dll": "cross-env NODE_ENV=production webpack --config webpack.prd.dll.config.js",
+    "clean": "rimraf build"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.0",
+    "doctrine": "^2.0.0",
+    "eventsource-polyfill": "^0.9.6",
+    "file-loader": "^0.11.1",
+    "highlight.js": "^9.8.0",
+    "history": "^2.0.0",
+    "img-loader": "^2.0.0",
+    "marked": "^0.3.5",
+    "raw-loader": "^0.5.1",
+    "react-addons-perf": "^15.4.0",
+    "react-docgen": "^2.17.0",
+    "react-hot-loader": "3.0.0-beta.6",
+    "recast": "^0.11.17",
+    "style-loader": "^0.16.1",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "d3-array": "^1.1.1",
+    "d3-ease": "^1.0.3",
+    "d3-format": "^1.1.1",
+    "d3-hierarchy": "^1.1.4",
+    "d3-scale": "^1.0.5",
+    "d3-shape": "^1.0.6",
+    "flubber": "^0.3.1",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.17.4",
+    "moment": "^2.17.1",
+    "prop-types": "^15.5.10",
+    "react-redux": "^5.0.6",
+    "react-router": "^3.0.0",
+    "react-tap-event-plugin": "^2.0.0",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^2.5.4",
+    "topojson": "^3.0.0"
   }
 }
