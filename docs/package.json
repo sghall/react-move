@@ -1,11 +1,11 @@
 {
-  "name": "resonance-docs",
+  "name": "react-move-docs",
   "private": true,
-  "version": "0.9.5",
+  "version": "1.0.0-beta",
   "description": "Data-driven transitions in React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sghall/resonance.git"
+    "url": "https://github.com/react-tools/react-move.git"
   },
   "scripts": {
     "start": "npm run clean && npm run start:dll && node webpack.dev.server.js",
