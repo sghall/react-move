@@ -22,7 +22,7 @@
     "eventsource-polyfill": "^0.9.6",
     "file-loader": "^0.11.1",
     "highlight.js": "^9.8.0",
-    "history": "^2.0.0",
+    "history": "^3.0.0",
     "img-loader": "^2.0.0",
     "marked": "^0.3.5",
     "raw-loader": "^0.5.1",
