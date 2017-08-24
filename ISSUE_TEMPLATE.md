@@ -4,7 +4,7 @@
 
 ### Versions (only needed for problems)
 
-- Resonance: 
+- React-Move: 
 - React: 
 - Browser: 
 

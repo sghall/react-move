@@ -4,7 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 const BundleInspector = require('bundle-inspector-webpack-plugin');
 
-const libraryName = 'resonance';
+const libraryName = 'react-move';
 
 const baseConfig = {
   entry: {
