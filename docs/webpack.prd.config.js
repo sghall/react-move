@@ -4,7 +4,6 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackBaseConfig = require('./webpackBaseConfig');
 const dllManifest = require('./build/dll.manifest.json');
-const BundleInspector = require('bundle-inspector-webpack-plugin');
 
 module.exports = Object.assign({}, webpackBaseConfig, {
   context: path.resolve(__dirname),
@@ -71,6 +70,5 @@ module.exports = Object.assign({}, webpackBaseConfig, {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new BundleInspector(),
   ]),
 });
