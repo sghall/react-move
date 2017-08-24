@@ -2,7 +2,7 @@
 /* eslint react/no-multi-comp: "off", max-len: "off" */
 
 import React, { PureComponent } from 'react';
-import NodeGroup from 'resonance/NodeGroup';
+import NodeGroup from 'react-move/NodeGroup';
 import Surface from 'docs/src/components/Surface';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { shuffle, max } from 'd3-array';

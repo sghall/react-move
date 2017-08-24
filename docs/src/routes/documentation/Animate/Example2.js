@@ -4,7 +4,7 @@
 import React, { PureComponent } from 'react';
 import { range } from 'd3-array';
 import { easeExpInOut } from 'd3-ease';
-import Animate from 'resonance/Animate';
+import Animate from 'react-move/Animate';
 
 function getRandomColor() {
   return range(6).reduce((m) => {

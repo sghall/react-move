@@ -45,7 +45,7 @@ function createPackageFile() {
     } = packageData;
 
     const minimalPackage = {
-      name: 'resonance',
+      name: 'react-move',
       author,
       version,
       description,

@@ -50,7 +50,7 @@ module.exports = Object.assign({}, webpackBaseConfig, {
   resolve: {
     alias: {
       docs: path.resolve(__dirname, '../docs'),
-      resonance: path.resolve(__dirname, '../src'),
+      'react-move': path.resolve(__dirname, '../src'),
     },
   },
   plugins: webpackBaseConfig.plugins.concat([

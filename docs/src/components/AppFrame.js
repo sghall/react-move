@@ -140,7 +140,7 @@ class AppFrame extends Component {
 
     // const router = this.context.router;
     const styles = this.getStyles();
-    const title = 'Resonance';
+    const title = 'React-Move';
 
     let docked = false;
     let showMenuIconButton = true;
@@ -193,7 +193,7 @@ class AppFrame extends Component {
           <p style={prepareStyles(styles.browserstack)}>
             {'Check out the project on Github '}
             <a href="https://github.com/react-tools/react-move" style={prepareStyles(styles.browserstackLogo)}>
-              Resonance
+              React-Move
             </a>
           </p>
         </FullWidthSection>

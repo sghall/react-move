@@ -16,7 +16,7 @@ const serverOptions = {
   },
 };
 
-const PORT = process.env.RESONANCE_PORT || 3000;
+const PORT = process.env.REACT_MOVE_PORT || 3000;
 
 new WebpackDevServer(webpack(webpackConfig), serverOptions)
   .listen(PORT, '0.0.0.0', (err) => {

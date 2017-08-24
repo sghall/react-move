@@ -69,7 +69,7 @@ class HomePage extends Component {
     return (
       <FullWidthSection style={styles.root}>
         <div style={styles.tagline}>
-          <h1 style={styles.h1}>Resonance</h1>
+          <h1 style={styles.h1}>React-Move</h1>
         </div>
       </FullWidthSection>
     );
