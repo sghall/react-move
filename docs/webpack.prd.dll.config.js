@@ -6,7 +6,7 @@ const packageJson = require('./package.json');
 const packageJsonSrc = require('../package.json');
 
 const excludedDeps = [
-  'lodash', 'simple-assign', 'babel-runtime',
+  'lodash', 'babel-runtime',
 ];
 
 const deps = []
