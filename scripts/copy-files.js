@@ -15,8 +15,7 @@ function copyFile(file) {
         resolve();
       },
     );
-  })
-  .then(() => console.log(`Copied ${file} to ${buildPath}`));
+  }).then(() => console.log(`Copied ${file} to ${buildPath}`));
 }
 
 function createPackageFile() {
@@ -28,49 +27,48 @@ function createPackageFile() {
 
       resolve(data);
     });
-  })
-  .then((data) => JSON.parse(data))
-  .then((packageData) => {
-    const {
-      author,
-      version,
-      description,
-      keywords,
-      repository,
-      license,
-      bugs,
-      homepage,
-      peerDependencies,
-      dependencies,
-    } = packageData;
+  }).then((data) => JSON.parse(data))
+    .then((packageData) => {
+      const {
+        version,
+        description,
+        contributors,
+        keywords,
+        repository,
+        license,
+        bugs,
+        homepage,
+        peerDependencies,
+        dependencies,
+      } = packageData;
 
-    const minimalPackage = {
-      name: 'react-move',
-      author,
-      version,
-      description,
-      main: './index.js',
-      module: './index.es.js',
-      'jsnext:main': './index.es.js',
-      keywords,
-      repository,
-      license,
-      bugs,
-      homepage,
-      peerDependencies,
-      dependencies,
-    };
+      const minimalPackage = {
+        name: 'react-move',
+        version,
+        description,
+        contributors,
+        main: './index.js',
+        module: './index.es.js',
+        'jsnext:main': './index.es.js',
+        keywords,
+        repository,
+        license,
+        bugs,
+        homepage,
+        peerDependencies,
+        dependencies,
+      };
 
-    return new Promise((resolve) => {
-      const buildPath = path.resolve(__dirname, '../build/package.json');
-      const data = JSON.stringify(minimalPackage, null, 2);
-      fse.writeFile(buildPath, data, (err) => {
-        if (err) throw (err);
-        console.log(`Created package.json in ${buildPath}`);
-        resolve();
+      return new Promise((resolve) => {
+        const buildPath = path.resolve(__dirname, '../build/package.json');
+        const data = JSON.stringify(minimalPackage, null, 2);
+        fse.writeFile(buildPath, data, (err) => {
+          if (err) throw (err);
+          console.log(`Created package.json in ${buildPath}`);
+          resolve();
+        });
       });
     });
-  });
 }
 
 const files = [
