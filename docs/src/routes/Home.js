@@ -109,7 +109,7 @@ class HomePage extends Component {
   }
 
   handleTouchTapDemo = () => {
-    this.context.router.push('/redux-examples/states-by-age');
+    this.context.router.push('/documentation/node-group');
   };
 
   render() {
