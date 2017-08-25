@@ -2,4 +2,3 @@
 
 export Animate from './Animate';
 export NodeGroup from './NodeGroup';
-export TickGroup from './TickGroup';
