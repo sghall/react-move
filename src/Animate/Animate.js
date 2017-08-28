@@ -2,67 +2,118 @@
 /* eslint max-len: "off" */
 
 import React, { Component } from 'react';
+import { interval } from 'd3-timer';
 import { transition, stop } from '../core/transition';
 
 type Props = {
   /**
-   * The show prop is used to optionally toggle the visibility and enter/leave states.
+   * Where the child should be mounted or not.
    */
-  show: boolean,
+  show: bool,
   /**
-  * An object or array representing the starting state.
+  * The starting state.
   */
-  enter: {} | Array<{}>,
+  start: {},
   /**
-   * An object or array representing the updated state. When changed, an animation will be triggered to transition to the new state.
+   * An object or array of objects describing how the state should transform on enter.
+   */
+  enter?: {} | Array<{}>,
+  /**
+   * An object or array of objects describing how the state should transform on update.
    */
   update?: {} | Array<{}>,
   /**
-   * An object or array representing the leaving state.
+   * An object or array of objects describing how the state should transform on leave.
    */
   leave?: {} | Array<{}>,
   /**
    * A function that renders the node.  The function is passed the data and state.
    */
-  children: (data: any, state: {}) => {},
+  children: (state: {}) => {},
 };
 
 class Animate extends Component {
   static defaultProps = {
-    enter: () => {},
-    update: () => {},
-  };
+    show: true,
+  }
 
-  state = this.props.enter;
+  state = this.props.start
+
+  componentWillMount() {
+    if (this.props.show === true) {
+      this.renderNull = false;
+    }
+  }
 
   componentDidMount() {
-    const { show, enter } = this.props;
+    const { enter } = this.props;
 
-    if (show && enter) {
+    if (enter) {
       transition.call(this, enter);
     }
   }
 
   componentWillReceiveProps(next) {
-    // TODO: immutable `update` object or deep change detection?
-    if (next.show !== this.props.show) {
-      this.update(next);
+    const { show, start, enter, update, leave } = next;
+
+    if (this.renderNull === true && show === true && this.props.show === false) {
+      if (this.interval) {
+        this.interval.stop();
+      }
+
+      this.renderNull = false;
+
+      this.setState(() => start, () => {
+        if (enter) {
+          transition.call(this, enter);
+        }
+      });
+    } else if (show === false && this.props.show === true) {
+      if (next.leave) {
+        transition.call(this, leave);
+        this.interval = interval(this.checkTransitionStatus);
+      } else {
+        this.renderNull = true;
+        this.setState((prevState) => prevState); // force render as null
+      }
+    } else if (show === true && update) {
+      if (this.interval) {
+        this.interval.stop();
+      }
+
+      transition.call(this, update);
     }
   }
 
   componentWillUnmount() {
+    if (this.interval) {
+      this.interval.stop();
+    }
+
     stop.call(this);
+  }
+
+  checkTransitionStatus = () => {
+    if (!this.TRANSITION_SCHEDULES) {
+      this.interval.stop();
+
+      if (this.props.show === false) {
+        this.renderNull = true;
+        this.setState((prevState) => prevState); // force render as null
+      }
+    }
   }
 
   props: Props;
 
-  update(props) {
-    const { show, update } = props;
-    // TODO: how to unmount the component is `show === false`
-    transition.call(this, update);
-  }
+  interval = null;
+  renderNull = true;
 
   render() {
+    if (this.renderNull === true) {
+      return null;
+    }
+
     const renderedChildren = this.props.children(this.state);
     return renderedChildren && React.Children.only(renderedChildren);
   }

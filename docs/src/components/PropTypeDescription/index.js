@@ -25,15 +25,12 @@ function getDeprecatedInfo(type) {
 }
 
 function generatePropType(type) {
-  let values = '';
-
   switch (type.name) {
     case 'func':
       return 'function';
     case 'enum':
     case 'union':
-      values = type.value.map((v) => v.value || v.name).join('<br>&nbsp;');
-      return `${type.name}:<br>&nbsp;${values}<br>`;
+      return type.elements.map((v) => (v.type || v.name).toLowerCase()).join(' or ');
     default:
       return type.type || type.name;
   }

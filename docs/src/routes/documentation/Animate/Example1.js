@@ -52,14 +52,13 @@ class Example extends PureComponent {
         </button>
         <Surface view={view} trbl={trbl}>
           <Animate
-            data={states}
 
-            start={() => ({
-              opacity: 1e-6,
+            start={{
+              opacity: 1,
               d: interpolator(0),
-            })}
+            }}
 
-            enter={() => ([
+            enter={[
               {
                 opacity: [0.7],
                 timing: { duration: 1000 },
@@ -69,15 +68,15 @@ class Example extends PureComponent {
                 timing: { delay: 1000, duration: 1000, ease: easeExpInOut },
                 events: { end: update },
               },
-            ])}
+            ]}
 
-            update={() => ({
+            update={{
               d: interpolator,
               timing: { delay: 200, duration: 1000, ease: easeExpInOut },
               events: { end: update },
-            })}
+            }}
           >
-            {(data, state) => {
+            {(state) => {
               return (
                 <g transform="translate(100, 0) scale(0.8)">
                   <path

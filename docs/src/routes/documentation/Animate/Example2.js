@@ -45,22 +45,20 @@ class Example extends PureComponent {
             <Animate
               key={d.key}
 
-              start={({ scale, color, rotate }) => ({
-                scale,
-                color,
-                rotate,
-              })}
+              start={{
+                scale: d.scale,
+                color: d.color,
+                rotate: d.rotate,
+              }}
 
-              update={({ scale, color, rotate }) => ({
-                scale: [scale],
-                color: [color],
-                rotate: [rotate],
+              update={{
+                scale: [d.scale],
+                color: [d.color],
+                rotate: [d.rotate],
                 timing: { duration: 500, ease: easeExpInOut },
-              })}
-
-              data={d}
+              }}
             >
-              {(data, { scale, color, rotate }) => {
+              {({ scale, color, rotate }) => {
                 return (
                   <div
                     style={{
