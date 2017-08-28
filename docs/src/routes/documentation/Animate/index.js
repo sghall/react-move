@@ -16,7 +16,7 @@ const NodeGroupDocs = (props) => {
     <div>
       <CodeExample
         code={docContext('./Animate/Example1')}
-        title="Example: Custom Tween Using Flubber"
+        title="Example: Leave Animation"
       >
         <Example3 />
       </CodeExample>
