@@ -14,12 +14,6 @@ const NodeGroupDocs = (props) => {
 
   return (
     <div>
-      <CodeExample
-        code={docContext('./Animate/Example3')}
-        title="Example: Leave Animation"
-      >
-        <Example3 />
-      </CodeExample>
       <MarkdownElement text={docContext('./Animate/README0.md')} />
       <PropTypeDescription code={srcContext('./Animate/Animate')} />
       <CodeExample
@@ -33,6 +27,12 @@ const NodeGroupDocs = (props) => {
         title="Example: HTML"
       >
         <Example2 />
+      </CodeExample>
+      <CodeExample
+        code={docContext('./Animate/Example3')}
+        title="Example: Leave Animation"
+      >
+        <Example3 />
       </CodeExample>
       <MarkdownElement text={docContext('./Animate/README1.md')} />
     </div>

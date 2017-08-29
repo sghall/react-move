@@ -4,32 +4,35 @@ A typical usage of Animate looks like this...
 
 ```js
 <Animate
-  data={this.state.data}
+  show=true
 
-  start={(data) => ({ // returns the starting state of node (required)
+  start={{ // the starting state (required)
     ...
-  })}
+  }}
 
-  enter={(data) => ({ // how to transform node state on enter - runs immediately after start (optional)
+  enter={{ // how to transform state on enter (optional)
     ...
-  })}
+  }}
 
-  update={(data) => ({ // how to transform node state on update - runs each time data updates (optional)
+  update={{ // how to transform node state on update (optional)
     ...
-  })}
+  }}
+
+  leave={{ // how to transform node state on leave (optional)
+    ...
+  }}
 >
-  {(data, state) => { // the only child of Animate should be a function to render the node (required)
+  {(state) => { // the only child of Animate should be a function to render the state (required)
     ...
   }}
 </Animate>
 ```
 
-The component allows you to set a starting state (returned from the "start" prop) and then specify how to transform that state on enter (after mounting).
-After the component mounts if you update the data prop the update transition will run.
+The component allows you to set a starting state (the "start" prop) and then specify how to transform that state on enter, update and leave.
 
 ### Transitions
 
-You return an object or an array of objects in your **enter** and **update** functions.
+You specify an object or an array of objects in your enter, update and leave props.
 Instead of simply returning the next state these objects describe how to transform the state.
 This is far more powerful than just returning a state object.  By approaching it this way, you can describe really complex transformations and handle interrupts easily.
 
@@ -37,7 +40,7 @@ If you're familiar with D3, this approach mimics selection/transition behavior. 
 D3 deals with the fact that transitions might be in-flight or the key is already at that value in the background without you having to worry about that.
 The Animate component takes the same approach but it's done in idiomatic React.
 
-Each object returned from your enter and update functions can specify its own duration, delay, easing and events independently.
+Each object can specify its own duration, delay, easing and events independently.
 To support that, inside your object there are two special keys you can use:  **timing** and **events**.  Both are optional.
 Timing and events are covered in more detail below.
 The rest of the keys in each object are assumed to be keys in your state.
@@ -76,36 +79,40 @@ For the ease key, just provide the function.  You can use any easing function, l
 
 ## Passing an array of objects
 
-Each object can define its own timing and it will be applied to any transitions in the object.
+You can also pass arrays of objects.  Each object can define its own timing and it will be applied to any transitions in the object.
 
 ```js
 import { easeExpInOut } from 'd3-ease';
 
 ...
 <Animate
-  data={states}
+  show={show}
 
-  start={() => ({
-    opacity: 1e-6,
-    d: interpolator(0),  // returns a string
-  })}
+  start={{
+    opacity: 0,
+    backgroundColor: color,
+  }}
 
-  enter={(data) => ([ // an array!!
-    {
-      opacity: [0.7],
-      timing: { duration: 750 },
-    },
-    {
-      d: interpolator,
-      timing: { delay: 750, duration: 750, ease: easeExpInOut },
-    },
-  ])}
-
-  update={() => ({
+  enter={{
     ...
-  })}
+  }}
+
+  update={{
+    ...
+  }}
+
+  leave={[ // an array!
+    {
+      backgroundColor: ['red'],
+      timing: { duration: 500, ease: easeExpInOut },
+    },
+    {
+      opacity: [0],
+      timing: { delay: 500, duration: 500, ease: easeExpInOut },
+    },
+  ]}
 >
-  {(data, state) => {
+  {({ opacity, backgroundColor }) => {
     ...
   }}
 </Animate>
@@ -114,35 +121,32 @@ import { easeExpInOut } from 'd3-ease';
 ## Events
 
 The events are the same as those on D3 transitions. You can fire a function on transition start, interrupt or end.
+
 ```js
 <Animate
-  data={states}
+  start={{
+    ...
+  }}
 
-  start={() => ({
-    opacity: 1e-6,
-    d: interpolator(0),
-  })}
-
-  enter={() => ([
+  enter={[
     {
       opacity: [0.7],
-      timing: { duration: 3000 },
+      timing: { duration: 1000 },
     },
     {
       d: interpolator,
-      timing: { delay: 3000, duration: 1000, ease: easeExpInOut },
-      events: { end: update }, //events!! Calls the update function on transition end
+      timing: { delay: 1000, duration: 1000, ease: easeExpInOut },
+      events: { end: update }, // an event - call update function on transition end
     },
-  ])}
+  ]}
 
-  update={() => ({
+  update={{
     d: interpolator,
     timing: { delay: 200, duration: 1000, ease: easeExpInOut },
-    events: { end: update }, //events!! Calls the update function on transition end
-  })}
-
+    events: { end: update }, // an event - call update function on transition end
+  }}
 >
-  {(data, state) => {
+  {(state) => {
     ...
   }}
 </Animate>
