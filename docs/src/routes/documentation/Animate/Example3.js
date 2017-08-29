@@ -1,5 +1,4 @@
 // @flow weak
-// example from https://github.com/veltman/flubber
 
 import React, { PureComponent } from 'react';
 import { range } from 'd3-array';
@@ -32,11 +31,13 @@ class Example extends PureComponent {
     return (
       <div>
         <button onClick={updateShow}>
-          {show ? 'unmount' : 'mount'}
+          Toggle
         </button>
-        <button onClick={updateColor}>
-          Change Color
-        </button>
+        {show ? (
+          <button onClick={updateColor}>
+            Update Color
+          </button>
+        ) : null}
         <Animate
           show={show}
 
@@ -59,17 +60,27 @@ class Example extends PureComponent {
           leave={[
             {
               backgroundColor: ['red'],
-              timing: { duration: 1000, ease: easeExpInOut },
+              timing: { duration: 500, ease: easeExpInOut },
             },
             {
               opacity: [0],
-              timing: { duration: 2000, ease: easeExpInOut },
+              timing: { delay: 500, duration: 500, ease: easeExpInOut },
             },
           ]}
         >
           {({ opacity, backgroundColor }) => {
             return (
-              <div style={{ height: 100, width: 100, opacity, backgroundColor }} />
+              <div style={{
+                opacity,
+                width: 200,
+                height: 200,
+                marginTop: 10,
+                color: 'white',
+                backgroundColor,
+              }}
+              >
+                {opacity.toFixed(3)}
+              </div>
             );
           }}
         </Animate>

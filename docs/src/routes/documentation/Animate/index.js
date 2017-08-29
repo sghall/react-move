@@ -15,7 +15,7 @@ const NodeGroupDocs = (props) => {
   return (
     <div>
       <CodeExample
-        code={docContext('./Animate/Example1')}
+        code={docContext('./Animate/Example3')}
         title="Example: Leave Animation"
       >
         <Example3 />

@@ -57,10 +57,6 @@ class Animate extends Component {
     const { show, start, enter, update, leave } = next;
 
     if (this.props.show === false && this.renderNull === true && show === true) {
-      if (this.interval) {
-        this.interval.stop();
-      }
-
       this.renderNull = false;
 
       this.setState(() => start, () => {
@@ -69,7 +65,7 @@ class Animate extends Component {
         }
       });
     } else if (this.props.show === true && show === false) {
-      if (next.leave) {
+      if (leave) {
         transition.call(this, leave);
         this.interval = interval(this.checkTransitionStatus);
       } else {
