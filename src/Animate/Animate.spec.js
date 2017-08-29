@@ -7,10 +7,7 @@ import { assert } from 'chai';
 import { shallow, mount } from 'enzyme';
 import Animate from './Animate';
 
-const data = { x: 100, y: 200 };
-
 class Node extends Component { // eslint-disable-line
-
   render() {
     return <line />;
   }
@@ -21,56 +18,104 @@ const renderNode = () => (
 );
 
 describe('<Animate />', () => {
-  it('should render node', () => {
+  it('should render child Node', () => {
     const wrapper = shallow(
       <Animate
-        data={data}
-        start={() => ({})}
+        start={{}}
       >
         {renderNode}
       </Animate>,
     );
 
-    assert.strictEqual(wrapper.is('Node'), true, 'should be true');
+    assert.strictEqual(wrapper.find(Node).length, 1, 'should be true');
   });
 
-  it('should call update when given new data prop', () => {
-    const wrapper = mount(
+  it('should call the child function once when show is true', () => {
+    const spy = sinon.spy(renderNode);
+
+    mount(
       <Animate
-        data={data}
-        start={() => ({})}
+        show
+        start={{}}
       >
-        {renderNode}
+        {spy}
       </Animate>,
     );
 
-    const spy = sinon.spy(Animate.prototype, 'update');
-
-    wrapper.setProps({ data: { x: 200, y: 400 } });
-
-    const callCount = Animate.prototype.update.callCount;
-    spy.restore();
+    const callCount = spy.callCount;
 
     assert.strictEqual(callCount, 1, 'should have been called once');
   });
 
-  it('should not call update when passed same data prop', () => {
+  it('should NOT call the child function when show is set to false', () => {
+    const spy = sinon.spy();
+
+    mount(
+      <Animate
+        show={false}
+        start={{}}
+      >
+        {spy}
+      </Animate>,
+    );
+
+    const callCount = spy.callCount;
+
+    assert.strictEqual(callCount, 0, 'should not have been called');
+  });
+
+  it('should run enter transition immediately after mounting if show is true', (done) => {
     const wrapper = mount(
       <Animate
-        data={data}
-        start={() => ({})}
+        show
+        start={{ opacity: 0 }}
+        enter={{ opacity: [1] }}
       >
         {renderNode}
       </Animate>,
     );
 
-    const spy = sinon.spy(Animate.prototype, 'update');
+    setTimeout(() => {
+      assert.strictEqual(wrapper.state('opacity'), 1, 'should be equal');
+      done();
+    }, 500);
+  });
 
-    wrapper.setProps({ data });
+  it('should NOT run enter transition immediately after mounting if show is false', (done) => {
+    const wrapper = mount(
+      <Animate
+        show={false}
+        start={{ opacity: 0 }}
+        enter={{ opacity: [1] }}
+      >
+        {renderNode}
+      </Animate>,
+    );
 
-    const callCount = Animate.prototype.update.callCount;
-    spy.restore();
+    setTimeout(() => {
+      assert.strictEqual(wrapper.state('opacity'), 0, 'should be equal');
+      done();
+    }, 500);
+  });
 
-    assert.strictEqual(callCount, 0, 'should not have been called');
+  it('should run leave transition when show changes to false', (done) => {
+    const wrapper = mount(
+      <Animate
+        show
+        start={{ opacity: 0 }}
+        enter={{ opacity: [0.5] }}
+        leave={{ opacity: [0.7] }}
+      >
+        {renderNode}
+      </Animate>,
+    );
+
+    wrapper.setProps({ show: false });
+
+    setTimeout(() => {
+      assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
+      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
+      done();
+    }, 500);
   });
 });

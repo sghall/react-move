@@ -46,9 +46,9 @@ class Animate extends Component {
   }
 
   componentDidMount() {
-    const { enter } = this.props;
+    const { enter, show } = this.props;
 
-    if (enter) {
+    if (enter && show === true) {
       transition.call(this, enter);
     }
   }
