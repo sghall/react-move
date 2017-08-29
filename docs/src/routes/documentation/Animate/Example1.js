@@ -41,7 +41,7 @@ class Example extends PureComponent {
         <Surface view={view} trbl={trbl}>
           <Animate
             start={{
-              opacity: 1,
+              opacity: 0,
               d: interpolator(0),
             }}
 
