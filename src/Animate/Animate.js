@@ -7,11 +7,11 @@ import { transition, stop } from '../core/transition';
 
 type Props = {
   /**
-   * Boolean value that determines if the child should be mounted or not.
+   * Boolean value that determines if the child should be rendered or not.
    */
   show: bool,
   /**
-  * The starting state.
+  * An object to be used as the starting state. 
   */
   start: {},
   /**
