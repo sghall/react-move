@@ -72,7 +72,7 @@ class Animate extends Component {
         this.renderNull = true;
         this.setState((prevState) => prevState); // force render as null
       }
-    } else if (show === true && update && update !== this.props.update) {
+    } else if (show === true && update) {
       if (this.interval) {
         this.interval.stop();
       }
