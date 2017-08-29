@@ -98,12 +98,30 @@ describe('<Animate />', () => {
     }, 500);
   });
 
+  it('should run update transition when props update', (done) => {
+    const wrapper = mount(
+      <Animate
+        start={{ opacity: 0 }}
+        update={{ opacity: [0.7] }}
+      >
+        {renderNode}
+      </Animate>,
+    );
+
+    wrapper.setProps({ show: true });
+
+    setTimeout(() => {
+      assert.strictEqual(wrapper.find(Node).length, 1, 'should be equal');
+      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
+      done();
+    }, 500);
+  });
+
   it('should run leave transition when show changes to false', (done) => {
     const wrapper = mount(
       <Animate
         show
         start={{ opacity: 0 }}
-        enter={{ opacity: [0.5] }}
         leave={{ opacity: [0.7] }}
       >
         {renderNode}
