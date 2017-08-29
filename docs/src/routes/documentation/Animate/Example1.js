@@ -17,7 +17,6 @@ const trbl = [10, 10, 10, 10]; // [top, right, bottom, left] margins
 
 class Example extends PureComponent {
   state = {
-    loop: true,
     states: feature(statesJSON, statesJSON.objects.states)
       .features.map((d) => {
         return d.geometry.coordinates[0];
@@ -25,34 +24,22 @@ class Example extends PureComponent {
   }
 
   update = () => { // take the first one, put it at the end
-    if (this.state.loop) {
-      this.setState(({ states }) => ({
-        states: [
-          ...states.slice(1),
-          states[0],
-        ],
-      }));
-    }
-  }
-
-  toggleLoop = () => {
-    this.setState(({ loop }) => {
-      return { loop: !loop };
-    }, this.update);
+    this.setState(({ states }) => ({
+      states: [
+        ...states.slice(1),
+        states[0],
+      ],
+    }));
   }
 
   render() {
-    const { update, toggleLoop, state: { states, loop } } = this;
+    const { update, state: { states } } = this;
     const interpolator = interpolate(states[0], states[1]);
 
     return (
       <div>
-        <button onClick={toggleLoop}>
-          {loop ? 'stop' : 'loop'}
-        </button>
         <Surface view={view} trbl={trbl}>
           <Animate
-
             start={{
               opacity: 1,
               d: interpolator(0),
