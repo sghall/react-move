@@ -3,10 +3,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
-import withWidth, { LARGE } from 'material-ui/utils/withWidth';
+import withWidth from 'material-ui/utils/withWidth';
 import spacing from 'material-ui/styles/spacing';
 import typography from 'material-ui/styles/typography';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import logo from 'docs/src/css/logo-react-move.png';
 import FullWidthSection from '../components/FullWidthSection';
 
 class HomePage extends Component {
@@ -18,7 +19,7 @@ class HomePage extends Component {
     router: PropTypes.object.isRequired,
   };
 
-  homePageHero() {
+  homePageHero = () => {
     const styles = {
       root: {
         overflow: 'hidden',
@@ -60,17 +61,9 @@ class HomePage extends Component {
 
     styles.h2 = Object.assign({}, styles.h1, styles.h2);
 
-    if (this.props.width === LARGE) {
-    //   styles.tagline = Object.assign({}, styles.tagline, styles.taglineWhenLarge);
-    //   styles.h1 = Object.assign({}, styles.h1, styles.h1WhenLarge);
-    //   styles.h2 = Object.assign({}, styles.h2, styles.h2WhenLarge);
-    }
-
     return (
       <FullWidthSection style={styles.root}>
-        <div style={styles.tagline}>
-          <h1 style={styles.h1}>React-Move</h1>
-        </div>
+        <img style={{ marginLeft: '10%' }} width="80%" src={logo} alt="react-move" />
       </FullWidthSection>
     );
   }
