@@ -49,9 +49,8 @@ Beautiful, data-driven animations for React.
   - Anything [d3-interpolate](https://github.com/d3/d3-interpolate) can handle
 
 ## Demos
-- [Codepen](http://codepen.io/react-tools/pen/dWYEwd?editors=0010)
-- [Storybook](https://react-move.js.org)
-- [`<Animated />` Scrimba Tutorial](https://scrimba.com/casts/cast-1924)
+- [CodeSandbox]https://codesandbox.io/s/j4mv3lvj6v)
+- [Examples](https://react-move.js.org)
 
 ## Installation
 ```bash
