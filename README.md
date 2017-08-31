@@ -49,7 +49,7 @@ Beautiful, data-driven animations for React.
   - Anything [d3-interpolate](https://github.com/d3/d3-interpolate) can handle
 
 ## Demos
-- [CodeSandbox]https://codesandbox.io/s/j4mv3lvj6v)
+- [CodeSandbox](https://codesandbox.io/s/j4mv3lvj6v)
 - [Examples](https://react-move.js.org)
 
 ## Installation
