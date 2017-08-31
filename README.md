@@ -28,7 +28,7 @@ Beautiful, data-driven animations for React.
 </a>
 
 ## Resonance is now React-Move!
-- [Resonance](https://github.com/sghall/resonance) has joined forces with react-move to make your animations even better! [Read about the collaboration here!](https://medium.com/@tannerlinsley/resonance-joins-forces-with-react-move-to-make-your-react-animations-even-better-d1090cd8dd40)
+- [Resonance](https://github.com/sghall/resonance) has joined forces with react-move to make your animations even better! [Read about the collaboration here!](https://medium.com/react-tools/react-move-2-0-resonance-joins-react-move-to-make-your-animations-even-better-2279d95cefaf)
 
 ## Features
 
