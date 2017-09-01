@@ -3,7 +3,7 @@
 
 import React, { PureComponent } from 'react';
 import { range } from 'd3-array';
-import { easeExpInOut } from 'd3-ease';
+import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 
 function getRandomColor() {
@@ -55,7 +55,7 @@ class Example extends PureComponent {
                 scale: [d.scale],
                 color: [d.color],
                 rotate: [d.rotate],
-                timing: { duration: 500, ease: easeExpInOut },
+                timing: { duration: 300, ease: easeExpOut },
               }}
             >
               {({ scale, color, rotate }) => {

@@ -54,7 +54,7 @@ class Example extends PureComponent {
           update={{
             opacity: [1],
             backgroundColor: [color],
-            timing: { duration: 1000, ease: easeExpInOut },
+            timing: { duration: 500, ease: easeExpInOut },
           }}
 
           leave={[
