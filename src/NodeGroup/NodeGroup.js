@@ -16,7 +16,7 @@ type Props = {
   /**
    * Function that returns a string key given a data object.  Used to track which nodes are entering, updating and leaving.
    */
-  keyAccessor: (data: {}) => string,
+  keyAccessor: (data: {}, index: number) => string,
   /**
   * A function that returns the starting state.  The function is passed the data and index and must return an object.
   */
@@ -90,7 +90,7 @@ class NodeGroup extends Component {
 
     for (let i = 0; i < data.length; i++) {
       const d = data[i];
-      const k = keyAccessor(d);
+      const k = keyAccessor(d, i);
 
       nextKeyIndex[k] = i;
       nextNodeKeys.push(k);
