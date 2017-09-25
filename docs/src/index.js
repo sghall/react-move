@@ -10,7 +10,6 @@ import store from './store';
 
 // Helpers for debugging
 window.React = React;
-window.Perf = require('react-addons-perf');
 
 injectTapEventPlugin();
 

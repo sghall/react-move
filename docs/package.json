@@ -17,7 +17,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.5",
-    "css-loader": "^0.28.0",
+    "css-loader": "^0.28.7",
     "doctrine": "^2.0.0",
     "eventsource-polyfill": "^0.9.6",
     "file-loader": "^0.11.1",
@@ -26,16 +26,15 @@
     "img-loader": "^2.0.0",
     "marked": "^0.3.5",
     "raw-loader": "^0.5.1",
-    "react-addons-perf": "^15.4.0",
-    "react-docgen": "^2.17.0",
+    "react-docgen": "^2.18.0",
     "react-hot-loader": "3.0.0-beta.6",
     "recast": "^0.11.17",
     "style-loader": "^0.16.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "d3-array": "^1.1.1",
+    "d3-array": "^1.2.1",
     "d3-ease": "^1.0.3",
     "d3-format": "^1.1.1",
     "d3-hierarchy": "^1.1.4",
@@ -52,6 +51,6 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
-    "topojson": "^3.0.0"
+    "topojson": "^3.0.2"
   }
 }
