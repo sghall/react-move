@@ -5,7 +5,7 @@
 # React-Move
 Beautiful, data-driven animations for React.
 
-## Go to [live examples, code and docs](https://react-move.js.org)!
+### Go to [live examples, code and docs](https://react-move.js.org)!
 
 <a href="https://travis-ci.org/react-tools/react-move">
   <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
