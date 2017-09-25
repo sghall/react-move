@@ -27,12 +27,9 @@ Beautiful, data-driven animations for React.
   <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
 </a>
 
-## Resonance is now React-Move!
-- [Resonance](https://github.com/sghall/resonance) has joined forces with react-move to make your animations even better! [Read about the collaboration here!](https://medium.com/react-tools/react-move-2-0-resonance-joins-react-move-to-make-your-animations-even-better-2279d95cefaf)
-
 ## Features
 
-- **12kb!** (minified)
+- **17kb!** (gzipped)
 - Supported in React, React-Native & React-VR
 - Animate anything. HTML, SVG, React-Native
 - Prop-level delays & duration customization
@@ -401,30 +398,6 @@ What's nice about this is you can then just spread your state in the render func
 
 ...
 ```
-
-## SVG Chart Examples
-
-You can animate anything with Resonance, but it was developed by experimenting with animated SVG charts and redux.
-This library is great for creating abstract animated data visualizations in React.
-You can view the [example code](https://github.com/sghall/resonance/tree/master/docs/src/routes/reduxExamples) here for the chart examples.
-Each example is a mini [redux](http://redux.js.org/) application with its actions and reducers defined in a small module.
-You can run these examples locally by following the direction above.
-
-<a href="https://sghall.github.io/resonance/#/redux-examples/webpack-sunburst">
-  <img src="https://cloud.githubusercontent.com/assets/4615775/25240281/45acec66-25a7-11e7-9e6a-83012473b748.png" height="150px"/>
-</a>
-<a href="https://sghall.github.io/resonance/#/redux-examples/alluvial-chart">
-  <img src="https://cloud.githubusercontent.com/assets/4615775/24084023/d736ddde-0c9f-11e7-8646-b953dd368c84.jpg" height="150px"/>
-</a>
-<a href="https://sghall.github.io/resonance/#/redux-examples/states-by-age">
-  <img src="https://cloud.githubusercontent.com/assets/4615775/24084025/d7397e86-0c9f-11e7-90b6-9a99f056f4c9.jpg" height="150px"/>
-</a>
-<a href="https://sghall.github.io/resonance/#/redux-examples/packed-by-age">
-  <img src="https://cloud.githubusercontent.com/assets/4615775/24084024/d7371ace-0c9f-11e7-8616-3941fd62aa55.jpg" height="150px"/>
-</a>
-<a href="https://sghall.github.io/resonance/#/redux-examples/stacked-area">
-  <img src="https://cloud.githubusercontent.com/assets/4615775/24084030/de9ec4e2-0c9f-11e7-85d8-3be0bbc5c7d0.jpg" height="150px"/>
-</a>
 
 ## Contributing
 To suggest a feature, create an issue if it does not already exist.
