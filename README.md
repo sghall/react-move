@@ -53,7 +53,7 @@ Beautiful, data-driven animations for React.
 ```bash
 $ yarn add react-move
 # or
-$ npm install react-move --only=dev
+$ npm install react-move
 ```
 ##### CDN
 ```html
@@ -414,16 +414,19 @@ What's nice about this is you can then just spread your state in the render func
 To suggest a feature, create an issue if it does not already exist.
 If you would like to help develop a suggested feature follow these steps:
 
+#### Run the repo locally
+
 - Fork this repo
-- Install dependencies with `$ yarn`
-- Auto-build files as you edit with `$ yarn run watch`
-- Implement your changes to files in the `src/` directory
-- Run the <a href="https://github.com/react-tools/react-story">React Story</a> locally with `$ yarn run docs`
-- View changes as you edit `docs/src`,
-- Submit PR for review
+- npm install
+- cd docs
+- npm install
+- npm start
 
 #### Scripts
 
-- `$ yarn run watch` Watches files and builds via babel
-- `$ yarn run docs` Serves the documentation/website
-- `$ yarn run test` Runs the test suite
+Run these from the root of the repo
+
+-  `npm run lint` Lints all files in src and docs
+-  `npm run test` Runs the test suite locally
+-  `npm run test:coverage` Get a coverage report in the console
+-  `npm run test:coverage:html` Get an HTML coverage report in coverage folder
