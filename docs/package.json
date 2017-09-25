@@ -42,7 +42,7 @@
     "d3-shape": "^1.0.6",
     "flubber": "^0.3.1",
     "lodash": "^4.17.4",
-    "material-ui": "^0.17.4",
+    "material-ui": "^0.19.2",
     "moment": "^2.17.1",
     "prop-types": "^15.5.10",
     "react-redux": "^5.0.6",

@@ -117,8 +117,7 @@ class AppFrame extends Component {
     });
   };
 
-  handleChangeList = (event, value) => {
-    this.context.router.push(value);
+  handleChangeList = () => {
     this.setState({
       navDrawerOpen: false,
     });

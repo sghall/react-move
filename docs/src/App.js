@@ -8,7 +8,7 @@ import routes from './routes';
 export default () => {
   return (
     <Router
-      history={useRouterHistory(createHashHistory)({ queryKey: false })}
+      history={useRouterHistory(createHashHistory)()}
       onUpdate={() => window.scrollTo(0, 0)}
     >
       {routes}

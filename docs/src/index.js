@@ -8,7 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './App';
 import store from './store';
 
-// Helpers for debugging
+// debugging
 window.React = React;
 
 injectTapEventPlugin();
