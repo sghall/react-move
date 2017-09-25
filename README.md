@@ -71,7 +71,7 @@ Older versions:
 The NodeGroup component allows you to create complex animated transitions.  You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
 The idea is similar to transition components like [react-transition-group](https://github.com/reactjs/react-transition-group) or [react-motion's TransitionMotion](https://github.com/chenglou/react-motion) but you use objects to express how you want your state to transition.
 
-Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing.
+Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing!
 
 ### Component Props
 
@@ -411,8 +411,7 @@ What's nice about this is you can then just spread your state in the render func
 ```
 
 ## Contributing
-To suggest a feature, create an issue if it does not already exist.
-If you would like to help develop a suggested feature follow these steps:
+We love contributions from the community! Read the [contributing info here](https://github.com/react-tools/react-move/blob/master/CONTRIBUTING.md).
 
 #### Run the repo locally
 
