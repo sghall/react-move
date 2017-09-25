@@ -53,7 +53,7 @@
     "flow": "flow"
   },
   "peerDependencies": {
-    "react": ">=15"
+    "react": "^15.4.0 || ^16.0.0-beta.5"
   },
   "dependencies": {
     "babel-runtime": "^6.25.0",
@@ -104,9 +104,9 @@
     "nodemon": "^1.11.0",
     "nyc": "^11.1.0",
     "phantomjs-prebuilt": "^2.1.13",
-    "react": "^15.5.3",
+    "react": "^16.0.0-beta.5",
     "react-addons-test-utils": "^15.4.0",
-    "react-dom": "^15.5.3",
+    "react-dom": "^16.0.0-beta.5",
     "react-test-renderer": "^15.6.1",
     "recursive-readdir-sync": "^1.0.6",
     "rimraf": "^2.6.1",

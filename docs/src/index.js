@@ -4,14 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './App';
 import store from './store';
 
 // debugging
 window.React = React;
-
-injectTapEventPlugin();
 
 ReactDOM.render(
   <AppContainer errorReporter={({ error }) => { throw error; }}>

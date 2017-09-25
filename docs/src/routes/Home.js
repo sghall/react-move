@@ -94,7 +94,7 @@ class HomePage extends Component {
         />
         <RaisedButton
           label="Examples"
-          onTouchTap={this.handleTouchTapDemo}
+          onClick={this.handleTouchTapDemo}
           style={styles.button}
         />
       </FullWidthSection>

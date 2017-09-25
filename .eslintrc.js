@@ -48,6 +48,7 @@ module.exports = {
     'mocha/no-global-tests': 'error',
     'mocha/no-pending-tests': 'error',
     'mocha/no-skipped-tests': 'error',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'flowtype/require-valid-file-annotation': ['error', 'always'],
     'flowtype/require-parameter-type': 'off',
     'flowtype/require-return-type': 'off',
