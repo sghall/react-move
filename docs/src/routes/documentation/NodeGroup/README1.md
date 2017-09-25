@@ -72,7 +72,7 @@ See the interpolators section below.
   start={(data, index) => ({
     opacity: 1e-6,
     x: 1e-6,
-    fill: 'green',
+    fill: '#00cf77',
     width: scale.bandwidth(),
   })}
 
@@ -131,7 +131,7 @@ import { easeQuadInOut } from 'd3-ease';
   start={(data, index) => ({
     opacity: 1e-6,
     x: 1e-6,
-    fill: 'green',
+    fill: '#00cf77',
     width: scale.bandwidth(),
   })}
 
@@ -180,7 +180,7 @@ The events are the same as those on D3 transitions. You can fire a function on t
   update={(data) => ({
     opacity: [0.5],
     x: [scale(data.name)],
-    fill: 'blue',
+    fill: '#00a7d8',
     width: [scale.bandwidth()],
     timing: { duration: 1500, ease: easeQuadInOut },
     events: {
@@ -262,7 +262,7 @@ What's nice about this is you can then just spread your state in the render func
     circle: {
       r: 1e-6,
       strokeWidth: 1e-6,
-      fill: 'green',
+      fill: '#00cf77',
     },
   })}
 
@@ -274,7 +274,7 @@ What's nice about this is you can then just spread your state in the render func
     circle: {
       r: [scale.bandwidth() / 2],
       strokeWidth: [(index + 1) * 2],
-      fill: 'green',
+      fill: '#00cf77',
     },
     timing: { duration: 1000, ease: easeExpInOut },
   })}

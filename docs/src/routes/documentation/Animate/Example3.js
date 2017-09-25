@@ -14,7 +14,7 @@ function getRandomColor() {
 class Example extends PureComponent {
   state = {
     show: false,
-    color: 'green',
+    color: '#00cf77',
   }
 
   updateShow = () => {
@@ -59,7 +59,7 @@ class Example extends PureComponent {
 
           leave={[
             {
-              backgroundColor: ['red'],
+              backgroundColor: ['#ff0063'],
               timing: { duration: 500, ease: easeExpInOut },
             },
             {

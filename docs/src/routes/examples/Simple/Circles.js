@@ -133,7 +133,7 @@ class Example extends PureComponent {
               circle: {
                 r: 1e-6,
                 strokeWidth: 1e-6,
-                fill: 'green',
+                fill: '#00cf77',
               },
             })}
 
@@ -145,7 +145,7 @@ class Example extends PureComponent {
               circle: {
                 r: [scale.bandwidth() / 2],
                 strokeWidth: [(index + 1) * 2],
-                fill: 'green',
+                fill: '#00cf77',
               },
               timing: { duration: 1000, ease: easeExpInOut },
             })}
@@ -158,7 +158,7 @@ class Example extends PureComponent {
               circle: {
                 r: [scale.bandwidth() / 2],
                 strokeWidth: [(index + 1) * 2],
-                fill: 'blue',
+                fill: '#00a7d8',
               },
               timing: { duration: 1000, ease: easeExpInOut },
             })}
@@ -168,7 +168,7 @@ class Example extends PureComponent {
                 opacity: [1e-6],
               },
               circle: {
-                fill: 'red',
+                fill: '#ff0063',
               },
               timing: { duration: 1000, ease: easeExpInOut },
             })}
@@ -187,13 +187,13 @@ class Example extends PureComponent {
                         <text
                           x="0"
                           y="20"
-                          fill="#333"
+                          fill="#777"
                           transform="rotate(-45 5,20)"
                         >{`x: ${state.g.transform}`}</text>
                         <text
                           x="0"
                           y="5"
-                          fill="#333"
+                          fill="#777"
                           transform="rotate(-45 5,20)"
                         >{`name: ${data.name}`}</text>
                       </g>

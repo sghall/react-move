@@ -103,7 +103,7 @@ import { easeExpInOut } from 'd3-ease';
 
   leave={[ // an array!
     {
-      backgroundColor: ['red'],
+      backgroundColor: ['#ff0063'],
       timing: { duration: 500, ease: easeExpInOut },
     },
     {

@@ -125,7 +125,7 @@ class Example extends PureComponent {
                       <rect
                         height={dims[1] - y(data.frequency)}
                         y={y(data.frequency)}
-                        fill="#455a64"
+                        fill="#00a7d8"
                         {...rest}
                       />
                       <text

@@ -54,7 +54,7 @@ export default class Example extends Component {
             enter={() => ([
               {
                 x: [width * 0.4],
-                color: ['green'],
+                color: ['#00cf77'],
                 timing: { delay: 500, duration: 500, ease: easeBackOut },
               },
               {
@@ -66,14 +66,14 @@ export default class Example extends Component {
             update={() => ({
               x: [width * 0.4], // handle interrupt, if already at value, nothing happens
               opacity: 1, // make sure opacity set to 1 on interrupt
-              color: 'blue',
+              color: '#00a7d8',
               timing: { duration: 500, ease: easeBackOut },
             })}
 
             leave={() => ([
               {
                 x: [width * 0.8],
-                color: ['red', 'black'],
+                color: ['#ff0063', 'black'],
                 timing: { duration: 750, ease: easeBackInOut },
               },
               {

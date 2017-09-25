@@ -67,7 +67,7 @@ class Example extends PureComponent {
               return (
                 <g transform="translate(100, 0) scale(0.8)">
                   <path
-                    fill="steelblue"
+                    fill="#00a7d8"
                     {...state}
                   />
                 </g>

@@ -7,7 +7,7 @@ import CodeIcon from 'material-ui/svg-icons/action/code';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
 const CodeBlockTitle = (props) => (
-  <Toolbar style={{ backgroundColor: '#616161' }}>
+  <Toolbar style={{ backgroundColor: '#ff0063' }}>
     <ToolbarGroup>
       <ToolbarTitle style={{ color: 'white' }} text={props.title || 'Example'} />
     </ToolbarGroup>

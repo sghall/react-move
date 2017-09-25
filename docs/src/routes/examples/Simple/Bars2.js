@@ -122,7 +122,7 @@ class Example extends PureComponent {
             start={() => ({
               opacity: 1e-6,
               x: 1e-6,
-              fill: 'green',
+              fill: '#00cf77',
               width: scale.bandwidth(),
             })}
 
@@ -135,7 +135,7 @@ class Example extends PureComponent {
             update={(data) => ({
               opacity: [0.5],
               x: [scale(data.name)],
-              fill: 'blue',
+              fill: '#00a7d8',
               width: [scale.bandwidth()],
               timing: { duration: 1000, ease: easeExpInOut },
             })}
@@ -143,7 +143,7 @@ class Example extends PureComponent {
             leave={() => ({
               opacity: [1e-6],
               x: [scale.range()[1]],
-              fill: 'red',
+              fill: '#ff0063',
               timing: { duration: 2000 },
             })}
           >
