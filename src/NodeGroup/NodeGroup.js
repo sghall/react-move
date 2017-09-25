@@ -14,7 +14,7 @@ type Props = {
    */
   data: Array<any>,
   /**
-   * Function that returns a string key given a data object.  Used to track which nodes are entering, updating and leaving.
+   * Function that returns a string key given a data object and its index.  Used to track which nodes are entering, updating and leaving.
    */
   keyAccessor: (data: {}, index: number) => string,
   /**
