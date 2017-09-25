@@ -124,34 +124,6 @@ A typical usage of NodeGroup looks like this...
 
 ### Transitions
 
-You return an object or an array of objects in your **enter**, **update** and **leave** functions.
-Instead of simply returning the next state these objects describe how to transform the state.
-This is far more powerful than just returning a state object.  By approaching it this way, you can describe really complex transformations and handle interrupts easily.
-
-If you're familiar with D3, this approach mimics selection/transition behavior.  In D3 your are really describing how the state should look on enter, update and exit and how to get there: set the value immediately or transition to it.
-D3 deals with the fact that transitions might be in-flight or the key is already at that value in the background without you having to worry about that.
-The NodeGroup takes the same approach but it's done in idiomatic React.
-
-Each object returned from your enter, update and leave functions can specify its own duration, delay, easing and events independently.
-To support that, inside your object there are two special keys you can use:  **timing** and **events**.  Both are optional.
-Timing and events are covered in more detail below.
-The rest of the keys in each object are assumed to be keys in your state.
-
-If you aren't transitioning anything then it wouldn't make sense to be using NodeGroup.
-That said, like in D3, it's also convenient to be able to set a key to value when a node enters, updates or leaves without transitioning.
-To support this you can return four different types of values to specify how you want to transform the state.
-
-* `string or number`: Set the key to the value immediately with no transition.
-
-* `array [value]`: Transition from the key's current value to the specified value. Value is a string or number.
-
-* `array [value, value]`: Transition from the first value to the second value. Each value is a string or number.
-
-* `function`: Function will be used as a custom tween function.
-
-In all cases above a "string" can be a color, path, transform (the key must be called "transform" see below), etc and it will be interpolated using the correct interpolator.
-See the interpolators section below.
-
 ```js
 <NodeGroup
   data={this.state.data}
@@ -185,6 +157,34 @@ See the interpolators section below.
   )}
 </NodeGroup>
 ```
+
+You return an object or an array of objects in your **enter**, **update** and **leave** functions.
+Instead of simply returning the next state these objects describe how to transform the state.
+This is far more powerful than just returning a state object.  By approaching it this way, you can describe really complex transformations and handle interrupts easily.
+
+If you're familiar with D3, this approach mimics selection/transition behavior.  In D3 your are really describing how the state should look on enter, update and exit and how to get there: set the value immediately or transition to it.
+D3 deals with the fact that transitions might be in-flight or the key is already at that value in the background without you having to worry about that.
+The NodeGroup takes the same approach but it's done in idiomatic React.
+
+Each object returned from your enter, update and leave functions can specify its own duration, delay, easing and events independently.
+To support that, inside your object there are two special keys you can use:  **timing** and **events**.  Both are optional.
+Timing and events are covered in more detail below.
+The rest of the keys in each object are assumed to be keys in your state.
+
+If you aren't transitioning anything then it wouldn't make sense to be using NodeGroup.
+That said, like in D3, it's also convenient to be able to set a key to value when a node enters, updates or leaves without transitioning.
+To support this you can return four different types of values to specify how you want to transform the state.
+
+* `string or number`: Set the key to the value immediately with no transition.
+
+* `array [value]`: Transition from the key's current value to the specified value. Value is a string or number.
+
+* `array [value, value]`: Transition from the first value to the second value. Each value is a string or number.
+
+* `function`: Function will be used as a custom tween function.
+
+In all cases above a "string" can be a color, path, transform (the key must be called "transform" see below), etc and it will be interpolated using the correct interpolator.
+See the interpolators section below.
 
 ## Timing
 
@@ -416,10 +416,10 @@ We love contributions from the community! Read the [contributing info here](http
 #### Run the repo locally
 
 - Fork this repo
-- npm install
-- cd docs
-- npm install
-- npm start
+- `npm install`
+- `cd docs`
+- `npm install`
+- `npm start`
 
 #### Scripts
 
