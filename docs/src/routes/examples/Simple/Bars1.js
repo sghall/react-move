@@ -127,7 +127,7 @@ class Example extends PureComponent {
             enter={(data) => ({
               opacity: [0.5],
               x: [scale(data.name)],
-              timing: { duration: 1500, ease: easeExpInOut },
+              timing: { duration: 750, ease: easeExpInOut },
             })}
 
             update={(data) => ({
@@ -135,20 +135,20 @@ class Example extends PureComponent {
               x: [scale(data.name)],
               fill: 'blue',
               width: [scale.bandwidth()],
-              timing: { duration: 1500, ease: easeExpInOut },
+              timing: { duration: 750, ease: easeExpInOut },
             })}
 
             leave={() => ({
               opacity: [1e-6],
               x: [scale.range()[1]],
               fill: 'red',
-              timing: { duration: 1500, ease: easeExpInOut },
+              timing: { duration: 750, ease: easeExpInOut },
             })}
           >
             {(nodes) => {
               return (
                 <g>
-                  {nodes.map(({ key, data, state }) => {
+                  {nodes.map(({ key, state }) => {
                     const { x, ...rest } = state;
 
                     return (
@@ -157,18 +157,6 @@ class Example extends PureComponent {
                           height={dims[1]}
                           {...rest}
                         />
-                        <text
-                          x="0"
-                          y="20"
-                          fill="white"
-                          transform="rotate(90 5,20)"
-                        >{`x: ${Math.round(x)}`}</text>
-                        <text
-                          x="0"
-                          y="5"
-                          fill="white"
-                          transform="rotate(90 5,20)"
-                        >{`name: ${data.name}`}</text>
                       </g>
                     );
                   })}
