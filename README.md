@@ -89,6 +89,8 @@ Not only can you can have independent duration, delay and easing for entering, u
 
 ### Usage
 
+Go to [live examples, code and docs](https://react-move.js.org)
+
 A typical usage of NodeGroup looks like this...
 
 ```js
@@ -123,6 +125,8 @@ A typical usage of NodeGroup looks like this...
 ```
 
 ### Transitions
+
+Go to [live examples, code and docs](https://react-move.js.org)
 
 ```js
 <NodeGroup
@@ -188,6 +192,8 @@ See the interpolators section below.
 
 ## Timing
 
+Go to [live examples, code and docs](https://react-move.js.org)
+
 If there's no timing key in your object you'll get the timing defaults.
 You can specify just the things you want to override on your timing key.
 
@@ -204,6 +210,8 @@ For the ease key, just provide the function.  You can use any easing function, l
 [List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
 
 ## Passing an array of objects
+
+Go to [live examples, code and docs](https://react-move.js.org)
 
 Each object can define its own timing and it will be applied to any transitions in the object.
 
@@ -252,6 +260,8 @@ import { easeQuadInOut } from 'd3-ease';
 
 ## Events
 
+Go to [live examples, code and docs](https://react-move.js.org)
+
 The events are the same as those on D3 transitions. You can fire a function on transition start, interrupt or end.
 ```js
 <NodeGroup
@@ -298,6 +308,8 @@ The events are the same as those on D3 transitions. You can fire a function on t
 
 ## Interpolators
 
+Go to [live examples, code and docs](https://react-move.js.org)
+
 Interpolators are inferred from what you specify in your transition object.
 
 With the exceptions of "events" and "timing" you can name the keys that are transitioning whatever you want, but if you use the key "transform" it indicates that you want to use D3's SVG transform interpolator.
@@ -330,6 +342,8 @@ export function getInterpolator(key, value) {
 ```
 
 ## Namespacing your state
+
+Go to [live examples, code and docs](https://react-move.js.org)
 
 You don't have to keep your state flat either.
 You can create "namespaces" that allow you to organize state in a way that makes sense for your component. In the example below, you can get sense of how this works.
@@ -429,3 +443,6 @@ Run these from the root of the repo
 -  `npm run test` Runs the test suite locally
 -  `npm run test:coverage` Get a coverage report in the console
 -  `npm run test:coverage:html` Get an HTML coverage report in coverage folder
+
+Go to [live examples, code and docs](https://react-move.js.org)
+
