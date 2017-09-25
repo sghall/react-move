@@ -68,11 +68,11 @@ class AppFrame extends Component {
         margin: `${spacing.desktopGutter}px ${spacing.desktopGutter}px`,
       },
       footer: {
-        backgroundColor: '#455a64',
+        backgroundColor: '#ff0063',
         textAlign: 'center',
       },
       a: {
-        color: darkWhite,
+        color: 'white',
       },
       p: {
         margin: '0 auto',
@@ -86,11 +86,12 @@ class AppFrame extends Component {
         justifyContent: 'center',
         margin: '25px 15px 0',
         padding: 0,
-        color: lightWhite,
+        color: 'white',
         lineHeight: '25px',
         fontSize: 12,
       },
       browserstackLogo: {
+        color: '#333',
         margin: '0 3px',
       },
       iconButton: {
