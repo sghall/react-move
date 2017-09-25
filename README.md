@@ -72,9 +72,19 @@ The NodeGroup component allows you to create complex animated transitions.  You 
 The idea is similar to transition components like [react-transition-group](https://github.com/reactjs/react-transition-group) or [react-motion's TransitionMotion](https://github.com/chenglou/react-motion) but you use objects to express how you want your state to transition.
 Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing.
 
-<a href="https://sghall.github.io/resonance/#/documentation/node-group">
-  <img src="https://user-images.githubusercontent.com/4615775/27489448-6ab3ed14-57ef-11e7-871e-a1fb621f2d96.png" height="500px"/>
-</a>
+### Component Props
+
+| Name | Type | Default | Description |
+|:-----|:-----|:-----|:-----|
+| <span style="color: #31a148">data *</span> | Array |  |  An array of data objects.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data. |
+| <span style="color: #31a148">keyAccessor *</span> | function |  |  Function that returns a string key given a data object and its index.  Used to track which nodes are entering, updating and leaving. |
+| <span style="color: #31a148">start *</span> | function |  |  A function that returns the starting state.  The function is passed the data and index and must return an object. |
+| enter | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index. |
+| update | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index. |
+| leave | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index. |
+| <span style="color: #31a148">children *</span> | function |  |  A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'. |
+
+* required props
 
 ### Usage
 
