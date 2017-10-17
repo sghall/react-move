@@ -15,15 +15,15 @@ type Props = {
   */
   start: {},
   /**
-   * An object or array of objects describing how the state should transform on enter.
+   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
    */
-  enter?: {} | Array<{}>,
+  enter?: {} | Array<{}> | () => {},
   /**
-   * An object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
+   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
    */
-  update?: {} | Array<{}>,
+  update?: {} | Array<{}> | () => {},
   /**
-   * An object or array of objects describing how the state should transform on leave.
+   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
    */
   leave?: {} | Array<{}>,
   /**
@@ -49,7 +49,7 @@ class Animate extends Component {
     const { enter, show } = this.props;
 
     if (enter && show === true) {
-      transition.call(this, enter);
+      transition.call(this, typeof enter === 'function' ? enter() : enter);
     }
   }
 
@@ -61,12 +61,12 @@ class Animate extends Component {
 
       this.setState(() => start, () => {
         if (enter) {
-          transition.call(this, enter);
+          transition.call(this, typeof enter === 'function' ? enter() : enter);
         }
       });
     } else if (this.props.show === true && show === false) {
       if (leave) {
-        transition.call(this, leave);
+        transition.call(this, typeof leave === 'function' ? leave() : leave);
         this.interval = interval(this.checkTransitionStatus);
       } else {
         this.renderNull = true;
@@ -77,7 +77,7 @@ class Animate extends Component {
         this.interval.stop();
       }
 
-      transition.call(this, update);
+      transition.call(this, typeof update === 'function' ? update() : update);
     }
   }
 
