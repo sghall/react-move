@@ -11,9 +11,9 @@ type Props = {
    */
   show: bool,
   /**
-  * An object to be used as the starting state. 
+  * An object or function that returns an obejct to be used as the starting state. 
   */
-  start: {},
+  start: {} | () => {},
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
    */
@@ -25,7 +25,7 @@ type Props = {
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
    */
-  leave?: {} | Array<{}>,
+  leave?: {} | Array<{}> | () => {},
   /**
    * A function that renders the node.  The function is passed the data and state.
    */
@@ -37,7 +37,7 @@ class Animate extends Component {
     show: true,
   }
 
-  state = this.props.start
+  state = typeof this.props.start === 'function' ? this.props.start() : this.props.start
 
   componentWillMount() {
     if (this.props.show === true) {
@@ -59,7 +59,7 @@ class Animate extends Component {
     if (this.props.show === false && this.renderNull === true && show === true) {
       this.renderNull = false;
 
-      this.setState(() => start, () => {
+      this.setState(() => (typeof start === 'function' ? start() : start), () => {
         if (enter) {
           transition.call(this, typeof enter === 'function' ? enter() : enter);
         }
