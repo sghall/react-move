@@ -32,7 +32,7 @@ The component allows you to set a starting state (the "start" prop) and then spe
 
 ### Transitions
 
-You specify an object or an array of objects in your enter, update and leave props.
+You specify an object or an array of objects (or a function that returns an object or array) in your enter, update and leave props.
 Instead of simply returning the next state these objects describe how to transform the state.
 This is far more powerful than just returning a state object.  By approaching it this way, you can describe really complex transformations and handle interrupts easily.
 
