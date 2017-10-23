@@ -7,6 +7,9 @@ Beautiful, data-driven animations for React.
 
 ### Go to [live examples, code and docs](https://react-move.js.org)!
 
+<a href="https://travis-ci.org/react-tools/react-move">
+  <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
+</a>
 <a href="https://npmjs.com/package/react-move">
   <img alt="" src="https://img.shields.io/npm/dm/react-move.svg" />
 </a>
