@@ -3,7 +3,7 @@
 
 import React, { PureComponent } from 'react';
 import { feature } from 'topojson';
-import { easeExpInOut } from 'd3-ease';
+import { easeQuadOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 import { interpolate } from 'flubber';
 import Surface from 'docs/src/components/Surface'; // this is just a responsive SVG
@@ -38,11 +38,12 @@ class Example extends PureComponent {
 
     return (
       <div>
+        <button onClick={update}>Update</button>
         <Surface view={view} trbl={trbl}>
           <Animate
             start={{
               opacity: 0,
-              d: interpolator(0),
+              d: interpolator(1),
             }}
 
             enter={[
@@ -50,17 +51,11 @@ class Example extends PureComponent {
                 opacity: [0.7],
                 timing: { duration: 1000 },
               },
-              {
-                d: interpolator,
-                timing: { delay: 1000, duration: 1000, ease: easeExpInOut },
-                events: { end: update },
-              },
             ]}
 
             update={{
               d: interpolator,
-              timing: { delay: 200, duration: 1000, ease: easeExpInOut },
-              events: { end: update },
+              timing: { duration: 1000, ease: easeQuadOut },
             }}
           >
             {(state) => {
