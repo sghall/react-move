@@ -94,7 +94,7 @@ class AppNavDrawer extends Component {
             ]}
           />
           <ListItem
-            primaryText="Examples"
+            primaryText="More Examples"
             primaryTogglesNestedList
             nestedItems={[
               <ListItem
@@ -103,9 +103,14 @@ class AppNavDrawer extends Component {
                 href="#/examples/simple"
               />,
               <ListItem
-                primaryText="Pie Charts"
-                value="/examples/pie-charts"
-                href="#/examples/pie-charts"
+                primaryText="Draggable List"
+                value="/examples/draggable-list"
+                href="#/examples/draggable-list"
+              />,
+              <ListItem
+                primaryText="SVG Charts"
+                value="/examples/charts"
+                href="#/examples/charts"
               />,
             ]}
           />

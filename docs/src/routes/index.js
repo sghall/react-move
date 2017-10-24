@@ -6,7 +6,8 @@ import AppFrame from '../components/AppFrame';
 import AnimateDocs from './documentation/Animate';
 import NodeGroupDocs from './documentation/NodeGroup';
 import Simple from './examples/Simple';
-import PieCharts from './examples/PieCharts';
+import Charts from './examples/Charts';
+import DraggableList from './examples/DraggableList';
 
 const docContext = require.context('!raw-loader!./documentation', true);
 const srcContext = require.context('!raw-loader!../../../src', true);
@@ -44,7 +45,7 @@ const routes = {
       ],
     },
     {
-      path: 'documentation',
+      path: 'examples',
       indexRoute: {
         onEnter(nextState, replace) {
           replace('/examples/pie-charts');
@@ -52,14 +53,18 @@ const routes = {
       },
       childRoutes: [
         {
+          path: '/examples/draggable-list',
+          component: DraggableList,
+        },
+        {
           path: '/examples/simple',
           exampleContext,
           component: Simple,
         },
         {
-          path: '/examples/pie-charts',
+          path: '/examples/charts',
           exampleContext,
-          component: PieCharts,
+          component: Charts,
         },
       ],
     },
