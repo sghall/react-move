@@ -11,7 +11,7 @@ const Example = (props) => {
   return (
     <div>
       <CodeExample
-        code={exampleContext('./PieCharts/DonutChart1')}
+        code={exampleContext('./Charts/DonutChart1')}
         title="Example 1: Donut Chart"
       >
         <DonutChart1 />
