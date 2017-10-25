@@ -65,10 +65,6 @@ $ yarn add react-move
 # or
 $ npm install react-move
 ```
-##### CDN
-```html
-<script src='https://npmcdn.com/react-move@latest/react-move.js'></script>
-```
 
 # Documentation
 The docs below are for version **2.x.x** of React-Move.
