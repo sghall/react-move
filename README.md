@@ -25,24 +25,25 @@ Beautiful, data-driven animations for React.
 
 ## Features
 
-- Supported in React, React-Native & React-VR
-- Animate anything. HTML, SVG, React-Native
-- Fine grained delay & duration customization
-- Animation lifecycle events: start, interrupt, end
-- Custom easing & tweening functions
-- Supports interpolation of
+- Built-in support for interpolating:
+  - Strings
   - Numbers
   - Colors
   - SVG paths
+  - SVG transforms
+- Animate anything. HTML, SVG, React-Native
+- Supported in React, React-Native & React-VR
+- Fine grained control of delay, duration and easing
+- Animation lifecycle events: start, interrupt, end
+- Custom tweening functions
 
 ## Demos
 - [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
 - [Examples](https://react-move.js.org)
 
-
 ## React-Move vs React-Motion
 
-- React-move allows you to define your transition using durations, delays and ease functions.
+- React-move allows you to define your animations using durations, delays and ease functions.
 In react-motion you use spring configurations to define your animations.
 
 - React-move has built-in support for interpolating strings, numbers, colors, SVG paths and SVG transforms.
@@ -51,7 +52,7 @@ With react-motion you can only interpolate numbers so you have to do a bit more 
 - In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
 React-motion allows you to define a spring configuration for each key in the "style" object.
 
-- React-move has life-cycle events on its transitions.
+- React-move has lifecycle events on its transitions.
 You can pass a function to be called on transition start, interrupt or end.
 React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
 
