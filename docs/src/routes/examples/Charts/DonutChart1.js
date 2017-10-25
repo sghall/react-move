@@ -4,7 +4,7 @@
 import { scaleOrdinal } from 'd3-scale';
 import { arc, pie } from 'd3-shape';
 import { shuffle } from 'd3-array';
-import { easeExpInOut } from 'd3-ease';
+import { easeExpOut } from 'd3-ease';
 import sortBy from 'lodash/sortBy';
 import Surface from 'docs/src/components/Surface';
 import React, { PureComponent } from 'react';
@@ -112,13 +112,13 @@ class Example extends PureComponent {
 
               enter={({ endAngle }) => ({
                 endAngle: [endAngle],
-                timing: { duration: 500, delay: 350, ease: easeExpInOut },
+                timing: { duration: 500, delay: 350, ease: easeExpOut },
               })}
 
               update={({ startAngle, endAngle }) => ({
                 startAngle: [startAngle],
                 endAngle: [endAngle],
-                timing: { duration: 350, ease: easeExpInOut },
+                timing: { duration: 350, ease: easeExpOut },
               })}
             >
               {(nodes) => {
