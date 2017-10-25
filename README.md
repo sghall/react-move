@@ -31,11 +31,12 @@ Beautiful, data-driven animations for React.
   - Colors
   - SVG paths
   - SVG transforms
-- Animate anything. HTML, SVG, React-Native
-- Supported in React, React-Native & React-VR
-- Fine grained control of delay, duration and easing
+- Animate HTML, SVG & React-Native
+- Fine-grained control of delay, duration and easing
 - Animation lifecycle events: start, interrupt, end
 - Custom tweening functions
+- Awesome documention and lots of examples
+- Supported in React, React-Native & React-VR
 
 ## Demos
 - [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
