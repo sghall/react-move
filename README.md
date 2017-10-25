@@ -35,7 +35,7 @@ Beautiful, data-driven animations for React.
 - Fine-grained control of delay, duration and easing
 - Animation lifecycle events: start, interrupt, end
 - Custom tweening functions
-- Awesome documention and lots of examples
+- Awesome documentation and lots of examples
 - Supported in React, React-Native & React-VR
 
 ## Demos
