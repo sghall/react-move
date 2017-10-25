@@ -19,37 +19,43 @@ Beautiful, data-driven animations for React.
 <a href="https://github.com/react-tools/react-move">
   <img alt="" src="https://img.shields.io/github/stars/react-tools/react-move.svg?style=social&label=Star" />
 </a>
-<a href="https://twitter.com/react-tools">
-  <img alt="" src="https://img.shields.io/twitter/follow/react-tools.svg?style=social&label=Follow" />
-</a>
-<a href="https://cdnjs.com/libraries/react-move">
-  <img alt="" src="https://img.shields.io/cdnjs/v/react-move.svg" />
-</a>
 <a href="https://www.npmjs.com/package/react-move">
   <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
 </a>
 
 ## Features
 
-- **17kb!** (gzipped)
 - Supported in React, React-Native & React-VR
 - Animate anything. HTML, SVG, React-Native
-- Prop-level delays & duration customization
-- Animation lifecycle events eg. (start, interrupt, end)
+- Fine grained delay & duration customization
+- Animation lifecycle events: start, interrupt, end
 - Custom easing & tweening functions
 - Supports interpolation of
   - Numbers
   - Colors
   - SVG paths
-  - Any string with embedded numbers
-  - Arrays of any of these
-  - Objects of any of these
-  - Arrays of objects of any of these... you get the point
-  - Anything [d3-interpolate](https://github.com/d3/d3-interpolate) can handle
 
 ## Demos
-- [CodeSandbox](https://codesandbox.io/s/j4mv3lvj6v)
+- [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
 - [Examples](https://react-move.js.org)
+
+
+## React-Move vs React-Motion
+
+- React-move allows you to define your transition using durations, delays and ease functions.
+In react-motion you use spring configurations to define your animations.
+
+- React-move has built-in support for interpolating strings, numbers, colors, SVG paths and SVG transforms.
+With react-motion you can only interpolate numbers so you have to do a bit more work or include another library to work with colors, paths, etc.
+
+- In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
+React-motion allows you to define a spring configuration for each key in the "style" object.
+
+- React-move has life-cycle events on its transitions.
+You can pass a function to be called on transition start, interrupt or end.
+React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
+
+- React-move also allows you to pass your own custom interpolators.  It's all springs in react-motion.
 
 ## Installation
 ```bash
