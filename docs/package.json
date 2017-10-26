@@ -1,7 +1,7 @@
 {
   "name": "react-move-docs",
   "private": true,
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Data-driven transitions in React",
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
     "clean": "rimraf build"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.1.1",
+    "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.1.0",
     "css-loader": "^0.28.7",
     "doctrine": "^2.0.0",
@@ -30,7 +30,7 @@
     "react-hot-loader": "3.0.0-beta.6",
     "recast": "^0.11.17",
     "style-loader": "^0.16.1",
-    "webpack-dev-server": "^2.9.2"
+    "webpack-dev-server": "^2.9.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
