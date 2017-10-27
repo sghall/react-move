@@ -18,6 +18,20 @@ function copyFile(file) {
   }).then(() => console.log(`Copied ${file} to ${buildPath}`));
 }
 
+function copyTypes(src, dst) {
+  const buildPath = path.resolve(__dirname, '../build/', dst);
+  return new Promise((resolve) => {
+    fse.copy(
+      src,
+      buildPath,
+      (err) => {
+        if (err) throw err;
+        resolve();
+      },
+    );
+  }).then(() => console.log(`Copied ${src} to ${buildPath}`));
+}
+
 function createPackageFile() {
   return new Promise((resolve) => {
     fse.readFile(path.resolve(__dirname, '../package.json'), 'utf8', (err, data) => {
@@ -75,10 +89,17 @@ function createPackageFile() {
 const files = [
   'README.md',
   'LICENSE',
-  'index.d.ts',
+];
+
+const types = [
+  ['src/index.d.ts', 'index.d.ts'],
+  ['src/core/index.d.ts', 'core/index.d.ts'],
+  ['src/Animate/index.d.ts', 'Animate/index.d.ts'],
+  ['src/NodeGroup/index.d.ts', 'NodeGroup/index.d.ts'],
 ];
 
 Promise
   .all(files.map((file) => copyFile(file)))
+  .then(() => Promise.all(types.map((file) => copyTypes(...file))))
   .then(() => createPackageFile());
 
