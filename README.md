@@ -37,6 +37,7 @@ Beautiful, data-driven animations for React.
 - Custom tweening functions
 - Awesome documentation and lots of examples
 - Supported in React, React-Native & React-VR
+- Supports Typescript
 
 ## Demos
 - [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
