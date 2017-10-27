@@ -50,6 +50,7 @@ function createPackageFile() {
         main: './index.js',
         module: './index.es.js',
         'jsnext:main': './index.es.js',
+        types: './index.d.ts',
         keywords,
         repository,
         license,
@@ -74,6 +75,7 @@ function createPackageFile() {
 const files = [
   'README.md',
   'LICENSE',
+  'index.d.ts',
 ];
 
 Promise
