@@ -1,6 +1,6 @@
 {
   "name": "react-move",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "description": "Beautiful, data-driven animations for React.",
   "main": "index.js",
@@ -78,7 +78,7 @@
     "bundle-inspector-webpack-plugin": "^0.1.9",
     "chai": "^4.1.1",
     "coveralls": "^2.13.3",
-    "cross-env": "^5.1.0",
+    "cross-env": "^5.1.1",
     "enzyme": "^2.8.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^15.1.0",
