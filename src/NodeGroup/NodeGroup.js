@@ -10,11 +10,11 @@ import { transition, stop } from '../core/transition';
 
 type Props = {
   /**
-   * An array of data objects.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
+   * An array.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
    */
   data: Array<any>,
   /**
-   * Function that returns a string key given a data object and its index.  Used to track which nodes are entering, updating and leaving.
+   * Function that returns a string key given the data and its index.  Used to track which nodes are entering, updating and leaving.
    */
   keyAccessor: (data: {}, index: number) => string,
   /**

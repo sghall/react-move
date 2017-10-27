@@ -4,8 +4,8 @@ A typical usage of NodeGroup looks like this...
 
 ```js
 <NodeGroup
-  data={this.state.data} // array of data objects (required)
-  keyAccessor={(d) => d.name} // function to get the key of each object (required)
+  data={this.state.data} // array (required)
+  keyAccessor={(d) => d.name} // function to get the key of each item in the data array (required)
 
   start={(data, index) => ({ // returns the starting state of node (required)
     ...

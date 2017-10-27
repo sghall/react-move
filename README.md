@@ -37,7 +37,7 @@ Beautiful, data-driven animations for React.
 - Custom tweening functions
 - Awesome documentation and lots of examples
 - Supported in React, React-Native & React-VR
-- Supports Typescript
+- Supports TypeScript
 
 ## Demos
 - [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
@@ -102,7 +102,7 @@ A typical usage of NodeGroup looks like this...
 
 ```js
 <NodeGroup
-  data={this.state.data} // array of data objects (required)
+  data={this.state.data} // an array (required)
   keyAccessor={(d) => d.name} // function to get the key of each object (required)
 
   start={(data, index) => ({ // returns the starting state of node (required)
