@@ -9,7 +9,7 @@ const trackStyles = {
   backgroundColor: 'rgb(240, 240, 232)',
   position: 'relative',
   margin: '5px 3px 10px',
-  width: 450,
+  width: 250,
   height: 50,
 };
 
@@ -18,21 +18,15 @@ class Example extends PureComponent {
     open: false,
   }
 
-  handleMouseDown = () => {
+  handleClick = () => {
     this.setState({ open: !this.state.open });
-  }
-
-  handleTouchStart = (e) => {
-    e.preventDefault();
-    this.handleMouseDown();
   }
 
   render() {
     return (
       <div>
         <button
-          onMouseDown={this.handleMouseDown}
-          onTouchStart={this.handleTouchStart}
+          onClick={this.handleClick}
         >
           Toggle
         </button>
@@ -42,7 +36,7 @@ class Example extends PureComponent {
           })}
 
           update={() => ({
-            x: [this.state.open ? 400 : 0],
+            x: [this.state.open ? 200 : 0],
             timing: { duration: 750, ease: easeExpOut },
           })}
         >

@@ -53,36 +53,6 @@ const mockData = [
   }, {
     name: 'Ntags',
     value: 17,
-  }, {
-    name: 'Brightbean',
-    value: 73,
-  }, {
-    name: 'Blogspan',
-    value: 25,
-  }, {
-    name: 'Twitterlist',
-    value: 73,
-  }, {
-    name: 'Rhycero',
-    value: 67,
-  }, {
-    name: 'Trunyx',
-    value: 52,
-  }, {
-    name: 'Browsecat',
-    value: 90,
-  }, {
-    name: 'Skinder',
-    value: 88,
-  }, {
-    name: 'Tagpad',
-    value: 83,
-  }, {
-    name: 'Gabcube',
-    value: 6,
-  }, {
-    name: 'Jabberstorm',
-    value: 19,
   },
 ];
 

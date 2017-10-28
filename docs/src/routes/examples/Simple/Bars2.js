@@ -53,36 +53,6 @@ const mockData = [
   }, {
     name: 'Ntags',
     value: 17,
-  }, {
-    name: 'Brightbean',
-    value: 73,
-  }, {
-    name: 'Blogspan',
-    value: 25,
-  }, {
-    name: 'Twitterlist',
-    value: 73,
-  }, {
-    name: 'Rhycero',
-    value: 67,
-  }, {
-    name: 'Trunyx',
-    value: 52,
-  }, {
-    name: 'Browsecat',
-    value: 90,
-  }, {
-    name: 'Skinder',
-    value: 88,
-  }, {
-    name: 'Tagpad',
-    value: 83,
-  }, {
-    name: 'Gabcube',
-    value: 6,
-  }, {
-    name: 'Jabberstorm',
-    value: 19,
   },
 ];
 
@@ -129,7 +99,7 @@ class Example extends PureComponent {
             enter={(data, index) => ({
               opacity: [0.5],
               x: [scale(data.name)],
-              timing: { duration: 200 * index, delay: 1000 },
+              timing: { duration: 100 * index, delay: 500 },
             })}
 
             update={(data) => ({
@@ -137,14 +107,14 @@ class Example extends PureComponent {
               x: [scale(data.name)],
               fill: '#00a7d8',
               width: [scale.bandwidth()],
-              timing: { duration: 1000, ease: easeExpInOut },
+              timing: { duration: 500, ease: easeExpInOut },
             })}
 
             leave={() => ({
               opacity: [1e-6],
               x: [scale.range()[1]],
               fill: '#ff0063',
-              timing: { duration: 2000 },
+              timing: { duration: 750 },
             })}
           >
             {(nodes) => {
