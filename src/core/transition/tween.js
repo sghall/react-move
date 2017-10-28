@@ -1,14 +1,7 @@
 // @flow weak
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate';
 
-import {
-  interpolateRgb,
-  interpolateNumber,
-  interpolateString,
-  interpolateTransformSvg,
-} from 'd3-interpolate';
-import { color } from 'd3-color';
-
-function getTween(nameSpace, attr, interpol, value1) {
+function getTween(nameSpace, attr, value1) {
   return function tween() {
     const value0 = nameSpace ? this.state[nameSpace][attr] : this.state[attr];
 
@@ -16,7 +9,7 @@ function getTween(nameSpace, attr, interpol, value1) {
       return null;
     }
 
-    const i = interpol(value0, value1);
+    const i = attr === 'transform' ? interpolateTransformSvg(value0, value1) : interpolate(value0, value1);
 
     let stateTween;
 
@@ -38,18 +31,6 @@ function getTween(nameSpace, attr, interpol, value1) {
   };
 }
 
-export function getInterpolator(attr, value) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg;
-  } else if (typeof value === 'number') {
-    return interpolateNumber;
-  } else if (value instanceof color || color(value) !== null) {
-    return interpolateRgb;
-  }
-
-  return interpolateString;
-}
-
 export default function (nameSpace, attr, value) {
-  return getTween.call(this, nameSpace, attr, getInterpolator(attr, value), value);
+  return getTween.call(this, nameSpace, attr, value);
 }
