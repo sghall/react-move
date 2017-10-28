@@ -103,6 +103,12 @@
     "react-test-renderer": "^15.6.2",
     "recursive-readdir-sync": "^1.0.6",
     "rimraf": "^2.6.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.3",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
     "sinon": "^3.2.0",
     "webpack": "^3.8.1"
   },
