@@ -11,7 +11,7 @@ type Props = {
    */
   show: bool,
   /**
-  * An object or function that returns an obejct to be used as the starting state. 
+  * An object or function that returns an obejct to be used as the starting state.
   */
   start: {} | () => {},
   /**
