@@ -1,3 +1,10 @@
 {
-  "presets": [ "./scripts/babel-preset" ]
+  "presets": ["./scripts/babel-preset"],
+  "env": {
+    "coverage": {
+      "plugins": [
+        ["istanbul"]
+      ]
+    }
+  }
 }

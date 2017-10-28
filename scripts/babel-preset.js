@@ -2,7 +2,7 @@
 /* eslint eqeqeq: "off" */
 
 const BABEL_ENV = process.env.BABEL_ENV;
-const building = BABEL_ENV != undefined && BABEL_ENV !== 'cjs';
+const building = BABEL_ENV != undefined && BABEL_ENV !== 'cjs' && BABEL_ENV !== 'coverage';
 
 const plugins = [];
 

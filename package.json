@@ -41,7 +41,7 @@
     "clean:build": "rimraf build",
     "prebuild": "npm run clean:build",
     "lint": "eslint src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
-    "test": "cross-env NODE_ENV=test BABEL_ENV=test mocha \"src/**/*.spec.js\"",
+    "test": "cross-env NODE_ENV=test BABEL_ENV=cjs mocha \"src/**/*.spec.js\"",
     "test:watch": "npm run test -- -w",
     "test:coverage": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=lcov",
     "test:coverage:html": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=html",
