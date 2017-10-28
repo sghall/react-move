@@ -11,34 +11,34 @@ const exec = (command, extraEnv) =>
     env: Object.assign({}, process.env, extraEnv),
   });
 
-// console.log('Building CommonJS modules ...')
+console.log('Building CommonJS modules...');
 
-// exec('babel modules -d . --ignore __tests__', {
-//   BABEL_ENV: 'cjs'
-// })
+exec('babel ./src --ignore *.spec.js --out-dir ./build', {
+  BABEL_ENV: 'cjs',
+});
 
-// console.log('\nBuilding ES modules ...')
+console.log('\nBuilding ES module index...');
 
-// exec('babel modules -d es --ignore __tests__', {
-//   BABEL_ENV: 'es'
-// })
+exec('babel ./src/index.js --out-file ./build/index.es.js', {
+  BABEL_ENV: 'es',
+});
 
-console.log('\nBuilding react-move.js ...');
+console.log('\nBuilding react-move.js...');
 
-exec('rollup -c -f umd -o build/react-move.js', {
+exec('rollup -c -f umd -o build/dist/react-move.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'development',
 });
 
-console.log('\nBuilding react-move.min.js ...');
+console.log('\nBuilding react-move.min.js...');
 
-exec('rollup -c -f umd -o build/react-move.min.js', {
+exec('rollup -c -f umd -o build/dist/react-move.min.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'production',
 });
 
 const size = gzipSize.sync(
-  fs.readFileSync('build/react-move.min.js'),
+  fs.readFileSync('build/dist/react-move.min.js'),
 );
 
 console.log('\ngzipped, the UMD build is %s', prettyBytes(size));
