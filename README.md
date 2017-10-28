@@ -60,6 +60,9 @@ React-motion has an "onRest" prop that fires a callback when the animation stops
 
 - React-move also allows you to pass your own custom interpolators.  It's all springs in react-motion.
 
+- React-move is also smaller. An unminified UMD build of react-motion is 62kb while react-move is 51kb.
+Minified and gzipped react-move (including all its dependencies) is just **9.15kb!**
+
 ## Installation
 ```bash
 $ yarn add react-move
