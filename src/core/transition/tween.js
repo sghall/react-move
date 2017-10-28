@@ -1,6 +1,14 @@
 // @flow weak
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate';
 
+export function getInterpolator(attr) {
+  if (attr === 'transform') {
+    return interpolateTransformSvg;
+  }
+
+  return interpolate;
+}
+
 function getTween(nameSpace, attr, value1) {
   return function tween() {
     const value0 = nameSpace ? this.state[nameSpace][attr] : this.state[attr];
@@ -9,7 +17,7 @@ function getTween(nameSpace, attr, value1) {
       return null;
     }
 
-    const i = attr === 'transform' ? interpolateTransformSvg(value0, value1) : interpolate(value0, value1);
+    const i = getInterpolator(attr)(value0, value1);
 
     let stateTween;
 
