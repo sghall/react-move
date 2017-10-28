@@ -1,16 +1,3 @@
 {
-  "presets": ["./scripts/babel-preset-es2015", "stage-1", "react"],
-  "env": {
-    "coverage": {
-      "plugins": [
-        ["istanbul"]
-      ]
-    },
-    "test": {
-      "sourceMaps": "both"
-    },
-    "production": {
-      "plugins": ["transform-runtime"]
-    }
-  }
+  "presets": [ "./scripts/babel-preset" ]
 }
