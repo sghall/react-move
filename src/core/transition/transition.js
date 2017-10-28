@@ -1,9 +1,19 @@
 // @flow weak
 
 import { now as timeNow } from 'd3-timer';
-import once from 'lodash.once';
 import tween from './tween';
 import schedule from './schedule';
+
+function once(func) {
+  let called = false;
+
+  return function transitionEvent() {
+    if (!called) {
+      called = true;
+      func.call(this);
+    }
+  };
+}
 
 let id = 0;
 

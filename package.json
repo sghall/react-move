@@ -54,8 +54,7 @@
   },
   "dependencies": {
     "d3-interpolate": "^1.1.3",
-    "d3-timer": "^1.0.4",
-    "lodash.once": "^4.1.1"
+    "d3-timer": "^1.0.4"
   },
   "devDependencies": {
     "app-module-path": "^2.1.0",
@@ -117,6 +116,7 @@
       "src/core/**/*.js"
     ],
     "exclude": [
+      "docs/**/*.js",
       "**/*.spec.js"
     ],
     "sourceMap": false,
