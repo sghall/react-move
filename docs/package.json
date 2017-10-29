@@ -1,7 +1,7 @@
 {
   "name": "react-move-docs",
   "private": true,
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Data-driven transitions in React",
   "repository": {
     "type": "git",
