@@ -28,7 +28,7 @@ export interface NameSpace {
 
 export interface Transition {
   [key: string]: Array<number> | Array<string> | number | string | CustomInterpolator | NameSpace | Events | Timing;
-};
+}
 
 export interface TransitionFunction {
   (): Transition | Array<Transition>;
