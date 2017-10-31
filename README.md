@@ -40,7 +40,9 @@ Beautiful, data-driven animations for React.
 - Supports TypeScript
 
 ## Demos
-- [CodeSandbox](https://codesandbox.io/s/j2povnz8ly)
+- [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
+- [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
+- [CodeSandbox - Animated Mount/Unmount](https://codesandbox.io/s/9z04rpypny)
 - [Examples](https://react-move.js.org)
 
 ## React-Move vs React-Motion
