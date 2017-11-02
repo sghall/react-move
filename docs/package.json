@@ -32,7 +32,7 @@
     "recast": "^0.11.17",
     "style-loader": "^0.16.1",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
