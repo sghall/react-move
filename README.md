@@ -7,22 +7,10 @@ Beautiful, data-driven animations for React.
 
 ### Go to [live examples, code and docs](https://react-move.js.org)!
 
-<a href="https://travis-ci.org/react-tools/react-move">
-  <img alt="" src="https://travis-ci.org/react-tools/react-move.svg?branch=master" />
-</a>
-<a href="https://npmjs.com/package/react-move">
-  <img alt="" src="https://img.shields.io/npm/dm/react-move.svg" />
-</a>
-<a href="https://react-chat-signup.herokuapp.com/">
-  <img alt="" src="https://img.shields.io/badge/slack-react--tools-blue.svg" />
-</a>
-<a href="https://github.com/react-tools/react-move">
-  <img alt="" src="https://img.shields.io/github/stars/react-tools/react-move.svg?style=social&label=Star" />
-</a>
-<a href="https://www.npmjs.com/package/react-move">
-  <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
-</a>
-
+[![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
+[![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
+[![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/react-tools/react-move/blob/master/LICENSE)
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 
 ## Features
