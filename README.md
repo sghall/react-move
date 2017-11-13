@@ -22,6 +22,7 @@ Beautiful, data-driven animations for React.
 <a href="https://www.npmjs.com/package/react-move">
   <img alt="" src="https://img.shields.io/npm/v/react-move.svg" />
 </a>
+
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 
 ## Features
