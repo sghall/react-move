@@ -11,7 +11,7 @@ Beautiful, data-driven animations for React.
 [![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/react-tools/react-move/blob/master/LICENSE)
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
-[![React-Chat](https://img.shields.io/badge/slack-react--chat-blue.svg)](https://react-chat-signup.herokuapp.com/)
+[![React-Tools-Chat](https://img.shields.io/badge/slack-react--chat-blue.svg)](https://react-chat-signup.herokuapp.com/)
 
 ### Go to [live examples, code and docs](https://react-move.js.org)!
 
@@ -53,6 +53,9 @@ You can pass a function to be called on transition start, interrupt or end.
 React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
 
 - React-move also allows you to pass your own custom interpolators.  It's all springs in react-motion.
+
+## Questions? Ideas? Chat with us!
+Sign up for the [React-Tools Slack Org](https://react-chat-signup.herokuapp.com/)!
 
 ## Installation
 ```bash
