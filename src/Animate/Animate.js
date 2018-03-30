@@ -55,11 +55,11 @@ class Animate extends Component {
     return (
       <NodeGroup
         data={show ? [true] : []}
-        keyAccessor={(d, i) => i}
-        start={() => start}
-        enter={() => enter}
-        update={() => update}
-        leave={() => leave}
+        keyAccessor={(d) => d}
+        start={typeof start === 'function' ? start : () => start}
+        enter={typeof enter === 'function' ? enter : () => enter}
+        update={typeof update === 'function' ? update : () => update}
+        leave={typeof leave === 'function' ? leave : () => leave}
       >
         {(inters) => {
           if (!inters.length) {
