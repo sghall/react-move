@@ -190,8 +190,16 @@ class NodeGroup extends Component {
   }
 
   render() {
-    const renderedChildren = this.props.children(this.state.nodes);
-    return renderedChildren && React.Children.only(renderedChildren);
+    const { render, children, Component: Comp } = this.props;
+    let rendered;
+    if (Comp) {
+      rendered = React.createElement(Comp, null, {
+        nodes: this.state.nodes,
+      });
+    } else {
+      rendered = (render || children)(this.state.nodes);
+    }
+    return rendered ? React.Children.only(rendered) : null;
   }
 }
 
