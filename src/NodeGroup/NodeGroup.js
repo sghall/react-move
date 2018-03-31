@@ -18,8 +18,8 @@ type Props = {
    */
   keyAccessor: (data: {}, index: number) => string,
   /**
-  * A function that returns the starting state.  The function is passed the data and index and must return an object.
-  */
+   * A function that returns the starting state.  The function is passed the data and index and must return an object.
+   */
   start: (data: {}, index: number) => {} | Array<{}>,
   /**
    * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
@@ -34,9 +34,21 @@ type Props = {
    */
   leave?: (data: {}, index: number) => {} | Array<{}>,
   /**
+   * An optional default timing object for any interpolations happening in this component.
+   */
+  timing?: Object,
+  /**
    * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
    */
   children: (nodes: Array<{}>) => {},
+  /**
+   * A function that renders the node. The function is passed the state.
+   */
+  render?: (state: {}) => {},
+  /**
+   * A function that renders the node. The function is passed the state.
+   */
+  Component?: React.Component,
 };
 
 class NodeGroup extends Component {
@@ -48,7 +60,7 @@ class NodeGroup extends Component {
 
   state = {
     nodes: [],
-  }
+  };
 
   componentDidMount() {
     this.updateNodes(this.props);
@@ -75,7 +87,7 @@ class NodeGroup extends Component {
   props: Props;
 
   updateNodes(props) {
-    const { data, keyAccessor, start, enter, update, leave } = props;
+    const { data, keyAccessor, start, enter, update, leave, timing } = props;
 
     const currKeyIndex = {};
     const currNodeKeys = this.nodeKeys;
@@ -112,12 +124,7 @@ class NodeGroup extends Component {
       }
     }
 
-    this.nodeKeys = mergeKeys(
-      currNodeKeys,
-      currKeyIndex,
-      nextNodeKeys,
-      nextKeyIndex,
-    );
+    this.nodeKeys = mergeKeys(currNodeKeys, currKeyIndex, nextNodeKeys, nextKeyIndex);
 
     for (let i = 0; i < this.nodeKeys.length; i++) {
       const k = this.nodeKeys[i];
@@ -126,11 +133,11 @@ class NodeGroup extends Component {
 
       if (n.type === ENTER) {
         n.setState(start(d, nextKeyIndex[k]));
-        transition.call(n, enter(d, nextKeyIndex[k]));
+        transition.call(n, enter(d, nextKeyIndex[k]), timing);
       } else if (n.type === LEAVE) {
-        transition.call(n, leave(d, currKeyIndex[k]));
+        transition.call(n, leave(d, currKeyIndex[k]), timing);
       } else {
-        transition.call(n, update(d, nextKeyIndex[k]));
+        transition.call(n, update(d, nextKeyIndex[k]), timing);
       }
     }
 
@@ -174,7 +181,7 @@ class NodeGroup extends Component {
 
     this.nodeKeys = nextNodeKeys;
     this.renderNodes();
-  }
+  };
 
   nodeHash = {};
   nodeKeys = [];

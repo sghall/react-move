@@ -33,7 +33,7 @@ export const preset = {
   ease: linear,
 };
 
-function scheduleTransitions(config = {}) {
+function scheduleTransitions(config = {}, defaultTiming = {}) {
   const transitions = { ...config };
 
   const events = transitions.events || {};
@@ -125,17 +125,17 @@ function scheduleTransitions(config = {}) {
       }
     }
 
-    const timingConfig = { ...preset, ...timing, time: timeNow() };
+    const timingConfig = { ...preset, ...defaultTiming, ...timing, time: timeNow() };
     schedule(this, stateKey, newId(), timingConfig, tweens, events);
   });
 }
 
-export default function transition(config) {
+export default function transition(config, defaultTiming) {
   if (Array.isArray(config)) {
     config.forEach((c) => {
-      scheduleTransitions.call(this, c);
+      scheduleTransitions.call(this, c, defaultTiming);
     });
   } else {
-    scheduleTransitions.call(this, config);
+    scheduleTransitions.call(this, config, defaultTiming);
   }
 }
