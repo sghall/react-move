@@ -2,10 +2,8 @@
 /* eslint max-len: "off" */
 
 import React, { Component } from 'react';
-
-//
-
-import NodeGroup from '../NodeGroup';
+import { interval } from 'd3-timer';
+import { transition, stop } from '../core/transition';
 
 type Props = {
   /**
@@ -40,10 +38,6 @@ type Props = {
    * A function that renders the node. The function is passed the state.
    */
   render?: (state: {}) => {},
-  /**
-   * A function that renders the node. The function is passed the state.
-   */
-  Component?: React.Component,
 };
 
 class Animate extends Component {
@@ -51,47 +45,86 @@ class Animate extends Component {
     show: true,
   };
 
-  render() {
-    const {
-      show,
-      start,
-      enter,
-      update,
-      leave,
-      children,
-      render,
-      Component: Comp,
-      timing,
-      ...rest
-    } = this.props;
+  state = typeof this.props.start === 'function' ? this.props.start() : this.props.start;
 
-    return (
-      <NodeGroup
-        data={show ? [true] : []}
-        keyAccessor={(d) => d}
-        start={typeof start === 'function' ? start : () => start}
-        enter={typeof enter === 'function' ? enter : () => enter}
-        update={typeof update === 'function' ? update : () => update}
-        leave={typeof leave === 'function' ? leave : () => leave}
-        timing={timing}
-      >
-        {(inters) => {
-          if (!inters.length) {
-            return null;
+  componentWillMount() {
+    if (this.props.show === true) {
+      this.renderNull = false;
+    }
+  }
+
+  componentDidMount() {
+    const { enter, show } = this.props;
+
+    if (enter && show === true) {
+      transition.call(this, typeof enter === 'function' ? enter() : enter);
+    }
+  }
+
+  componentWillReceiveProps(next) {
+    const { show, start, enter, update, leave } = next;
+
+    if (this.props.show === false && this.renderNull === true && show === true) {
+      this.renderNull = false;
+
+      this.setState(
+        () => (typeof start === 'function' ? start() : start),
+        () => {
+          if (enter) {
+            transition.call(this, typeof enter === 'function' ? enter() : enter);
           }
-          let rendered;
-          if (Comp) {
-            rendered = React.createElement(Comp, null, {
-              ...rest,
-              ...inters[0].state,
-            });
-          } else {
-            rendered = (render || children)(inters[0].state);
-          }
-          return rendered ? React.Children.only(rendered) : null;
-        }}
-      </NodeGroup>
-    );
+        },
+      );
+    } else if (this.props.show === true && show === false) {
+      if (leave) {
+        transition.call(this, typeof leave === 'function' ? leave() : leave);
+        this.interval = interval(this.checkTransitionStatus);
+      } else {
+        this.renderNull = true;
+        this.setState((prevState) => prevState); // force render as null
+      }
+    } else if (show === true && update) {
+      if (this.interval) {
+        this.interval.stop();
+      }
+
+      transition.call(this, typeof update === 'function' ? update() : update);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.interval) {
+      this.interval.stop();
+    }
+
+    stop.call(this);
+  }
+
+  checkTransitionStatus = () => {
+    if (!this.TRANSITION_SCHEDULES) {
+      this.interval.stop();
+
+      if (this.props.show === false) {
+        this.renderNull = true;
+        this.setState((prevState) => prevState); // force render as null
+      }
+    }
+  };
+
+  props: Props;
+
+  interval = null;
+  renderNull = true;
+
+  render() {
+    const { render, children } = this.props;
+
+    if (this.renderNull === true) {
+      return null;
+    }
+
+    const renderedChildren = (render || children)(this.state);
+    return renderedChildren && React.Children.only(renderedChildren);
   }
 }
 
