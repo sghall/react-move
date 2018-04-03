@@ -45,10 +45,6 @@ type Props = {
    * A function that renders the node. The function is passed the state.
    */
   render?: (state: {}) => {},
-  /**
-   * A function that renders the node. The function is passed the state.
-   */
-  Component?: React.Component,
 };
 
 class NodeGroup extends Component {
@@ -197,15 +193,8 @@ class NodeGroup extends Component {
   }
 
   render() {
-    const { render, children, Component: Comp } = this.props;
-    let rendered;
-    if (Comp) {
-      rendered = React.createElement(Comp, null, {
-        nodes: this.state.nodes,
-      });
-    } else {
-      rendered = (render || children)(this.state.nodes);
-    }
+    const { render, children } = this.props;
+    const rendered = (render || children)(this.state.nodes);
     return rendered ? React.Children.only(rendered) : null;
   }
 }
