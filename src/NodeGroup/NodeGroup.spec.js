@@ -41,6 +41,19 @@ describe('<NodeGroup />', () => {
     assert.strictEqual(wrapper.is('g'), true, 'should be true');
   });
 
+  it('should render nodes using the render prop', () => {
+    const wrapper = shallow(
+      <NodeGroup
+        data={data}
+        keyAccessor={(d) => d.val}
+        start={() => ({})}
+        render={renderChildren}
+      />,
+    );
+
+    assert.strictEqual(wrapper.is('g'), true, 'should be true');
+  });
+
   it('should render a node for each data item', () => {
     const wrapper = mount(
       <NodeGroup

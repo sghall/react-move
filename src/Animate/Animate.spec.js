@@ -18,13 +18,24 @@ const renderNode = () => (
 );
 
 describe('<Animate />', () => {
-  it('should render child Node', () => {
+  it('should render child Node with the children prop', () => {
     const wrapper = shallow(
       <Animate
         start={{}}
       >
         {renderNode}
       </Animate>,
+    );
+
+    assert.strictEqual(wrapper.find(Node).length, 1, 'should be true');
+  });
+
+  it('should render child Node with the render prop', () => {
+    const wrapper = shallow(
+      <Animate
+        start={{}}
+        render={renderNode}
+      />,
     );
 
     assert.strictEqual(wrapper.find(Node).length, 1, 'should be true');
