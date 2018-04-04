@@ -43,7 +43,7 @@ type Props = {
 class Animate extends Component {
   static defaultProps = {
     show: true,
-    children: () => null
+    children: () => null,
   };
 
   state = typeof this.props.start === 'function' ? this.props.start() : this.props.start;
