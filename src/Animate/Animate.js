@@ -33,7 +33,7 @@ type Props = {
   /**
    * A function that renders the node. The function is passed the state.
    */
-  children?: (state: {}) => {},
+  children: (state: {}) => {},
   /**
    * A function that renders the node. The function is passed the state.
    */
@@ -43,6 +43,7 @@ type Props = {
 class Animate extends Component {
   static defaultProps = {
     show: true,
+    children: () => null
   };
 
   state = typeof this.props.start === 'function' ? this.props.start() : this.props.start;
