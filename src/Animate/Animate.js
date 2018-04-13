@@ -55,15 +55,15 @@ class Animate extends Component {
   }
 
   componentDidMount() {
-    const { enter, show } = this.props;
+    const { enter, show, timing } = this.props;
 
     if (enter && show === true) {
-      transition.call(this, typeof enter === 'function' ? enter() : enter);
+      transition.call(this, typeof enter === 'function' ? enter() : enter, timing);
     }
   }
 
   componentWillReceiveProps(next) {
-    const { show, start, enter, update, leave } = next;
+    const { show, start, enter, update, leave, timing } = next;
 
     if (this.props.show === false && this.renderNull === true && show === true) {
       this.renderNull = false;
@@ -72,13 +72,13 @@ class Animate extends Component {
         () => (typeof start === 'function' ? start() : start),
         () => {
           if (enter) {
-            transition.call(this, typeof enter === 'function' ? enter() : enter);
+            transition.call(this, typeof enter === 'function' ? enter() : enter, timing);
           }
         },
       );
     } else if (this.props.show === true && show === false) {
       if (leave) {
-        transition.call(this, typeof leave === 'function' ? leave() : leave);
+        transition.call(this, typeof leave === 'function' ? leave() : leave, timing);
         this.interval = interval(this.checkTransitionStatus);
       } else {
         this.renderNull = true;
@@ -89,7 +89,7 @@ class Animate extends Component {
         this.interval.stop();
       }
 
-      transition.call(this, typeof update === 'function' ? update() : update);
+      transition.call(this, typeof update === 'function' ? update() : update, timing);
     }
   }
 
