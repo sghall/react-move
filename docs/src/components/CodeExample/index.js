@@ -18,12 +18,12 @@ class CodeExample extends Component {
     title: PropTypes.string,
   };
 
-  static defaultProps = {
-    component: true,
-  };
-
   static contextTypes = {
     muiTheme: PropTypes.object,
+  };
+
+  static defaultProps = {
+    component: true,
   };
 
   render() {

@@ -58,9 +58,9 @@
   },
   "devDependencies": {
     "app-module-path": "^2.1.0",
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^8.2.6",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-polyfill": "^6.23.0",
