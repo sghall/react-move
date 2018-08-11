@@ -85,7 +85,7 @@
     "glob": "^7.1.1",
     "gzip-size": "^4.1.0",
     "istanbul-lib-instrument": "^1.10.1",
-    "jsdom": "^11.12.0",
+    "jsdom": "^11.11.0",
     "minimist": "^1.2.0",
     "mocha": "^3.5.0",
     "nodemon": "^1.18.3",
