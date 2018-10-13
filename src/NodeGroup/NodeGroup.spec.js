@@ -11,8 +11,6 @@ const msPerFrame = 1000 / 60
 const data = [1, 2, 3, 4, 5].map(d => ({ val: d }))
 
 class Node extends Component {
-  // eslint-disable-line
-
   render() {
     return <line />
   }

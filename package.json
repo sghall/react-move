@@ -87,6 +87,7 @@
     "react-dom": "^15.6.2",
     "react-test-renderer": "^15.6.2",
     "recursive-readdir-sync": "^1.0.6",
+    "request": "^2.88.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.1",
     "rollup-plugin-babel": "^4.0.3",
