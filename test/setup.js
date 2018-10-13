@@ -1,3 +1,3 @@
 // @flow weak
 
-require('./utils/dom')();
+require('./utils/dom')()

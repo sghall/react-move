@@ -1,12 +1,12 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ClearFix from 'material-ui/internal/ClearFix';
-import spacing from 'material-ui/styles/spacing';
-import withWidth, { SMALL, LARGE } from 'material-ui/utils/withWidth';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import ClearFix from 'material-ui/internal/ClearFix'
+import spacing from 'material-ui/styles/spacing'
+import withWidth, { SMALL, LARGE } from 'material-ui/utils/withWidth'
 
-const desktopGutter = spacing.desktopGutter;
+const desktopGutter = spacing.desktopGutter
 
 class FullWidthSection extends Component {
   static propTypes = {
@@ -16,12 +16,12 @@ class FullWidthSection extends Component {
     style: PropTypes.object,
     useContent: PropTypes.bool,
     width: PropTypes.number.isRequired,
-  };
+  }
 
   static defaultProps = {
     useContent: false,
     contentType: 'div',
-  };
+  }
 
   getStyles = () => ({
     root: {
@@ -40,7 +40,7 @@ class FullWidthSection extends Component {
       paddingTop: desktopGutter * 3,
       paddingBottom: desktopGutter * 3,
     },
-  });
+  })
 
   render() {
     const {
@@ -50,20 +50,19 @@ class FullWidthSection extends Component {
       contentStyle,
       width,
       ...other
-    } = this.props;
+    } = this.props
 
-    const styles = this.getStyles();
+    const styles = this.getStyles()
 
-    let content;
+    let content
     if (useContent) {
-      content =
-        React.createElement(
-          contentType,
-          { style: Object.assign(styles.content, contentStyle) },
-          this.props.children,
-        );
+      content = React.createElement(
+        contentType,
+        { style: Object.assign(styles.content, contentStyle) },
+        this.props.children,
+      )
     } else {
-      content = this.props.children;
+      content = this.props.children
     }
 
     return (
@@ -73,12 +72,13 @@ class FullWidthSection extends Component {
           styles.root,
           style,
           width === SMALL && styles.rootWhenSmall,
-          width === LARGE && styles.rootWhenLarge)}
+          width === LARGE && styles.rootWhenLarge,
+        )}
       >
         {content}
       </ClearFix>
-    );
+    )
   }
 }
 
-export default withWidth()(FullWidthSection);
+export default withWidth()(FullWidthSection)

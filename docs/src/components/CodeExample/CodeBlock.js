@@ -1,10 +1,10 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import transitions from 'material-ui/styles/transitions';
-import MarkdownElement from '../MarkdownElement';
-import CodeBlockTitle from './CodeBlockTitle';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import transitions from 'material-ui/styles/transitions'
+import MarkdownElement from '../MarkdownElement'
+import CodeBlockTitle from './CodeBlockTitle'
 
 const styles = {
   root: {
@@ -31,37 +31,37 @@ const styles = {
   codeBlockTitle: {
     cursor: 'pointer',
   },
-};
+}
 
 class CodeBlock extends Component {
   static propTypes = {
     children: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
-  };
+  }
 
   state = {
     expand: false,
-  };
+  }
 
   handleTouchTap = () => {
     this.setState({
       expand: !this.state.expand,
-    });
-  };
+    })
+  }
 
   render() {
     const text = `\`\`\`js
 ${this.props.children}
-    \`\`\``;
+    \`\`\``
 
-    const descriptionStyle = styles.description;
-    let codeStyle = Object.assign({}, styles.markdown, styles.markdownRetracted);
-    let tooltip = 'Show source';
+    const descriptionStyle = styles.description
+    let codeStyle = Object.assign({}, styles.markdown, styles.markdownRetracted)
+    let tooltip = 'Show source'
 
     if (this.state.expand) {
-      codeStyle = styles.markdown;
-      tooltip = 'Hide source';
+      codeStyle = styles.markdown
+      tooltip = 'Hide source'
     }
 
     return (
@@ -70,10 +70,13 @@ ${this.props.children}
           <CodeBlockTitle title={this.props.title} tooltip={tooltip} />
         </div>
         <MarkdownElement style={codeStyle} text={text} />
-        <MarkdownElement style={descriptionStyle} text={this.props.description} />
+        <MarkdownElement
+          style={descriptionStyle}
+          text={this.props.description}
+        />
       </div>
-    );
+    )
   }
 }
 
-export default CodeBlock;
+export default CodeBlock

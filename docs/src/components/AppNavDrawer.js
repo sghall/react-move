@@ -1,15 +1,15 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Drawer from 'material-ui/Drawer';
-import { List, ListItem, makeSelectable } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import { spacing, typography, zIndex } from 'material-ui/styles';
-import palette from '../utils/palette';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Drawer from 'material-ui/Drawer'
+import { List, ListItem, makeSelectable } from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import Subheader from 'material-ui/Subheader'
+import { spacing, typography, zIndex } from 'material-ui/styles'
+import palette from '../utils/palette'
 
-const SelectableList = makeSelectable(List);
+const SelectableList = makeSelectable(List)
 
 const styles = {
   logo: {
@@ -26,7 +26,7 @@ const styles = {
     paddingLeft: spacing.desktopGutterLess,
     fontSize: 16,
   },
-};
+}
 
 class AppNavDrawer extends Component {
   static propTypes = {
@@ -36,21 +36,21 @@ class AppNavDrawer extends Component {
     onRequestChangeNavDrawer: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     style: PropTypes.object,
-  };
+  }
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
     router: PropTypes.object.isRequired,
-  };
+  }
 
   handleRequestChangeLink = (event, value) => {
-    window.location = value;
-  };
+    window.location = value
+  }
 
   handleTouchTapHeader = () => {
-    this.context.router.push('/');
-    this.props.onRequestChangeNavDrawer(false);
-  };
+    this.context.router.push('/')
+    this.props.onRequestChangeNavDrawer(false)
+  }
 
   render() {
     const {
@@ -60,7 +60,7 @@ class AppNavDrawer extends Component {
       onChangeList,
       open,
       style,
-    } = this.props;
+    } = this.props
 
     return (
       <Drawer
@@ -73,10 +73,7 @@ class AppNavDrawer extends Component {
         <div style={styles.logo} onClick={this.handleTouchTapHeader}>
           React-Move
         </div>
-        <SelectableList
-          value={location.pathname}
-          onChange={onChangeList}
-        >
+        <SelectableList value={location.pathname} onChange={onChangeList}>
           <ListItem
             primaryText="Documentation"
             primaryTogglesNestedList
@@ -116,17 +113,20 @@ class AppNavDrawer extends Component {
           />
         </SelectableList>
         <Divider />
-        <SelectableList
-          value=""
-          onChange={this.handleRequestChangeLink}
-        >
+        <SelectableList value="" onChange={this.handleRequestChangeLink}>
           <Subheader>Resources</Subheader>
-          <ListItem primaryText="GitHub" value="https://github.com/react-tools/react-move" />
-          <ListItem primaryText="React" value="http://facebook.github.io/react" />
+          <ListItem
+            primaryText="GitHub"
+            value="https://github.com/react-tools/react-move"
+          />
+          <ListItem
+            primaryText="React"
+            value="http://facebook.github.io/react"
+          />
         </SelectableList>
       </Drawer>
-    );
+    )
   }
 }
 
-export default AppNavDrawer;
+export default AppNavDrawer

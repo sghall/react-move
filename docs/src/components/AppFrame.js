@@ -1,53 +1,55 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import spacing from 'material-ui/styles/spacing';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { darkWhite, lightWhite } from 'material-ui/styles/colors';
-import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth';
-import palette from '../utils/palette';
-import AppNavDrawer from './AppNavDrawer';
-import FullWidthSection from './FullWidthSection';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
+import spacing from 'material-ui/styles/spacing'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { darkWhite, lightWhite } from 'material-ui/styles/colors'
+import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth'
+import palette from '../utils/palette'
+import AppNavDrawer from './AppNavDrawer'
+import FullWidthSection from './FullWidthSection'
 
 class AppFrame extends Component {
   static propTypes = {
     children: PropTypes.node,
     location: PropTypes.object,
     width: PropTypes.number.isRequired,
-  };
+  }
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
-  };
+  }
 
   static childContextTypes = {
     muiTheme: PropTypes.object,
-  };
+  }
 
   state = {
     navDrawerOpen: false,
-  };
+  }
 
   getChildContext() {
     return {
       muiTheme: this.state.muiTheme,
-    };
+    }
   }
 
   componentWillMount() {
     this.setState({
       muiTheme: getMuiTheme({ palette }),
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    const newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+    const newMuiTheme = nextContext.muiTheme
+      ? nextContext.muiTheme
+      : this.state.muiTheme
     this.setState({
       muiTheme: newMuiTheme,
-    });
+    })
   }
 
   getStyles() {
@@ -97,64 +99,57 @@ class AppFrame extends Component {
       iconButton: {
         color: darkWhite,
       },
-    };
-
-    if (this.props.width === MEDIUM || this.props.width === LARGE) {
-      styles.content = Object.assign(styles.content, styles.contentWhenMedium);
     }
 
-    return styles;
+    if (this.props.width === MEDIUM || this.props.width === LARGE) {
+      styles.content = Object.assign(styles.content, styles.contentWhenMedium)
+    }
+
+    return styles
   }
 
   handleTouchTapLeftIconButton = () => {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen,
-    });
-  };
+    })
+  }
 
-  handleChangeRequestNavDrawer = (open) => {
+  handleChangeRequestNavDrawer = open => {
     this.setState({
       navDrawerOpen: open,
-    });
-  };
+    })
+  }
 
   handleChangeList = () => {
     this.setState({
       navDrawerOpen: false,
-    });
-  };
+    })
+  }
 
   render() {
-    const {
-      location,
-      children,
-    } = this.props;
+    const { location, children } = this.props
 
-    let {
-      navDrawerOpen,
-    } = this.state;
+    let { navDrawerOpen } = this.state
 
-    const {
-      prepareStyles,
-    } = this.state.muiTheme;
+    const { prepareStyles } = this.state.muiTheme
 
     // const router = this.context.router;
-    const styles = this.getStyles();
-    const title = 'React-Move';
+    const styles = this.getStyles()
+    const title = 'React-Move'
 
-    let docked = false;
-    let showMenuIconButton = true;
+    let docked = false
+    let showMenuIconButton = true
 
     if (this.props.width === LARGE && title !== '') {
-      docked = true;
-      navDrawerOpen = true;
-      showMenuIconButton = false;
+      docked = true
+      navDrawerOpen = true
+      showMenuIconButton = false
 
       styles.navDrawer = {
         zIndex: styles.appBar.zIndex - 1,
-      };
-      styles.root.paddingLeft = 256;
-      styles.footer.paddingLeft = 256;
+      }
+      styles.root.paddingLeft = 256
+      styles.footer.paddingLeft = 256
     }
 
     return (
@@ -173,9 +168,7 @@ class AppFrame extends Component {
           showMenuIconButton={showMenuIconButton}
         />
         <div style={prepareStyles(styles.root)}>
-          <div style={prepareStyles(styles.content)}>
-            {children}
-          </div>
+          <div style={prepareStyles(styles.content)}>{children}</div>
         </div>
         <AppNavDrawer
           style={styles.navDrawer}
@@ -192,14 +185,17 @@ class AppFrame extends Component {
           />
           <p style={prepareStyles(styles.browserstack)}>
             {'Check out the project on Github '}
-            <a href="https://github.com/react-tools/react-move" style={prepareStyles(styles.browserstackLogo)}>
+            <a
+              href="https://github.com/react-tools/react-move"
+              style={prepareStyles(styles.browserstackLogo)}
+            >
               React-Move
             </a>
           </p>
         </FullWidthSection>
       </div>
-    );
+    )
   }
 }
 
-export default withWidth()(AppFrame);
+export default withWidth()(AppFrame)

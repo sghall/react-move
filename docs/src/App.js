@@ -1,9 +1,9 @@
 // @flow weak
 
-import React from 'react';
-import { Router, useRouterHistory } from 'react-router';
-import { createHashHistory } from 'history';
-import routes from './routes';
+import React from 'react'
+import { Router, useRouterHistory } from 'react-router'
+import { createHashHistory } from 'history'
+import routes from './routes'
 
 export default () => {
   return (
@@ -13,5 +13,5 @@ export default () => {
     >
       {routes}
     </Router>
-  );
-};
+  )
+}

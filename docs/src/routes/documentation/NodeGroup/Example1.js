@@ -2,23 +2,24 @@
 /* eslint react/no-multi-comp: 'off' */
 // example from https://bl.ocks.org/mbostock/3885705
 
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
-import Surface from 'docs/src/components/Surface'; // this is just a responsive SVG
-import { scaleLinear, scaleBand } from 'd3-scale';
-import { easeExpInOut } from 'd3-ease';
-import { ascending, max } from 'd3-array';
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
+import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
+import { scaleLinear, scaleBand } from 'd3-scale'
+import { easeExpInOut } from 'd3-ease'
+import { ascending, max } from 'd3-array'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 450]; // [width, height]
-const trbl = [10, 10, 30, 10]; // [top, right, bottom, left] margins
+const view = [1000, 450] // [width, height]
+const trbl = [10, 10, 30, 10] // [top, right, bottom, left] margins
 
-const dims = [ // Adjusted dimensions [width, height]
+const dims = [
+  // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 // **************************************************
 //  Mock Data
@@ -26,7 +27,7 @@ const dims = [ // Adjusted dimensions [width, height]
 const letters = [
   { letter: 'A', frequency: 0.08167 },
   { letter: 'B', frequency: 0.01492 },
-  { letter: 'C', frequency: 0.02780 },
+  { letter: 'C', frequency: 0.0278 },
   { letter: 'D', frequency: 0.04253 },
   { letter: 'E', frequency: 0.12702 },
   { letter: 'F', frequency: 0.02288 },
@@ -47,14 +48,14 @@ const letters = [
   { letter: 'U', frequency: 0.02758 },
   { letter: 'V', frequency: 0.01037 },
   { letter: 'W', frequency: 0.02465 },
-  { letter: 'X', frequency: 0.00150 },
+  { letter: 'X', frequency: 0.0015 },
   { letter: 'Y', frequency: 0.01971 },
   { letter: 'Z', frequency: 0.00074 },
-];
+]
 
 const y = scaleLinear()
   .range([dims[1], 0])
-  .domain([0, max(letters, (d) => d.frequency)]);
+  .domain([0, max(letters, d => d.frequency)])
 
 class Example extends PureComponent {
   state = {
@@ -62,23 +63,26 @@ class Example extends PureComponent {
   }
 
   update = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       sortAlpha: !state.sortAlpha,
-    }));
+    }))
   }
 
   render() {
-    const { sortAlpha } = this.state;
+    const { sortAlpha } = this.state
 
-    const sorted = letters.sort(sortAlpha ?
-      (a, b) => ascending(a.letter, b.letter) :
-      (a, b) => b.frequency - a.frequency,
-    ).slice(0);
+    const sorted = letters
+      .sort(
+        sortAlpha
+          ? (a, b) => ascending(a.letter, b.letter)
+          : (a, b) => b.frequency - a.frequency,
+      )
+      .slice(0)
 
     const scale = scaleBand()
       .rangeRound([0, dims[0]])
-      .domain(sorted.map((d) => d.letter))
-      .padding(0.1);
+      .domain(sorted.map(d => d.letter))
+      .padding(0.1)
 
     return (
       <div>
@@ -88,37 +92,33 @@ class Example extends PureComponent {
         <Surface view={view} trbl={trbl}>
           <NodeGroup
             data={sorted}
-            keyAccessor={(d) => d.letter}
-
+            keyAccessor={d => d.letter}
             start={() => ({
               opacity: 1e-6,
               x: 1e-6,
               width: scale.bandwidth(),
             })}
-
-            enter={(d) => ({
+            enter={d => ({
               opacity: [0.7],
               x: [scale(d.letter)],
               timing: { duration: 750, ease: easeExpInOut },
             })}
-
             update={(d, i) => ({
               opacity: [0.7],
               x: [scale(d.letter)],
               width: [scale.bandwidth()],
               timing: { duration: 750, delay: i * 50, ease: easeExpInOut },
             })}
-
             leave={() => ({
               opacity: [1e-6],
               x: [scale.range()[1]],
               timing: { duration: 750, ease: easeExpInOut },
             })}
           >
-            {(nodes) => (
+            {nodes => (
               <g>
                 {nodes.map(({ key, data, state }) => {
-                  const { x, ...rest } = state;
+                  const { x, ...rest } = state
 
                   return (
                     <g key={key} transform={`translate(${x},0)`}>
@@ -133,17 +133,19 @@ class Example extends PureComponent {
                         y={dims[1] + 15}
                         dx="-.35em"
                         fill="#333"
-                      >{data.letter}</text>
+                      >
+                        {data.letter}
+                      </text>
                     </g>
-                  );
+                  )
                 })}
               </g>
             )}
           </NodeGroup>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

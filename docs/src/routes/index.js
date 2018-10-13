@@ -1,17 +1,17 @@
 // @flow weak
 /* eslint global-require: 0 */
 
-import Home from './Home';
-import AppFrame from '../components/AppFrame';
-import AnimateDocs from './documentation/Animate';
-import NodeGroupDocs from './documentation/NodeGroup';
-import Simple from './examples/Simple';
-import Charts from './examples/Charts';
-import DraggableList from './examples/DraggableList';
+import Home from './Home'
+import AppFrame from '../components/AppFrame'
+import AnimateDocs from './documentation/Animate'
+import NodeGroupDocs from './documentation/NodeGroup'
+import Simple from './examples/Simple'
+import Charts from './examples/Charts'
+import DraggableList from './examples/DraggableList'
 
-const docContext = require.context('!raw-loader!./documentation', true);
-const srcContext = require.context('!raw-loader!../../../src', true);
-const exampleContext = require.context('!raw-loader!./examples', true);
+const docContext = require.context('!raw-loader!./documentation', true)
+const srcContext = require.context('!raw-loader!../../../src', true)
+const exampleContext = require.context('!raw-loader!./examples', true)
 
 const routes = {
   path: '/',
@@ -26,7 +26,7 @@ const routes = {
       path: 'documentation',
       indexRoute: {
         onEnter(nextState, replace) {
-          replace('/documentation/node-group');
+          replace('/documentation/node-group')
         },
       },
       childRoutes: [
@@ -48,7 +48,7 @@ const routes = {
       path: 'examples',
       indexRoute: {
         onEnter(nextState, replace) {
-          replace('/examples/pie-charts');
+          replace('/examples/pie-charts')
         },
       },
       childRoutes: [
@@ -69,6 +69,6 @@ const routes = {
       ],
     },
   ],
-};
+}
 
-export default routes;
+export default routes

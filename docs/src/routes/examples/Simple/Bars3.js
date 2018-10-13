@@ -1,23 +1,24 @@
 // @flow weak
 /* eslint react/no-multi-comp: "off", max-len: "off" */
 
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
-import Surface from 'docs/src/components/Surface';
-import { scaleBand, scaleLinear } from 'd3-scale';
-import { shuffle, max } from 'd3-array';
-import { easeExpInOut, easePoly } from 'd3-ease';
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
+import Surface from 'docs/src/components/Surface'
+import { scaleBand, scaleLinear } from 'd3-scale'
+import { shuffle, max } from 'd3-array'
+import { easeExpInOut, easePoly } from 'd3-ease'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 250]; // [width, height]
-const trbl = [10, 100, 10, 100]; // [top, right, bottom, left] margins
+const view = [1000, 250] // [width, height]
+const trbl = [10, 100, 10, 100] // [top, right, bottom, left] margins
 
-const dims = [ // Adjusted dimensions [width, height]
+const dims = [
+  // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 // **************************************************
 //  Data
@@ -26,78 +27,88 @@ const mockData = [
   {
     name: 'Linktype',
     value: 45,
-  }, {
+  },
+  {
     name: 'Quaxo',
     value: 53,
-  }, {
+  },
+  {
     name: 'Skynoodle',
     value: 86,
-  }, {
+  },
+  {
     name: 'Realmix',
     value: 36,
-  }, {
+  },
+  {
     name: 'Jetpulse',
     value: 54,
-  }, {
+  },
+  {
     name: 'Chatterbridge',
     value: 91,
-  }, {
+  },
+  {
     name: 'Riffpedia',
     value: 67,
-  }, {
+  },
+  {
     name: 'Layo',
     value: 12,
-  }, {
+  },
+  {
     name: 'Oyoba',
     value: 69,
-  }, {
+  },
+  {
     name: 'Ntags',
     value: 17,
   },
-];
+]
 
 // **************************************************
 //  Example
 // **************************************************
 class Example extends PureComponent {
   constructor(props) {
-    super(props);
-    (this:any).update = this.update.bind(this);
+    super(props)
+    ;(this: any).update = this.update.bind(this)
   }
 
   state = {
-    data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length * 0.7) - (5 + 1))) + 5),
+    data: shuffle(mockData).slice(
+      0,
+      Math.floor(Math.random() * (mockData.length * 0.7 - (5 + 1))) + 5,
+    ),
   }
 
   update() {
     this.setState({
-      data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length * 0.7) - (5 + 1))) + 5),
-    });
+      data: shuffle(mockData).slice(
+        0,
+        Math.floor(Math.random() * (mockData.length * 0.7 - (5 + 1))) + 5,
+      ),
+    })
   }
 
   render() {
     const xScale = scaleBand()
       .rangeRound([0, dims[0]])
-      .domain(this.state.data.map((d) => d.name))
-      .padding(0.1);
+      .domain(this.state.data.map(d => d.name))
+      .padding(0.1)
 
     const yScale = scaleLinear()
       .rangeRound([dims[1], 0])
-      .domain([0, max(this.state.data.map((d) => d.value))]);
+      .domain([0, max(this.state.data.map(d => d.value))])
 
     return (
       <div>
-        <button onClick={this.update}>
-          Update
-        </button>
-        <span style={{ margin: 5 }}>
-          Bar Count: {this.state.data.length}
-        </span>
+        <button onClick={this.update}>Update</button>
+        <span style={{ margin: 5 }}>Bar Count: {this.state.data.length}</span>
         <Surface view={view} trbl={trbl}>
           <NodeGroup
             data={this.state.data}
-            keyAccessor={(d) => d.name}
-
+            keyAccessor={d => d.name}
             start={() => ({
               opacity: 1e-6,
               x: 0,
@@ -105,8 +116,8 @@ class Example extends PureComponent {
               width: xScale.bandwidth(),
               height: 0,
             })}
-
-            enter={(node, index) => ([ // An array!!
+            enter={(node, index) => [
+              // An array!!
               {
                 opacity: [0.6],
                 width: [xScale.bandwidth()],
@@ -117,9 +128,9 @@ class Example extends PureComponent {
                 x: [xScale(node.name)],
                 timing: { duration: 100 * index, ease: easePoly },
               },
-            ])}
-
-            update={(node) => ([ // An array!!
+            ]}
+            update={node => [
+              // An array!!
               {
                 opacity: [0.6],
                 fill: ['#00a7d8', 'grey'],
@@ -136,33 +147,29 @@ class Example extends PureComponent {
               {
                 height: [yScale(node.value)],
                 timing: { delay: 2000, duration: 500 },
-                events: { // Events!!
+                events: {
+                  // Events!!
                   end() {
-                    this.setState({ fill: 'steelblue' });
+                    this.setState({ fill: 'steelblue' })
                   },
                 },
               },
-            ])}
-
+            ]}
             leave={() => ({
               opacity: [1e-6],
               fill: '#ff0063',
               timing: { duration: 1000 },
             })}
           >
-            {(nodes) => {
+            {nodes => {
               return (
                 <g>
                   {nodes.map(({ key, data, state }) => {
-                    const { x, height, ...rest } = state;
+                    const { x, height, ...rest } = state
 
                     return (
                       <g key={key} transform={`translate(${x},0)`}>
-                        <rect
-                          y={height}
-                          height={dims[1] - height}
-                          {...rest}
-                        />
+                        <rect y={height} height={dims[1] - height} {...rest} />
                         <text
                           x="0"
                           y="20"
@@ -176,16 +183,16 @@ class Example extends PureComponent {
                           transform="rotate(90 5,20)"
                         >{`name: ${data.name}, value: ${data.value}`}</text>
                       </g>
-                    );
+                    )
                   })}
                 </g>
-              );
+              )
             }}
           </NodeGroup>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example
