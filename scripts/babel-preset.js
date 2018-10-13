@@ -4,20 +4,22 @@
 const BABEL_ENV = process.env.BABEL_ENV;
 const building = BABEL_ENV != undefined && BABEL_ENV !== 'cjs' && BABEL_ENV !== 'coverage';
 
-const plugins = [];
-
-if (BABEL_ENV === 'umd') {
-  plugins.push('external-helpers');
-}
-
-module.exports = {
+module.exports = () => ({
   presets: [
-    ['es2015', {
-      loose: true,
-      modules: building ? false : 'commonjs',
-    }],
-    'stage-1',
-    'react',
+    [
+      '@babel/preset-env',
+      {
+        modules: building ? false : 'commonjs',
+      },
+    ],
+    '@babel/preset-react',
   ],
-  plugins,
-};
+  plugins: [
+    ['transform-react-remove-prop-types', {
+      removeImport: true,
+      ignoreFilenames: ['node_modules'],
+    }],
+    '@babel/plugin-proposal-class-properties',
+  ],
+});
+

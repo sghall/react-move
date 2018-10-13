@@ -12,7 +12,7 @@ const RUNNING = 4;
 const ENDING = 5;
 const ENDED = 6;
 
-export default function (node, stateKey:string, id:number, timing, tweens, events = {}) {
+export default function (node, stateKey, id, timing, tweens, events = {}) {
   const schedules = node.TRANSITION_SCHEDULES;
   if (!schedules) {
     node.TRANSITION_SCHEDULES = {}; // eslint-disable-line no-param-reassign
@@ -24,7 +24,7 @@ export default function (node, stateKey:string, id:number, timing, tweens, event
   create(node, id, config);
 }
 
-function create(node, id:number, config) {
+function create(node, id, config) {
   const schedules = node.TRANSITION_SCHEDULES;
 
   // Initialize the transition timer when the transition is created.
