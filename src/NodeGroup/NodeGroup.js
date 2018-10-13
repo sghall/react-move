@@ -9,7 +9,6 @@ import mergeKeys from '../core/mergeKeys';
 import { ENTER, UPDATE, LEAVE } from '../core/types';
 import { transition, stop } from '../core/transition';
 
-
 class NodeGroup extends Component {
   static defaultProps = {
     enter: () => {},
