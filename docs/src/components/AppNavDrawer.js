@@ -79,11 +79,13 @@ class AppNavDrawer extends Component {
             primaryTogglesNestedList
             nestedItems={[
               <ListItem
+                key="a"
                 primaryText="Animate"
                 value="/documentation/animate"
                 href="#/documentation/animate"
               />,
               <ListItem
+                key="b"
                 primaryText="NodeGroup"
                 value="/documentation/node-group"
                 href="#/documentation/node-group"
@@ -95,16 +97,19 @@ class AppNavDrawer extends Component {
             primaryTogglesNestedList
             nestedItems={[
               <ListItem
+                key="a"
                 primaryText="Simple"
                 value="/examples/simple"
                 href="#/examples/simple"
               />,
               <ListItem
+                key="b"
                 primaryText="Draggable List"
                 value="/examples/draggable-list"
                 href="#/examples/draggable-list"
               />,
               <ListItem
+                key="c"
                 primaryText="SVG Charts"
                 value="/examples/charts"
                 href="#/examples/charts"

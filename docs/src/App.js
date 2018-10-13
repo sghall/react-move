@@ -1,4 +1,4 @@
-// @flow weak
+/* eslint react/display-name: "off" */
 
 import React from 'react'
 import { Router, useRouterHistory } from 'react-router'
