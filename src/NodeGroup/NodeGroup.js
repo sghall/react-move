@@ -56,7 +56,7 @@ class NodeGroup extends Component {
 
   componentDidUpdate(previous) {
     if (previous.data !== this.props.data) {
-      this.updateNodes(this.props);
+      this.updateNodes(this.props`);
     }
   }
 
