@@ -100,16 +100,10 @@
     "webpack": "^4.28.4"
   },
   "nyc": {
-    "all": true,
-    "require": [
-      "babel-register"
-    ],
     "include": [
-      "src/**/*.js",
-      "src/core/**/*.js"
+      "src/**/*.js"
     ],
     "exclude": [
-      "docs/**/*.js",
       "**/*.spec.js"
     ],
     "sourceMap": false,
