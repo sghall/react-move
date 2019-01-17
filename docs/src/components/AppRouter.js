@@ -82,7 +82,6 @@ export default function AppRouter() {
           nav
         >
           {demo.map(d => {
-            console.log(d)
             return (
               <Route
                 key={d.name}
