@@ -1,16 +1,11 @@
-##### Prevent Crossing
-###### mode = 2 step = 5 
-{{demo='pages/demos/simple/Example1.js'}}
+##### Toggle
+{{demo='pages/demos/simple/Toggle.js'}}
 
-##### Allow Crossing
-###### mode = 1 step = 5 
-{{demo='pages/demos/simple/Example2.js'}}
+##### Bars
+{{demo='pages/demos/simple/Bars1.js'}}
 
-##### Reversed - Prevent Crossing
-###### mode = 2 step = 10
-This example also demonstrates keyboard events. Click on a handle (tab) and use arrow keys.
-{{demo='pages/demos/simple/Example3.js'}}
+##### Bars Redux
+{{demo='pages/demos/simple/Bars2.js'}}
 
-##### Reversed - Pushable Mode
-###### mode = 3 step = 10 
-{{demo='pages/demos/simple/Example4.js'}}
+##### Circles
+{{demo='pages/demos/simple/Circles.js'}}

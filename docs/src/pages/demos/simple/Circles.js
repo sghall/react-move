@@ -1,6 +1,3 @@
-// @flow weak
-/* eslint react/no-multi-comp: "off", max-len: "off" */
-
 import React, { PureComponent } from 'react'
 import NodeGroup from 'react-move/NodeGroup'
 import Surface from 'docs/src/components/Surface'
@@ -12,7 +9,7 @@ import { shuffle } from 'd3-array'
 //  SVG Layout
 // **************************************************
 const view = [1000, 250] // [width, height]
-const trbl = [100, 100, 10, 100] // [top, right, bottom, left] margins
+const trbl = [100, 10, 10, 10] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
@@ -60,17 +57,11 @@ const mockData = [
 //  Example
 // **************************************************
 class Example extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    (this:any).update = this.update.bind(this)
-  }
-
   state = {
     data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length + 2) - (5 + 1))) + 5),
   }
 
-  update() {
+  update = () => {
     this.setState({
       data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length + 2) - (5 + 1))) + 5),
     })

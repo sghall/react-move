@@ -1,18 +1,15 @@
-// @flow weak
-/* eslint react/no-multi-comp: "off", max-len: "off" */
-
 import React, { PureComponent } from 'react'
 import NodeGroup from 'react-move/NodeGroup'
 import Surface from 'docs/src/components/Surface'
-import { scaleBand, scaleLinear } from 'd3-scale'
-import { shuffle, max } from 'd3-array'
-import { easeExpInOut, easePoly } from 'd3-ease'
+import { scaleBand } from 'd3-scale'
+import { shuffle } from 'd3-array'
+import { easeExpInOut } from 'd3-ease'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
 const view = [1000, 250] // [width, height]
-const trbl = [10, 100, 10, 100] // [top, right, bottom, left] margins
+const trbl = [10, 10, 10, 10] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
@@ -20,7 +17,7 @@ const dims = [ // Adjusted dimensions [width, height]
 ]
 
 // **************************************************
-//  Data
+//  Mock Data
 // **************************************************
 const mockData = [
   {
@@ -60,30 +57,21 @@ const mockData = [
 //  Example
 // **************************************************
 class Example extends PureComponent {
-  constructor(props) {
-    super(props);
-    (this:any).update = this.update.bind(this)
-  }
-
   state = {
-    data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length * 0.7) - (5 + 1))) + 5),
+    data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length + 2) - (5 + 1))) + 5),
   }
 
-  update() {
+  update = () => {
     this.setState({
-      data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length * 0.7) - (5 + 1))) + 5),
+      data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length + 2) - (5 + 1))) + 5),
     })
   }
 
   render() {
-    const xScale = scaleBand()
+    const scale = scaleBand()
       .rangeRound([0, dims[0]])
       .domain(this.state.data.map((d) => d.name))
       .padding(0.1)
-
-    const yScale = scaleLinear()
-      .rangeRound([dims[1], 0])
-      .domain([0, max(this.state.data.map((d) => d.value))])
 
     return (
       <div>
@@ -100,81 +88,56 @@ class Example extends PureComponent {
 
             start={() => ({
               opacity: 1e-6,
-              x: 0,
+              x: 1e-6,
               fill: '#00cf77',
-              width: xScale.bandwidth(),
-              height: 0,
+              width: scale.bandwidth(),
             })}
 
-            enter={(node, index) => ([ // An array!!
-              {
-                opacity: [0.6],
-                width: [xScale.bandwidth()],
-                height: [yScale(node.value)],
-                timing: { duration: 1000 },
-              },
-              {
-                x: [xScale(node.name)],
-                timing: { duration: 100 * index, ease: easePoly },
-              },
-            ])}
+            enter={(data, index) => ({
+              opacity: [0.5],
+              x: [scale(data.name)],
+              timing: { duration: 100 * index, delay: 500 },
+            })}
 
-            update={(node) => ([ // An array!!
-              {
-                opacity: [0.6],
-                fill: ['#00a7d8', 'grey'],
-                timing: { duration: 2000 },
-              },
-              {
-                x: [xScale(node.name)],
-                timing: { duration: 2000, ease: easeExpInOut },
-              },
-              {
-                width: [xScale.bandwidth()],
-                timing: { duration: 500 },
-              },
-              {
-                height: [yScale(node.value)],
-                timing: { delay: 2000, duration: 500 },
-                events: { // Events!!
-                  end() {
-                    this.setState({ fill: 'steelblue' })
-                  },
-                },
-              },
-            ])}
+            update={(data) => ({
+              opacity: [0.5],
+              x: [scale(data.name)],
+              fill: '#00a7d8',
+              width: [scale.bandwidth()],
+              timing: { duration: 500, ease: easeExpInOut },
+            })}
 
             leave={() => ({
               opacity: [1e-6],
+              x: [scale.range()[1]],
               fill: '#ff0063',
-              timing: { duration: 1000 },
+              timing: { duration: 750 },
             })}
           >
             {(nodes) => {
               return (
                 <g>
                   {nodes.map(({ key, data, state }) => {
-                    const { x, height, ...rest } = state
+                    const { x, opacity, ...rest } = state
 
                     return (
-                      <g key={key} transform={`translate(${x},0)`}>
+                      <g key={key} opacity={opacity} transform={`translate(${x},0)`}>
                         <rect
-                          y={height}
-                          height={dims[1] - height}
+                          height={dims[1]}
                           {...rest}
                         />
                         <text
                           x="0"
                           y="20"
-                          fill="grey"
+                          fill="white"
                           transform="rotate(90 5,20)"
                         >{`x: ${Math.round(x)}`}</text>
                         <text
                           x="0"
                           y="5"
-                          fill="grey"
+                          fill="white"
                           transform="rotate(90 5,20)"
-                        >{`name: ${data.name}, value: ${data.value}`}</text>
+                        >{`name: ${data.name}`}</text>
                       </g>
                     )
                   })}

@@ -104,7 +104,10 @@ Animate.propTypes = {
   /**
   * An object or function that returns an obejct to be used as the starting state.
   */
-  start: PropTypes.func.isRequired,
+  start: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object
+  ]),
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
    */
