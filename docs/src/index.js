@@ -1,35 +1,40 @@
-// @flow weak
-
+import { AppContainer } from 'react-hot-loader'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
-import App from './App'
-import store from './store'
+import App from './components/App'
 
-// debugging
-window.React = React
+const docs = (state = { dark: true }, action) => {
+  if (action.type === 'TOGGLE_THEME_SHADE') {
+    return Object.assign({}, state, { dark: !state.dark })
+  }
+  return state
+}
 
-ReactDOM.render(
-  <AppContainer errorReporter={({ error }) => { throw error }}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </AppContainer>,
-  document.getElementById('app'),
-)
+const store = createStore(docs)
+const rootEl = document.querySelector('#app')
+
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer
+      errorReporter={({ error }) => {
+        throw error
+      }}
+    >
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    rootEl,
+  )
+}
+
+render(App)
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default // eslint-disable-line global-require
-
-    ReactDOM.render(
-      <AppContainer errorReporter={({ error }) => { throw error }}>
-        <Provider store={store}>
-          <NextApp />
-        </Provider>
-      </AppContainer>,
-      document.getElementById('app'),
-    )
+  module.hot.accept('./components/App', () => {
+    const NextApp = require('./components/App').default // eslint-disable-line global-require
+    render(NextApp)
   })
 }

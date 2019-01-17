@@ -1,205 +1,223 @@
-// @flow weak
-
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
-import spacing from 'material-ui/styles/spacing'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { darkWhite, lightWhite } from 'material-ui/styles/colors'
-import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth'
-import palette from '../utils/palette'
-import AppNavDrawer from './AppNavDrawer'
-import FullWidthSection from './FullWidthSection'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Home from '@material-ui/icons/HomeRounded'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router'
+import GitHub from './Github'
 
-class AppFrame extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    location: PropTypes.object,
-    width: PropTypes.number.isRequired,
-  };
+const drawerWidth = 240
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-  };
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    color: theme.palette.text.primary,
+  },
+  navTitle: {
+    marginLeft: 10,
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  },
+  menuButton: {
+    marginRight: 20,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+  },
+})
 
-  static childContextTypes = {
-    muiTheme: PropTypes.object,
-  };
-
+class ResponsiveDrawer extends React.Component {
   state = {
-    navDrawerOpen: false,
-  };
-
-  getChildContext() {
-    return {
-      muiTheme: this.state.muiTheme,
-    }
+    mobileOpen: false,
   }
 
-  componentWillMount() {
-    this.setState({
-      muiTheme: getMuiTheme({ palette }),
-    })
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
   }
-
-  componentWillReceiveProps(nextProps, nextContext) {
-    const newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme
-    this.setState({
-      muiTheme: newMuiTheme,
-    })
-  }
-
-  getStyles() {
-    const styles = {
-      appBar: {
-        position: 'fixed',
-        zIndex: this.state.muiTheme.zIndex.appBar + 1,
-        top: 0,
-      },
-      root: {
-        paddingTop: spacing.desktopKeylineIncrement,
-        minHeight: 400,
-      },
-      content: {
-        margin: spacing.desktopGutter,
-      },
-      contentWhenMedium: {
-        margin: `${spacing.desktopGutter}px ${spacing.desktopGutter}px`,
-      },
-      footer: {
-        backgroundColor: '#ff0063',
-        textAlign: 'center',
-      },
-      a: {
-        color: 'white',
-      },
-      p: {
-        margin: '0 auto',
-        padding: 0,
-        color: lightWhite,
-        maxWidth: 356,
-      },
-      browserstack: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        margin: '25px 15px 0',
-        padding: 0,
-        color: 'white',
-        lineHeight: '25px',
-        fontSize: 12,
-      },
-      browserstackLogo: {
-        color: '#333',
-        margin: '0 3px',
-      },
-      iconButton: {
-        color: darkWhite,
-      },
-    }
-
-    if (this.props.width === MEDIUM || this.props.width === LARGE) {
-      styles.content = Object.assign(styles.content, styles.contentWhenMedium)
-    }
-
-    return styles
-  }
-
-  handleTouchTapLeftIconButton = () => {
-    this.setState({
-      navDrawerOpen: !this.state.navDrawerOpen,
-    })
-  };
-
-  handleChangeRequestNavDrawer = (open) => {
-    this.setState({
-      navDrawerOpen: open,
-    })
-  };
-
-  handleChangeList = () => {
-    this.setState({
-      navDrawerOpen: false,
-    })
-  };
 
   render() {
-    const {
-      location,
-      children,
-    } = this.props
+    const { theme, classes, children } = this.props
 
-    let {
-      navDrawerOpen,
-    } = this.state
-
-    const {
-      prepareStyles,
-    } = this.state.muiTheme
-
-    // const router = this.context.router;
-    const styles = this.getStyles()
-    const title = 'React-Move'
-
-    let docked = false
-    let showMenuIconButton = true
-
-    if (this.props.width === LARGE && title !== '') {
-      docked = true
-      navDrawerOpen = true
-      showMenuIconButton = false
-
-      styles.navDrawer = {
-        zIndex: styles.appBar.zIndex - 1,
-      }
-      styles.root.paddingLeft = 256
-      styles.footer.paddingLeft = 256
-    }
+    const drawer = (
+      <div>
+        <div className={classes.toolbar} />
+        <Divider />
+        <Typography variant="h6" className={classes.navTitle}>
+          Documentation
+        </Typography>
+        <List>
+          <Link to="/getting-started/installation">
+            <ListItem button>
+              <ListItemText primary="Installation" />
+            </ListItem>
+          </Link>
+          <Link to="/getting-started/features">
+            <ListItem button>
+              <ListItemText primary="Features" />
+            </ListItem>
+          </Link>
+          <Link to="/getting-started/tutorial">
+            <ListItem button>
+              <ListItemText primary="Tutorial" />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <Typography variant="h6" className={classes.navTitle}>
+          Slider Demos
+        </Typography>
+        <List>
+          <Link to="/slider-demos/horizontal">
+            <ListItem button>
+              <ListItemText primary="Horizontal" />
+            </ListItem>
+          </Link>
+          <Link to="/slider-demos/vertical">
+            <ListItem button>
+              <ListItemText primary="Vertical" />
+            </ListItem>
+          </Link>
+          <Link to="/slider-demos/material-ui">
+            <ListItem button>
+              <ListItemText primary="Material UI" />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <Typography variant="h6" className={classes.navTitle}>
+          Component API
+        </Typography>
+        <List>
+          <Link to="/component-api/slider">
+            <ListItem button>
+              <ListItemText primary="Slider" />
+            </ListItem>
+          </Link>
+          <Link to="/component-api/rail">
+            <ListItem button>
+              <ListItemText primary="Rail" />
+            </ListItem>
+          </Link>
+          <Link to="/component-api/tracks">
+            <ListItem button>
+              <ListItemText primary="Tracks" />
+            </ListItem>
+          </Link>
+          <Link to="/component-api/ticks">
+            <ListItem button>
+              <ListItemText primary="Ticks" />
+            </ListItem>
+          </Link>
+        </List>
+      </div>
+    )
 
     return (
-      <div>
-        <AppBar
-          onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
-          title={title}
-          zDepth={0}
-          iconElementRight={
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
             <IconButton
-              iconClassName="muidocs-icon-custom-github"
-              href="https://github.com/react-tools/react-move"
-            />
-          }
-          style={styles.appBar}
-          showMenuIconButton={showMenuIconButton}
-        />
-        <div style={prepareStyles(styles.root)}>
-          <div style={prepareStyles(styles.content)}>
-            {children}
-          </div>
-        </div>
-        <AppNavDrawer
-          style={styles.navDrawer}
-          location={location}
-          docked={docked}
-          onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
-          onChangeList={this.handleChangeList}
-          open={navDrawerOpen}
-        />
-        <FullWidthSection style={styles.footer}>
-          <IconButton
-            iconStyle={styles.iconButton}
-            href="https://github.com/react-tools/react-move"
-          />
-          <p style={prepareStyles(styles.browserstack)}>
-            {'Check out the project on Github '}
-            <a href="https://github.com/react-tools/react-move" style={prepareStyles(styles.browserstackLogo)}>
-              React-Move
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.grow}
+            >
+              React Compound Slider
+            </Typography>
+            <Link style={{ color: 'inherit' }} to="/">
+              <IconButton color="inherit">
+                <Home />
+              </IconButton>
+            </Link>
+            <a
+              style={{ color: 'inherit' }}
+              href="https://github.com/sghall/react-compound-slider"
+            >
+              <IconButton color="inherit">
+                <GitHub />
+              </IconButton>
             </a>
-          </p>
-        </FullWidthSection>
+          </Toolbar>
+        </AppBar>
+        <nav className={classes.drawer}>
+          <Hidden smUp implementation="css">
+            <Drawer
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={this.state.mobileOpen}
+              onClose={this.handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              variant="permanent"
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
     )
   }
 }
 
-export default withWidth()(AppFrame)
+ResponsiveDrawer.propTypes = {
+  theme: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles, { withTheme: true })(ResponsiveDrawer)

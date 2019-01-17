@@ -1,24 +1,19 @@
 // @flow weak
 
-const path = require('path');
-const webpack = require('webpack');
-const webpackBaseConfig = require('./webpackBaseConfig');
-const dllManifest = require('./build/dll.manifest.json');
+const path = require('path')
+const webpack = require('webpack')
 
-module.exports = Object.assign({}, webpackBaseConfig, {
+module.exports = {
   cache: true,
+  mode: 'development',
   devtool: 'inline-source-map',
   context: path.resolve(__dirname),
-  entry: {
-    main: [
-      'babel-polyfill', // polyfill for lesser browsers
-      'eventsource-polyfill', // hot reloading in IE
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://0.0.0.0:3000',
-      'webpack/hot/only-dev-server',
-      './src/index',
-    ],
-  },
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
+    './src/index',
+  ],
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
@@ -27,28 +22,51 @@ module.exports = Object.assign({}, webpackBaseConfig, {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: 'commonjs',
+                },
+              ],
+              '@babel/preset-react',
+            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
         },
-      },
-      {
-        test: /\.svg$/,
-        loader: 'file-loader',
-      },
-      {
-        test: /\.(jpg|gif|png)$/,
-        loader: 'file-loader!img-loader',
       },
       {
         test: /\.md$/,
         loader: 'raw-loader',
       },
       {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              disable: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -58,12 +76,8 @@ module.exports = Object.assign({}, webpackBaseConfig, {
       'react-move': path.resolve(__dirname, '../src'),
     },
   },
-  plugins: webpackBaseConfig.plugins.concat([
+  plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DllReferencePlugin({
-      context: '.',
-      manifest: dllManifest,
-    }),
     new webpack.NamedModulesPlugin(),
-  ]),
-});
+  ],
+}

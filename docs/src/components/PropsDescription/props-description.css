@@ -1,0 +1,30 @@
+.propTypeDescription table td, .propTypeDescription table th {
+  border-top: 1px solid lightgray;
+  border-left: 0 none;
+  border-right: 0 none;
+  display: table-cell;
+  vertical-align: top;
+}
+
+.propTypeDescription table th {
+  border-bottom: 1px solid lightgray;
+  border-top: 0 none;
+  display: table-cell;
+  font-weight: normal;
+  text-align: left;
+}
+
+.propTypeDescription table td {
+  font-size: 95%;
+  min-width: 150px;
+}
+
+.propTypeDescription table td + td {
+  font-family: "Roboto", sans-serif;
+  font-size: 90%;
+}
+
+.propTypeDescription table td + td + td + td {
+  font-family: "Roboto", sans-serif;
+  font-size: 95%;
+}
