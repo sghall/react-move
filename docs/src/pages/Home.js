@@ -5,9 +5,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Link from 'react-router/lib/Link'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import Logo from './Logo'
+import logo from './logo-react-move.png'
 
 const styles = () => ({
   root: {
@@ -21,17 +20,14 @@ function Home(props) {
 
   return (
     <Grid container alignItems="center" justify="space-around">
-      <Grid item xs={4} className={classes.root}>
-        <Logo />
-      </Grid>
-      <Grid item xs={12} className={classes.root}>
-        <Typography variant="h5">React Compound Slider</Typography>
+      <Grid item xs={10} className={classes.root}>
+        <img style={{ marginLeft: '10%' }} width="80%" src={logo} alt="react-move" />
       </Grid>
       <Grid item xs={12} className={classes.root}>
         <Button
           component={Link}
           variant="outlined"
-          to="/slider-demos/horizontal"
+          to="/demos/node-group"
         >
           Demos
         </Button>

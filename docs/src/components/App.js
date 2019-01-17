@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import { createMuiTheme } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
-import blueGrey from '@material-ui/core/colors/blueGrey'
+import pink from '@material-ui/core/colors/pink'
 import deepOrange from '@material-ui/core/colors/deepOrange'
 import { lightTheme, darkTheme, setPrismTheme } from '../utils/prism'
 import AppRouter from './AppRouter'
@@ -19,7 +19,7 @@ function AppContainer(props) {
       suppressWarning: true,
     },
     palette: {
-      primary: blueGrey,
+      primary: pink,
       secondary: grey,
       accent: deepOrange,
       type: dark ? 'dark' : 'light',

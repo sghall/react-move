@@ -87,11 +87,6 @@ class ResponsiveDrawer extends React.Component {
               <ListItemText primary="Features" />
             </ListItem>
           </Link>
-          <Link to="/getting-started/tutorial">
-            <ListItem button>
-              <ListItemText primary="Tutorial" />
-            </ListItem>
-          </Link>
         </List>
         <Divider />
         <Typography variant="h6" className={classes.navTitle}>
@@ -119,24 +114,14 @@ class ResponsiveDrawer extends React.Component {
           Component API
         </Typography>
         <List>
-          <Link to="/component-api/slider">
+          <Link to="/component-api/node-group">
             <ListItem button>
-              <ListItemText primary="Slider" />
+              <ListItemText primary="NodeGroup" />
             </ListItem>
           </Link>
-          <Link to="/component-api/rail">
+          <Link to="/component-api/animate">
             <ListItem button>
-              <ListItemText primary="Rail" />
-            </ListItem>
-          </Link>
-          <Link to="/component-api/tracks">
-            <ListItem button>
-              <ListItemText primary="Tracks" />
-            </ListItem>
-          </Link>
-          <Link to="/component-api/ticks">
-            <ListItem button>
-              <ListItemText primary="Ticks" />
+              <ListItemText primary="Animate" />
             </ListItem>
           </Link>
         </List>
@@ -162,7 +147,7 @@ class ResponsiveDrawer extends React.Component {
               noWrap
               className={classes.grow}
             >
-              React Compound Slider
+              React Move
             </Typography>
             <Link style={{ color: 'inherit' }} to="/">
               <IconButton color="inherit">
@@ -171,7 +156,7 @@ class ResponsiveDrawer extends React.Component {
             </Link>
             <a
               style={{ color: 'inherit' }}
-              href="https://github.com/sghall/react-compound-slider"
+              href="https://github.com/react-tools/react-move"
             >
               <IconButton color="inherit">
                 <GitHub />

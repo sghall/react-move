@@ -52,12 +52,6 @@ export default function AppRouter() {
             component={MarkdownDocs}
             nav
           />
-          <Route
-            title="Tutorial"
-            path="/getting-started/tutorial"
-            component={Tutorial}
-            nav
-          />
         </Route>
         <Route
           title="Component API"
@@ -66,18 +60,18 @@ export default function AppRouter() {
           nav
         >
           <Route
-            title="Slider"
-            path="/component-api/slider"
+            title="NodeGroup"
+            path="/component-api/node-group"
             code={srcContext('./NodeGroup/NodeGroup')}
-            content={requireMarkdown('./component-api/slider.md')}
+            content={requireMarkdown('./component-api/node-group.md')}
             component={ComponentDoc}
             nav
           />
           <Route
-            title="Rail"
-            path="/component-api/rail"
+            title="Animate"
+            path="/component-api/animate"
             code={srcContext('./Animate/Animate')}
-            content={requireMarkdown('./component-api/rail.md')}
+            content={requireMarkdown('./component-api/animate.md')}
             component={ComponentDoc}
             nav
           />

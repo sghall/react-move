@@ -108,7 +108,7 @@ Animate.propTypes = {
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
    */
-  enter: PropTypes.oneOf([
+  enter: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.array,
     PropTypes.object
@@ -116,7 +116,7 @@ Animate.propTypes = {
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
    */
-  update: PropTypes.oneOf([
+  update: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.array,
     PropTypes.object
@@ -124,7 +124,7 @@ Animate.propTypes = {
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
    */
-  leave: PropTypes.oneOf([
+  leave: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.array,
     PropTypes.object
