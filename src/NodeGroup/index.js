@@ -1,2 +1,1 @@
-
-export { default } from './NodeGroup';
+export { default } from './NodeGroup'

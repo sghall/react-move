@@ -1,83 +1,83 @@
 // @flow weak
 /* eslint max-len: "off" */
 
-import React, { Component } from 'react';
-import { interval } from 'd3-timer';
-import Node from '../Node';
-import mergeKeys from '../core/mergeKeys';
-import { ENTER, UPDATE, LEAVE } from '../core/types';
-import { transition, stop } from '../core/transition';
+import React, { Component } from 'react'
+import { interval } from 'd3-timer'
+import Node from '../Node'
+import mergeKeys from '../core/mergeKeys'
+import { ENTER, UPDATE, LEAVE } from '../core/types'
+import { transition, stop } from '../core/transition'
 
 class NodeGroup extends Component {
   static defaultProps = {
     enter: () => {},
     update: () => {},
     leave: () => {},
-  };
+  }
 
   state = {
     nodes: [],
   }
 
   componentDidMount() {
-    this.updateNodes(this.props);
+    this.updateNodes(this.props)
   }
 
   componentWillReceiveProps(next) {
     if (next.data !== this.props.data) {
-      this.updateNodes(next);
+      this.updateNodes(next)
     }
   }
 
   componentWillUnmount() {
-    this.unmounting = true;
+    this.unmounting = true
 
     if (this.interval) {
-      this.interval.stop();
+      this.interval.stop()
     }
 
-    this.nodeKeys.forEach((key) => {
-      stop.call(this.nodeHash[key]);
-    });
+    this.nodeKeys.forEach(key => {
+      stop.call(this.nodeHash[key])
+    })
   }
 
   // props: Props;
 
   updateNodes(props) {
-    const { data, keyAccessor, start, enter, update, leave } = props;
+    const { data, keyAccessor, start, enter, update, leave } = props
 
-    const currKeyIndex = {};
-    const currNodeKeys = this.nodeKeys;
-    const currNodeKeysLength = this.nodeKeys.length;
+    const currKeyIndex = {}
+    const currNodeKeys = this.nodeKeys
+    const currNodeKeysLength = this.nodeKeys.length
 
     for (let i = 0; i < currNodeKeysLength; i++) {
-      currKeyIndex[currNodeKeys[i]] = i;
+      currKeyIndex[currNodeKeys[i]] = i
     }
 
-    const nextKeyIndex = {};
-    const nextNodeKeys = [];
+    const nextKeyIndex = {}
+    const nextNodeKeys = []
 
     for (let i = 0; i < data.length; i++) {
-      const d = data[i];
-      const k = keyAccessor(d, i);
+      const d = data[i]
+      const k = keyAccessor(d, i)
 
-      nextKeyIndex[k] = i;
-      nextNodeKeys.push(k);
+      nextKeyIndex[k] = i
+      nextNodeKeys.push(k)
 
       if (currKeyIndex[k] === undefined) {
-        this.nodeHash[k] = new Node(k, d, ENTER);
+        this.nodeHash[k] = new Node(k, d, ENTER)
       }
     }
 
     for (let i = 0; i < currNodeKeysLength; i++) {
-      const k = currNodeKeys[i];
-      const n = this.nodeHash[k];
+      const k = currNodeKeys[i]
+      const n = this.nodeHash[k]
 
       if (nextKeyIndex[k] !== undefined) {
-        n.updateData(data[nextKeyIndex[k]]);
-        n.updateType(UPDATE);
+        n.updateData(data[nextKeyIndex[k]])
+        n.updateType(UPDATE)
       } else {
-        n.updateType(LEAVE);
+        n.updateType(LEAVE)
       }
     }
 
@@ -86,81 +86,81 @@ class NodeGroup extends Component {
       currKeyIndex,
       nextNodeKeys,
       nextKeyIndex,
-    );
+    )
 
     for (let i = 0; i < this.nodeKeys.length; i++) {
-      const k = this.nodeKeys[i];
-      const n = this.nodeHash[k];
-      const d = n.data;
+      const k = this.nodeKeys[i]
+      const n = this.nodeHash[k]
+      const d = n.data
 
       if (n.type === ENTER) {
-        n.setState(start(d, nextKeyIndex[k]));
-        transition.call(n, enter(d, nextKeyIndex[k]));
+        n.setState(start(d, nextKeyIndex[k]))
+        transition.call(n, enter(d, nextKeyIndex[k]))
       } else if (n.type === LEAVE) {
-        transition.call(n, leave(d, currKeyIndex[k]));
+        transition.call(n, leave(d, currKeyIndex[k]))
       } else {
-        transition.call(n, update(d, nextKeyIndex[k]));
+        transition.call(n, update(d, nextKeyIndex[k]))
       }
     }
 
     if (!this.interval) {
-      this.interval = interval(this.animate);
+      this.interval = interval(this.animate)
     } else {
-      this.interval.restart(this.animate);
+      this.interval.restart(this.animate)
     }
 
-    this.renderNodes();
+    this.renderNodes()
   }
 
   animate = () => {
     if (this.unmounting) {
-      return;
+      return
     }
 
-    let pending = false;
+    let pending = false
 
-    const nextNodeKeys = [];
-    const length = this.nodeKeys.length;
+    const nextNodeKeys = []
+    const length = this.nodeKeys.length
 
     for (let i = 0; i < length; i++) {
-      const k = this.nodeKeys[i];
-      const n = this.nodeHash[k];
+      const k = this.nodeKeys[i]
+      const n = this.nodeHash[k]
 
       if (n.TRANSITION_SCHEDULES) {
-        pending = true;
+        pending = true
       }
 
       if (n.type === LEAVE && !n.TRANSITION_SCHEDULES) {
-        delete this.nodeHash[k];
+        delete this.nodeHash[k]
       } else {
-        nextNodeKeys.push(k);
+        nextNodeKeys.push(k)
       }
     }
 
     if (!pending) {
-      this.interval.stop();
+      this.interval.stop()
     }
 
-    this.nodeKeys = nextNodeKeys;
-    this.renderNodes();
+    this.nodeKeys = nextNodeKeys
+    this.renderNodes()
   }
 
-  nodeHash = {};
-  nodeKeys = [];
-  interval = null;
-  unmounting = false;
+  nodeHash = {}
+  nodeKeys = []
+  interval = null
+  unmounting = false
 
   renderNodes() {
     this.setState(() => ({
-      nodes: this.nodeKeys.map((key) => {
-        return this.nodeHash[key];
+      nodes: this.nodeKeys.map(key => {
+        return this.nodeHash[key]
       }),
-    }));
+    }))
   }
 
   render() {
-    const renderedChildren = this.props.children(this.state.nodes);
-    return renderedChildren && React.Children.only(renderedChildren);
+    const renderedChildren = this.props.children(this.state.nodes)
+    return renderedChildren && React.Children.only(renderedChildren)
   }
 }
 
@@ -195,5 +195,4 @@ class NodeGroup extends Component {
 //   children: (nodes: Array<{}>) => {},
 // };
 
-
-export default NodeGroup;
+export default NodeGroup

@@ -1,91 +1,100 @@
 // @flow weak
 /* eslint max-len: "off" */
 
-import React, { Component } from 'react';
-import { interval } from 'd3-timer';
-import { transition, stop } from '../core/transition';
-
+import React, { Component } from 'react'
+import { interval } from 'd3-timer'
+import { transition, stop } from '../core/transition'
 
 class Animate extends Component {
   static defaultProps = {
     show: true,
   }
 
-  state = typeof this.props.start === 'function' ? this.props.start() : this.props.start
+  state =
+    typeof this.props.start === 'function'
+      ? this.props.start()
+      : this.props.start
 
   componentWillMount() {
     if (this.props.show === true) {
-      this.renderNull = false;
+      this.renderNull = false
     }
   }
 
   componentDidMount() {
-    const { enter, show } = this.props;
+    const { enter, show } = this.props
 
     if (enter && show === true) {
-      transition.call(this, typeof enter === 'function' ? enter() : enter);
+      transition.call(this, typeof enter === 'function' ? enter() : enter)
     }
   }
 
   componentWillReceiveProps(next) {
-    const { show, start, enter, update, leave } = next;
+    const { show, start, enter, update, leave } = next
 
-    if (this.props.show === false && this.renderNull === true && show === true) {
-      this.renderNull = false;
+    if (
+      this.props.show === false &&
+      this.renderNull === true &&
+      show === true
+    ) {
+      this.renderNull = false
 
-      this.setState(() => (typeof start === 'function' ? start() : start), () => {
-        if (enter) {
-          transition.call(this, typeof enter === 'function' ? enter() : enter);
-        }
-      });
+      this.setState(
+        () => (typeof start === 'function' ? start() : start),
+        () => {
+          if (enter) {
+            transition.call(this, typeof enter === 'function' ? enter() : enter)
+          }
+        },
+      )
     } else if (this.props.show === true && show === false) {
       if (leave) {
-        transition.call(this, typeof leave === 'function' ? leave() : leave);
-        this.interval = interval(this.checkTransitionStatus);
+        transition.call(this, typeof leave === 'function' ? leave() : leave)
+        this.interval = interval(this.checkTransitionStatus)
       } else {
-        this.renderNull = true;
-        this.setState((prevState) => prevState); // force render as null
+        this.renderNull = true
+        this.setState(prevState => prevState) // force render as null
       }
     } else if (show === true && update) {
       if (this.interval) {
-        this.interval.stop();
+        this.interval.stop()
       }
 
-      transition.call(this, typeof update === 'function' ? update() : update);
+      transition.call(this, typeof update === 'function' ? update() : update)
     }
   }
 
   componentWillUnmount() {
     if (this.interval) {
-      this.interval.stop();
+      this.interval.stop()
     }
 
-    stop.call(this);
+    stop.call(this)
   }
 
   checkTransitionStatus = () => {
     if (!this.TRANSITION_SCHEDULES) {
-      this.interval.stop();
+      this.interval.stop()
 
       if (this.props.show === false) {
-        this.renderNull = true;
-        this.setState((prevState) => prevState); // force render as null
+        this.renderNull = true
+        this.setState(prevState => prevState) // force render as null
       }
     }
   }
 
   // props: Props;
 
-  interval = null;
-  renderNull = true;
+  interval = null
+  renderNull = true
 
   render() {
     if (this.renderNull === true) {
-      return null;
+      return null
     }
 
-    const renderedChildren = this.props.children(this.state);
-    return renderedChildren && React.Children.only(renderedChildren);
+    const renderedChildren = this.props.children(this.state)
+    return renderedChildren && React.Children.only(renderedChildren)
   }
 }
 
@@ -116,4 +125,4 @@ class Animate extends Component {
 //   children: (state: {}) => {},
 // };
 
-export default Animate;
+export default Animate

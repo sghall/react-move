@@ -1,38 +1,37 @@
 // @flow weak
-/* eslint guard-for-in: "off", no-restricted-syntax: "off" */
 // Node constructor used to manage transitions internally
 // Basically a modified preact component (https://github.com/developit/preact)
 
 function extend(obj, props) {
   for (const i in props) {
-    obj[i] = props[i]; // eslint-disable-line no-param-reassign
+    obj[i] = props[i] // eslint-disable-line no-param-reassign
   }
 
-  return obj;
+  return obj
 }
 
 function Node(key, data, type) {
-  this.key = key;
-  this.data = data;
-  this.type = type;
-  this.state = {};
+  this.key = key
+  this.data = data
+  this.type = type
+  this.state = {}
 }
 
 extend(Node.prototype, {
   setState(state) {
-    const s = this.state;
-    extend(s, typeof state === 'function' ? state(s) : state);
+    const s = this.state
+    extend(s, typeof state === 'function' ? state(s) : state)
   },
   updateData(data) {
-    this.data = data;
+    this.data = data
 
-    return this;
+    return this
   },
   updateType(type) {
-    this.type = type;
+    this.type = type
 
-    return this;
+    return this
   },
-});
+})
 
-export default Node;
+export default Node

@@ -1,8 +1,8 @@
 // @flow weak
 /* eslint-env mocha */
 
-import { assert } from 'chai';
-import mergeKeys from './mergeKeys';
+import { assert } from 'chai'
+import mergeKeys from './mergeKeys'
 
 // from react-motion mergeDiff
 // core keys merging algorithm. If previous render's keys are [a, b], and the
@@ -24,18 +24,18 @@ import mergeKeys from './mergeKeys';
 
 describe('mergeKeys', () => {
   it('should return keys in the correct order', () => {
-    const currKeyIndex = {};
-    const currNodeKeys = ['a', 'b'];
+    const currKeyIndex = {}
+    const currNodeKeys = ['a', 'b']
 
     for (let i = 0; i < currNodeKeys.length; i++) {
-      currKeyIndex[currNodeKeys[i]] = i;
+      currKeyIndex[currNodeKeys[i]] = i
     }
 
-    const nextKeyIndex = {};
-    const nextNodeKeys = ['c', 'b', 'd'];
+    const nextKeyIndex = {}
+    const nextNodeKeys = ['c', 'b', 'd']
 
     for (let i = 0; i < nextNodeKeys.length; i++) {
-      nextKeyIndex[nextNodeKeys[i]] = i;
+      nextKeyIndex[nextNodeKeys[i]] = i
     }
 
     const mergedKeys = mergeKeys(
@@ -43,8 +43,8 @@ describe('mergeKeys', () => {
       currKeyIndex,
       nextNodeKeys,
       nextKeyIndex,
-    );
+    )
 
-    assert.deepEqual(mergedKeys, ['a', 'c', 'b', 'd'], 'should be true');
-  });
-});
+    assert.deepEqual(mergedKeys, ['a', 'c', 'b', 'd'], 'should be true')
+  })
+})
