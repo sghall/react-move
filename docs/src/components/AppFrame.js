@@ -90,6 +90,22 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <Divider />
         <Typography variant="h6" className={classes.navTitle}>
+          Component API
+        </Typography>
+        <List>
+          <Link to="/component-api/node-group">
+            <ListItem button>
+              <ListItemText primary="NodeGroup" />
+            </ListItem>
+          </Link>
+          <Link to="/component-api/animate">
+            <ListItem button>
+              <ListItemText primary="Animate" />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <Typography variant="h6" className={classes.navTitle}>
           Demos
         </Typography>
         <List>
@@ -116,22 +132,6 @@ class ResponsiveDrawer extends React.Component {
           <Link to="/demos/draggable-list">
             <ListItem button>
               <ListItemText primary="Draggable List" />
-            </ListItem>
-          </Link>
-        </List>
-        <Divider />
-        <Typography variant="h6" className={classes.navTitle}>
-          Component API
-        </Typography>
-        <List>
-          <Link to="/component-api/node-group">
-            <ListItem button>
-              <ListItemText primary="NodeGroup" />
-            </ListItem>
-          </Link>
-          <Link to="/component-api/animate">
-            <ListItem button>
-              <ListItemText primary="Animate" />
             </ListItem>
           </Link>
         </List>
