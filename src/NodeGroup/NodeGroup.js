@@ -2,6 +2,7 @@
 /* eslint max-len: "off" */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { interval } from 'd3-timer'
 import Node from '../Node'
 import mergeKeys from '../core/mergeKeys'
@@ -164,35 +165,37 @@ class NodeGroup extends Component {
   }
 }
 
-// type Props = {
-//   /**
-//    * An array.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
-//    */
-//   data: Array<any>,
-//   /**
-//    * Function that returns a string key given the data and its index.  Used to track which nodes are entering, updating and leaving.
-//    */
-//   keyAccessor: (data: {}, index: number) => string,
-//   /**
-//   * A function that returns the starting state.  The function is passed the data and index and must return an object.
-//   */
-//   start: (data: {}, index: number) => {} | Array<{}>,
-//   /**
-//    * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
-//    */
-//   enter?: (data: {}, index: number) => {} | Array<{}>,
-//   /**
-//    * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index.
-//    */
-//   update?: (data: {}, index: number) => {} | Array<{}>,
-//   /**
-//    * A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index.
-//    */
-//   leave?: (data: {}, index: number) => {} | Array<{}>,
-//   /**
-//    * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
-//    */
-//   children: (nodes: Array<{}>) => {},
-// };
+
+
+NodeGroup.propTypes = {
+  /**
+   * An array.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
+   */
+  data: PropTypes.array.isRequired,
+  /**
+   * Function that returns a string key given the data and its index.  Used to track which nodes are entering, updating and leaving.
+   */
+  keyAccessor: PropTypes.func.isRequired,
+  /**
+  * A function that returns the starting state.  The function is passed the data and index and must return an object.
+  */
+  start: PropTypes.func.isRequired,
+  /**
+   * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
+   */
+  enter: PropTypes.func,
+  /**
+   * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index.
+   */
+  update: PropTypes.func,
+  /**
+   * A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index.
+   */
+  leave: PropTypes.func,
+  /**
+   * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
+   */
+  children: PropTypes.func.isRequired,
+}
 
 export default NodeGroup
