@@ -1,102 +1,107 @@
 // @flow weak
 
 import React, { Component } from 'react'
-import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
-import ValueViewer from 'docs/src/pages/ValueViewer' // for examples only - displays the table above slider
-import { Handle, Track, Tick } from './components' // example render components - source below
+import { shuffle, range } from 'd3-array'
+import { easeBackOut, easeBackInOut } from 'd3-ease'
+import NodeGroup from 'react-move/NodeGroup'
 
-const sliderStyle = {
-  position: 'relative',
-  width: '100%',
+const count = 15
+
+function getData() {
+  return shuffle(range(count).map((d) => ({ value: d }))).slice(0, count / 1.5)
 }
 
-const railStyle = {
-  position: 'absolute',
-  width: '100%',
-  height: 14,
-  borderRadius: 7,
-  cursor: 'pointer',
-  backgroundColor: 'rgb(155,155,155)',
-}
-
-const domain = [100, 500]
-const defaultValues = [150, 300, 400, 450]
-
-class Example extends Component {
+export default class Example extends Component {
   state = {
-    values: defaultValues.slice(),
-    update: defaultValues.slice(),
+    width: null,
+    items: getData(),
   }
 
-  onUpdate = update => {
-    this.setState({ update })
+  componentDidMount() {
+    this.updateWidth()
+    window.addEventListener('resize', this.updateWidth)
   }
 
-  onChange = values => {
-    this.setState({ values })
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth)
   }
+
+  updateWidth = () => {
+    this.setState(() => ({ width: this.container.offsetWidth || 200 }))
+  }
+
+  container = null
 
   render() {
-    const { state: { values, update } } = this
+    const { items, width } = this.state
 
     return (
-      <div style={{ height: 120, width: '100%' }}>
-        <ValueViewer values={values} update={update} />
-        <Slider
-          mode={2}
-          step={5}
-          domain={domain}
-          rootStyle={sliderStyle}
-          onUpdate={this.onUpdate}
-          onChange={this.onChange}
-          values={values}
-        >
-          <Rail>
-            {({ getRailProps }) => (
-              <div style={railStyle} {...getRailProps()} />
-            )}
-          </Rail>
-          <Handles>
-            {({ handles, getHandleProps }) => (
-              <div className="slider-handles">
-                {handles.map(handle => (
-                  <Handle
-                    key={handle.id}
-                    handle={handle}
-                    domain={domain}
-                    getHandleProps={getHandleProps}
-                  />
+      <div style={{ width: '100%' }} ref={(d) => { this.container = d }}>
+        <button onClick={() => this.setState({ items: getData() })}>
+          Update
+        </button>
+        {width === null ? null : (
+          <NodeGroup
+            data={items}
+            keyAccessor={(d) => d.value}
+
+            start={() => ({
+              x: 0,
+              opacity: 0,
+              color: 'black',
+            })}
+
+            enter={() => ([
+              {
+                x: [width * 0.4],
+                color: ['#00cf77'],
+                timing: { delay: 500, duration: 500, ease: easeBackOut },
+              },
+              {
+                opacity: [1],
+                timing: { duration: 500 },
+              },
+            ])}
+
+            update={() => ({
+              x: [width * 0.4], // handle interrupt, if already at value, nothing happens
+              opacity: 1, // make sure opacity set to 1 on interrupt
+              color: '#00a7d8',
+              timing: { duration: 500, ease: easeBackOut },
+            })}
+
+            leave={() => ([
+              {
+                x: [width * 0.8],
+                color: ['#ff0063', 'black'],
+                timing: { duration: 750, ease: easeBackInOut },
+              },
+              {
+                opacity: [0],
+                timing: { delay: 750, duration: 500 },
+              },
+            ])}
+          >
+            {(nodes) => (
+              <div style={{ margin: 10, height: count * 20, position: 'relative' }}>
+                {nodes.map(({ key, state: { x, opacity, color } }) => (
+                  <div
+                    key={key}
+                    style={{
+                      position: 'absolute',
+                      transform: `translate(${x}px, ${key * 20}px)`,
+                      opacity,
+                      color,
+                    }}
+                  >
+                    {key + 1} - {Math.round(x)}
+                  </div>
                 ))}
               </div>
             )}
-          </Handles>
-          <Tracks left={false} right={false}>
-            {({ tracks, getTrackProps }) => (
-              <div className="slider-tracks">
-                {tracks.map(({ id, source, target }) => (
-                  <Track
-                    key={id}
-                    source={source}
-                    target={target}
-                    getTrackProps={getTrackProps}
-                  />
-                ))}
-              </div>
-            )}
-          </Tracks>
-          <Ticks count={5}>
-            {({ ticks }) => (
-              <div className="slider-ticks">
-                {ticks.map(tick => (
-                  <Tick key={tick.id} tick={tick} count={ticks.length} />
-                ))}
-              </div>
-            )}
-          </Ticks>
-        </Slider>
+          </NodeGroup>
+        )}
       </div>
     )
   }
 }
-
-export default Example
