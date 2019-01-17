@@ -48,9 +48,9 @@ class Line extends Component {
 
   render() {
     return (
-      <g>
-        <line {...this.state.line} />
-      </g>
+      <div>
+        <div {...this.state.line} />
+      </div>
     );
   }
 }

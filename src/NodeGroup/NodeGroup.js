@@ -8,37 +8,6 @@ import mergeKeys from '../core/mergeKeys';
 import { ENTER, UPDATE, LEAVE } from '../core/types';
 import { transition, stop } from '../core/transition';
 
-type Props = {
-  /**
-   * An array.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
-   */
-  data: Array<any>,
-  /**
-   * Function that returns a string key given the data and its index.  Used to track which nodes are entering, updating and leaving.
-   */
-  keyAccessor: (data: {}, index: number) => string,
-  /**
-  * A function that returns the starting state.  The function is passed the data and index and must return an object.
-  */
-  start: (data: {}, index: number) => {} | Array<{}>,
-  /**
-   * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
-   */
-  enter?: (data: {}, index: number) => {} | Array<{}>,
-  /**
-   * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index.
-   */
-  update?: (data: {}, index: number) => {} | Array<{}>,
-  /**
-   * A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index.
-   */
-  leave?: (data: {}, index: number) => {} | Array<{}>,
-  /**
-   * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
-   */
-  children: (nodes: Array<{}>) => {},
-};
-
 class NodeGroup extends Component {
   static defaultProps = {
     enter: () => {},
@@ -72,7 +41,7 @@ class NodeGroup extends Component {
     });
   }
 
-  props: Props;
+  // props: Props;
 
   updateNodes(props) {
     const { data, keyAccessor, start, enter, update, leave } = props;
@@ -194,5 +163,37 @@ class NodeGroup extends Component {
     return renderedChildren && React.Children.only(renderedChildren);
   }
 }
+
+// type Props = {
+//   /**
+//    * An array.  The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.
+//    */
+//   data: Array<any>,
+//   /**
+//    * Function that returns a string key given the data and its index.  Used to track which nodes are entering, updating and leaving.
+//    */
+//   keyAccessor: (data: {}, index: number) => string,
+//   /**
+//   * A function that returns the starting state.  The function is passed the data and index and must return an object.
+//   */
+//   start: (data: {}, index: number) => {} | Array<{}>,
+//   /**
+//    * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
+//    */
+//   enter?: (data: {}, index: number) => {} | Array<{}>,
+//   /**
+//    * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index.
+//    */
+//   update?: (data: {}, index: number) => {} | Array<{}>,
+//   /**
+//    * A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index.
+//    */
+//   leave?: (data: {}, index: number) => {} | Array<{}>,
+//   /**
+//    * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
+//    */
+//   children: (nodes: Array<{}>) => {},
+// };
+
 
 export default NodeGroup;

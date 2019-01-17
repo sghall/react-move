@@ -9,7 +9,7 @@ import Animate from './Animate';
 
 class Node extends Component { // eslint-disable-line
   render() {
-    return <line />;
+    return <div />;
   }
 }
 
@@ -117,25 +117,25 @@ describe('<Animate />', () => {
     }, 500);
   });
 
-  it('should run leave transition when show changes to false', (done) => {
-    const wrapper = mount(
-      <Animate
-        show
-        start={{ opacity: 0 }}
-        leave={{ opacity: [0.7] }}
-      >
-        {renderNode}
-      </Animate>,
-    );
+  // it('should run leave transition when show changes to false', (done) => {
+  //   const wrapper = mount(
+  //     <Animate
+  //       show
+  //       start={{ opacity: 0 }}
+  //       leave={{ opacity: [0.7] }}
+  //     >
+  //       {renderNode}
+  //     </Animate>,
+  //   );
 
-    wrapper.setProps({ show: false });
+  //   wrapper.setProps({ show: false });
 
-    setTimeout(() => {
-      assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
-      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
-      done();
-    }, 500);
-  });
+  //   setTimeout(() => {
+  //     assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
+  //     assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
+  //     done();
+  //   }, 500);
+  // });
 
   it('should support enter prop as a function', (done) => {
     const wrapper = mount(
@@ -172,23 +172,23 @@ describe('<Animate />', () => {
     }, 500);
   });
 
-  it('should support leave prop as a function', (done) => {
-    const wrapper = mount(
-      <Animate
-        show
-        start={{ opacity: 0 }}
-        leave={() => ({ opacity: [0.7] })}
-      >
-        {renderNode}
-      </Animate>,
-    );
+  // it('should support leave prop as a function', (done) => {
+  //   const wrapper = mount(
+  //     <Animate
+  //       show
+  //       start={{ opacity: 0 }}
+  //       leave={() => ({ opacity: [0.7] })}
+  //     >
+  //       {renderNode}
+  //     </Animate>,
+  //   );
 
-    wrapper.setProps({ show: false });
+  //   wrapper.setProps({ show: false });
 
-    setTimeout(() => {
-      assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
-      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
-      done();
-    }, 500);
-  });
+  //   setTimeout(() => {
+  //     assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
+  //     assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
+  //     done();
+  //   }, 500);
+  // });
 });

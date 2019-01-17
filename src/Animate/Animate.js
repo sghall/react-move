@@ -5,32 +5,6 @@ import React, { Component } from 'react';
 import { interval } from 'd3-timer';
 import { transition, stop } from '../core/transition';
 
-type Props = {
-  /**
-   * Boolean value that determines if the child should be rendered or not.
-   */
-  show: bool,
-  /**
-  * An object or function that returns an obejct to be used as the starting state.
-  */
-  start: {} | () => {},
-  /**
-   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
-   */
-  enter?: {} | Array<{}> | () => {},
-  /**
-   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
-   */
-  update?: {} | Array<{}> | () => {},
-  /**
-   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
-   */
-  leave?: {} | Array<{}> | () => {},
-  /**
-   * A function that renders the node.  The function is passed the data and state.
-   */
-  children: (state: {}) => {},
-};
 
 class Animate extends Component {
   static defaultProps = {
@@ -100,7 +74,7 @@ class Animate extends Component {
     }
   }
 
-  props: Props;
+  // props: Props;
 
   interval = null;
   renderNull = true;
@@ -114,5 +88,32 @@ class Animate extends Component {
     return renderedChildren && React.Children.only(renderedChildren);
   }
 }
+
+// type Props = {
+//   /**
+//    * Boolean value that determines if the child should be rendered or not.
+//    */
+//   show: bool,
+//   /**
+//   * An object or function that returns an obejct to be used as the starting state.
+//   */
+//   start: {} | () => {},
+//   /**
+//    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
+//    */
+//   enter?: {} | Array<{}> | () => {},
+//   /**
+//    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
+//    */
+//   update?: {} | Array<{}> | () => {},
+//   /**
+//    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
+//    */
+//   leave?: {} | Array<{}> | () => {},
+//   /**
+//    * A function that renders the node.  The function is passed the data and state.
+//    */
+//   children: (state: {}) => {},
+// };
 
 export default Animate;

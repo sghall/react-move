@@ -83,10 +83,10 @@ class Test extends Component {
 
   render() {
     return (
-      <g>
-        <line {...this.state.line} />
-        <rect {...this.state.rect} />
-      </g>
+      <div>
+        <div {...this.state.line} />
+        <div {...this.state.rect} />
+      </div>
     );
   }
 }

@@ -3,10 +3,10 @@
 /* based on react-motion's mergeDiff (https://github.com/chenglou/react-motion) */
 
 function mergeKeys(
-  currNodeKeys:Array<string>,
-  currKeyIndex:{},
-  nextNodeKeys:Array<string>,
-  nextKeyIndex:{},
+  currNodeKeys,
+  currKeyIndex,
+  nextNodeKeys,
+  nextKeyIndex,
 ) {
   const allKeys = [];
 
