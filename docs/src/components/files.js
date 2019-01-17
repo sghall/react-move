@@ -15,15 +15,15 @@ export const requireMarkdown = require.context(
 export const srcContext = require.context('!raw-loader!../../../src', true)
 
 // ********************************************************
-// SLIDER DEMO FILES
+// DEMO FILES
 // ********************************************************
-export const requireSliderDemo = require.context(
-  '../pages/slider-demos',
+export const requireDemo = require.context(
+  '../pages/demos',
   true,
   /\.md$/,
 )
 
-export const sliderDemo = requireSliderDemo.keys().map(n => ({
+export const demo = requireDemo.keys().map(n => ({
   path: n,
   name: n.replace(/.*\//, '').replace('.md', ''),
 }))

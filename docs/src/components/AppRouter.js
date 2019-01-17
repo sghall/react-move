@@ -16,11 +16,10 @@ import AppContent from 'docs/src/components/AppContent'
 import MarkdownDocs from 'docs/src/components/MarkdownDocs'
 import ComponentDoc from 'docs/src/components/ComponentDoc'
 import Home from 'docs/src/pages/Home'
-import Tutorial from 'docs/src/pages/getting-started/Tutorial'
 import {
   requireMarkdown,
-  requireSliderDemo,
-  sliderDemo,
+  requireDemo,
+  demo,
   srcContext,
 } from 'docs/src/components/files'
 
@@ -30,7 +29,7 @@ export default function AppRouter() {
       history={useRouterHistory(createHashHistory)()}
       render={applyRouterMiddleware(useScroll())}
     >
-      <Route title="React Compound Slider" path="/" component={AppFrame}>
+      <Route title="React Move" path="/" component={AppFrame}>
         <IndexRoute dockDrawer component={Home} title={null} />
         <Route
           title="Getting Started"
@@ -77,20 +76,21 @@ export default function AppRouter() {
           />
         </Route>
         <Route
-          title="Slider Demos"
-          path="/slider-demos"
+          title="Demos"
+          path="/demos"
           component={AppContent}
           nav
         >
-          {sliderDemo.map(demo => {
+          {demo.map(d => {
+            console.log(d)
             return (
               <Route
-                key={demo.name}
-                title={titleize(demo.name)}
-                path={`/slider-demos/${demo.name}`}
-                content={requireSliderDemo(demo.path)}
+                key={d.name}
+                title={titleize(d.name)}
+                path={`/demos/${d.name}`}
+                content={requireDemo(d.path)}
                 component={MarkdownDocs}
-                demo={demo}
+                demo={d}
                 nav
               />
             )

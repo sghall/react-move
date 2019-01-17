@@ -90,22 +90,32 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <Divider />
         <Typography variant="h6" className={classes.navTitle}>
-          Slider Demos
+          Demos
         </Typography>
         <List>
-          <Link to="/slider-demos/horizontal">
+          <Link to="/demos/node-group">
             <ListItem button>
-              <ListItemText primary="Horizontal" />
+              <ListItemText primary="NodeGroup" />
             </ListItem>
           </Link>
-          <Link to="/slider-demos/vertical">
+          <Link to="/demos/animate">
             <ListItem button>
-              <ListItemText primary="Vertical" />
+              <ListItemText primary="Animate" />
             </ListItem>
           </Link>
-          <Link to="/slider-demos/material-ui">
+          <Link to="/demos/charts">
             <ListItem button>
-              <ListItemText primary="Material UI" />
+              <ListItemText primary="SVG Charts" />
+            </ListItem>
+          </Link>
+          <Link to="/demos/simple">
+            <ListItem button>
+              <ListItemText primary="Simple" />
+            </ListItem>
+          </Link>
+          <Link to="/demos/draggable-list">
+            <ListItem button>
+              <ListItemText primary="Draggable List" />
             </ListItem>
           </Link>
         </List>
