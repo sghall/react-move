@@ -1,97 +1,75 @@
-// @flow weak
+import React, { PureComponent } from 'react'
+import { feature } from 'topojson'
+import { easeQuadOut } from 'd3-ease'
+import Animate from 'react-move/Animate'
+import { interpolate } from 'flubber'
+import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
+import statesJSON from './states.json'
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Slider from 'react-compound-slider'
-import { withStyles } from '@material-ui/core/styles'
-import ValueViewer from 'docs/src/pages/ValueViewer' // for examples only - displays the table above slider
-import { Rail, Handle, Track } from './components' // example render components - source below
+// **************************************************
+//  SVG Layout
+// **************************************************
+const view = [1000, 450] // [width, height]
+const trbl = [10, 10, 10, 10] // [top, right, bottom, left] margins
 
-const style = () => ({
-  root: {
-    height: 120,
-    width: '100%',
-  },
-  slider: {
-    position: 'relative',
-    width: '100%',
-  },
-})
-
-const domain = [100, 500]
-const defaultValues = [150]
-
-class Example extends Component {
+class Example extends PureComponent {
   state = {
-    values: defaultValues.slice(),
-    update: defaultValues.slice(),
+    states: feature(statesJSON, statesJSON.objects.states)
+      .features.map((d) => {
+        return d.geometry.coordinates[0]
+      }),
   }
 
-  onUpdate = update => {
-    this.setState({ update })
-  }
-
-  onChange = values => {
-    this.setState({ values })
+  update = () => { // take the first one, put it at the end
+    this.setState(({ states }) => ({
+      states: [
+        ...states.slice(1),
+        states[0],
+      ],
+    }))
   }
 
   render() {
-    const {
-      props: { classes },
-      state: { values, update },
-    } = this
+    const { update, state: { states } } = this
+    const interpolator = interpolate(states[0], states[1])
 
     return (
-      <div className={classes.root}>
-        <ValueViewer values={values} update={update} />
-        <Slider
-          mode={2}
-          step={5}
-          domain={domain}
-          className={classes.slider}
-          onUpdate={this.onUpdate}
-          onChange={this.onChange}
-          values={values}
-        >
-          <Slider.Rail>
-            {({ getRailProps }) => <Rail getRailProps={getRailProps} />}
-          </Slider.Rail>
-          <Slider.Handles>
-            {({ handles, getHandleProps }) => (
-              <div>
-                {handles.map(handle => (
-                  <Handle
-                    key={handle.id}
-                    handle={handle}
-                    domain={domain}
-                    getHandleProps={getHandleProps}
+      <div>
+        <button onClick={update}>Update</button>
+        <Surface view={view} trbl={trbl}>
+          <Animate
+            start={{
+              opacity: 0,
+              d: interpolator(1),
+            }}
+
+            enter={[
+              {
+                opacity: [0.7],
+                timing: { duration: 1000 },
+              },
+            ]}
+
+            update={{
+              d: interpolator,
+              timing: { duration: 1000, ease: easeQuadOut },
+            }}
+          >
+            {(state) => {
+              return (
+                <g transform="translate(100, 0) scale(0.8)">
+                  <path
+                    fill="#00a7d8"
+                    {...state}
                   />
-                ))}
-              </div>
-            )}
-          </Slider.Handles>
-          <Slider.Tracks right={false}>
-            {({ tracks, getTrackProps }) => (
-              <div>
-                {tracks.map(({ id, source, target }) => (
-                  <Track
-                    key={id}
-                    source={source}
-                    target={target}
-                    getTrackProps={getTrackProps}
-                  />
-                ))}
-              </div>
-            )}
-          </Slider.Tracks>
-        </Slider>
+                </g>
+              )
+            }}
+          </Animate>
+        </Surface>
       </div>
     )
   }
 }
 
-Example.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
-
-export default withStyles(style)(Example)
+export default Example

@@ -24,6 +24,7 @@
     "d3-scale": "^2.1.2",
     "d3-shape": "^1.2.2",
     "file-loader": "^3.0.1",
+    "flubber": "^0.4.2",
     "history": "^3.3.0",
     "image-webpack-loader": "^4.6.0",
     "lodash": "^4.17.11",
@@ -43,6 +44,7 @@
     "redux": "^4.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "topojson": "^3.0.2",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
