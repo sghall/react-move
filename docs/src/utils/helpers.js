@@ -6,75 +6,75 @@ export function kebabCase(string) {
     .split('')
     .map((a, i) => {
       if (a.toUpperCase() === a && a !== '-') {
-        return (i !== 0 ? '-' : '') + a.toLowerCase();
+        return (i !== 0 ? '-' : '') + a.toLowerCase()
       }
-      return a;
+      return a
     })
     .join('')
-    .toLowerCase();
+    .toLowerCase()
 }
 
 export function titleize(string) {
   if (string.length <= 3) {
-    return string.toUpperCase();
+    return string.toUpperCase()
   }
 
   return string.split('-')
     .map((word) => word.split(''))
     .map((letters) => {
-      const first = letters.shift();
-      return [first.toUpperCase(), ...letters].join('');
+      const first = letters.shift()
+      return [first.toUpperCase(), ...letters].join('')
     })
-    .join(' ');
+    .join(' ')
 }
 
 export const truncate = (string, maxLength = 30) => {
   if (string.length <= maxLength) {
-    return string;
+    return string
   }
 
-  const diff = (string.length + 3) - maxLength;
+  const diff = (string.length + 3) - maxLength
 
-  return `${string.slice(0, -diff)}...`;
-};
+  return `${string.slice(0, -diff)}...`
+}
 
 export function getSortByKey(key, ascending) {
   return function sort(a, b) {
-    let result = 0;
+    let result = 0
 
     if (a[key] > b[key]) {
-      result = ascending ? 1 : -1;
+      result = ascending ? 1 : -1
     }
 
     if (a[key] < b[key]) {
-      result = ascending ? -1 : 1;
+      result = ascending ? -1 : 1
     }
 
-    return result;
-  };
+    return result
+  }
 }
 
 export function genRandomSeries(m:number) {
   function bump(a) {
-    const x = 1 / (0.1 + Math.random());
-    const y = (2 * Math.random()) - 0.5;
-    const z = 10 / (0.1 + Math.random());
+    const x = 1 / (0.1 + Math.random())
+    const y = (2 * Math.random()) - 0.5
+    const z = 10 / (0.1 + Math.random())
 
     for (let i = 0; i < m; i++) {
-      const w = ((i / m) - y) * z;
-      a[i] += x * Math.exp(-w * w); // eslint-disable-line no-param-reassign
+      const w = ((i / m) - y) * z
+      a[i] += x * Math.exp(-w * w) // eslint-disable-line no-param-reassign
     }
   }
 
-  const a = [];
+  const a = []
 
   for (let i = 0; i < m; ++i) {
-    a[i] = 0;
+    a[i] = 0
   }
 
   for (let i = 0; i < 5; ++i) {
-    bump(a);
+    bump(a)
   }
 
-  return a.map((d) => +Math.max(0, d).toFixed(3));
+  return a.map((d) => +Math.max(0, d).toFixed(3))
 }

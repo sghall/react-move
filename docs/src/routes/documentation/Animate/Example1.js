@@ -1,25 +1,25 @@
 // @flow weak
 // example from https://github.com/veltman/flubber
 
-import React, { PureComponent } from 'react';
-import { feature } from 'topojson';
-import { easeQuadOut } from 'd3-ease';
-import Animate from 'react-move/Animate';
-import { interpolate } from 'flubber';
-import Surface from 'docs/src/components/Surface'; // this is just a responsive SVG
-import statesJSON from './states.json';
+import React, { PureComponent } from 'react'
+import { feature } from 'topojson'
+import { easeQuadOut } from 'd3-ease'
+import Animate from 'react-move/Animate'
+import { interpolate } from 'flubber'
+import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
+import statesJSON from './states.json'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 450]; // [width, height]
-const trbl = [10, 10, 10, 10]; // [top, right, bottom, left] margins
+const view = [1000, 450] // [width, height]
+const trbl = [10, 10, 10, 10] // [top, right, bottom, left] margins
 
 class Example extends PureComponent {
   state = {
     states: feature(statesJSON, statesJSON.objects.states)
       .features.map((d) => {
-        return d.geometry.coordinates[0];
+        return d.geometry.coordinates[0]
       }),
   }
 
@@ -29,12 +29,12 @@ class Example extends PureComponent {
         ...states.slice(1),
         states[0],
       ],
-    }));
+    }))
   }
 
   render() {
-    const { update, state: { states } } = this;
-    const interpolator = interpolate(states[0], states[1]);
+    const { update, state: { states } } = this
+    const interpolator = interpolate(states[0], states[1])
 
     return (
       <div>
@@ -66,13 +66,13 @@ class Example extends PureComponent {
                     {...state}
                   />
                 </g>
-              );
+              )
             }}
           </Animate>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

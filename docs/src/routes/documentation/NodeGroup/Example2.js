@@ -1,14 +1,14 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import { shuffle, range } from 'd3-array';
-import { easeBackOut, easeBackInOut } from 'd3-ease';
-import NodeGroup from 'react-move/NodeGroup';
+import React, { Component } from 'react'
+import { shuffle, range } from 'd3-array'
+import { easeBackOut, easeBackInOut } from 'd3-ease'
+import NodeGroup from 'react-move/NodeGroup'
 
-const count = 15;
+const count = 15
 
 function getData() {
-  return shuffle(range(count).map((d) => ({ value: d }))).slice(0, count / 1.5);
+  return shuffle(range(count).map((d) => ({ value: d }))).slice(0, count / 1.5)
 }
 
 export default class Example extends Component {
@@ -18,25 +18,25 @@ export default class Example extends Component {
   }
 
   componentDidMount() {
-    this.updateWidth();
-    window.addEventListener('resize', this.updateWidth);
+    this.updateWidth()
+    window.addEventListener('resize', this.updateWidth)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWidth);
+    window.removeEventListener('resize', this.updateWidth)
   }
 
   updateWidth = () => {
-    this.setState(() => ({ width: this.container.offsetWidth || 200 }));
+    this.setState(() => ({ width: this.container.offsetWidth || 200 }))
   }
 
   container = null
 
   render() {
-    const { items, width } = this.state;
+    const { items, width } = this.state
 
     return (
-      <div ref={(d) => { this.container = d; }}>
+      <div ref={(d) => { this.container = d }}>
         <button onClick={() => this.setState({ items: getData() })}>
           Update
         </button>
@@ -102,6 +102,6 @@ export default class Example extends Component {
           </NodeGroup>
         )}
       </div>
-    );
+    )
   }
 }

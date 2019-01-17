@@ -1,17 +1,17 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import marked from 'marked';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import marked from 'marked'
 
-require('./github-markdown.css');
+require('./github-markdown.css')
 
 const styles = {
   root: {
     marginTop: 20,
     marginBottom: 20,
   },
-};
+}
 
 class MarkdownElement extends Component {
   static propTypes = {
@@ -35,11 +35,11 @@ class MarkdownElement extends Component {
       highlight: (code, lang) => {
         return require('highlight.js').highlight(lang, code).value; // eslint-disable-line
       },
-    });
+    })
   }
 
   render() {
-    const { style, text } = this.props;
+    const { style, text } = this.props
 
     return (
       <div
@@ -47,8 +47,8 @@ class MarkdownElement extends Component {
         className="markdown-body"
         dangerouslySetInnerHTML={{ __html: marked(text) }} // eslint-disable-line react/no-danger
       />
-    );
+    )
   }
 }
 
-export default MarkdownElement;
+export default MarkdownElement

@@ -1,16 +1,16 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import spacing from 'material-ui/styles/spacing';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { darkWhite, lightWhite } from 'material-ui/styles/colors';
-import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth';
-import palette from '../utils/palette';
-import AppNavDrawer from './AppNavDrawer';
-import FullWidthSection from './FullWidthSection';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
+import spacing from 'material-ui/styles/spacing'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { darkWhite, lightWhite } from 'material-ui/styles/colors'
+import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth'
+import palette from '../utils/palette'
+import AppNavDrawer from './AppNavDrawer'
+import FullWidthSection from './FullWidthSection'
 
 class AppFrame extends Component {
   static propTypes = {
@@ -34,20 +34,20 @@ class AppFrame extends Component {
   getChildContext() {
     return {
       muiTheme: this.state.muiTheme,
-    };
+    }
   }
 
   componentWillMount() {
     this.setState({
       muiTheme: getMuiTheme({ palette }),
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    const newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+    const newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme
     this.setState({
       muiTheme: newMuiTheme,
-    });
+    })
   }
 
   getStyles() {
@@ -97,64 +97,64 @@ class AppFrame extends Component {
       iconButton: {
         color: darkWhite,
       },
-    };
-
-    if (this.props.width === MEDIUM || this.props.width === LARGE) {
-      styles.content = Object.assign(styles.content, styles.contentWhenMedium);
     }
 
-    return styles;
+    if (this.props.width === MEDIUM || this.props.width === LARGE) {
+      styles.content = Object.assign(styles.content, styles.contentWhenMedium)
+    }
+
+    return styles
   }
 
   handleTouchTapLeftIconButton = () => {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen,
-    });
+    })
   };
 
   handleChangeRequestNavDrawer = (open) => {
     this.setState({
       navDrawerOpen: open,
-    });
+    })
   };
 
   handleChangeList = () => {
     this.setState({
       navDrawerOpen: false,
-    });
+    })
   };
 
   render() {
     const {
       location,
       children,
-    } = this.props;
+    } = this.props
 
     let {
       navDrawerOpen,
-    } = this.state;
+    } = this.state
 
     const {
       prepareStyles,
-    } = this.state.muiTheme;
+    } = this.state.muiTheme
 
     // const router = this.context.router;
-    const styles = this.getStyles();
-    const title = 'React-Move';
+    const styles = this.getStyles()
+    const title = 'React-Move'
 
-    let docked = false;
-    let showMenuIconButton = true;
+    let docked = false
+    let showMenuIconButton = true
 
     if (this.props.width === LARGE && title !== '') {
-      docked = true;
-      navDrawerOpen = true;
-      showMenuIconButton = false;
+      docked = true
+      navDrawerOpen = true
+      showMenuIconButton = false
 
       styles.navDrawer = {
         zIndex: styles.appBar.zIndex - 1,
-      };
-      styles.root.paddingLeft = 256;
-      styles.footer.paddingLeft = 256;
+      }
+      styles.root.paddingLeft = 256
+      styles.footer.paddingLeft = 256
     }
 
     return (
@@ -198,8 +198,8 @@ class AppFrame extends Component {
           </p>
         </FullWidthSection>
       </div>
-    );
+    )
   }
 }
 
-export default withWidth()(AppFrame);
+export default withWidth()(AppFrame)

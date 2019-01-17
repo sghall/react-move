@@ -1,14 +1,14 @@
 // @flow weak
 
-import React, { PureComponent } from 'react';
-import { range } from 'd3-array';
-import { easeExpInOut } from 'd3-ease';
-import Animate from 'react-move/Animate';
+import React, { PureComponent } from 'react'
+import { range } from 'd3-array'
+import { easeExpInOut } from 'd3-ease'
+import Animate from 'react-move/Animate'
 
 function getRandomColor() {
   return range(6).reduce((m) => {
-    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`;
-  }, '#');
+    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`
+  }, '#')
 }
 
 class Example extends PureComponent {
@@ -18,15 +18,15 @@ class Example extends PureComponent {
   }
 
   updateShow = () => {
-    this.setState((prev) => ({ show: !prev.show }));
+    this.setState((prev) => ({ show: !prev.show }))
   }
 
   updateColor = () => {
-    this.setState(() => ({ show: true, color: getRandomColor() }));
+    this.setState(() => ({ show: true, color: getRandomColor() }))
   }
 
   render() {
-    const { updateShow, updateColor, state: { show, color } } = this;
+    const { updateShow, updateColor, state: { show, color } } = this
 
     return (
       <div>
@@ -81,12 +81,12 @@ class Example extends PureComponent {
               >
                 {opacity.toFixed(3)}
               </div>
-            );
+            )
           }}
         </Animate>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

@@ -1,14 +1,14 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
-import withWidth from 'material-ui/utils/withWidth';
-import spacing from 'material-ui/styles/spacing';
-import typography from 'material-ui/styles/typography';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import logo from 'docs/src/css/logo-react-move.png';
-import FullWidthSection from '../components/FullWidthSection';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import RaisedButton from 'material-ui/RaisedButton'
+import withWidth from 'material-ui/utils/withWidth'
+import spacing from 'material-ui/styles/spacing'
+import typography from 'material-ui/styles/typography'
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
+import logo from 'docs/src/css/logo-react-move.png'
+import FullWidthSection from '../components/FullWidthSection'
 
 class HomePage extends Component {
   static propTypes = {
@@ -57,15 +57,15 @@ class HomePage extends Component {
         paddingTop: 16,
         marginBottom: 12,
       },
-    };
+    }
 
-    styles.h2 = Object.assign({}, styles.h1, styles.h2);
+    styles.h2 = Object.assign({}, styles.h1, styles.h2)
 
     return (
       <FullWidthSection style={styles.root}>
         <img style={{ marginLeft: '10%' }} width="80%" src={logo} alt="react-move" />
       </FullWidthSection>
-    );
+    )
   }
 
   homeContribute() {
@@ -82,7 +82,7 @@ class HomePage extends Component {
       button: {
         marginTop: 32,
       },
-    };
+    }
 
     return (
       <FullWidthSection useContent style={styles.root}>
@@ -98,25 +98,25 @@ class HomePage extends Component {
           style={styles.button}
         />
       </FullWidthSection>
-    );
+    )
   }
 
   handleTouchTapDemo = () => {
-    this.context.router.push('/documentation/node-group');
+    this.context.router.push('/documentation/node-group')
   };
 
   render() {
     const style = {
       paddingTop: spacing.desktopKeylineIncrement,
-    };
+    }
 
     return (
       <div style={style}>
         {this.homePageHero()}
         {this.homeContribute()}
       </div>
-    );
+    )
   }
 }
 
-export default withWidth()(HomePage);
+export default withWidth()(HomePage)

@@ -1,11 +1,11 @@
 // @flow weak
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function Surface(props) {
-  const { className, view, trbl, style, children, ...other } = props;
-  const paddingBottom = `${Math.round((view[1] / view[0]) * 100)}%`;
+  const { className, view, trbl, style, children, ...other } = props
+  const paddingBottom = `${Math.round((view[1] / view[0]) * 100)}%`
 
   // uses bottom-padding hack. See https://css-tricks.com/scale-svg/
   return (
@@ -23,7 +23,7 @@ export default function Surface(props) {
         </g>
       </svg>
     </div>
-  );
+  )
 }
 
 Surface.propTypes = {
@@ -47,9 +47,9 @@ Surface.propTypes = {
    * Width and height attributes of the SVG view box.
    */
   view: PropTypes.array,
-};
+}
 
 Surface.defaultProps = {
   view: [1000, 350],
   trbl: [10, 10, 10, 10],
-};
+}

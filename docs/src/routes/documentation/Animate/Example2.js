@@ -1,15 +1,15 @@
 // @flow weak
 // example adpated from https://react-move.js.org/#/story/animate
 
-import React, { PureComponent } from 'react';
-import { range } from 'd3-array';
-import { easeExpOut } from 'd3-ease';
-import Animate from 'react-move/Animate';
+import React, { PureComponent } from 'react'
+import { range } from 'd3-array'
+import { easeExpOut } from 'd3-ease'
+import Animate from 'react-move/Animate'
 
 function getRandomColor() {
   return range(6).reduce((m) => {
-    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`;
-  }, '#');
+    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`
+  }, '#')
 }
 
 function getItems() {
@@ -18,7 +18,7 @@ function getItems() {
     scale: Math.random() * 1,
     color: getRandomColor(),
     rotate: Math.random() > 0.5 ? 360 : 0,
-  }));
+  }))
 }
 
 class Example extends PureComponent {
@@ -29,11 +29,11 @@ class Example extends PureComponent {
   update = () => {
     this.setState({
       items: getItems(),
-    });
+    })
   }
 
   render() {
-    const { items } = this.state;
+    const { items } = this.state
 
     return (
       <div>
@@ -78,14 +78,14 @@ class Example extends PureComponent {
                   >
                     {Math.round(scale * 100)}
                   </div>
-                );
+                )
               }}
             </Animate>
           ))}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

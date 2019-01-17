@@ -1,5 +1,5 @@
 // @flow weak
-import createStore from './createStore';
+import createStore from './createStore'
 
-export { injectReducer } from './reducers';
-export default createStore();
+export { injectReducer } from './reducers'
+export default createStore()

@@ -1,23 +1,23 @@
 // @flow weak
 /* eslint react/no-multi-comp: "off", max-len: "off" */
 
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
-import Surface from 'docs/src/components/Surface';
-import { easeExpInOut } from 'd3-ease';
-import { scaleBand } from 'd3-scale';
-import { shuffle } from 'd3-array';
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
+import Surface from 'docs/src/components/Surface'
+import { easeExpInOut } from 'd3-ease'
+import { scaleBand } from 'd3-scale'
+import { shuffle } from 'd3-array'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 250]; // [width, height]
-const trbl = [100, 100, 10, 100]; // [top, right, bottom, left] margins
+const view = [1000, 250] // [width, height]
+const trbl = [100, 100, 10, 100] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 // **************************************************
 //  Mock Data
@@ -54,7 +54,7 @@ const mockData = [
     name: 'Ntags',
     value: 17,
   },
-];
+]
 
 // **************************************************
 //  Example
@@ -63,7 +63,7 @@ class Example extends PureComponent {
   constructor(props) {
     super(props);
 
-    (this:any).update = this.update.bind(this);
+    (this:any).update = this.update.bind(this)
   }
 
   state = {
@@ -73,14 +73,14 @@ class Example extends PureComponent {
   update() {
     this.setState({
       data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length + 2) - (5 + 1))) + 5),
-    });
+    })
   }
 
   render() {
     const scale = scaleBand()
       .rangeRound([0, dims[0]])
       .domain(this.state.data.map((d) => d.name))
-      .padding(0.1);
+      .padding(0.1)
 
     return (
       <div>
@@ -167,16 +167,16 @@ class Example extends PureComponent {
                           transform="rotate(-45 5,20)"
                         >{`name: ${data.name}`}</text>
                       </g>
-                    );
+                    )
                   })}
                 </g>
-              );
+              )
             }}
           </NodeGroup>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

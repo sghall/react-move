@@ -1,23 +1,23 @@
 // @flow weak
 /* eslint react/no-multi-comp: "off", max-len: "off" */
 
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
-import Surface from 'docs/src/components/Surface';
-import { scaleBand, scaleLinear } from 'd3-scale';
-import { shuffle, max } from 'd3-array';
-import { easeExpInOut, easePoly } from 'd3-ease';
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
+import Surface from 'docs/src/components/Surface'
+import { scaleBand, scaleLinear } from 'd3-scale'
+import { shuffle, max } from 'd3-array'
+import { easeExpInOut, easePoly } from 'd3-ease'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 250]; // [width, height]
-const trbl = [10, 100, 10, 100]; // [top, right, bottom, left] margins
+const view = [1000, 250] // [width, height]
+const trbl = [10, 100, 10, 100] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 // **************************************************
 //  Data
@@ -54,7 +54,7 @@ const mockData = [
     name: 'Ntags',
     value: 17,
   },
-];
+]
 
 // **************************************************
 //  Example
@@ -62,7 +62,7 @@ const mockData = [
 class Example extends PureComponent {
   constructor(props) {
     super(props);
-    (this:any).update = this.update.bind(this);
+    (this:any).update = this.update.bind(this)
   }
 
   state = {
@@ -72,18 +72,18 @@ class Example extends PureComponent {
   update() {
     this.setState({
       data: shuffle(mockData).slice(0, Math.floor(Math.random() * ((mockData.length * 0.7) - (5 + 1))) + 5),
-    });
+    })
   }
 
   render() {
     const xScale = scaleBand()
       .rangeRound([0, dims[0]])
       .domain(this.state.data.map((d) => d.name))
-      .padding(0.1);
+      .padding(0.1)
 
     const yScale = scaleLinear()
       .rangeRound([dims[1], 0])
-      .domain([0, max(this.state.data.map((d) => d.value))]);
+      .domain([0, max(this.state.data.map((d) => d.value))])
 
     return (
       <div>
@@ -138,7 +138,7 @@ class Example extends PureComponent {
                 timing: { delay: 2000, duration: 500 },
                 events: { // Events!!
                   end() {
-                    this.setState({ fill: 'steelblue' });
+                    this.setState({ fill: 'steelblue' })
                   },
                 },
               },
@@ -154,7 +154,7 @@ class Example extends PureComponent {
               return (
                 <g>
                   {nodes.map(({ key, data, state }) => {
-                    const { x, height, ...rest } = state;
+                    const { x, height, ...rest } = state
 
                     return (
                       <g key={key} transform={`translate(${x},0)`}>
@@ -176,16 +176,16 @@ class Example extends PureComponent {
                           transform="rotate(90 5,20)"
                         >{`name: ${data.name}, value: ${data.value}`}</text>
                       </g>
-                    );
+                    )
                   })}
                 </g>
-              );
+              )
             }}
           </NodeGroup>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

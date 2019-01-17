@@ -1,10 +1,10 @@
 // @flow weak
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import IconButton from 'material-ui/IconButton';
-import CodeIcon from 'material-ui/svg-icons/action/code';
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import React from 'react'
+import PropTypes from 'prop-types'
+import IconButton from 'material-ui/IconButton'
+import CodeIcon from 'material-ui/svg-icons/action/code'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 
 const CodeBlockTitle = (props) => (
   <Toolbar style={{ backgroundColor: '#ff0063' }}>
@@ -17,11 +17,11 @@ const CodeBlockTitle = (props) => (
       </IconButton>
     </ToolbarGroup>
   </Toolbar>
-);
+)
 
 CodeBlockTitle.propTypes = {
   title: PropTypes.string,
   tooltip: PropTypes.string,
-};
+}
 
-export default CodeBlockTitle;
+export default CodeBlockTitle

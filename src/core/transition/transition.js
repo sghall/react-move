@@ -1,29 +1,29 @@
 // @flow weak
 
-import { now as timeNow } from 'd3-timer';
-import tween from './tween';
-import schedule from './schedule';
+import { now as timeNow } from 'd3-timer'
+import tween from './tween'
+import schedule from './schedule'
 
 function once(func) {
-  let called = false;
+  let called = false
 
   return function transitionEvent() {
     if (!called) {
-      called = true;
-      func.call(this);
+      called = true
+      func.call(this)
     }
-  };
+  }
 }
 
-let id = 0;
+let id = 0
 
 export function newId() {
-  return ++id;
+  return ++id
 }
 
 // from https://github.com/d3/d3-ease/blob/master/src/linear.js
 function linear(t) {
-  return +t;
+  return +t
 }
 
 export const preset = {
@@ -31,111 +31,111 @@ export const preset = {
   delay: 0,
   duration: 250,
   ease: linear,
-};
+}
 
 function scheduleTransitions(config = {}) {
-  const transitions = { ...config };
+  const transitions = { ...config }
 
-  const events = transitions.events || {};
-  delete transitions.events;
+  const events = transitions.events || {}
+  delete transitions.events
 
   // each event handler should be called only once
   Object.keys(events).forEach((d) => {
     if (typeof events[d] !== 'function') {
-      throw new Error('Event handlers must be a function');
+      throw new Error('Event handlers must be a function')
     } else {
-      events[d] = once(events[d]);
+      events[d] = once(events[d])
     }
-  });
+  })
 
-  const timing = transitions.timing || {};
-  delete transitions.timing;
+  const timing = transitions.timing || {}
+  delete transitions.timing
 
   Object.keys(transitions).forEach((stateKey) => {
-    const tweens = [];
+    const tweens = []
 
     if (
       typeof transitions[stateKey] === 'object' &&
       Array.isArray(transitions[stateKey]) === false
     ) {
       Object.keys(transitions[stateKey]).forEach((attr) => {
-        const val = transitions[stateKey][attr];
+        const val = transitions[stateKey][attr]
 
         if (Array.isArray(val)) {
           if (val.length === 1) {
-            tweens.push(tween.call(this, stateKey, attr, val[0]));
+            tweens.push(tween.call(this, stateKey, attr, val[0]))
           } else {
             this.setState((state) => {
-              return { [stateKey]: { ...state[stateKey], [attr]: val[0] } };
-            });
+              return { [stateKey]: { ...state[stateKey], [attr]: val[0] } }
+            })
 
-            tweens.push(tween.call(this, stateKey, attr, val[1]));
+            tweens.push(tween.call(this, stateKey, attr, val[1]))
           }
         } else if (typeof val === 'function') {
           const getResonanceCustomTween = () => {
             const resonanceCustomTween = (t) => {
               this.setState((state) => {
-                return { [stateKey]: { ...state[stateKey], [attr]: val(t) } };
-              });
-            };
+                return { [stateKey]: { ...state[stateKey], [attr]: val(t) } }
+              })
+            }
 
-            return resonanceCustomTween;
-          };
+            return resonanceCustomTween
+          }
 
-          tweens.push(getResonanceCustomTween);
+          tweens.push(getResonanceCustomTween)
         } else {
           this.setState((state) => {
-            return { [stateKey]: { ...state[stateKey], [attr]: val } };
-          });
+            return { [stateKey]: { ...state[stateKey], [attr]: val } }
+          })
           // This assures any existing transitions are stopped
-          tweens.push(tween.call(this, stateKey, attr, val));
+          tweens.push(tween.call(this, stateKey, attr, val))
         }
-      });
+      })
     } else {
-      const val = transitions[stateKey];
+      const val = transitions[stateKey]
 
       if (Array.isArray(val)) {
         if (val.length === 1) {
-          tweens.push(tween.call(this, null, stateKey, val[0]));
+          tweens.push(tween.call(this, null, stateKey, val[0]))
         } else {
           this.setState(() => {
-            return { [stateKey]: val[0] };
-          });
+            return { [stateKey]: val[0] }
+          })
 
-          tweens.push(tween.call(this, null, stateKey, val[1]));
+          tweens.push(tween.call(this, null, stateKey, val[1]))
         }
       } else if (typeof val === 'function') {
         const getResonanceCustomTween = () => {
           const resonanceCustomTween = (t) => {
             this.setState(() => {
-              return { [stateKey]: val(t) };
-            });
-          };
+              return { [stateKey]: val(t) }
+            })
+          }
 
-          return resonanceCustomTween;
-        };
+          return resonanceCustomTween
+        }
 
-        tweens.push(getResonanceCustomTween);
+        tweens.push(getResonanceCustomTween)
       } else {
         this.setState(() => {
-          return { [stateKey]: val };
-        });
+          return { [stateKey]: val }
+        })
         // This assures any existing transitions are stopped
-        tweens.push(tween.call(this, null, stateKey, val));
+        tweens.push(tween.call(this, null, stateKey, val))
       }
     }
 
-    const timingConfig = { ...preset, ...timing, time: timeNow() };
-    schedule(this, stateKey, newId(), timingConfig, tweens, events);
-  });
+    const timingConfig = { ...preset, ...timing, time: timeNow() }
+    schedule(this, stateKey, newId(), timingConfig, tweens, events)
+  })
 }
 
 export default function transition(config) {
   if (Array.isArray(config)) {
     config.forEach((c) => {
-      scheduleTransitions.call(this, c);
-    });
+      scheduleTransitions.call(this, c)
+    })
   } else {
-    scheduleTransitions.call(this, config);
+    scheduleTransitions.call(this, config)
   }
 }

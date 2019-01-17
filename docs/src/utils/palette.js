@@ -9,4 +9,4 @@ export default {
   accent3Color: '#121E26',
   canvasColor: '#ffffff',
   textColor: '#333333',
-};
+}

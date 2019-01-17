@@ -1,92 +1,92 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import recast from 'recast';
-import { parse } from 'react-docgen';
-import { parse as parseDoctrine } from 'doctrine';
-import MarkdownElement from '../MarkdownElement';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import recast from 'recast'
+import { parse } from 'react-docgen'
+import { parse as parseDoctrine } from 'doctrine'
+import MarkdownElement from '../MarkdownElement'
 
-require('./prop-type-description.css');
+require('./prop-type-description.css')
 
 function getDeprecatedInfo(type) {
-  const deprecatedPropType = 'deprecated(PropTypes.';
+  const deprecatedPropType = 'deprecated(PropTypes.'
 
-  const indexStart = type.raw.indexOf(deprecatedPropType);
+  const indexStart = type.raw.indexOf(deprecatedPropType)
 
   if (indexStart !== -1) {
     return {
       propTypes: type.raw.substring(indexStart + deprecatedPropType.length, type.raw.indexOf(',')),
       explanation: recast.parse(type.raw).program.body[0].expression.arguments[1].value,
-    };
+    }
   }
 
-  return false;
+  return false
 }
 
 function generatePropType(type) {
   switch (type.name) {
     case 'func':
-      return 'function';
+      return 'function'
     case 'enum':
     case 'union':
-      return type.elements.map((v) => (v.type || v.name).toLowerCase()).join(' or ');
+      return type.elements.map((v) => (v.type || v.name).toLowerCase()).join(' or ')
     default:
-      return type.type || type.name;
+      return type.type || type.name
   }
 }
 
 function genDescription(required, description, type) {
-  let deprecated = '';
+  let deprecated = ''
 
   if (type.name === 'custom') {
-    const deprecatedInfo = getDeprecatedInfo(type);
+    const deprecatedInfo = getDeprecatedInfo(type)
 
     if (deprecatedInfo) {
-      deprecated = `*Deprecated*. ${deprecatedInfo.explanation}<br><br>`;
+      deprecated = `*Deprecated*. ${deprecatedInfo.explanation}<br><br>`
     }
   }
 
-  const parsed = parseDoctrine(description);
-  const jsDocText = parsed.description.replace(/\n\n/g, '<br>').replace(/\n/g, ' ');
+  const parsed = parseDoctrine(description)
+  const jsDocText = parsed.description.replace(/\n\n/g, '<br>').replace(/\n/g, ' ')
 
-  if (parsed.tags.some((tag) => tag.title === 'ignore')) return null;
+  if (parsed.tags.some((tag) => tag.title === 'ignore')) return null
 
-  let signature = '';
+  let signature = ''
 
   if (type.name === 'func' && parsed.tags.length > 0) {
     parsed.tags.map((tag) => {
-      const res = { ...tag };
+      const res = { ...tag }
 
       if (res.description) {
-        res.description.replace(/\n/g, ' ');
+        res.description.replace(/\n/g, ' ')
       }
 
-      return res;
-    });
+      return res
+    })
 
-    let parsedArgs = [];
-    let parsedReturns;
+    let parsedArgs = []
+    let parsedReturns
 
     if (parsed.tags[parsed.tags.length - 1].title === 'returns') {
-      parsedArgs = parsed.tags.slice(0, parsed.tags.length - 1);
-      parsedReturns = parsed.tags[parsed.tags.length - 1];
+      parsedArgs = parsed.tags.slice(0, parsed.tags.length - 1)
+      parsedReturns = parsed.tags[parsed.tags.length - 1]
     } else {
-      parsedArgs = parsed.tags;
-      parsedReturns = { type: { name: 'void' } };
+      parsedArgs = parsed.tags
+      parsedReturns = { type: { name: 'void' } }
     }
 
-    signature += '<br><br>**Signature:**<br>`function(';
-    signature += parsedArgs.map((tag) => `${tag.name}: ${tag.type.name}`).join(', ');
-    signature += `) => ${parsedReturns.type.name}<br>`;
-    signature += parsedArgs.map((tag) => `*${tag.name}:* ${tag.description}`).join('<br>');
+    signature += '<br><br>**Signature:**<br>`function('
+    signature += parsedArgs.map((tag) => `${tag.name}: ${tag.type.name}`).join(', ')
+    signature += `) => ${parsedReturns.type.name}<br>`
+    signature += parsedArgs.map((tag) => `*${tag.name}:* ${tag.description}`).join('<br>')
 
     if (parsedReturns.description) {
-      signature += `<br> *returns* (${parsedReturns.type.name}): ${parsedReturns.description}`;
+      signature += `<br> *returns* (${parsedReturns.type.name}): ${parsedReturns.description}`
     }
   }
 
-  return `${deprecated} ${jsDocText}${signature}`;
+  return `${deprecated} ${jsDocText}${signature}`
 }
 
 const styles = {
@@ -94,7 +94,7 @@ const styles = {
     fontSize: '90%',
     paddingLeft: '15px',
   },
-};
+}
 
 class PropTypeDescription extends Component {
   static propTypes = {
@@ -110,50 +110,50 @@ class PropTypeDescription extends Component {
     const {
       code,
       header,
-    } = this.props;
+    } = this.props
 
-    let requiredProps = 0;
+    let requiredProps = 0
 
-    let text = `${header}`;
-    text += '\n| Name | Type | Default | Description |';
-    text += '\n|:-----|:-----|:-----|:-----|\n';
+    let text = `${header}`
+    text += '\n| Name | Type | Default | Description |'
+    text += '\n|:-----|:-----|:-----|:-----|\n'
 
-    const info = parse(code);
+    const info = parse(code)
 
     Object.keys(info.props).forEach((key) => {
-      let name = key;
+      let name = key
 
-      const prop = info.props[name];
-      prop.type = prop.type || prop.flowType;
+      const prop = info.props[name]
+      prop.type = prop.type || prop.flowType
 
-      const desc = genDescription(prop.required, prop.description, prop.type) || '';
+      const desc = genDescription(prop.required, prop.description, prop.type) || ''
 
-      let defaultValue = '';
+      let defaultValue = ''
 
       if (prop.defaultValue) {
-        defaultValue = prop.defaultValue.value.replace(/\n/g, '');
+        defaultValue = prop.defaultValue.value.replace(/\n/g, '')
       }
 
       if (prop.required) {
-        name = `<span style="color: #31a148">${name} *</span>`;
-        requiredProps += 1;
+        name = `<span style="color: #31a148">${name} *</span>`
+        requiredProps += 1
       }
 
       if (prop.type.name === 'custom') {
         if (getDeprecatedInfo(prop.type)) {
-          name = `~~${name}~~`;
+          name = `~~${name}~~`
         }
       }
 
-      text += `| ${name} | ${generatePropType(prop.type)} | ${defaultValue} | ${desc} |\n`;
-    });
+      text += `| ${name} | ${generatePropType(prop.type)} | ${defaultValue} | ${desc} |\n`
+    })
 
-    let requiredPropFootnote = '';
+    let requiredPropFootnote = ''
 
     if (requiredProps === 1) {
-      requiredPropFootnote = '* required property';
+      requiredPropFootnote = '* required property'
     } else if (requiredProps > 1) {
-      requiredPropFootnote = '* required properties';
+      requiredPropFootnote = '* required properties'
     }
 
     return (
@@ -163,8 +163,8 @@ class PropTypeDescription extends Component {
           {requiredPropFootnote}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default PropTypeDescription;
+export default PropTypeDescription

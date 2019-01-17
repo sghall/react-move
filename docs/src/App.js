@@ -1,11 +1,11 @@
 // @flow weak
 
-import React from 'react';
-import { Router, useRouterHistory } from 'react-router';
-import { createHashHistory } from 'history';
-import routes from './routes';
+import React from 'react'
+import { Router, useRouterHistory } from 'react-router'
+import { createHashHistory } from 'history'
+import routes from './routes'
 
-export default () => {
+export default function App() {
   return (
     <Router
       history={useRouterHistory(createHashHistory)()}
@@ -13,5 +13,5 @@ export default () => {
     >
       {routes}
     </Router>
-  );
-};
+  )
+}

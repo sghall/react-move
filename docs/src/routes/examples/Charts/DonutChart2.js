@@ -1,28 +1,28 @@
 // @flow weak
 /* eslint react/no-multi-comp: 'off' */
 
-import { scaleOrdinal } from 'd3-scale';
-import { arc, pie } from 'd3-shape';
-import { shuffle } from 'd3-array';
-import { easeExpOut } from 'd3-ease';
-import sortBy from 'lodash/sortBy';
-import Surface from 'docs/src/components/Surface';
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
+import { scaleOrdinal } from 'd3-scale'
+import { arc, pie } from 'd3-shape'
+import { shuffle } from 'd3-array'
+import { easeExpOut } from 'd3-ease'
+import sortBy from 'lodash/sortBy'
+import Surface from 'docs/src/components/Surface'
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
 
 const colors = scaleOrdinal()
-  .range(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a']);
+  .range(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a'])
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 550]; // [width, height]
-const trbl = [10, 10, 10, 10]; // [top, right, bottom, left] margins
+const view = [1000, 550] // [width, height]
+const trbl = [10, 10, 10, 10] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 const mockData = [
   {
@@ -46,35 +46,35 @@ const mockData = [
   }, {
     name: 'Ntags',
   },
-];
+]
 
-const radius = (dims[1] / 2) * 0.70;
+const radius = (dims[1] / 2) * 0.70
 
 const pieLayout = pie()
   .value((d) => d.value)
-  .sort(null);
+  .sort(null)
 
 const innerArcPath = arc()
   .innerRadius(radius * 0.8)
-  .outerRadius(radius * 1.0);
+  .outerRadius(radius * 1.0)
 
 const outerArcPath = arc()
   .innerRadius(radius * 1.2)
-  .outerRadius(radius * 1.2);
+  .outerRadius(radius * 1.2)
 
 function mid(d) {
-  return Math.PI > (d.startAngle + (d.endAngle - d.startAngle));
+  return Math.PI > (d.startAngle + (d.endAngle - d.startAngle))
 }
 
 function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - (min + 1))) + min;
+  return Math.floor(Math.random() * (max - (min + 1))) + min
 }
 
 function getArcs() {
   const data = shuffle(mockData).slice(0, getRandom(5, 10))
-    .map(({ name }) => ({ name, value: getRandom(10, 100) }));
+    .map(({ name }) => ({ name, value: getRandom(10, 100) }))
 
-  return pieLayout(sortBy(data, (d) => d.name));
+  return pieLayout(sortBy(data, (d) => d.name))
 }
 
 class Example extends PureComponent {
@@ -83,16 +83,16 @@ class Example extends PureComponent {
   }
 
   update = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
 
     this.setState(() => ({
       arcs: getArcs(),
-    }));
+    }))
   }
 
   render() {
-    const { arcs } = this.state;
+    const { arcs } = this.state
 
     return (
       <div>
@@ -125,11 +125,11 @@ class Example extends PureComponent {
                 return (
                   <g>
                     {nodes.map(({ key, data, state }) => {
-                      const p1 = outerArcPath.centroid(state);
+                      const p1 = outerArcPath.centroid(state)
                       const p2 = [
                         mid(state) ? p1[0] + (radius * 0.5) : p1[0] - (radius * 0.5),
                         p1[1],
-                      ];
+                      ]
                       return (
                         <g key={key}>
                           <path
@@ -149,18 +149,18 @@ class Example extends PureComponent {
                             points={`${innerArcPath.centroid(state)},${p1},${p2.toString()}`}
                           />
                         </g>
-                      );
+                      )
                     })}
                   </g>
-                );
+                )
               }}
             </NodeGroup>
           </g>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example
 

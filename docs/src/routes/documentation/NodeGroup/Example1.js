@@ -2,23 +2,23 @@
 /* eslint react/no-multi-comp: 'off' */
 // example from https://bl.ocks.org/mbostock/3885705
 
-import React, { PureComponent } from 'react';
-import NodeGroup from 'react-move/NodeGroup';
-import Surface from 'docs/src/components/Surface'; // this is just a responsive SVG
-import { scaleLinear, scaleBand } from 'd3-scale';
-import { easeExpInOut } from 'd3-ease';
-import { ascending, max } from 'd3-array';
+import React, { PureComponent } from 'react'
+import NodeGroup from 'react-move/NodeGroup'
+import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
+import { scaleLinear, scaleBand } from 'd3-scale'
+import { easeExpInOut } from 'd3-ease'
+import { ascending, max } from 'd3-array'
 
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 450]; // [width, height]
-const trbl = [10, 10, 30, 10]; // [top, right, bottom, left] margins
+const view = [1000, 450] // [width, height]
+const trbl = [10, 10, 30, 10] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
   view[1] - trbl[0] - trbl[2],
-];
+]
 
 // **************************************************
 //  Mock Data
@@ -50,11 +50,11 @@ const letters = [
   { letter: 'X', frequency: 0.00150 },
   { letter: 'Y', frequency: 0.01971 },
   { letter: 'Z', frequency: 0.00074 },
-];
+]
 
 const y = scaleLinear()
   .range([dims[1], 0])
-  .domain([0, max(letters, (d) => d.frequency)]);
+  .domain([0, max(letters, (d) => d.frequency)])
 
 class Example extends PureComponent {
   state = {
@@ -64,21 +64,21 @@ class Example extends PureComponent {
   update = () => {
     this.setState((state) => ({
       sortAlpha: !state.sortAlpha,
-    }));
+    }))
   }
 
   render() {
-    const { sortAlpha } = this.state;
+    const { sortAlpha } = this.state
 
     const sorted = letters.sort(sortAlpha ?
       (a, b) => ascending(a.letter, b.letter) :
       (a, b) => b.frequency - a.frequency,
-    ).slice(0);
+    ).slice(0)
 
     const scale = scaleBand()
       .rangeRound([0, dims[0]])
       .domain(sorted.map((d) => d.letter))
-      .padding(0.1);
+      .padding(0.1)
 
     return (
       <div>
@@ -118,7 +118,7 @@ class Example extends PureComponent {
             {(nodes) => (
               <g>
                 {nodes.map(({ key, data, state }) => {
-                  const { x, ...rest } = state;
+                  const { x, ...rest } = state
 
                   return (
                     <g key={key} transform={`translate(${x},0)`}>
@@ -135,15 +135,15 @@ class Example extends PureComponent {
                         fill="#333"
                       >{data.letter}</text>
                     </g>
-                  );
+                  )
                 })}
               </g>
             )}
           </NodeGroup>
         </Surface>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

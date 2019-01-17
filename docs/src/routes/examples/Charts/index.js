@@ -1,13 +1,13 @@
 // @flow weak
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import CodeExample from 'docs/src/components/CodeExample';
-import DonutChart1 from './DonutChart1';
-import DonutChart2 from './DonutChart2';
+import React from 'react'
+import PropTypes from 'prop-types'
+import CodeExample from 'docs/src/components/CodeExample'
+import DonutChart1 from './DonutChart1'
+import DonutChart2 from './DonutChart2'
 
 const Example = (props) => {
-  const { route: { exampleContext } } = props;
+  const { route: { exampleContext } } = props
 
   return (
     <div>
@@ -24,11 +24,11 @@ const Example = (props) => {
         <DonutChart2 />
       </CodeExample>
     </div>
-  );
-};
+  )
+}
 
 Example.propTypes = {
   route: PropTypes.object.isRequired,
-};
+}
 
-export default Example;
+export default Example

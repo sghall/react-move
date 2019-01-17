@@ -1,11 +1,11 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { parse } from 'react-docgen';
-import ClearFix from 'material-ui/internal/ClearFix';
-import Paper from 'material-ui/Paper';
-import CodeBlock from './CodeBlock';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { parse } from 'react-docgen'
+import ClearFix from 'material-ui/internal/ClearFix'
+import Paper from 'material-ui/Paper'
+import CodeBlock from './CodeBlock'
 
 class CodeExample extends Component {
   static propTypes = {
@@ -33,10 +33,10 @@ class CodeExample extends Component {
       component,
       exampleBlockStyle,
       layoutSideBySide,
-    } = this.props;
+    } = this.props
 
-    const palette = this.context.muiTheme.rawTheme.palette;
-    const canvasColor = palette.canvasColor;
+    const palette = this.context.muiTheme.rawTheme.palette
+    const canvasColor = palette.canvasColor
 
     const styles = {
       root: {
@@ -50,9 +50,9 @@ class CodeExample extends Component {
         width: layoutSideBySide ? '45%' : null,
         float: layoutSideBySide ? 'right' : null,
       },
-    };
+    }
 
-    const docs = component ? parse(code) : {};
+    const docs = component ? parse(code) : {}
 
     return (
       <Paper style={styles.root}>
@@ -66,8 +66,8 @@ class CodeExample extends Component {
           {children}
         </ClearFix>
       </Paper>
-    );
+    )
   }
 }
 
-export default CodeExample;
+export default CodeExample

@@ -1,6 +1,6 @@
 // @flow weak
 
-import React from 'react';
+import React from 'react'
 
 const Example = () => {
   return (
@@ -12,7 +12,7 @@ const Example = () => {
         sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
       />
     </div>
-  );
-};
+  )
+}
 
-export default Example;
+export default Example

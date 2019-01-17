@@ -1,15 +1,15 @@
 // @flow weak
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Drawer from 'material-ui/Drawer';
-import { List, ListItem, makeSelectable } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import { spacing, typography, zIndex } from 'material-ui/styles';
-import palette from '../utils/palette';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Drawer from 'material-ui/Drawer'
+import { List, ListItem, makeSelectable } from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import Subheader from 'material-ui/Subheader'
+import { spacing, typography, zIndex } from 'material-ui/styles'
+import palette from '../utils/palette'
 
-const SelectableList = makeSelectable(List);
+const SelectableList = makeSelectable(List)
 
 const styles = {
   logo: {
@@ -26,7 +26,7 @@ const styles = {
     paddingLeft: spacing.desktopGutterLess,
     fontSize: 16,
   },
-};
+}
 
 class AppNavDrawer extends Component {
   static propTypes = {
@@ -44,12 +44,12 @@ class AppNavDrawer extends Component {
   };
 
   handleRequestChangeLink = (event, value) => {
-    window.location = value;
+    window.location = value
   };
 
   handleTouchTapHeader = () => {
-    this.context.router.push('/');
-    this.props.onRequestChangeNavDrawer(false);
+    this.context.router.push('/')
+    this.props.onRequestChangeNavDrawer(false)
   };
 
   render() {
@@ -60,7 +60,7 @@ class AppNavDrawer extends Component {
       onChangeList,
       open,
       style,
-    } = this.props;
+    } = this.props
 
     return (
       <Drawer
@@ -82,11 +82,13 @@ class AppNavDrawer extends Component {
             primaryTogglesNestedList
             nestedItems={[
               <ListItem
+                key="animate"
                 primaryText="Animate"
                 value="/documentation/animate"
                 href="#/documentation/animate"
               />,
               <ListItem
+                key="nodegroup"
                 primaryText="NodeGroup"
                 value="/documentation/node-group"
                 href="#/documentation/node-group"
@@ -98,16 +100,19 @@ class AppNavDrawer extends Component {
             primaryTogglesNestedList
             nestedItems={[
               <ListItem
+                key="animate"
                 primaryText="Simple"
                 value="/examples/simple"
                 href="#/examples/simple"
               />,
               <ListItem
+                key="animate"
                 primaryText="Draggable List"
                 value="/examples/draggable-list"
                 href="#/examples/draggable-list"
               />,
               <ListItem
+                key="charts"
                 primaryText="SVG Charts"
                 value="/examples/charts"
                 href="#/examples/charts"
@@ -125,8 +130,8 @@ class AppNavDrawer extends Component {
           <ListItem primaryText="React" value="http://facebook.github.io/react" />
         </SelectableList>
       </Drawer>
-    );
+    )
   }
 }
 
-export default AppNavDrawer;
+export default AppNavDrawer

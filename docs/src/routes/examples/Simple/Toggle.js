@@ -1,8 +1,8 @@
 // @flow weak
 
-import React, { PureComponent } from 'react';
-import Animate from 'react-move/Animate';
-import { easeExpOut } from 'd3-ease';
+import React, { PureComponent } from 'react'
+import Animate from 'react-move/Animate'
+import { easeExpOut } from 'd3-ease'
 
 const trackStyles = {
   borderRadius: 4,
@@ -11,7 +11,7 @@ const trackStyles = {
   margin: '5px 3px 10px',
   width: 250,
   height: 50,
-};
+}
 
 class Example extends PureComponent {
   state = {
@@ -19,7 +19,7 @@ class Example extends PureComponent {
   }
 
   handleClick = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ open: !this.state.open })
   }
 
   render() {
@@ -41,7 +41,7 @@ class Example extends PureComponent {
           })}
         >
           {(state) => {
-            const { x } = state;
+            const { x } = state
 
             return (
               <div style={trackStyles}>
@@ -58,12 +58,12 @@ class Example extends PureComponent {
                   }}
                 />
               </div>
-            );
+            )
           }}
         </Animate>
       </div>
-    );
+    )
   }
 }
 
-export default Example;
+export default Example

@@ -7,8 +7,6 @@ import { assert } from 'chai'
 import { shallow, mount } from 'enzyme'
 import NodeGroup from './NodeGroup'
 
-const msPerFrame = 1000 / 60
-
 const data = [1, 2, 3, 4, 5].map(d => ({ val: d }))
 
 class Node extends Component {
