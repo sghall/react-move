@@ -41,13 +41,14 @@
     "build": "npm run build:lib && npm run build:cpy",
     "build:cln": "rimraf build",
     "build:lib": "node ./scripts/build.js",
-    "build:cpy": "babel-node ./scripts/copy-files.js",
-    "lint": "eslint src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
-    "test": "cross-env NODE_ENV=test BABEL_ENV=cjs mocha \"src/**/*.spec.js\"",
+    "build:cpy": "cross-env BABEL_ENV=cjs babel-node ./scripts/copy-files.js",
+    "lint": "eslint --fix src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
+    "test": "cross-env BABEL_ENV=test mocha \"src/**/*.spec.js\"",
     "test:watch": "npm run test -- -w",
-    "test:coverage": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=lcov",
-    "test:coverage:html": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=html",
-    "flow": "flow"
+    "test:coverage": "cross-env BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=lcov",
+    "test:coverage:html": "cross-env BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=html",
+    "pretty": "prettier-eslint src/**/*.js --write --no-semi --single-quote --trailing-comma=all --print-width 80",
+    "pretty-docs": "prettier-eslint docs/src/**/*.js --write --no-semi --single-quote --trailing-comma=all --print-width 80"
   },
   "peerDependencies": {
     "react": "^15.4.0 || ^16.0.0-beta.5"
