@@ -20,30 +20,30 @@ class NodeGroup extends Component {
       const { nodeKeys, nodeHash } = prevState
 
       const keyIndex = {}
-  
+
       for (let i = 0; i < nodeKeys.length; i++) {
         keyIndex[nodeKeys[i]] = i
       }
-  
+
       const nextKeyIndex = {}
       const nextNodeKeys = []
-  
+
       for (let i = 0; i < data.length; i++) {
         const d = data[i]
         const k = keyAccessor(d, i)
-  
+
         nextKeyIndex[k] = i
         nextNodeKeys.push(k)
-  
+
         if (keyIndex[k] === undefined) {
           nodeHash[k] = new Node(k, d, ENTER)
         }
       }
-  
+
       for (let i = 0; i < nodeKeys.length; i++) {
         const k = nodeKeys[i]
         const n = nodeHash[k]
-  
+
         if (nextKeyIndex[k] !== undefined) {
           n.updateData(data[nextKeyIndex[k]])
           n.updateType(UPDATE)
@@ -51,19 +51,19 @@ class NodeGroup extends Component {
           n.updateType(LEAVE)
         }
       }
-  
+
       const mergedNodeKeys = mergeKeys(
         nodeKeys,
         keyIndex,
         nextNodeKeys,
         nextKeyIndex,
       )
-  
+
       for (let i = 0; i < mergedNodeKeys.length; i++) {
         const k = mergedNodeKeys[i]
         const n = nodeHash[k]
         const d = n.data
-  
+
         if (n.type === ENTER) {
           n.setState(start(d, nextKeyIndex[k]))
           transition.call(n, enter(d, nextKeyIndex[k]))
@@ -80,7 +80,7 @@ class NodeGroup extends Component {
           return nodeHash[key]
         }),
         nodeHash,
-        nodeKeys: mergedNodeKeys
+        nodeKeys: mergedNodeKeys,
       }
 
       return nextState
@@ -179,8 +179,8 @@ NodeGroup.propTypes = {
    */
   keyAccessor: PropTypes.func.isRequired,
   /**
-  * A function that returns the starting state.  The function is passed the data and index and must return an object.
-  */
+   * A function that returns the starting state.  The function is passed the data and index and must return an object.
+   */
   start: PropTypes.func.isRequired,
   /**
    * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
