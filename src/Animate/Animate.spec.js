@@ -4,11 +4,10 @@
 import React, { Component } from 'react'
 import sinon from 'sinon'
 import { assert } from 'chai'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import Animate from './Animate'
 
 class Node extends Component {
-  // eslint-disable-line
   render() {
     return <div />
   }
@@ -18,8 +17,7 @@ const renderNode = () => <Node />
 
 describe('<Animate />', () => {
   it('should render child Node', () => {
-    const wrapper = shallow(<Animate start={{}}>{renderNode}</Animate>)
-
+    const wrapper = mount(<Animate start={{}}>{renderNode}</Animate>)
     assert.strictEqual(wrapper.find(Node).length, 1, 'should be true')
   })
 
@@ -52,27 +50,37 @@ describe('<Animate />', () => {
   })
 
   it('should run enter transition immediately after mounting if show is true', done => {
-    const wrapper = mount(
+    let result
+
+    mount(
       <Animate show start={{ opacity: 0 }} enter={{ opacity: [1] }}>
-        {renderNode}
+        {state => {
+          result = state
+          return null
+        }}
       </Animate>,
     )
 
     setTimeout(() => {
-      assert.strictEqual(wrapper.state('opacity'), 1, 'should be equal')
+      assert.strictEqual(result.opacity, 1, 'should be equal')
       done()
     }, 500)
   })
 
   it('should NOT run enter transition immediately after mounting if show is false', done => {
-    const wrapper = mount(
+    let result
+
+    mount(
       <Animate show={false} start={{ opacity: 0 }} enter={{ opacity: [1] }}>
-        {renderNode}
+        {state => {
+          result = state
+          return null
+        }}
       </Animate>,
     )
 
     setTimeout(() => {
-      assert.strictEqual(wrapper.state('opacity'), 0, 'should be equal')
+      assert.strictEqual(result, undefined, 'should be equal')
       done()
     }, 500)
   })
@@ -88,77 +96,69 @@ describe('<Animate />', () => {
 
     setTimeout(() => {
       assert.strictEqual(wrapper.find(Node).length, 1, 'should be equal')
-      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal')
       done()
     }, 500)
   })
 
-  // it('should run leave transition when show changes to false', (done) => {
-  //   const wrapper = mount(
-  //     <Animate
-  //       show
-  //       start={{ opacity: 0 }}
-  //       leave={{ opacity: [0.7] }}
-  //     >
-  //       {renderNode}
-  //     </Animate>,
-  //   );
+  it('should run leave transition when show changes to false', (done) => {
+    let result 
 
-  //   wrapper.setProps({ show: false });
+    const wrapper = mount(
+      <Animate
+        show
+        start={{ opacity: 1 }}
+        leave={{ opacity: [0] }}
+      >
+        {state => {
+          result = state
+          return null
+        }}
+      </Animate>,
+    )
 
-  //   setTimeout(() => {
-  //     assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
-  //     assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
-  //     done();
-  //   }, 500);
-  // });
+    wrapper.setProps({ show: false })
+
+    setTimeout(() => {
+      assert.strictEqual(result.opacity, 0, 'should be equal')
+      done()
+    }, 500)
+  })
 
   it('should support enter prop as a function', done => {
-    const wrapper = mount(
+    let result
+
+    mount(
       <Animate start={{ opacity: 0 }} enter={() => ({ opacity: [1] })}>
-        {renderNode}
+        {state => {
+          result = state
+          return null
+        }}
       </Animate>,
     )
 
     setTimeout(() => {
-      assert.strictEqual(wrapper.state('opacity'), 1, 'should be equal')
+      assert.strictEqual(result.opacity, 1, 'should be equal')
       done()
     }, 500)
   })
 
   it('should support update prop as a function', done => {
+    let result
+
     const wrapper = mount(
       <Animate start={{ opacity: 0 }} update={() => ({ opacity: [0.7] })}>
-        {renderNode}
+        {state => {
+          result = state
+          return null
+        }}
       </Animate>,
     )
 
     wrapper.setProps({ show: true })
 
     setTimeout(() => {
-      assert.strictEqual(wrapper.find(Node).length, 1, 'should be equal')
-      assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal')
+      assert.strictEqual(result.opacity, 0.7, 'should be equal')
       done()
     }, 500)
   })
-
-  // it('should support leave prop as a function', (done) => {
-  //   const wrapper = mount(
-  //     <Animate
-  //       show
-  //       start={{ opacity: 0 }}
-  //       leave={() => ({ opacity: [0.7] })}
-  //     >
-  //       {renderNode}
-  //     </Animate>,
-  //   );
-
-  //   wrapper.setProps({ show: false });
-
-  //   setTimeout(() => {
-  //     assert.strictEqual(wrapper.find(Node).length, 0, 'should be equal');
-  //     assert.strictEqual(wrapper.state('opacity'), 0.7, 'should be equal');
-  //     done();
-  //   }, 500);
-  // });
 })
