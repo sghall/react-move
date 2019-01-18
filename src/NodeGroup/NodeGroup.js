@@ -74,7 +74,7 @@ class NodeGroup extends Component {
         }
       }
 
-      const nextState = {
+      return {
         data,
         nodes: mergedNodeKeys.map(key => {
           return nodeHash[key]
@@ -82,8 +82,6 @@ class NodeGroup extends Component {
         nodeHash,
         nodeKeys: mergedNodeKeys,
       }
-
-      return nextState
     }
 
     return null
