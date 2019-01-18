@@ -20,7 +20,7 @@ const styles = theme => ({
     marginBottom: 40,
   },
   paper: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
   },
   codeButton: {
     display: 'none',
@@ -80,9 +80,7 @@ class Demo extends Component {
           Source <CodeIcon />
         </IconButton>
         <Collapse in={this.state.codeOpen}>
-          <h3 style={{ fontWeight: 300, marginLeft: 10 }}>
-            Example Source
-          </h3>
+          <h3 style={{ fontWeight: 300, marginLeft: 10 }}>Example Source</h3>
           <MarkdownElement
             className={classes.code}
             text={`\`\`\`js\n${demoSource}\n\`\`\``}

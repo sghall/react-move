@@ -136,7 +136,10 @@ class ResponsiveDrawer extends React.Component {
           </Link>
           <Link to="/demos/draggable-list">
             <ListItem button>
-              <ListItemText primary="Draggable List" secondary={'CodeSandbox'} />
+              <ListItemText
+                primary="Draggable List"
+                secondary={'CodeSandbox'}
+              />
             </ListItem>
           </Link>
         </List>

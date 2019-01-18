@@ -75,12 +75,7 @@ export default function AppRouter() {
             nav
           />
         </Route>
-        <Route
-          title="Demos"
-          path="/demos"
-          component={AppContent}
-          nav
-        >
+        <Route title="Demos" path="/demos" component={AppContent} nav>
           {demo.map(d => {
             return (
               <Route

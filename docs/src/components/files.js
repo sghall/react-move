@@ -17,11 +17,7 @@ export const srcContext = require.context('!raw-loader!../../../src', true)
 // ********************************************************
 // DEMO FILES
 // ********************************************************
-export const requireDemo = require.context(
-  '../pages/demos',
-  true,
-  /\.md$/,
-)
+export const requireDemo = require.context('../pages/demos', true, /\.md$/)
 
 export const demo = requireDemo.keys().map(n => ({
   path: n,

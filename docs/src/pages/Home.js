@@ -21,14 +21,15 @@ function Home(props) {
   return (
     <Grid container alignItems="center" justify="space-around">
       <Grid item xs={10} className={classes.root}>
-        <img style={{ marginLeft: '10%' }} width="80%" src={logo} alt="react-move" />
+        <img
+          style={{ marginLeft: '10%' }}
+          width="80%"
+          src={logo}
+          alt="react-move"
+        />
       </Grid>
       <Grid item xs={12} className={classes.root}>
-        <Button
-          component={Link}
-          variant="outlined"
-          to="/demos/node-group"
-        >
+        <Button component={Link} variant="outlined" to="/demos/node-group">
           Demos
         </Button>
       </Grid>
