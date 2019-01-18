@@ -69,35 +69,35 @@ describe('<NodeGroup />', () => {
   //   }, msPerFrame * 2);
   // });
 
-  it('should call updateNodes when given new data prop', () => {
+  it('should call startInterval when given new data prop', () => {
     const wrapper = mount(
       <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )
 
-    const spy = sinon.spy(NodeGroup.prototype, 'updateNodes')
+    const spy = sinon.spy(NodeGroup.prototype, 'startInterval')
 
     wrapper.setProps({ data: [{ val: 1 }, { val: 2 }] })
 
-    const callCount = NodeGroup.prototype.updateNodes.callCount
+    const callCount = NodeGroup.prototype.startInterval.callCount
     spy.restore()
 
     assert.strictEqual(callCount, 1, 'should have been called once')
   })
 
-  it('should not call updateNodes when passed same data prop', () => {
+  it('should not call startInterval when passed same data prop', () => {
     const wrapper = mount(
       <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )
 
-    const spy = sinon.spy(NodeGroup.prototype, 'updateNodes')
+    const spy = sinon.spy(NodeGroup.prototype, 'startInterval')
 
     wrapper.setProps({ data })
 
-    const callCount = NodeGroup.prototype.updateNodes.callCount
+    const callCount = NodeGroup.prototype.startInterval.callCount
     spy.restore()
 
     assert.strictEqual(callCount, 0, 'should not have been called')

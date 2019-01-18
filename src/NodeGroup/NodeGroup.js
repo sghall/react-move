@@ -1,6 +1,3 @@
-// @flow weak
-/* eslint max-len: "off" */
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { interval } from 'd3-timer'
@@ -10,110 +7,123 @@ import { ENTER, UPDATE, LEAVE } from '../core/types'
 import { transition, stop } from '../core/transition'
 
 class NodeGroup extends Component {
-  static defaultProps = {
-    enter: () => {},
-    update: () => {},
-    leave: () => {},
+  state = {
+    nodeKeys: [],
+    nodeHash: {},
+    nodes: [],
+    data: null,
   }
 
-  state = {
-    nodes: [],
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.data !== prevState.data) {
+      const { data, keyAccessor, start, enter, update, leave } = nextProps
+      const { nodeKeys, nodeHash } = prevState
+
+      const keyIndex = {}
+  
+      for (let i = 0; i < nodeKeys.length; i++) {
+        keyIndex[nodeKeys[i]] = i
+      }
+  
+      const nextKeyIndex = {}
+      const nextNodeKeys = []
+  
+      for (let i = 0; i < data.length; i++) {
+        const d = data[i]
+        const k = keyAccessor(d, i)
+  
+        nextKeyIndex[k] = i
+        nextNodeKeys.push(k)
+  
+        if (keyIndex[k] === undefined) {
+          nodeHash[k] = new Node(k, d, ENTER)
+        }
+      }
+  
+      for (let i = 0; i < nodeKeys.length; i++) {
+        const k = nodeKeys[i]
+        const n = nodeHash[k]
+  
+        if (nextKeyIndex[k] !== undefined) {
+          n.updateData(data[nextKeyIndex[k]])
+          n.updateType(UPDATE)
+        } else {
+          n.updateType(LEAVE)
+        }
+      }
+  
+      const mergedNodeKeys = mergeKeys(
+        nodeKeys,
+        keyIndex,
+        nextNodeKeys,
+        nextKeyIndex,
+      )
+  
+      for (let i = 0; i < mergedNodeKeys.length; i++) {
+        const k = mergedNodeKeys[i]
+        const n = nodeHash[k]
+        const d = n.data
+  
+        if (n.type === ENTER) {
+          n.setState(start(d, nextKeyIndex[k]))
+          transition.call(n, enter(d, nextKeyIndex[k]))
+        } else if (n.type === LEAVE) {
+          transition.call(n, leave(d, keyIndex[k]))
+        } else {
+          transition.call(n, update(d, nextKeyIndex[k]))
+        }
+      }
+
+      const nextState = {
+        data,
+        nodes: mergedNodeKeys.map(key => {
+          return nodeHash[key]
+        }),
+        nodeHash,
+        nodeKeys: mergedNodeKeys
+      }
+
+      return nextState
+    }
+
+    return null
   }
 
   componentDidMount() {
-    this.updateNodes(this.props)
+    this.startInterval()
   }
 
-  componentWillReceiveProps(next) {
-    if (next.data !== this.props.data) {
-      this.updateNodes(next)
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data && !this.unmounting) {
+      this.startInterval()
+    }
+  }
+
+  startInterval() {
+    if (!this.interval) {
+      this.interval = interval(this.animate)
+    } else {
+      this.interval.restart(this.animate)
     }
   }
 
   componentWillUnmount() {
+    const { nodeKeys, nodeHash } = this.state
+
     this.unmounting = true
 
     if (this.interval) {
       this.interval.stop()
     }
 
-    this.nodeKeys.forEach(key => {
-      stop.call(this.nodeHash[key])
+    nodeKeys.forEach(key => {
+      stop.call(nodeHash[key])
     })
   }
 
-  // props: Props;
-
-  updateNodes(props) {
-    const { data, keyAccessor, start, enter, update, leave } = props
-
-    const currKeyIndex = {}
-    const currNodeKeys = this.nodeKeys
-    const currNodeKeysLength = this.nodeKeys.length
-
-    for (let i = 0; i < currNodeKeysLength; i++) {
-      currKeyIndex[currNodeKeys[i]] = i
-    }
-
-    const nextKeyIndex = {}
-    const nextNodeKeys = []
-
-    for (let i = 0; i < data.length; i++) {
-      const d = data[i]
-      const k = keyAccessor(d, i)
-
-      nextKeyIndex[k] = i
-      nextNodeKeys.push(k)
-
-      if (currKeyIndex[k] === undefined) {
-        this.nodeHash[k] = new Node(k, d, ENTER)
-      }
-    }
-
-    for (let i = 0; i < currNodeKeysLength; i++) {
-      const k = currNodeKeys[i]
-      const n = this.nodeHash[k]
-
-      if (nextKeyIndex[k] !== undefined) {
-        n.updateData(data[nextKeyIndex[k]])
-        n.updateType(UPDATE)
-      } else {
-        n.updateType(LEAVE)
-      }
-    }
-
-    this.nodeKeys = mergeKeys(
-      currNodeKeys,
-      currKeyIndex,
-      nextNodeKeys,
-      nextKeyIndex,
-    )
-
-    for (let i = 0; i < this.nodeKeys.length; i++) {
-      const k = this.nodeKeys[i]
-      const n = this.nodeHash[k]
-      const d = n.data
-
-      if (n.type === ENTER) {
-        n.setState(start(d, nextKeyIndex[k]))
-        transition.call(n, enter(d, nextKeyIndex[k]))
-      } else if (n.type === LEAVE) {
-        transition.call(n, leave(d, currKeyIndex[k]))
-      } else {
-        transition.call(n, update(d, nextKeyIndex[k]))
-      }
-    }
-
-    if (!this.interval) {
-      this.interval = interval(this.animate)
-    } else {
-      this.interval.restart(this.animate)
-    }
-
-    this.renderNodes()
-  }
-
   animate = () => {
+    const { nodeKeys, nodeHash } = this.state
+
     if (this.unmounting) {
       return
     }
@@ -121,18 +131,18 @@ class NodeGroup extends Component {
     let pending = false
 
     const nextNodeKeys = []
-    const length = this.nodeKeys.length
+    const length = nodeKeys.length
 
     for (let i = 0; i < length; i++) {
-      const k = this.nodeKeys[i]
-      const n = this.nodeHash[k]
+      const k = nodeKeys[i]
+      const n = nodeHash[k]
 
       if (n.TRANSITION_SCHEDULES) {
         pending = true
       }
 
       if (n.type === LEAVE && !n.TRANSITION_SCHEDULES) {
-        delete this.nodeHash[k]
+        delete nodeHash[k]
       } else {
         nextNodeKeys.push(k)
       }
@@ -142,30 +152,22 @@ class NodeGroup extends Component {
       this.interval.stop()
     }
 
-    this.nodeKeys = nextNodeKeys
-    this.renderNodes()
-  }
-
-  nodeHash = {}
-  nodeKeys = []
-  interval = null
-  unmounting = false
-
-  renderNodes() {
     this.setState(() => ({
-      nodes: this.nodeKeys.map(key => {
-        return this.nodeHash[key]
+      nodeKeys: nextNodeKeys,
+      nodes: nextNodeKeys.map(key => {
+        return nodeHash[key]
       }),
     }))
   }
+
+  interval = null
+  unmounting = false
 
   render() {
     const renderedChildren = this.props.children(this.state.nodes)
     return renderedChildren && React.Children.only(renderedChildren)
   }
 }
-
-
 
 NodeGroup.propTypes = {
   /**
@@ -196,6 +198,12 @@ NodeGroup.propTypes = {
    * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
    */
   children: PropTypes.func.isRequired,
+}
+
+NodeGroup.defaultProps = {
+  enter: () => {},
+  update: () => {},
+  leave: () => {},
 }
 
 export default NodeGroup

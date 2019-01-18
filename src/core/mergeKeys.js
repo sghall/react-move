@@ -1,5 +1,3 @@
-// @flow weak
-/* eslint no-continue: "off" */
 /* based on react-motion's mergeDiff (https://github.com/chenglou/react-motion) */
 
 function mergeKeys(currNodeKeys, currKeyIndex, nextNodeKeys, nextKeyIndex) {
