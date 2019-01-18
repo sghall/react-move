@@ -70,7 +70,7 @@ class ResponsiveDrawer extends React.Component {
     const { theme, classes, children } = this.props
 
     const drawer = (
-      <div>
+      <div style={{ marginBottom: 100 }}>
         <div className={classes.toolbar} />
         <Divider />
         <Typography variant="h6" className={classes.navTitle}>
@@ -129,9 +129,14 @@ class ResponsiveDrawer extends React.Component {
               <ListItemText primary="Simple" />
             </ListItem>
           </Link>
+          <Link to="/demos/animated-bar">
+            <ListItem button>
+              <ListItemText primary="Animated Bars" secondary={'CodeSandbox'} />
+            </ListItem>
+          </Link>
           <Link to="/demos/draggable-list">
             <ListItem button>
-              <ListItemText primary="Draggable List" />
+              <ListItemText primary="Draggable List" secondary={'CodeSandbox'} />
             </ListItem>
           </Link>
         </List>
