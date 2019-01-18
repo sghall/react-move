@@ -33,6 +33,8 @@ Beautiful, data-driven animations for React.
 
 ## Demos
 
+* [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5)[@animateddata](https://github.com/animateddata)
+* [CodeSandbox - Collapsible Tree](https://codesandbox.io/s/ww0xkyqonk)[@techniq](https://github.com/techniq)
 * [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
 * [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
 * [CodeSandbox - Animated Mount/Unmount](https://codesandbox.io/s/9z04rpypny)
