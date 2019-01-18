@@ -1,4 +1,3 @@
-// @flow weak
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
 export function getInterpolator(attr) {

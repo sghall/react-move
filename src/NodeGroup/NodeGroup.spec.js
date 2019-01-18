@@ -1,4 +1,3 @@
-// @flow weak
 /* eslint-env mocha */
 
 import React, { Component } from 'react'
@@ -10,8 +9,6 @@ import NodeGroup from './NodeGroup'
 const data = [1, 2, 3, 4, 5].map(d => ({ val: d }))
 
 class Node extends Component {
-  // eslint-disable-line
-
   render() {
     return <div />
   }

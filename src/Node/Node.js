@@ -1,7 +1,3 @@
-// @flow weak
-// Node constructor used to manage transitions internally
-// Basically a modified preact component (https://github.com/developit/preact)
-
 function extend(obj, props) {
   for (const i in props) {
     obj[i] = props[i] // eslint-disable-line no-param-reassign

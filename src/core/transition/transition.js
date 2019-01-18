@@ -1,5 +1,3 @@
-// @flow weak
-
 import { now as timeNow } from 'd3-timer'
 import tween from './tween'
 import schedule from './schedule'

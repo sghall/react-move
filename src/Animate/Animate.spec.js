@@ -1,4 +1,3 @@
-// @flow weak
 /* eslint-env mocha */
 
 import React, { Component } from 'react'
@@ -100,15 +99,11 @@ describe('<Animate />', () => {
     }, 500)
   })
 
-  it('should run leave transition when show changes to false', (done) => {
-    let result 
+  it('should run leave transition when show changes to false', done => {
+    let result
 
     const wrapper = mount(
-      <Animate
-        show
-        start={{ opacity: 1 }}
-        leave={{ opacity: [0] }}
-      >
+      <Animate show start={{ opacity: 1 }} leave={{ opacity: [0] }}>
         {state => {
           result = state
           return null

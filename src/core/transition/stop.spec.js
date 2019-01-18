@@ -1,6 +1,4 @@
-// @flow weak
 /* eslint-env mocha */
-/* eslint react/no-multi-comp:0 */
 
 import React, { Component } from 'react'
 import { assert } from 'chai'

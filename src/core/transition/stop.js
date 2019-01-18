@@ -1,5 +1,3 @@
-// @flow weak
-
 export default function stop() {
   const ts = this.TRANSITION_SCHEDULES
 
