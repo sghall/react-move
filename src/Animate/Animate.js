@@ -1,99 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { interval } from 'd3-timer'
-import { transition, stop } from '../core/transition'
+import NodeGroup from '../NodeGroup'
 
-class Animate extends Component {
-  static defaultProps = {
-    show: true,
-  }
+const keyAccessor = () => '$$key$$'
 
-  state =
-    typeof this.props.start === 'function'
-      ? this.props.start()
-      : this.props.start
+function Animate(props) {
+  const { show, start, enter, update, leave, children } = props
+  const data = typeof start === 'function' ? start() : start
 
-  componentWillMount() {
-    if (this.props.show === true) {
-      this.renderNull = false
-    }
-  }
+  return (
+    <NodeGroup
+      data={show ? [data] : []}
+      start={() => data}
+      keyAccessor={keyAccessor}
+      enter={typeof enter === 'function' ? enter : () => enter}
+      update={typeof update === 'function' ? update : () => update}
+      leave={typeof leave === 'function' ? leave : () => leave}
+    >
+      {nodes => {
+        if (!nodes[0]) {
+          return null
+        }
 
-  componentDidMount() {
-    const { enter, show } = this.props
-
-    if (enter && show === true) {
-      transition.call(this, typeof enter === 'function' ? enter() : enter)
-    }
-  }
-
-  componentWillReceiveProps(next) {
-    const { show, start, enter, update, leave } = next
-
-    if (
-      this.props.show === false &&
-      this.renderNull === true &&
-      show === true
-    ) {
-      this.renderNull = false
-
-      this.setState(
-        () => (typeof start === 'function' ? start() : start),
-        () => {
-          if (enter) {
-            transition.call(this, typeof enter === 'function' ? enter() : enter)
-          }
-        },
-      )
-    } else if (this.props.show === true && show === false) {
-      if (leave) {
-        transition.call(this, typeof leave === 'function' ? leave() : leave)
-        this.interval = interval(this.checkTransitionStatus)
-      } else {
-        this.renderNull = true
-        this.setState(prevState => prevState) // force render as null
-      }
-    } else if (show === true && update) {
-      if (this.interval) {
-        this.interval.stop()
-      }
-
-      transition.call(this, typeof update === 'function' ? update() : update)
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.interval) {
-      this.interval.stop()
-    }
-
-    stop.call(this)
-  }
-
-  checkTransitionStatus = () => {
-    if (!this.TRANSITION_SCHEDULES) {
-      this.interval.stop()
-
-      if (this.props.show === false) {
-        this.renderNull = true
-        this.setState(prevState => prevState) // force render as null
-      }
-    }
-  }
-
-  // props: Props;
-
-  interval = null
-  renderNull = true
-
-  render() {
-    if (this.renderNull === true) {
-      return null
-    }
-
-    const renderedChildren = this.props.children(this.state)
-    return renderedChildren && React.Children.only(renderedChildren)
-  }
+        const renderedChildren = children(nodes[0].state)
+        return renderedChildren && React.Children.only(renderedChildren)
+      }}
+    </NodeGroup>
+  )
 }
 
 Animate.propTypes = {
@@ -133,6 +66,10 @@ Animate.propTypes = {
    * A function that renders the node.  The function is passed the data and state.
    */
   children: PropTypes.func.isRequired,
+}
+
+Animate.defaultProps = {
+  show: true,
 }
 
 export default Animate
