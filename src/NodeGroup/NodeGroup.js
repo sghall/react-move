@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { polyfill } from 'react-lifecycles-compat'
 import PropTypes from 'prop-types'
 import { interval } from 'd3-timer'
 import Node from '../Node'
@@ -203,5 +204,7 @@ NodeGroup.defaultProps = {
   update: () => {},
   leave: () => {},
 }
+
+polyfill(NodeGroup)
 
 export default NodeGroup
