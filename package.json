@@ -1,6 +1,6 @@
 {
   "name": "react-move",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "private": true,
   "description": "Beautiful, data-driven animations for React.",
   "main": "./index.js",
@@ -51,7 +51,7 @@
     "pretty-docs": "prettier-eslint docs/src/**/*.js --write --no-semi --single-quote --trailing-comma=all --print-width 80"
   },
   "peerDependencies": {
-    "react": "^16.3.0"
+    "react": "^15.4.0 || ^16.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.2.0",
