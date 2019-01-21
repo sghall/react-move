@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { interval } from 'd3-timer'
-import Node from '../Node'
+import { interval } from '../core/kapellmeister'
+import Node from '../core/Node'
 import mergeKeys from '../core/mergeKeys'
 import { ENTER, UPDATE, LEAVE } from '../core/types'
-import { transition, stop } from '../core/transition'
 
 class NodeGroup extends Component {
   state = {
@@ -36,7 +35,11 @@ class NodeGroup extends Component {
         nextNodeKeys.push(k)
 
         if (keyIndex[k] === undefined) {
-          nodeHash[k] = new Node(k, d, ENTER)
+          const node = new Node()
+          node.key = k
+          node.data = d
+          node.type = ENTER
+          nodeHash[k] = node
         }
       }
 
@@ -45,10 +48,10 @@ class NodeGroup extends Component {
         const n = nodeHash[k]
 
         if (nextKeyIndex[k] !== undefined) {
-          n.updateData(data[nextKeyIndex[k]])
-          n.updateType(UPDATE)
+          n.data = data[nextKeyIndex[k]]
+          n.type = UPDATE
         } else {
-          n.updateType(LEAVE)
+          n.type = LEAVE
         }
       }
 
@@ -66,11 +69,11 @@ class NodeGroup extends Component {
 
         if (n.type === ENTER) {
           n.setState(start(d, nextKeyIndex[k]))
-          transition.call(n, enter(d, nextKeyIndex[k]))
+          n.animate(enter(d, nextKeyIndex[k]))
         } else if (n.type === LEAVE) {
-          transition.call(n, leave(d, keyIndex[k]))
+          n.animate(leave(d, keyIndex[k]))
         } else {
-          transition.call(n, update(d, nextKeyIndex[k]))
+          n.animate(update(d, nextKeyIndex[k]))
         }
       }
 
@@ -115,7 +118,7 @@ class NodeGroup extends Component {
     }
 
     nodeKeys.forEach(key => {
-      stop.call(nodeHash[key])
+      nodeHash[key].stopAnimating()
     })
   }
 
@@ -135,11 +138,13 @@ class NodeGroup extends Component {
       const k = nodeKeys[i]
       const n = nodeHash[k]
 
-      if (n.TRANSITION_SCHEDULES) {
+      const isAnimating = n.isAnimating()
+
+      if (isAnimating) {
         pending = true
       }
 
-      if (n.type === LEAVE && !n.TRANSITION_SCHEDULES) {
+      if (n.type === LEAVE && !isAnimating) {
         delete nodeHash[k]
       } else {
         nextNodeKeys.push(k)
