@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { interval } from '../core/kapellmeister'
+import { interval } from 'kapellmeister'
 import Node from '../core/Node'
 import mergeKeys from '../core/mergeKeys'
 import { ENTER, UPDATE, LEAVE } from '../core/types'
@@ -69,11 +69,11 @@ class NodeGroup extends Component {
 
         if (n.type === ENTER) {
           n.setState(start(d, nextKeyIndex[k]))
-          n.animate(enter(d, nextKeyIndex[k]))
+          n.transition(enter(d, nextKeyIndex[k]))
         } else if (n.type === LEAVE) {
-          n.animate(leave(d, keyIndex[k]))
+          n.transition(leave(d, keyIndex[k]))
         } else {
-          n.animate(update(d, nextKeyIndex[k]))
+          n.transition(update(d, nextKeyIndex[k]))
         }
       }
 
@@ -118,7 +118,7 @@ class NodeGroup extends Component {
     }
 
     nodeKeys.forEach(key => {
-      nodeHash[key].stopAnimating()
+      nodeHash[key].stopTransitions()
     })
   }
 
@@ -138,13 +138,13 @@ class NodeGroup extends Component {
       const k = nodeKeys[i]
       const n = nodeHash[k]
 
-      const isAnimating = n.isAnimating()
+      const isTransitioning = n.isTransitioning()
 
-      if (isAnimating) {
+      if (isTransitioning) {
         pending = true
       }
 
-      if (n.type === LEAVE && !isAnimating) {
+      if (n.type === LEAVE && !isTransitioning) {
         delete nodeHash[k]
       } else {
         nextNodeKeys.push(k)
