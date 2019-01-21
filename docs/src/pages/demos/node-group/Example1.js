@@ -1,4 +1,3 @@
-// @flow weak
 // example from https://bl.ocks.org/mbostock/3885705
 
 import React, { PureComponent } from 'react'
@@ -79,6 +78,8 @@ class Example extends PureComponent {
       .domain(sorted.map((d) => d.letter))
       .padding(0.1)
 
+    const width = scale.bandwidth()
+
     return (
       <div style={{ width: '100%' }}>
         <button onClick={this.update}>
@@ -92,7 +93,6 @@ class Example extends PureComponent {
             start={() => ({
               opacity: 1e-6,
               x: 1e-6,
-              width: scale.bandwidth(),
             })}
 
             enter={(d) => ({
@@ -104,7 +104,6 @@ class Example extends PureComponent {
             update={(d, i) => ({
               opacity: [0.7],
               x: [scale(d.letter)],
-              width: [scale.bandwidth()],
               timing: { duration: 750, delay: i * 50, ease: easeExpInOut },
             })}
 
@@ -116,26 +115,23 @@ class Example extends PureComponent {
           >
             {(nodes) => (
               <g>
-                {nodes.map(({ key, data, state }) => {
-                  const { x, ...rest } = state
-
-                  return (
-                    <g key={key} transform={`translate(${x},0)`}>
-                      <rect
-                        height={dims[1] - y(data.frequency)}
-                        y={y(data.frequency)}
-                        fill="#00a7d8"
-                        {...rest}
-                      />
-                      <text
-                        x={scale.bandwidth() / 2}
-                        y={dims[1] + 15}
-                        dx="-.35em"
-                        fill="#333"
-                      >{data.letter}</text>
-                    </g>
-                  )
-                })}
+                {nodes.map(({ key, data, state: { x, opacity } }) => (
+                  <g key={key} transform={`translate(${x},0)`}>
+                    <rect
+                      height={dims[1] - y(data.frequency)}
+                      y={y(data.frequency)}
+                      fill="#00a7d8"
+                      width={width}
+                      opacity={opacity}
+                    />
+                    <text
+                      x={scale.bandwidth() / 2}
+                      y={dims[1] + 15}
+                      dx="-.35em"
+                      fill="#333"
+                    >{data.letter}</text>
+                  </g>
+                ))}
               </g>
             )}
           </NodeGroup>
