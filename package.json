@@ -57,8 +57,7 @@
     "@babel/runtime": "^7.2.0",
     "d3-interpolate": "^1.3.2",
     "d3-timer": "^1.0.9",
-    "prop-types": "^15.6.2",
-    "react-lifecycles-compat": "^3.0.4"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
