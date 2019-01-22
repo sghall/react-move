@@ -71,7 +71,7 @@ $ npm install react-move
 
 # Documentation
 
-The docs below are for version **2.x.x** of React-Move.
+The docs below are for version **3.x.x** of React-Move.
 
 Older versions:
 
