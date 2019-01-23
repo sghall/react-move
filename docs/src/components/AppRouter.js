@@ -61,7 +61,7 @@ export default function AppRouter() {
           <Route
             title="NodeGroup"
             path="/component-api/node-group"
-            code={srcContext('./NodeGroup/NodeGroup')}
+            code={srcContext('./createNodeGroup/index')}
             content={requireMarkdown('./component-api/node-group.md')}
             component={ComponentDoc}
             nav
@@ -69,7 +69,7 @@ export default function AppRouter() {
           <Route
             title="Animate"
             path="/component-api/animate"
-            code={srcContext('./Animate/Animate')}
+            code={srcContext('./createAnimate/index')}
             content={requireMarkdown('./component-api/animate.md')}
             component={ComponentDoc}
             nav
