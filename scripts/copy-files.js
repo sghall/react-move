@@ -94,8 +94,8 @@ const files = ['README.md', 'LICENSE']
 const types = [
   ['src/index.d.ts', 'index.d.ts'],
   ['src/core/index.d.ts', 'core/index.d.ts'],
-  ['src/configAnimate/index.d.ts', 'configAnimate/index.d.ts'],
-  ['src/configNodeGroup/index.d.ts', 'configNodeGroup/index.d.ts'],
+  ['src/createAnimate/index.d.ts', 'createAnimate/index.d.ts'],
+  ['src/createNodeGroup/index.d.ts', 'createNodeGroup/index.d.ts'],
 ]
 
 Promise.all(files.map(file => copyFile(file)))
