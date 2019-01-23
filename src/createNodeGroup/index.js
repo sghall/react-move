@@ -6,7 +6,7 @@ import { ENTER, UPDATE, LEAVE } from '../core/types'
 
 export default function createNodeGroup(getInterpolater) {
   if (!getInterpolater) {
-    throw new Error('getInterpolator is required.')
+    throw new Error('[react-move] getInterpolator is required.')
   }
 
   class Node extends BaseNode {
