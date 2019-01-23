@@ -5,6 +5,7 @@ import {
   PlainObject,
   PlainObjectFunction,
 } from '../core';
+import { GetInterpolator } from '..'
 
 export interface IAnimateProps {
   /**
@@ -35,4 +36,6 @@ export interface IAnimateProps {
 
 declare class Animate extends React.Component<IAnimateProps> { }
 
-export default Animate;
+type createAnimate = (func: GetInterpolator, displayName: string) => Animate
+
+export default createAnimate;

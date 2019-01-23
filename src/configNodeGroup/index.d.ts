@@ -3,6 +3,7 @@ import {
   Transition,
   PlainObject,
 } from '../core';
+import { GetInterpolator } from '..'
 
 export interface INodeGroupProps {
   /**
@@ -35,6 +36,8 @@ export interface INodeGroupProps {
   children: (nodes: Array<any>) => React.ReactElement<any>;
 }
 
-declare class NodeGroup extends React.Component<INodeGroupProps> { }
+export declare class NodeGroup extends React.Component<INodeGroupProps> { }
 
-export default NodeGroup;
+type createNodeGroup = (func: GetInterpolator, displayName: string) => NodeGroup
+
+export default createNodeGroup;
