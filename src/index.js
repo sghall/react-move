@@ -1,2 +1,2 @@
-export { default as configAnimate } from './configAnimate'
-export { default as configNodeGroup } from './configNodeGroup'
+export { default as createAnimate } from './createAnimate'
+export { default as createNodeGroup } from './createNodeGroup'

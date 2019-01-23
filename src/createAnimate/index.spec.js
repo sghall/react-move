@@ -5,9 +5,9 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import sinon from 'sinon'
 import { assert } from 'chai'
 import { mount } from 'enzyme'
-import configAnimate from '.'
+import createAnimate from '.'
 
-const Animate = configAnimate(function getInterpolator(attr, begValue, endValue) {
+const Animate = createAnimate(function getInterpolator(attr, begValue, endValue) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }

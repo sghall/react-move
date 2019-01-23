@@ -5,9 +5,9 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import sinon from 'sinon'
 import { assert } from 'chai'
 import { shallow, mount } from 'enzyme'
-import configNodeGroup from '.'
+import createNodeGroup from '.'
 
-const NodeGroup = configNodeGroup(function getInterpolator(attr, begValue, endValue) {
+const NodeGroup = createNodeGroup(function getInterpolator(attr, begValue, endValue) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }

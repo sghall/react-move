@@ -4,7 +4,7 @@ import { BaseNode, interval } from 'kapellmeister'
 import mergeKeys from '../core/mergeKeys'
 import { ENTER, UPDATE, LEAVE } from '../core/types'
 
-export default function configNodeGroup(getInterpolater) {
+export default function createNodeGroup(getInterpolater) {
   class Node extends BaseNode {
     getInterpolator = getInterpolater
   }

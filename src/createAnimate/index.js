@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import configNodeGroup from '../configNodeGroup'
+import createNodeGroup from '../createNodeGroup'
 
 const keyAccessor = () => '$$key$$'
 
-export default function configAnimate(getInterpolater) {
-  const NodeGroup = configNodeGroup(getInterpolater)
+export default function createAnimate(getInterpolater) {
+  const NodeGroup = createNodeGroup(getInterpolater)
 
   return class Animate extends Component {
     static propTypes = {
