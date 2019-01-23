@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import Animate from 'react-move/Animate'
+import Animate from 'docs/src/components/Animate'
 import { easeExpOut } from 'd3-ease'
 
 const trackStyles = {

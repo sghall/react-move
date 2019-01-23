@@ -1,7 +1,7 @@
 // example from https://bl.ocks.org/mbostock/3885705
 
 import React, { PureComponent } from 'react'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
 import { scaleLinear, scaleBand } from 'd3-scale'
 import { easeExpInOut } from 'd3-ease'
