@@ -1,12 +1,12 @@
 {
   "build/dist/react-move.js": {
-    "bundled": 76157,
-    "minified": 30739,
-    "gzipped": 11133
+    "bundled": 55930,
+    "minified": 17892,
+    "gzipped": 6100
   },
   "build/dist/react-move.min.js": {
-    "bundled": 22439,
-    "minified": 22384,
-    "gzipped": 8488
+    "bundled": 9641,
+    "minified": 9602,
+    "gzipped": 3518
   }
 }
