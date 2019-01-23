@@ -11,5 +11,5 @@ export {
   TransitionFunction
 } from './core';
 
-export { default as Animate } from './Animate';
-export { default as NodeGroup } from './NodeGroup';
+export { default as configAnimate } from './configAnimate';
+export { default as configNodeGroup } from './configNodeGroup';
