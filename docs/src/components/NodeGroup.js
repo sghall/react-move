@@ -1,4 +1,4 @@
-import createNodeGroup from 'react-move'
+import { createNodeGroup } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
 export default createNodeGroup(function getInterpolator(attr, begValue, endValue) {
