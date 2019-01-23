@@ -7,4 +7,4 @@ export default createNodeGroup(function getInterpolator(attr, begValue, endValue
   }
 
   return interpolate(begValue, endValue)
-})
+}, 'DocsNodeGroup')

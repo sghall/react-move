@@ -4,10 +4,12 @@ import createNodeGroup from '../createNodeGroup'
 
 const keyAccessor = () => '$$key$$'
 
-export default function createAnimate(getInterpolater) {
-  const NodeGroup = createNodeGroup(getInterpolater)
+export default function createAnimate(getInterpolater, displayName = 'Animate') {
+  const NodeGroup = createNodeGroup(getInterpolater, `${displayName}(NodeGroup)`)
 
   return class Animate extends Component {
+    static displayName = displayName
+
     static propTypes = {
       /**
        * Boolean value that determines if the child should be rendered or not.

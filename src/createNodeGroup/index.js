@@ -4,7 +4,7 @@ import { BaseNode, interval } from 'kapellmeister'
 import mergeKeys from '../core/mergeKeys'
 import { ENTER, UPDATE, LEAVE } from '../core/types'
 
-export default function createNodeGroup(getInterpolater) {
+export default function createNodeGroup(getInterpolater, displayName = 'NodeGroup') {
   if (!getInterpolater) {
     throw new Error('[react-move] getInterpolator is required.')
   }
@@ -14,6 +14,8 @@ export default function createNodeGroup(getInterpolater) {
   }
 
   return class NodeGroup extends Component {
+    static displayName = displayName
+
     static propTypes = {
       /**
        * An array. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.

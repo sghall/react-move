@@ -7,4 +7,4 @@ export default createAnimate(function getInterpolator(attr, begValue, endValue) 
   }
 
   return interpolate(begValue, endValue)
-})
+}, 'DocsAnimate')
