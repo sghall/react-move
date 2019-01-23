@@ -1,12 +1,25 @@
 /* eslint-env mocha */
 
 import React, { Component } from 'react'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import sinon from 'sinon'
 import { assert } from 'chai'
 import { shallow, mount } from 'enzyme'
-import NodeGroup from './NodeGroup'
+import configNodeGroup from '.'
 
-const data = [1, 2, 3, 4, 5].map(d => ({ val: d }))
+const NodeGroup = configNodeGroup(function getInterpolator(attr, begValue, endValue) {
+  if (attr === 'transform') {
+    return interpolateTransformSvg(begValue, endValue)
+  }
+
+  return interpolate(begValue, endValue)
+})
+
+function getData() {
+  return [1, 2, 3, 4, 5].map(d => ({ val: d, key: `key-${d}` }))
+}
+
+const keyAccessor = d => d.key
 
 class Node extends Component {
   render() {
@@ -25,7 +38,7 @@ const renderChildren = nodes => (
 describe('<NodeGroup />', () => {
   it('should render nodes wrapped in the outer element', () => {
     const wrapper = shallow(
-      <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
+      <NodeGroup data={getData()} keyAccessor={keyAccessor} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )
@@ -34,8 +47,10 @@ describe('<NodeGroup />', () => {
   })
 
   it('should render a node for each data item', () => {
+    const data = getData()
+
     const wrapper = mount(
-      <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
+      <NodeGroup data={data} keyAccessor={keyAccessor} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )
@@ -47,35 +62,41 @@ describe('<NodeGroup />', () => {
     )
   })
 
-  // it('should remove nodes that are not transitioning', (done) => {
-  //   const wrapper = mount(
-  //     <NodeGroup
-  //       data={data}
-  //       keyAccessor={(d) => d.val}
-  //       start={() => ({})}
-  //     >
-  //       {renderChildren}
-  //     </NodeGroup>,
-  //   );
+  it('should remove nodes that are not transitioning', (done) => {
+    const data = getData()
 
-  //   wrapper.setProps({ data: data.slice(1) });
+    const wrapper = mount(
+      <NodeGroup
+        data={data}
+        keyAccessor={keyAccessor}
+        start={() => ({})}
+      >
+        {renderChildren}
+      </NodeGroup>,
+    )
 
-  //   setTimeout(() => {
-  //     assert.strictEqual(wrapper.find(Node).length, data.length - 1, 'should be equal');
-  //     done();
-  //   }, msPerFrame * 2);
-  // });
+    const data2 = data.slice(1)
+
+    wrapper.setProps({ data: data2 })
+
+    setTimeout(() => {
+      assert.strictEqual(wrapper.state().nodes.length, data2.length)
+      done()
+    }, 500)
+  })
 
   it('should call startInterval when given new data prop', () => {
+    const data = getData()
+
     const wrapper = mount(
-      <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
+      <NodeGroup data={data} keyAccessor={keyAccessor} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )
 
     const spy = sinon.spy(NodeGroup.prototype, 'startInterval')
 
-    wrapper.setProps({ data: [{ val: 1 }, { val: 2 }] })
+    wrapper.setProps({ data: data.slice(0, 2) })
 
     const callCount = NodeGroup.prototype.startInterval.callCount
     spy.restore()
@@ -84,6 +105,8 @@ describe('<NodeGroup />', () => {
   })
 
   it('should not call startInterval when passed same data prop', () => {
+    const data = getData()
+
     const wrapper = mount(
       <NodeGroup data={data} keyAccessor={d => d.val} start={() => ({})}>
         {renderChildren}

@@ -1,10 +1,19 @@
 /* eslint-env mocha */
 
 import React, { Component } from 'react'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import sinon from 'sinon'
 import { assert } from 'chai'
 import { mount } from 'enzyme'
-import Animate from './Animate'
+import configAnimate from '.'
+
+const Animate = configAnimate(function getInterpolator(attr, begValue, endValue) {
+  if (attr === 'transform') {
+    return interpolateTransformSvg(begValue, endValue)
+  }
+
+  return interpolate(begValue, endValue)
+})
 
 class Node extends Component {
   render() {
