@@ -215,7 +215,7 @@ You might use namespaces like so:
 
 #### Starting state in NodeGroup
 
-In `NodeGroup` you are working with an array of items and you pass a start prop (a function) that receives the data item and its index.  The start prop will be called when that data item (identified by its key) enters.  Note it could leave and come back and that prop will be called again.  Immediately after the starting state is set your enter transition is called allowing you to transform that state.
+In `NodeGroup` you are working with an array of items and you pass a start prop (a function) that receives the data item and its index.  The start prop will be called when that data item (identified by its key) enters.  Note it could leave and come back and that prop will be called again.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
 ```js
 <NodeGroup
@@ -237,7 +237,7 @@ In `NodeGroup` you are working with an array of items and you pass a start prop 
 
 #### Starting state in Animate
 
-In `Animate` you are animating a single item and pass a start prop that is an object or a function.  The start prop will be called when that the item enters.  Note it could leave and come back by toggling the show prop.  Immediately after the starting state is set your enter transition is called allowing you to transform that state.
+In `Animate` you are animating a single item and pass a start prop that is an object or a function.  The start prop will be called when that the item enters.  Note it could leave and come back by toggling the show prop.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
 ```js
 <Animate
@@ -309,69 +309,13 @@ To have different timing for some keys use an array of config objects:
 ]
 ```
 
-## < NodeGroup />
-
-The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
-
-### Component Props
-
-| Name                                               | Type     | Default  | Description                                                                                                                                                                              |
-| :------------------------------------------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <span style="color: #31a148">data \*</span>        | Array    |          | An array of data objects. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.                                                                |
-| <span style="color: #31a148">keyAccessor \*</span> | function |          | Function that returns a string key given a data object and its index. Used to track which nodes are entering, updating and leaving.                                                      |
-| <span style="color: #31a148">start \*</span>       | function |          | A function that returns the starting state. The function is passed the data and index and must return an object.                                                                         |
-| enter                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on enter. The function is passed the data and index.                                 |
-| update                                             | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on update. The function is passed the data and index.                                |
-| leave                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on leave. The function is passed the data and index.                                 |
-| <span style="color: #31a148">children \*</span>    | function |          | A function that renders the nodes. It should accept an array of nodes as its only argument. Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'. |
-
-* required props
-
-### Usage
-
-A typical usage of NodeGroup looks like this...
-
-```js
-<NodeGroup
-  data={this.state.data} // an array (required)
-  keyAccessor={(d) => d.name} // function to get the key of each object (required)
-
-  start={(data, index) => ({ // returns the starting state of node (required)
-    ...
-  })}
-
-  enter={(data, index) => ({ // how to transform node state on enter - runs immediately after start (optional)
-    ...
-  })}
-
-  update={(data, index) => ({ // how to transform node state on update - runs each time data updates and key remains (optional)
-    ...
-  })}
-
-  leave={(data, index) => ({ // how to transform node state on leave - run when data updates and key is gone (optional)
-    ...
-  })}
->
-  {(nodes) => ( // the only child of NodeGroup should be a function to render the nodes (required)
-    ...
-      {nodes.map(({ key, data, state }) => {
-        ...
-      })}
-    ...
-  )}
-</NodeGroup>
-```
-
-### Transitions
-
-Go to [live examples, code and docs](https://react-move.js.org)!
+### Example Transitions in NodeGroup
 
 ```js
 <NodeGroup
   data={this.state.data}
   keyAccessor={(d) => d.name}
 
-  // start - starting state of the node. Just return an object.
   start={(data, index) => ({
     opacity: 1e-6,
     x: 1e-6,
@@ -379,12 +323,53 @@ Go to [live examples, code and docs](https://react-move.js.org)!
     width: scale.bandwidth(),
   })}
 
-  // enter - return an object or array of objects describing how to transform the state.
   enter={(data, index) => ({
     opacity: [0.5], // transition opacity on enter
     x: [scale(data.name)], // transition x on on enter
     timing: { duration: 1500 }, // timing for transitions
   })}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+>
+  {(nodes) => (
+    ...
+  )}
+</NodeGroup>
+```
+
+Using an array of config objects:
+```js
+import { easeQuadInOut } from 'd3-ease';
+
+...
+
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={(data, index) => ({
+    opacity: 1e-6,
+    x: 1e-6,
+    fill: 'green',
+    width: scale.bandwidth(),
+  })}
+
+  enter={(data, index) => ([ // An array
+    {
+      opacity: [0.5], // transition opacity on enter
+      timing: { duration: 1000 }, // timing for transition
+    },
+    {
+      x: [scale(data.name)], // transition x on on enter
+      timing: { delay: 750, duration: 1500, ease: easeQuadInOut }, // timing for transition
+    },
+  ])}
 
   update={(data) => ({
     ...
@@ -421,50 +406,56 @@ For the ease key, just provide the function. You can use any easing function, li
 
 [List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
 
-## Passing an array of objects
 
-Go to [live examples, code and docs](https://react-move.js.org)!
 
-Each object can define its own timing and it will be applied to any transitions in the object.
+## < NodeGroup />
+
+The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
+
+### Component Props
+
+| Name                                               | Type     | Default  | Description                                                                                                                                                                              |
+| :------------------------------------------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span style="color: #31a148">data \*</span>        | Array    |          | An array of data objects. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.                                                                |
+| <span style="color: #31a148">keyAccessor \*</span> | function |          | Function that returns a string key given a data object and its index. Used to track which nodes are entering, updating and leaving.                                                      |
+| <span style="color: #31a148">start \*</span>       | function |          | A function that returns the starting state. The function is passed the data and index and must return an object.                                                                         |
+| enter                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on enter. The function is passed the data and index.                                 |
+| update                                             | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on update. The function is passed the data and index.                                |
+| leave                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on leave. The function is passed the data and index.                                 |
+| <span style="color: #31a148">children \*</span>    | function |          | A function that renders the nodes. It should accept an array of nodes as its only argument. Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'. |
+
+* required props
+
+### Exmaple Usage
+
+A typical usage of NodeGroup looks like this...
 
 ```js
-import { easeQuadInOut } from 'd3-ease';
-
-...
-
 <NodeGroup
-  data={this.state.data}
-  keyAccessor={(d) => d.name}
+  data={this.state.data} // an array (required)
+  keyAccessor={(d) => d.name} // function to get the key of each object (required)
 
-  // start - starting state of the node. Just return an object.
-  start={(data, index) => ({
-    opacity: 1e-6,
-    x: 1e-6,
-    fill: 'green',
-    width: scale.bandwidth(),
-  })}
-
-  // enter - return an object or array of objects describing how to transform the state.
-  enter={(data, index) => ([ // An array
-    {
-      opacity: [0.5], // transition opacity on enter
-      timing: { duration: 1000 }, // timing for transition
-    },
-    {
-      x: [scale(data.name)], // transition x on on enter
-      timing: { delay: 750, duration: 1500, ease: easeQuadInOut }, // timing for transition
-    },
-  ])}
-
-  update={(data) => ({
+  start={(data, index) => ({ // returns the starting state of node (required)
     ...
   })}
 
-  leave={() => ({
+  enter={(data, index) => ({ // how to transform node state on enter - runs immediately after start (optional)
+    ...
+  })}
+
+  update={(data, index) => ({ // how to transform node state on update - runs each time data updates and key remains (optional)
+    ...
+  })}
+
+  leave={(data, index) => ({ // how to transform node state on leave - run when data updates and key is gone (optional)
     ...
   })}
 >
-  {(nodes) => (
+  {(nodes) => ( // the only child of NodeGroup should be a function to render the nodes (required)
+    ...
+      {nodes.map(({ key, data, state }) => {
+        ...
+      })}
     ...
   )}
 </NodeGroup>
