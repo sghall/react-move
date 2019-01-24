@@ -13,44 +13,6 @@ Beautiful, data-driven animations for React.
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-move)
 
-## React-Move 4.0 is here!!!
-
-Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components.
-
-### 4.0 Highlights
-- React-Move is now just 3.5kb (gzipped)!!
-- Application developers and package maintainers can now make much smaller bundles
-- You can now use any interpolator you want which opens new creative doors for designers
-- Tons of performance improvements
-
-### Upgrading to 4.0
-
-This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports exactly two functions (HOCs):
-- createNodeGroup(getInterpolator, displayName) => NodeGroup
-- createAnimate(getInterpolator, displayName) => Animate
-
-The big news on this release is the `getInterpolator ` function. To get exactly the same components as in react-move 2.x.x and 3.x.x just create them locally like this:
-
-```js
-import { createNodeGroup, createAnimate } from 'react-move'
-import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
-
-function getInterpolator(attr, begValue, endValue) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg(begValue, endValue)
-  }
-
-  return interpolate(begValue, endValue)
-}
-
-export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
-export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
-
-```
-
-
-
-
 ### Go to [live examples, code and docs](https://react-move.js.org)!
 
 ## Features
