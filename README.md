@@ -13,12 +13,29 @@ Beautiful, data-driven animations for React.
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-move)
 
-## React-Move 4.0 is here!!!
+## Features
+
+* Animate HTML, SVG & React-Native
+* Fine-grained control of delay, duration and easing
+* Animation lifecycle events: start, interrupt, end
+* Custom tweening functions
+* Awesome documentation and lots of examples
+* Supports TypeScript
+
+## Installation
+
+```bash
+$ yarn add react-move
+# or
+$ npm install react-move
+```
+
+## React Move 4.0 is here!!!
 
 Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
 
 ### 4.0 Highlights
-- React-Move is now just **3.5kb (gzipped)! Almost 60% smaller.**
+- React Move is now just **3.5kb (gzipped)! Almost 60% smaller.**
 - Application developers and package maintainers can now make much smaller bundles.
 - You can now use any interpolator you want which opens new creative doors for designers.
 - Tons of performance improvements. 🚀 
@@ -26,11 +43,11 @@ Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 
 
 ### Upgrading to 4.0
 
-This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports just two factory functions:
+This version of React Move breaks the hard dependency on d3-interpolate.  React Move now exports just two factory functions:
 - createNodeGroup(getInterpolator, displayName) => NodeGroup
 - createAnimate(getInterpolator, displayName) => Animate
 
-The big news on this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. To start, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
+The big news in this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. To start, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
 
 ```js
 // THIS IS HOW YOU UPGRADE TO 4.0
@@ -54,7 +71,7 @@ export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // d
 
 The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
-The interpolate exported from d3-interpolate function includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
+The `interpolate` function exported from d3-interpolate includes a lot of code (e.g. d3-color) that may not be needed for your project. For example, if you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
 ```js
 import { createNodeGroup, createAnimate } from 'react-move'
@@ -69,17 +86,7 @@ export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName
 
 ```
 
-Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can also use any interpolation library or write your own. 
-
-## Features
-
-* Animate HTML, SVG & React-Native
-* Fine-grained control of delay, duration and easing
-* Animation lifecycle events: start, interrupt, end
-* Custom tweening functions
-* Awesome documentation and lots of examples
-* Supported in React, React-Native & React-VR
-* Supports TypeScript
+Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can use any interpolation library or write your own. 
 
 ## Demos
 
@@ -90,47 +97,19 @@ Of course you can create as many custom components as you want and organize them
 * [CodeSandbox - Animated Mount/Unmount](https://codesandbox.io/s/9z04rpypny)
 * [Examples](https://react-move.js.org)
 
-## React-Move vs React-Motion
-
-* React-move allows you to define your animations using durations, delays and ease functions.
-  In react-motion you use spring configurations to define your animations.
-
-* React-move is designed to plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
-  With react-motion you can only interpolate numbers so you have to do a bit more work use colors, paths, etc.
-
-* In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
-  React-motion allows you to define a spring configuration for each key in the "style" object.
-
-* React-move has lifecycle events on its transitions.
-  You can pass a function to be called on transition start, interrupt or end.
-  React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
-
-* React-move also allows you to pass your own custom tween functions. It's all springs in react-motion.
-
-## Questions? Ideas? Chat with us!
-
-Sign up for the [React-Tools Spectrum Community](https://spectrum.chat/react-move)!
-
-## Installation
-
-```bash
-$ yarn add react-move
-# or
-$ npm install react-move
-```
-
 # Documentation
 
-The docs below are for version **3.x.x** of React-Move.
+The docs below are for version **4.x.x** of React-Move.
 
 Older versions:
 
 * [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
-
+* [Version 2.x.x](https://github.com/react-tools/react-move/tree/v2.9.1)
+* [Version 3.x.x](https://github.com/react-tools/react-move/tree/v3.1.0)
 
 # Getting Started
 
-React-Move exports just two factory functions:
+React Move exports just two factory functions:
 - createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
 - createAnimate => Animate - If you have a **singe item** that enters, updates and leaves
 
@@ -160,7 +139,7 @@ Then just import them in other components in your app.
 
 ## Starting state
 
-Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string, number, or function leaves**.  The leaf keys are referred to as the "attr" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
+Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as the "attr" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
 
 Two rules to live by for starting states:
 - Don't use the strings "timing" or "events" as an attr or namespace.
@@ -182,7 +161,6 @@ Example starting state:
   attr3: '#dadada'
 }
 ```
-**note:** you can also use tween functions but it's a more advanced topic so just focusing on strings and numbers here.
 
 A more concrete example might be:
 ```js
@@ -234,7 +212,6 @@ You might use namespaces like so:
   }
 }
 ```
-
 
 ## < NodeGroup />
 
@@ -429,6 +406,23 @@ import { easeQuadInOut } from 'd3-ease';
   )}
 </NodeGroup>
 ```
+
+## React-Move vs React-Motion
+
+* React-move allows you to define your animations using durations, delays and ease functions.
+  In react-motion you use spring configurations to define your animations.
+
+* React-move is designed to plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
+  With react-motion you can only interpolate numbers so you have to do a bit more work use colors, paths, etc.
+
+* In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
+  React-motion allows you to define a spring configuration for each key in the "style" object.
+
+* React-move has lifecycle events on its transitions.
+  You can pass a function to be called on transition start, interrupt or end.
+  React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
+
+* React-move also allows you to pass your own custom tween functions. It's all springs in react-motion.
 
 ## Contributing
 
