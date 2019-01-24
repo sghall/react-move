@@ -33,6 +33,8 @@ This version of react-move breaks the hard dependency on d3-interpolate.  React-
 The big news on this release is the `getInterpolator` function. This function opens up a lot of doors to be more creative. To start, to get exactly the same components as in react-move 2.x.x and 3.x.x just create them locally like this:
 
 ```js
+// THIS IS HOW YOU UPGRADE TO 4.0
+
 import { createNodeGroup, createAnimate } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
