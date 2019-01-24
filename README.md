@@ -46,7 +46,7 @@ function getInterpolator(attr, begValue, endValue) {
   return interpolate(begValue, endValue)
 }
 
-// YOUR NEW LOCAL <NodeGroup /> AND <Animate > - EQUIVALENT TO 2.X.X AND 3.X.X
+// YOUR NEW LOCAL <NodeGroup /> AND <Animate /> - EQUIVALENT TO 2.X.X AND 3.X.X
 
 export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
 export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
