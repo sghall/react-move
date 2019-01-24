@@ -1,7 +1,7 @@
 import { createAnimate } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
-export default createAnimate(function getInterpolator(attr, begValue, endValue) {
+export default createAnimate(function getInterpolator(begValue, endValue, attr) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }
