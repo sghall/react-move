@@ -18,7 +18,7 @@ Beautiful, data-driven animations for React.
 Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
 
 ### 4.0 Highlights
-- React-Move is now just 3.5kb (gzipped)! Almost 60% smaller.
+- React-Move is now just **3.5kb (gzipped)! Almost 60% smaller.**
 - Application developers and package maintainers can now make much smaller bundles.
 - You can now use any interpolator you want which opens new creative doors for designers.
 - Tons of performance improvements. 🚀 
