@@ -387,8 +387,6 @@ import { easeQuadInOut } from 'd3-ease';
 
 ## Timing
 
-Go to [live examples, code and docs](https://react-move.js.org)!
-
 If there's no timing key in your object you'll get the timing defaults.
 You can specify just the things you want to override on your timing key.
 
@@ -409,8 +407,6 @@ For the ease key, just provide the function. You can use any easing function, li
 
 
 ## < NodeGroup />
-
-The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
 
 ### Component Props
 
