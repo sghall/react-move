@@ -171,8 +171,16 @@ Two rules to live by for starting states:
 
 Example starting state:
 ```js
+// GOOD
 {
   attr1: 100,
+  attr2: 200,
+  attr3: '#dadada'
+}
+
+// BAD
+{
+  attr1: [100], // NO ARRAYS
   attr2: 200,
   attr3: '#dadada'
 }
