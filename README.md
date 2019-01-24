@@ -135,7 +135,7 @@ Older versions:
 
 React-Move exports just two functions (HOCs):
 - createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
-- createAnimate => Animate - If you have a **singe item** that enter, update and leaves
+- createAnimate => Animate - If you have a **singe item** that enters, updates and leaves
 
 To get some components to work with in your app you can use this code to create them with some good defaults:
 
