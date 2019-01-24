@@ -4,7 +4,7 @@ import { easeExpOut } from 'd3-ease'
 
 const trackStyles = {
   borderRadius: 4,
-  backgroundColor: 'rgb(240, 240, 232)',
+  backgroundColor: 'rgba(255, 255, 255, 0.5)',
   position: 'relative',
   margin: '5px 3px 10px',
   width: 250,
@@ -50,7 +50,7 @@ class Example extends PureComponent {
                     height: 50,
                     borderRadius: 4,
                     opacity: 0.7,
-                    backgroundColor: '#00cf77',
+                    backgroundColor: '#ff69b4',
                     WebkitTransform: `translate3d(${x}px, 0, 0)`,
                     transform: `translate3d(${x}px, 0, 0)`,
                   }}
