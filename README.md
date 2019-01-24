@@ -163,7 +163,7 @@ Then just import them in other components in your app.
 
 ## Starting state
 
-Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the biggest mistake people make working with react-move.  The starting state for each item is always **an object with string, number, or function leaves**.  The leaf keys are called are referred to as the "attr" as in attribute.
+Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string, number, or function leaves**.  The leaf keys are called are referred to as the "attr" as in attribute.
 
 Example starting state:
 ```js
