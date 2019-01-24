@@ -426,6 +426,35 @@ For the ease key, just provide the function. You can use any easing function, li
 
 [List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
 
+## Events
+
+You can add events on your config objects.  You can pass a function that will run when the transition starts, is interrupted (an update to the data occurs) or ends.
+
+Using Events:
+```js
+{
+  attr1: [100],
+  attr3: '#ddaabb',
+  namespace1: {
+    attr1: [300],
+    attr2: 200
+  },
+  timing: { duration: 300, delay: 100 },
+  events: {
+    start: () => {
+      ..do stuff - use an arrow function to keep the context of the outer component
+    },
+    interrupt: () => {
+      ..do stuff - use an arrow function to keep the context of the outer component
+    },
+    end: () => {
+      ..do stuff - use an arrow function to keep the context of the outer component
+    },
+  }
+}
+```
+
+
 ## < NodeGroup />
 
 ### Component Props
