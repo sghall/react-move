@@ -51,6 +51,12 @@ The big change in this release is the `getInterpolator` function. This function 
 
 For starters, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
 
+First install d3-interpolate locally:
+```
+npm install d3-interpolate
+```
+
+Then in your app:
 ```js
 // THIS IS HOW YOU UPGRADE TO 4.0
 
@@ -98,7 +104,7 @@ export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName
 
 ```
 
-Your `getInterpolator` function should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  See the sections below on starting states and transitions for more on that.
+Your `getInterpolator` function should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  **See the sections below on starting states and transitions for more on attrs and namespaces.**
 
 Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can use any interpolation library or write your own. 
 
