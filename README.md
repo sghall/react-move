@@ -13,6 +13,12 @@ Beautiful, data-driven animations for React.
 ![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/react-move)
 
+
+Compare:
+![gzip size](http://img.badgesize.io/https://npmcdn.com/react-motion/build/react-motion.js?compression=gzip)
+![gzip size](http://img.badgesize.io/https://npmcdn.com/react-spring/web.umd.js?compression=gzip)
+
+
 ## React-Move 4.0 is here!!!
 
 Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
