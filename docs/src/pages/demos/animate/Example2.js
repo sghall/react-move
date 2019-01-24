@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { range } from 'd3-array'
-import { easeExpOut } from 'd3-ease'
+import { easeExpInOut } from 'd3-ease'
 import Animate from 'docs/src/components/Animate'
 
 function getRandomColor() {
@@ -9,77 +9,79 @@ function getRandomColor() {
   }, '#')
 }
 
-function getItems() {
-  return range(5).map((d) => ({
-    key: `id-${d}`,
-    scale: Math.random() * 1,
-    color: getRandomColor(),
-    rotate: Math.random() > 0.5 ? 360 : 0,
-  }))
-}
-
 class Example extends PureComponent {
   state = {
-    items: getItems(),
+    show: false,
+    color: '#00cf77',
   }
 
-  update = () => {
-    this.setState({
-      items: getItems(),
-    })
+  updateShow = () => {
+    this.setState((prev) => ({ show: !prev.show }))
+  }
+
+  updateColor = () => {
+    this.setState(() => ({ show: true, color: getRandomColor() }))
   }
 
   render() {
-    const { items } = this.state
+    const { updateShow, updateColor, state: { show, color } } = this
 
     return (
       <div>
-        <button onClick={this.update}>
-          Update
+        <button onClick={updateShow}>
+          Toggle
         </button>
-        <div style={{ height: '200px' }}>
-          {items.map((d) => (
-            <Animate
-              key={d.key}
+        {show ? (
+          <button onClick={updateColor}>
+            Update Color
+          </button>
+        ) : null}
+        <Animate
+          show={show}
 
-              start={{
-                scale: d.scale,
-                color: d.color,
-                rotate: d.rotate,
-              }}
+          start={{
+            opacity: 0,
+            backgroundColor: color,
+          }}
 
-              update={{
-                scale: [d.scale],
-                color: [d.color],
-                rotate: [d.rotate],
-                timing: { duration: 300, ease: easeExpOut },
+          enter={{
+            opacity: [1],
+            timing: { duration: 1000, ease: easeExpInOut },
+          }}
+
+          update={{
+            opacity: [1],
+            backgroundColor: [color],
+            timing: { duration: 500, ease: easeExpInOut },
+          }}
+
+          leave={[
+            {
+              backgroundColor: ['#ff0063'],
+              timing: { duration: 500, ease: easeExpInOut },
+            },
+            {
+              opacity: [0],
+              timing: { delay: 500, duration: 500, ease: easeExpInOut },
+            },
+          ]}
+        >
+          {({ opacity, backgroundColor }) => {
+            return (
+              <div style={{
+                opacity,
+                width: 200,
+                height: 200,
+                marginTop: 10,
+                color: 'white',
+                backgroundColor,
               }}
-            >
-              {({ scale, color, rotate }) => {
-                return (
-                  <div
-                    style={{
-                      float: 'left',
-                      width: '100px',
-                      height: '100px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                      borderRadius: `${(rotate / 360) * 100}px`,
-                      transform: `translate(${scale * 50}%, ${scale * 50}%) scale(${scale}) rotate(${rotate}deg)`,
-                      background: color,
-                    }}
-                  >
-                    {Math.round(scale * 100)}
-                  </div>
-                )
-              }}
-            </Animate>
-          ))}
-        </div>
+              >
+                {opacity.toFixed(3)}
+              </div>
+            )
+          }}
+        </Animate>
       </div>
     )
   }

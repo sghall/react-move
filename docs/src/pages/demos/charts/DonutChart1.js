@@ -137,12 +137,13 @@ class Example extends PureComponent {
                           <text
                             dy="4px"
                             fontSize="12px"
+                            fill="#fff"
                             transform={`translate(${p2.toString()})`}
                             textAnchor={mid(state) ? 'start' : 'end'}
                           >{data.data.name}</text>
                           <polyline
                             fill="none"
-                            stroke="rgba(127,127,127,0.5)"
+                            stroke="rgba(255,255,255,0.5)"
                             points={`${innerArcPath.centroid(state)},${p1},${p2.toString()}`}
                           />
                         </g>
