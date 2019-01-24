@@ -8,7 +8,7 @@ import React, { PureComponent } from 'react'
 import NodeGroup from 'docs/src/components/NodeGroup'
 
 const colors = scaleOrdinal()
-  .range(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a'])
+  .range(['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'])
 
 // **************************************************
 //  SVG Layout
