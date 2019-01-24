@@ -420,8 +420,6 @@ For the ease key, just provide the function. You can use any easing function, li
 
 [List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
 
-
-
 ## < NodeGroup />
 
 ### Component Props
@@ -438,40 +436,20 @@ For the ease key, just provide the function. You can use any easing function, li
 
 * required props
 
-### Exmaple Usage
+## < Animate />
 
-A typical usage of NodeGroup looks like this...
+### Component Props
 
-```js
-<NodeGroup
-  data={this.state.data} // an array (required)
-  keyAccessor={(d) => d.name} // function to get the key of each object (required)
+| Name | Type | Default | Description |
+|:-----|:-----|:-----|:-----|
+| show | bool | true |  Boolean value that determines if the child should be rendered or not. |
+| <span style="color: #31a148">start *</span> | union:<br>&nbsp;func<br>&nbsp;object<br> |  |  An object or function that returns an obejct to be used as the starting state. |
+| enter | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter. |
+| update | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions. |
+| leave | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave. |
+| <span style="color: #31a148">children *</span> | function |  |  A function that renders the node.  The function is passed the data and state. |
 
-  start={(data, index) => ({ // returns the starting state of node (required)
-    ...
-  })}
-
-  enter={(data, index) => ({ // how to transform node state on enter - runs immediately after start (optional)
-    ...
-  })}
-
-  update={(data, index) => ({ // how to transform node state on update - runs each time data updates and key remains (optional)
-    ...
-  })}
-
-  leave={(data, index) => ({ // how to transform node state on leave - run when data updates and key is gone (optional)
-    ...
-  })}
->
-  {(nodes) => ( // the only child of NodeGroup should be a function to render the nodes (required)
-    ...
-      {nodes.map(({ key, data, state }) => {
-        ...
-      })}
-    ...
-  )}
-</NodeGroup>
-```
+* required props
 
 ## React-Move vs React-Motion
 
