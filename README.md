@@ -106,6 +106,8 @@ The docs below are for version **4.x.x** of React-Move.
 Older versions:
 
 * [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
+
+The API for `NodeGroup` and `Animate` have not changed in 4.0, but if you want to refer back:
 * [Version 2.x.x](https://github.com/react-tools/react-move/tree/v2.9.1)
 * [Version 3.x.x](https://github.com/react-tools/react-move/tree/v3.1.0)
 
