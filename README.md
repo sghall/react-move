@@ -71,7 +71,9 @@ export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName'
 export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
 ```
 
-The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
+### New `getInterpolator` function
+
+The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how [D3](https://d3js.org/) selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
 The `interpolate` function exported from d3-interpolate also includes a lot of code (e.g. d3-color) that may not be needed for your project. For example, if you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
@@ -87,6 +89,8 @@ export const NodeGroupNumeric = createNodeGroup(getInterpolator, 'NodeGroupDispl
 export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
 
 ```
+
+Your `getInterpolator` function should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  See the sections below on starting states and transitions for more on that.
 
 Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can use any interpolation library or write your own. 
 
