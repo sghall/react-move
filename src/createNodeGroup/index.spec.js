@@ -7,7 +7,7 @@ import { assert } from 'chai'
 import { shallow, mount } from 'enzyme'
 import createNodeGroup from '.'
 
-const NodeGroup = createNodeGroup(function getInterpolator(attr, begValue, endValue) {
+const NodeGroup = createNodeGroup(function getInterpolator(begValue, endValue, attr) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }

@@ -7,7 +7,7 @@ import { assert } from 'chai'
 import { mount } from 'enzyme'
 import createAnimate from '.'
 
-const Animate = createAnimate(function getInterpolator(attr, begValue, endValue) {
+const Animate = createAnimate(function getInterpolator(begValue, endValue, attr) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }
