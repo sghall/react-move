@@ -139,7 +139,7 @@ Then just import them in other components in your app.
 
 ## Starting state
 
-Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as the "attr" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
+Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with React Move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as "attrs" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
 
 Two rules to live by for starting states:
 - Don't use the strings "timing" or "events" as an attr or namespace.
@@ -213,12 +213,31 @@ You might use namespaces like so:
 }
 ```
 
+### Starting state in NodeGroup
+
+In `NodeGroup` you pass a start prop (a function) that receives the data item and it's index.  The start prop will be called when that data item (identified by its key) enters.  Note it could leave and come back.  Immediately after the starting state is set your enter transition is called allow you to transform that state.
+
+```js
+<NodeGroup
+  data={data} // an array (required)
+  keyAccessor={(d) => d.name} // function to get the key of each object (required)
+  start={(data, index) => ({ // returns the starting state of node (required)
+    ...
+  })}
+>
+  {(nodes) => (
+    ...
+      {nodes.map(({ key, data, state }) => {
+        ...
+      })}
+    ...
+  )}
+</NodeGroup>
+```
+
 ## < NodeGroup />
 
-The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
-The idea is similar to transition components like [react-transition-group](https://github.com/reactjs/react-transition-group) or [react-motion's TransitionMotion](https://github.com/chenglou/react-motion) but you use objects to express how you want your state to transition.
-
-Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing!
+The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates. Not only can you can have independent duration, delay and easing for entering, updating and leaving but each individual key in your state can define its own timing!
 
 ### Component Props
 
