@@ -131,6 +131,103 @@ Older versions:
 
 * [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
 
+
+# Getting Started
+
+React-Move exports just two functions (HOCs):
+- createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
+- createAnimate => Animate - If you have a **singe item** that enter, update and leaves
+
+To get some components to work with in your app you can use this code to create them with some good defaults:
+
+```
+npm install react-move d3-interpolate
+```
+
+Then in your app:
+```js
+import { createNodeGroup, createAnimate } from 'react-move'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
+
+function getInterpolator(attr, begValue, endValue) {
+  if (attr === 'transform') {
+    return interpolateTransformSvg(begValue, endValue)
+  }
+
+  return interpolate(begValue, endValue)
+}
+
+export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
+export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
+```
+Then just import them in other components in your app.
+
+## Starting state
+
+Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the biggest mistake people make working with react-move.  The starting state for each item is always **an object with string, number, or function leaves**.  The leaf keys are called are referred to as the "attr" as in attribute.
+
+Example starting state:
+```js
+{
+  attr1: 100,
+  attr2: 200,
+  attr3: '#dadada'
+}
+```
+**note:** you can also use tween functions but it's a more advanced topic so just focusing on strings and numbers here.
+
+A more concrete example might be:
+```js
+{
+  opacity: 0.1,
+  x: 200,
+  y: 100,
+  color: '#dadada'
+}
+```
+
+You can add "namespaces" to help organize your state:
+```js
+{
+  attr1: 100,
+  attr2: 200,
+  attr3: '#ddaabb',
+  namespace1: {
+    attr1: 100,
+    attr2: 200
+  }
+}
+```
+Or something like:
+```js
+{
+  namespace1: {
+    attr1: 100,
+    attr2: 200
+  },
+  namespace2: {
+    attr1: 100,
+    attr2: 200
+  }
+}
+```
+You might use namespaces like so:
+```js
+{
+  inner: {
+    x: 100,
+    y: 150,
+    color: '#545454'
+  },
+  outer: {
+    x: 300,
+    y: 350,
+    color: '#3e3e3e'
+  }
+}
+```
+
+
 ## < NodeGroup />
 
 The NodeGroup component allows you to create complex animated transitions. You pass it an array of objects and a key accessor function and it will run your enter, update and leave transitions as the data updates.
