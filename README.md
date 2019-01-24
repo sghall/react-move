@@ -54,7 +54,7 @@ export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // d
 
 The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
-That interpolate exported from d3-interpolate function includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
+The interpolate exported from d3-interpolate function includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
 ```js
 import { createNodeGroup, createAnimate } from 'react-move'
@@ -69,7 +69,7 @@ export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName
 
 ```
 
-Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can also use any interpolation library or write your own.
+Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can also use any interpolation library or write your own. 
 
 ## Features
 
