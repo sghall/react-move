@@ -11,41 +11,23 @@ export default function createAnimate(getInterpolater, displayName = 'Animate') 
     static displayName = displayName
 
     static propTypes = {
-      /**
-       * Boolean value that determines if the child should be rendered or not.
-       */
       show: PropTypes.bool.isRequired,
-      /**
-       * An object or function that returns an obejct to be used as the starting state.
-       */
       start: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
-      /**
-       * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
-       */
       enter: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.array,
         PropTypes.object,
       ]),
-      /**
-       * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
-       */
       update: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.array,
         PropTypes.object,
       ]),
-      /**
-       * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
-       */
       leave: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.array,
         PropTypes.object,
       ]),
-      /**
-       * A function that renders the node.  The function is passed the data and state.
-       */
       children: PropTypes.func.isRequired,
     }
 
