@@ -71,9 +71,6 @@ export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName
 
 Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can also use any interpolation library or write your own.
 
-
-### Go to [live examples, code and docs](https://react-move.js.org)!
-
 ## Features
 
 * Animate HTML, SVG & React-Native
