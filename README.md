@@ -163,7 +163,7 @@ Then just import them in other components in your app.
 
 ## Starting state
 
-Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string, number, or function leaves**.  The leaf keys are referred to as the "attr" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
+Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with react-move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as the "attr" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
 
 Two rules to live by for starting states:
 - Don't use the strings "timing" or "events" as an attr or namespace.
@@ -185,7 +185,6 @@ Example starting state:
   attr3: '#dadada'
 }
 ```
-**note:** you can also use tween functions but it's a more advanced topic so just focusing on strings and numbers here.
 
 A more concrete example might be:
 ```js
