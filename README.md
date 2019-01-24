@@ -47,7 +47,9 @@ This version of React Move breaks the hard dependency on d3-interpolate.  React 
 - createNodeGroup(getInterpolator, displayName) => NodeGroup
 - createAnimate(getInterpolator, displayName) => Animate
 
-The big news in this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. To start, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
+The big change in this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in `getInterpolator` to check if your animations are working as expected. 
+
+For starters, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
 
 ```js
 // THIS IS HOW YOU UPGRADE TO 4.0
@@ -71,7 +73,7 @@ export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // d
 
 The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
-The `interpolate` function exported from d3-interpolate includes a lot of code (e.g. d3-color) that may not be needed for your project. For example, if you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
+The `interpolate` function exported from d3-interpolate also includes a lot of code (e.g. d3-color) that may not be needed for your project. For example, if you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
 ```js
 import { createNodeGroup, createAnimate } from 'react-move'
@@ -253,7 +255,7 @@ In `Animate` you are animating a single item and pass a start prop that is an ob
 
 ## Transitioning state
 
-You return an object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate` (you can just pass objects in `Animate` as well). Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
+You return an object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate`. Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
 
 There are two special keys you can use: **timing** and **events**. Both are optional.
 Timing and events are covered in more detail below.
