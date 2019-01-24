@@ -30,7 +30,7 @@ This version of react-move breaks the hard dependency on d3-interpolate.  React-
 - createNodeGroup(getInterpolator, displayName) => NodeGroup
 - createAnimate(getInterpolator, displayName) => Animate
 
-The big news on this release is the `getInterpolator` function. This function opens up a lot of doors to be more creative. To start, you'll get exactly the same components as in react-move 2.x.x and 3.x.x by creating them locally like this:
+The big news on this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. To start, you'll get exactly the same components as in react-move 2.x.x and 3.x.x by creating them locally like this:
 
 ```js
 // THIS IS HOW YOU UPGRADE TO 4.0
