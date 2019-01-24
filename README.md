@@ -60,7 +60,7 @@ However, that interpolate function also includes a lot of code (e.g. d3-color) t
 import { createNodeGroup, createAnimate } from 'react-move'
 import { interpolateNumber } from 'd3-interpolate'
 
-function getInterpolator(attr, begValue, endValue) {
+function getInterpolator(begValue, endValue, attr, namespace) {
   return interpolateNumber(begValue, endValue)
 }
 
@@ -145,7 +145,7 @@ Then in your app:
 import { createNodeGroup, createAnimate } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
-function getInterpolator(attr, begValue, endValue) {
+function getInterpolator(begValue, endValue, attr, namespace) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }
