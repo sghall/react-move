@@ -21,8 +21,8 @@ Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 
 - React-Move is now just 3.5kb (gzipped)! Almost 60% smaller.
 - Application developers and package maintainers can now make much smaller bundles.
 - You can now use any interpolator you want which opens new creative doors for designers.
-- Much easier debugging of animations.
 - Tons of performance improvements. 🚀 
+- Much easier debugging of animations.
 
 ### Upgrading to 4.0
 
