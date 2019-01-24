@@ -4,7 +4,7 @@
 ##### Bars
 {{demo='pages/demos/simple/Bars1.js'}}
 
-##### Bars Redux
+##### More Bars
 {{demo='pages/demos/simple/Bars2.js'}}
 
 ##### Circles
