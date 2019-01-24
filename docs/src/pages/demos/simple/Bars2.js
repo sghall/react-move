@@ -100,7 +100,7 @@ class Example extends PureComponent {
 
             enter={(node, index) => ([ // An array!!
               {
-                opacity: [0.6],
+                opacity: [0.8],
                 width: [xScale.bandwidth()],
                 height: [yScale(node.value)],
                 timing: { duration: 1000 },
@@ -113,7 +113,7 @@ class Example extends PureComponent {
 
             update={(node) => ([ // An array!!
               {
-                opacity: [0.6],
+                opacity: [0.8],
                 fill: ['#00a7d8', 'grey'],
                 timing: { duration: 2000 },
               },
@@ -158,15 +158,15 @@ class Example extends PureComponent {
                         <text
                           x="0"
                           y="20"
-                          fill="grey"
+                          fill="#fff"
                           transform="rotate(90 5,20)"
                         >{`x: ${Math.round(x)}`}</text>
                         <text
                           x="0"
                           y="5"
-                          fill="grey"
+                          fill="#fff"
                           transform="rotate(90 5,20)"
-                        >{`name: ${data.name}, value: ${data.value}`}</text>
+                        >{`value: ${data.value}`}</text>
                       </g>
                     )
                   })}

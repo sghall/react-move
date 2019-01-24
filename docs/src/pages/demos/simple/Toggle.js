@@ -4,7 +4,7 @@ import { easeExpOut } from 'd3-ease'
 
 const trackStyles = {
   borderRadius: 4,
-  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
   position: 'relative',
   margin: '5px 3px 10px',
   width: 250,
