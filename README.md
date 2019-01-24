@@ -26,7 +26,7 @@ Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 
 
 ### Upgrading to 4.0
 
-This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports exactly two functions (HOCs):
+This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports exactly two factory functions:
 - createNodeGroup(getInterpolator, displayName) => NodeGroup
 - createAnimate(getInterpolator, displayName) => Animate
 
@@ -52,7 +52,7 @@ export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName'
 export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
 ```
 
-I think you see where this is going now.  The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
+The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
 However, that interpolate function also includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
@@ -130,7 +130,7 @@ Older versions:
 
 # Getting Started
 
-React-Move exports just two functions (HOCs):
+React-Move exports just two factory functions:
 - createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
 - createAnimate => Animate - If you have a **singe item** that enters, updates and leaves
 
