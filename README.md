@@ -32,7 +32,7 @@ $ npm install react-move
 
 ## React Move 4.0 is here!!!
 
-Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
+Lots of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
 
 ### 4.0 Highlights
 - React Move is now just **3.5kb (gzipped)! Almost 60% smaller.**
