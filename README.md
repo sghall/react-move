@@ -26,7 +26,7 @@ Lot of exciting news and don't worry upgrading is a breeze and can be done in 5 
 
 ### Upgrading to 4.0
 
-This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports exactly two factory functions:
+This version of react-move breaks the hard dependency on d3-interpolate.  React-move now exports just two factory functions:
 - createNodeGroup(getInterpolator, displayName) => NodeGroup
 - createAnimate(getInterpolator, displayName) => Animate
 
@@ -38,7 +38,7 @@ The big news on this release is the `getInterpolator` function. This function op
 import { createNodeGroup, createAnimate } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
-function getInterpolator(attr, begValue, endValue) {
+function getInterpolator(begValue, endValue, attr, namespace) {
   if (attr === 'transform') {
     return interpolateTransformSvg(begValue, endValue)
   }
@@ -54,7 +54,7 @@ export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // d
 
 The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how d3.js selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
 
-However, that interpolate function also includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
+That interpolate exported from d3-interpolate function includes a lot of code (e.g. d3-color) that may not be needed for your project. If you are just interpolating numbers in your components you could replace all that code with `interpolateNumber` which is just a few bytes of code:
 
 ```js
 import { createNodeGroup, createAnimate } from 'react-move'
