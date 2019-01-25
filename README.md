@@ -4,7 +4,7 @@
 
 # React-Move
 
-Beautiful, data-driven animations for React. Just 3.5kb (gzipped)!
+Beautiful, data-driven animations for React. Just 3.6kb (gzipped)!
 
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
@@ -34,7 +34,7 @@ $ npm install react-move
 Lots of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
 
 ### 4.0 Highlights
-- React Move is now just **3.5kb (gzipped)! Almost 60% smaller.**
+- React Move is now just **3.6kb (gzipped)! Almost 60% smaller.**
 - Application developers and package maintainers can now make much smaller bundles.
 - You can now use any interpolator you want which opens new creative doors for designers.
 - Tons of performance improvements. 🚀 
