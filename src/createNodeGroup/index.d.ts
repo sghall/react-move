@@ -38,6 +38,6 @@ export interface INodeGroupProps {
 
 export declare class NodeGroup extends React.Component<INodeGroupProps> { }
 
-type createNodeGroup = (func: GetInterpolator, displayName: string) => NodeGroup
+type createNodeGroup = (func: GetInterpolator, displayName?: string) => NodeGroup
 
 export default createNodeGroup;

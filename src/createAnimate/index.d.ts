@@ -36,6 +36,6 @@ export interface IAnimateProps {
 
 declare class Animate extends React.Component<IAnimateProps> { }
 
-type createAnimate = (func: GetInterpolator, displayName: string) => Animate
+type createAnimate = (func: GetInterpolator, displayName?: string) => Animate
 
 export default createAnimate;
