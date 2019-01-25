@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 import Surface from 'docs/src/components/Surface'
 import { easeExpInOut } from 'd3-ease'
 import { scaleBand } from 'd3-scale'
@@ -8,8 +8,8 @@ import { shuffle } from 'd3-array'
 // **************************************************
 //  SVG Layout
 // **************************************************
-const view = [1000, 250] // [width, height]
-const trbl = [100, 10, 50, 10] // [top, right, bottom, left] margins
+const view = [1000, 350] // [width, height]
+const trbl = [150, 10, 50, 10] // [top, right, bottom, left] margins
 
 const dims = [ // Adjusted dimensions [width, height]
   view[0] - trbl[1] - trbl[3],
@@ -100,7 +100,7 @@ class Example extends PureComponent {
 
             enter={(data, index) => ({
               g: {
-                opacity: [0.4],
+                opacity: [0.8],
                 transform: [`translate(${scale(data.name) + (scale.bandwidth() / 2)},0)`],
               },
               circle: {
@@ -113,7 +113,7 @@ class Example extends PureComponent {
 
             update={(data, index) => ({
               g: {
-                opacity: [0.4],
+                opacity: [0.8],
                 transform: [`translate(${scale(data.name) + (scale.bandwidth() / 2)},0)`],
               },
               circle: {
@@ -148,13 +148,13 @@ class Example extends PureComponent {
                         <text
                           x="0"
                           y="20"
-                          fill="#777"
+                          fill="#fff"
                           transform="rotate(-45 5,20)"
                         >{`x: ${state.g.transform}`}</text>
                         <text
                           x="0"
                           y="5"
-                          fill="#777"
+                          fill="#fff"
                           transform="rotate(-45 5,20)"
                         >{`name: ${data.name}`}</text>
                       </g>

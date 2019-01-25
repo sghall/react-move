@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { shuffle, range } from 'd3-array'
 import { easeBackOut, easeBackInOut } from 'd3-ease'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 
 const count = 15
 
@@ -48,7 +48,7 @@ export default class Example extends Component {
             start={() => ({
               x: 0,
               opacity: 0,
-              color: 'black',
+              color: '#ff69b4',
             })}
 
             enter={() => ([
@@ -73,7 +73,7 @@ export default class Example extends Component {
             leave={() => ([
               {
                 x: [width * 0.8],
-                color: ['#ff0063', 'black'],
+                color: ['#ff0063', '#bff69b4'],
                 timing: { duration: 750, ease: easeBackInOut },
               },
               {

@@ -12,7 +12,7 @@ export const requireMarkdown = require.context(
 // ********************************************************
 // SRC CONTEXT
 // ********************************************************
-export const srcContext = require.context('!raw-loader!../../../src', true)
+export const srcContext = require.context('!raw-loader!./PropsDescription', true)
 
 // ********************************************************
 // DEMO FILES

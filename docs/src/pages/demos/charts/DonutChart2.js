@@ -5,10 +5,10 @@ import { easeExpOut } from 'd3-ease'
 import sortBy from 'lodash/sortBy'
 import Surface from 'docs/src/components/Surface'
 import React, { PureComponent } from 'react'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 
 const colors = scaleOrdinal()
-  .range(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a'])
+  .range(['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'])
 
 // **************************************************
 //  SVG Layout
@@ -137,12 +137,13 @@ class Example extends PureComponent {
                           <text
                             dy="4px"
                             fontSize="12px"
+                            fill="#fff"
                             transform={`translate(${p2.toString()})`}
                             textAnchor={mid(state) ? 'start' : 'end'}
                           >{data.data.name}</text>
                           <polyline
                             fill="none"
-                            stroke="rgba(127,127,127,0.5)"
+                            stroke="rgba(255,255,255,0.5)"
                             points={`${innerArcPath.centroid(state)},${p1},${p2.toString()}`}
                           />
                         </g>

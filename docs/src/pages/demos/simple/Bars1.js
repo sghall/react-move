@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 import Surface from 'docs/src/components/Surface'
 import { scaleBand } from 'd3-scale'
 import { shuffle } from 'd3-array'
@@ -94,13 +94,13 @@ class Example extends PureComponent {
             })}
 
             enter={(data, index) => ({
-              opacity: [0.5],
+              opacity: [0.8],
               x: [scale(data.name)],
               timing: { duration: 100 * index, delay: 500 },
             })}
 
             update={(data) => ({
-              opacity: [0.5],
+              opacity: [0.8],
               x: [scale(data.name)],
               fill: '#00a7d8',
               width: [scale.bandwidth()],

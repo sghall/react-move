@@ -1,7 +1,7 @@
 // example from https://bl.ocks.org/mbostock/3885705
 
 import React, { PureComponent } from 'react'
-import NodeGroup from 'react-move/NodeGroup'
+import NodeGroup from 'docs/src/components/NodeGroup'
 import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
 import { scaleLinear, scaleBand } from 'd3-scale'
 import { easeExpInOut } from 'd3-ease'
@@ -120,7 +120,7 @@ class Example extends PureComponent {
                     <rect
                       height={dims[1] - y(data.frequency)}
                       y={y(data.frequency)}
-                      fill="#00a7d8"
+                      fill="#ff69b4"
                       width={width}
                       opacity={opacity}
                     />
@@ -128,7 +128,7 @@ class Example extends PureComponent {
                       x={scale.bandwidth() / 2}
                       y={dims[1] + 15}
                       dx="-.35em"
-                      fill="#333"
+                      fill="#dadada"
                     >{data.letter}</text>
                   </g>
                 ))}

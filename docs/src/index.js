@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/App'
 
-const docs = (state = { dark: false }, action) => {
+const docs = (state = { dark: true }, action) => {
   if (action.type === 'TOGGLE_THEME_SHADE') {
     return Object.assign({}, state, { dark: !state.dark })
   }
