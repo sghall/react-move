@@ -5,8 +5,8 @@ import mergeKeys from '../core/mergeKeys'
 import { ENTER, UPDATE, LEAVE } from '../core/types'
 
 export default function createNodeGroup(getInterpolater, displayName = 'NodeGroup') {
-  if (!getInterpolater) {
-    throw new Error('[react-move] getInterpolator is required.')
+  if (!getInterpolater || typeof getInterpolater !== 'function') {
+    throw new Error('[react-move] getInterpolator function is required.')
   }
 
   class Node extends BaseNode {
