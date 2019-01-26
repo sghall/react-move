@@ -22,12 +22,8 @@ export interface CustomInterpolator {
   (t: number): any;
 }
 
-export interface NameSpace {
-  [key: string]: Array<number> | Array<string> | number | string | CustomInterpolator ;
-}
-
 export interface Transition {
-  [key: string]: Array<number> | Array<string> | number | string | CustomInterpolator | NameSpace | Events | Timing;
+  [key: string]: any
 }
 
 export interface TransitionFunction {
