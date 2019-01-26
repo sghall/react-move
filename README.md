@@ -24,9 +24,11 @@ Beautiful, data-driven animations for React. Just 3.6kb (gzipped)!
 ## Installation
 
 ```bash
-$ yarn add react-move
-# or
-$ npm install react-move
+// React 16.3 or greater
+npm install react-move
+
+// React 15.0 -> 16.2
+npm install react-move@2.9.1
 ```
 
 ## React Move 4.0 is here!!!
