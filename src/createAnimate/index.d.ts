@@ -34,8 +34,6 @@ export interface IAnimateProps {
   children: (state: PlainObject) => React.ReactElement<any>;
 }
 
-declare class Animate extends React.Component<IAnimateProps> { }
+declare class IAnimate extends React.Component<IAnimateProps> { }
 
-type createAnimate = (func: GetInterpolator, displayName?: string) => Animate
-
-export default createAnimate;
+export default function createAnimate(func: GetInterpolator, displayName?: string): typeof IAnimate;
