@@ -1,6 +1,6 @@
 {
   "name": "react-move",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "description": "Beautiful, data-driven animations for React.",
   "main": "./index.js",
