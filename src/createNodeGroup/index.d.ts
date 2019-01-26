@@ -13,7 +13,7 @@ export interface INodeGroupProps {
   /**
    * Function that returns a string key given a data object and its index.  Used to track which nodes are entering, updating and leaving.
    */
-  keyAccessor: (data: any, index: number) => string;
+  keyAccessor: (data: any, index: number) => string | number;
   /**
   * A function that returns the starting state.  The function is passed the data and index and must return an object.
   */
@@ -36,8 +36,6 @@ export interface INodeGroupProps {
   children: (nodes: Array<any>) => React.ReactElement<any>;
 }
 
-export declare class NodeGroup extends React.Component<INodeGroupProps> { }
+export declare class INodeGroup extends React.Component<INodeGroupProps> { }
 
-type createNodeGroup = (func: GetInterpolator, displayName?: string) => NodeGroup
-
-export default createNodeGroup;
+export default function createNodeGroup(func: GetInterpolator, displayName?: string): typeof INodeGroup;
