@@ -3,7 +3,6 @@ import * as React from "react";
 export {
   Timing,
   Events,
-  NameSpace,
   CustomInterpolator,
   PlainObject,
   PlainObjectFunction,
@@ -12,7 +11,7 @@ export {
 } from './core';
 
 
-export type GetInterpolator = (attr: string, begValue: any, endValue: any) => (t: number) => any
+export type GetInterpolator = (begValue?: any, endValue?: any, attr?: string, namespace?: string) => (t: number) => any
 
-export { default as createAnimate } from './createAnimate';
-export { default as createNodeGroup } from './createNodeGroup';
+export { default as createAnimate, IAnimate } from './createAnimate';
+export { default as createNodeGroup, INodeGroup } from './createNodeGroup';
