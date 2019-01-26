@@ -51,6 +51,13 @@ export default function AppRouter() {
             component={MarkdownDocs}
             nav
           />
+          <Route
+            title="Getting Started"
+            path="/getting-started/getting-started"
+            content={requireMarkdown('./getting-started/getting-started.md')}
+            component={MarkdownDocs}
+            nav
+          />
         </Route>
         <Route
           title="Component API"

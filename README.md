@@ -492,7 +492,7 @@ Using Events:
 * React-move allows you to define your animations using durations, delays and ease functions.
   In react-motion you use spring configurations to define your animations.
 
-* React-move is designed to plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
+* React-move is designed to easily plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
   With react-motion you can only interpolate numbers so you have to do a bit more work use colors, paths, etc.
 
 * In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.

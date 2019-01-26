@@ -87,6 +87,11 @@ class ResponsiveDrawer extends React.Component {
               <ListItemText primary="Features" />
             </ListItem>
           </Link>
+          <Link to="/getting-started/getting-started">
+            <ListItem button>
+              <ListItemText primary="Getting Started" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <Typography variant="h6" className={classes.navTitle}>
