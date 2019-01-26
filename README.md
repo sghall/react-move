@@ -5,6 +5,7 @@
 # React-Move
 
 Beautiful, data-driven animations for React. Just 3.6kb (gzipped)!
+### [Documentation and Examples](https://react-move.js.org)
 
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
