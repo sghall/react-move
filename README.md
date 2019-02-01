@@ -116,7 +116,7 @@ React Move exports just two components:
 - NodeGroup - If you have an **array of items** that enter, update and leave
 - Animate - If you have a **singe item** that enters, updates and leaves
 
-## <NodeGroup />
+## < NodeGroup />
 
 ### Component Props
 
@@ -131,7 +131,7 @@ React Move exports just two components:
 | leave | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index. |
 | <span style="color: #31a148">children *</span> | function |  |  A function that receives an array of nodes. |
 
-## <Animate />
+## < Animate />
 
 ### Component Props
 
@@ -439,36 +439,6 @@ Using Events:
   }
 }
 ```
-
-
-
-
-| Name                                               | Type     | Default  | Description                                                                                                                                                                              |
-| :------------------------------------------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <span style="color: #31a148">data \*</span>        | Array    |          | An array of data objects. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.                                                                |
-| <span style="color: #31a148">keyAccessor \*</span> | function |          | Function that returns a string key given a data object and its index. Used to track which nodes are entering, updating and leaving.                                                      |
-| <span style="color: #31a148">start \*</span>       | function |          | A function that returns the starting state. The function is passed the data and index and must return an object.                                                                         |
-| enter                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on enter. The function is passed the data and index.                                 |
-| update                                             | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on update. The function is passed the data and index.                                |
-| leave                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on leave. The function is passed the data and index.                                 |
-| <span style="color: #31a148">children \*</span>    | function |          | A function that renders the nodes. It should accept an array of nodes as its only argument. Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'. |
-
-* required props
-
-## < Animate />
-
-### Component Props
-
-| Name | Type | Default | Description |
-|:-----|:-----|:-----|:-----|
-| show | bool | true |  Boolean value that determines if the child should be rendered or not. |
-| <span style="color: #31a148">start *</span> | union:<br>&nbsp;func<br>&nbsp;object<br> |  |  An object or function that returns an obejct to be used as the starting state. |
-| enter | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter. |
-| update | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions. |
-| leave | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave. |
-| <span style="color: #31a148">children *</span> | function |  |  A function that renders the node.  The function is passed the data and state. |
-
-* required props
 
 ### Interpolation
 
