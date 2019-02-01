@@ -10,6 +10,7 @@ Beautiful, data-driven animations for React. Just 4kb (gzipped)!
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
+![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/react-tools/react-move/blob/master/LICENSE)
 
 ## Features
