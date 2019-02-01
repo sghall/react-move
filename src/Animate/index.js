@@ -72,7 +72,7 @@ Animate.propTypes = {
     PropTypes.object,
   ]),
   /**
-   * A React node. No custom components.
+   * A function that receives the state.
    */
   children: PropTypes.func.isRequired,
 }

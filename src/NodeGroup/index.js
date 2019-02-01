@@ -222,7 +222,7 @@ NodeGroup.propTypes = {
    */
   leave: PropTypes.func,
   /**
-   * A React node. The node will be used as a template for each item in the array. No custom components.
+   * A function that receives an array of nodes.
    */
   children: PropTypes.func.isRequired,
 }

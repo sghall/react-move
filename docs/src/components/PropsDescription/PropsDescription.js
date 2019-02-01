@@ -181,6 +181,8 @@ class PropTypeDescription extends Component {
         ? ''
         : '* required properties'
 
+    console.log(text)
+
     return (
       <div className="propTypeDescription" style={{ paddingTop: 10 }}>
         <MarkdownElement text={text} />
