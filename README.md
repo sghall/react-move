@@ -487,6 +487,79 @@ Using Events:
 
 * required props
 
+### Interpolation
+
+You can wire your components in `react-move` to handle different types of interpolation using the `interpolation` prop in both `NodeGroup` and `Animate`.  The code for interpolating strings or SVG paths can be bulky and, in many cases, it's not needed so by default components only handle numeric interpolation. 
+
+Your `interpolation` prop is a function that should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  **See the sections on starting states and transitions for more on attrs and namespaces.**
+
+#### Cadillac Interpolation  - Depends on d3-interpolate
+
+To wire up a full service interpolation that will interpolate colors, paths, numbers and SVG transforms you can use a setup like this:
+
+```
+npm install react-move d3-interpolate
+```
+
+Then in your app:
+```js
+import { NodeGroup, Animate } from 'react-move'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
+
+...
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={(data, index) => ({
+    ...
+  })}
+
+  enter={(data, index) => ([ // An array
+    ...
+  ])}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+  
+  interpolation ={(begValue, endValue, attr, namespace) => { // pass as prop
+    if (attr === 'transform') {
+      return interpolateTransformSvg(begValue, endValue)
+    }
+
+    return interpolate(begValue, endValue)
+  }}
+>
+  ...children
+</NodeGroup>
+```
+
+```
+This setup mimics how `d3.js` works for selecting interpolators and will not force you to think too much about the values your are using.  For example, if you use colors (in any format) they will be recognized and interpolated correctly. The `interpolate` function exported from d3-interpolate does a great job of guessing what you're trying to do and handles it for you but it also includes a lot of code (e.g. d3-color) that may not be needed for your project.
+
+#### Numeric Interpolation Only - Default - No dependencies
+ 
+To do numeric interpolation you don't need to do anything in your components.  The default numeric interpolator looks like this:
+
+```js
+// The default interpolator used in NodeGroup and Animate
+
+const numeric = (beg, end) => {
+  const a = +beg
+  const b = +end - a
+  
+  return function(t) {
+    return a + b * t
+  } 
+}
+
+```
+
 ## React-Move vs React-Motion
 
 * React-move allows you to define your animations using durations, delays and ease functions.
