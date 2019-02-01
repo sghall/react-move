@@ -1,33 +1,9 @@
+
 #### Getting Started
 
-React Move exports just two factory functions:
-- createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
-- createAnimate => Animate - If you have a **singe item** that enters, updates and leaves
-
-To get some components to work with in your app you can use this code to create them with some good defaults:
-
-```
-npm install react-move d3-interpolate
-```
-
-Then in your app:
-```js
-import { createNodeGroup, createAnimate } from 'react-move'
-import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
-
-function getInterpolator(begValue, endValue, attr, namespace) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg(begValue, endValue)
-  }
-
-  return interpolate(begValue, endValue)
-}
-
-export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
-export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
-```
-Then just import them in other components in your app.
-
+React Move exports just two components:
+- NodeGroup - If you have an **array of items** that enter, update and leave
+- Animate - If you have a **singe item** that enters, updates and leaves
 
 ###### Starting state
 
@@ -105,7 +81,7 @@ You might use namespaces like so:
 }
 ```
 
-**Starting state in NodeGroup**
+###### Starting state in NodeGroup
 
 In `NodeGroup` you are working with an array of items and you pass a start prop (a function) that receives the data item and its index.  The start prop will be called when that data item (identified by its key) enters.  Note it could leave and come back and that prop will be called again.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
@@ -131,10 +107,9 @@ In `NodeGroup` you are working with an array of items and you pass a start prop 
 
 In `Animate` you are animating a single item and pass a start prop that is an object or a function.  The start prop will be called when that the item enters.  Note it could leave and come back by toggling the show prop.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
-
 ##### Transitioning state
 
-You return an object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate`. Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
+You return a config object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate`. Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
 
 There are two special keys you can use: **timing** and **events**. Both are optional.
 Timing and events are covered in more detail below.
@@ -283,7 +258,7 @@ const defaultTiming = {
 
 For the ease key, just provide the function. You can use any easing function, like those from d3-ease...
 
-[List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
+[List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/src/index.js)
 
 ##### Events
 
@@ -311,4 +286,76 @@ Using Events:
     },
   }
 }
+```
+
+##### Interpolation
+
+You can wire your components in `react-move` to handle different types of interpolation using the `interpolation` prop in both `NodeGroup` and `Animate`.  The code for interpolating strings or SVG paths can be bulky and, in many cases, it's not needed so by default components only handle numeric interpolation. 
+
+Your `interpolation` prop is a function that should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  **See the sections on starting states and transitions for more on attrs and namespaces.**
+
+#### Cadillac Interpolation  - Depends on d3-interpolate
+
+To wire up a full service interpolation that will interpolate colors, paths, numbers and SVG transforms you can use a setup like this:
+
+```
+npm install react-move d3-interpolate
+```
+
+Then in your app:
+```js
+import { NodeGroup, Animate } from 'react-move'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
+
+...
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={(data, index) => ({
+    ...
+  })}
+
+  enter={(data, index) => ([ // An array
+    ...
+  ])}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+  
+  interpolation ={(begValue, endValue, attr, namespace) => { // pass as prop
+    if (attr === 'transform') {
+      return interpolateTransformSvg(begValue, endValue)
+    }
+
+    return interpolate(begValue, endValue)
+  }}
+>
+  ...children
+</NodeGroup>
+```
+
+This setup mimics how `d3.js` works for selecting interpolators and will not force you to think too much about the values your are using.  For example, if you use colors (in any format) they will be recognized and interpolated correctly. The `interpolate` function exported from d3-interpolate does a great job of guessing what you're trying to do and handles it for you but it also includes a lot of code (e.g. d3-color) that may not be needed for your project.
+
+###### Numeric Interpolation Only - Default - No dependencies
+ 
+To do numeric interpolation you don't need to do anything in your components.  The default numeric interpolator looks like this:
+
+```js
+// The default interpolator used in NodeGroup and Animate
+
+const numeric = (beg, end) => {
+  const a = +beg
+  const b = +end - a
+  
+  return function(t) {
+    return a + b * t
+  } 
+}
+
 ```
