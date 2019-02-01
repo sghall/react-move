@@ -24,31 +24,69 @@ Beautiful, data-driven animations for React. Just 3.6kb (gzipped)!
 ## Installation
 
 ```bash
-// React 16.3 or greater
+// React ^0.14.9 || ^15.3.0 || ^16.0.0
 npm install react-move
-
-// React 15.0 -> 16.2
-npm install react-move@2.9.1
 ```
 
-## React Move 4.0 is here!!!
+## React Move 5.0 is here.
 
-Lots of exciting news and don't worry upgrading is a breeze and can be done in 5 minutes.  You will not have to make a single change to your existing components. 🎉 
-
-### 4.0 Highlights
-- React Move is now just **3.6kb (gzipped)! Almost 60% smaller.**
+### 5.0 Highlights
+- React Move is now just **4kb (gzipped)! Almost 60% smaller.**
 - Application developers and package maintainers can now make much smaller bundles.
 - You can now use any interpolator you want which opens new creative doors for designers.
 - Tons of performance improvements. 🚀 
 - Much easier debugging of animations.
 
-### Upgrading to 4.0
+### Upgrading to 5.0
 
-This version of React Move breaks the hard dependency on d3-interpolate.  React Move now exports just two factory functions:
-- createNodeGroup(getInterpolator, displayName) => NodeGroup
-- createAnimate(getInterpolator, displayName) => Animate
+This version of React Move breaks the hard dependency on d3-interpolate. By default `react-move` will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything.**
 
-The big change in this release is the `getInterpolator` function. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in `getInterpolator` to check if your animations are working as expected. 
+To get the same interpolation found in `react-move` 2.x and 3.x do this:
+
+Install d3-interpolate:
+```
+npm install d3-interpolate
+```
+
+Then in your app:
+```js
+import { NodeGroup } from 'react-move'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
+
+...
+<NodeGroup
+  data={this.state.data}
+  keyAccessor={(d) => d.name}
+
+  start={(data, index) => ({
+    ...
+  })}
+
+  enter={(data, index) => ([ // An array
+    ...
+  ])}
+
+  update={(data) => ({
+    ...
+  })}
+
+  leave={() => ({
+    ...
+  })}
+  
+  interpolation ={(begValue, endValue, attr, namespace) => { // pass as prop
+    if (attr === 'transform') {
+      return interpolateTransformSvg(begValue, endValue)
+    }
+
+    return interpolate(begValue, endValue)
+  }}
+>
+  ...children
+</NodeGroup>
+```
+
+The big change in this release is the `interpolation` prop. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in `getInterpolator` to check if your animations are working as expected. 
 
 For starters, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
 
@@ -78,37 +116,6 @@ export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName'
 export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
 ```
 
-### New `getInterpolator` function
-
-The above `getInterpolator` function is how react-move has been hard wired for some time.  It's modeled after how [D3](https://d3js.org/) selects interpolators and is quite useful. If you're not concerned about bundle size then the above will give you a lot of flexibility.  The `interpolate` function exported from d3-interpolate is very clever.  It will interpolate numbers, colors and strings with numbers in them without you needing to worry about it.  
-
-The `interpolate` function exported from d3-interpolate also includes a lot of code (e.g. d3-color) that may not be needed for your project. For example, if you are just interpolating numbers in your components you could replace all that code with just a simple a interpolation function.  React Move will apply easing functions (see [d3-ease](https://github.com/d3/d3-ease)) to your transitions to get a variety of effects.  A basic numeric interpolator would look like this:
-
-```js
-import { createNodeGroup, createAnimate } from 'react-move'
-
-const numeric = (beg, end) => {
-  const a = +beg
-  const b = +end - a
-  
-  return function(t) {
-    return a + b * t
-  } 
-}
-
-function getInterpolator(begValue, endValue, attr, namespace) {
-  return numeric(begValue, endValue)
-}
-
-export const NodeGroupNumeric = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
-export const AnimateNumeric = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
-
-```
-
-Your `getInterpolator` function should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  **See the sections below on starting states and transitions for more on attrs and namespaces.**
-
-Of course you can create as many custom components as you want and organize them in a way that makes sense to you.  You can use any interpolation library or write your own. 
-
 ## Demos
 
 * [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
@@ -132,33 +139,9 @@ The API for `NodeGroup` and `Animate` have not changed in 4.0, but if you want t
 
 # Getting Started
 
-React Move exports just two factory functions:
-- createNodeGroup => NodeGroup - If you have an **array of items** that enter, update and leave
-- createAnimate => Animate - If you have a **singe item** that enters, updates and leaves
-
-To get some components to work with in your app you can use this code to create them with some good defaults:
-
-```
-npm install react-move d3-interpolate
-```
-
-Then in your app:
-```js
-import { createNodeGroup, createAnimate } from 'react-move'
-import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
-
-function getInterpolator(begValue, endValue, attr, namespace) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg(begValue, endValue)
-  }
-
-  return interpolate(begValue, endValue)
-}
-
-export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
-export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
-```
-Then just import them in other components in your app.
+React Move exports just two components:
+- NodeGroup - If you have an **array of items** that enter, update and leave
+- Animate - If you have a **singe item** that enters, updates and leaves
 
 ## Starting state
 
