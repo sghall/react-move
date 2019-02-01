@@ -4,7 +4,7 @@
 
 # React-Move
 
-Beautiful, data-driven animations for React. Just 3.6kb (gzipped)!
+Beautiful, data-driven animations for React. Just 4kb (gzipped)!
 ### [Documentation and Examples](https://react-move.js.org)
 
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
@@ -39,9 +39,9 @@ npm install react-move
 
 ### Upgrading to 5.0
 
-This version of React Move breaks the hard dependency on d3-interpolate. By default `react-move` will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything.**
+This version of React Move breaks the hard dependency on d3-interpolate. By default `react-move` will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
-To get the same interpolation found in `react-move` 2.x and 3.x do this:
+To get the same interpolation found in `react-move` 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
 
 Install d3-interpolate:
 ```
@@ -86,35 +86,7 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 </NodeGroup>
 ```
 
-The big change in this release is the `interpolation` prop. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in `getInterpolator` to check if your animations are working as expected. 
-
-For starters, you'll get exactly the same component setup you have in react-move 2.x.x and 3.x.x by creating them locally like this:
-
-First install d3-interpolate locally:
-```
-npm install d3-interpolate
-```
-
-Then in your app:
-```js
-// THIS IS HOW YOU UPGRADE TO 4.0
-
-import { createNodeGroup, createAnimate } from 'react-move'
-import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
-
-function getInterpolator(begValue, endValue, attr, namespace) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg(begValue, endValue)
-  }
-
-  return interpolate(begValue, endValue)
-}
-
-// YOUR NEW LOCAL <NodeGroup /> AND <Animate /> - EQUIVALENT TO 2.X.X AND 3.X.X
-
-export const NodeGroup = createNodeGroup(getInterpolator, 'NodeGroupDisplayName') // displayName is optional
-export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // displayName is optional
-```
+The big change in this release is the `interpolation` prop. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in your `interpolation` function to check if your animations are working as expected. 
 
 ## Demos
 
@@ -127,15 +99,16 @@ export const Animate = createAnimate(getInterpolator, 'AnimateDisplayName') // d
 
 # Documentation
 
-The docs below are for version **4.x.x** of React-Move.
+The docs below are for version **5.x.x** of React-Move.
 
 Older versions:
 
 * [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
 
-The API for `NodeGroup` and `Animate` have not changed in 4.0, but if you want to refer back:
+The API for `NodeGroup` and `Animate` have not changed in 5.0, but if you want to refer back:
 * [Version 2.x.x](https://github.com/react-tools/react-move/tree/v2.9.1)
 * [Version 3.x.x](https://github.com/react-tools/react-move/tree/v3.1.0)
+* [Version 4.x.x](https://github.com/react-tools/react-move/tree/v4.0.0)
 
 # Getting Started
 
