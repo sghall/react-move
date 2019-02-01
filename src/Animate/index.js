@@ -7,7 +7,7 @@ const keyAccessor = () => '$$key$$'
 
 class Animate extends Component {
   render() {
-    const { show, start, enter, update, leave, children } = this.props
+    const { show, start, enter, update, leave, interpolation, children } = this.props
     const data = typeof start === 'function' ? start() : start
 
     return (
@@ -15,6 +15,7 @@ class Animate extends Component {
         data={show ? [data] : []}
         start={() => data}
         keyAccessor={keyAccessor}
+        interpolation={interpolation}
         enter={typeof enter === 'function' ? enter : () => enter}
         update={typeof update === 'function' ? update : () => update}
         leave={typeof leave === 'function' ? leave : () => leave}
@@ -36,7 +37,7 @@ Animate.propTypes = {
   /**
    * Boolean value that determines if the child should be rendered or not.
    */
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
   /**
    * A function that returns an interpolator given the begin value, end value, atrr and namespace. See docs for more.
    */
