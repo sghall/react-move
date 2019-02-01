@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
-  HashMap,
-  Config
+  HashMap
 } from 'kapellmeister';
 import { GetInterpolator } from '..'
 
@@ -9,9 +8,9 @@ export interface IAnimateProps {
   show?: boolean;
   interpolation?: GetInterpolator;
   start: () => HashMap | HashMap;
-  enter?: () => (Config| Array<Config>) | Config | Array<Config>;
-  update?: () => (Config | Array<Config>) | Config | Array<Config>;
-  leave?: () => (Config| Array<Config>) | Config | Array<Config>;
+  enter?: () => (HashMap| Array<HashMap>) | HashMap | Array<HashMap>;
+  update?: () => (HashMap | Array<HashMap>) | HashMap | Array<HashMap>;
+  leave?: () => (HashMap| Array<HashMap>) | HashMap | Array<HashMap>;
   children: (state: HashMap) => React.ReactElement<any>;
 }
 

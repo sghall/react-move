@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Config,
   HashMap,
 } from 'kapellmeister';
 import { GetInterpolator } from '..'
@@ -10,9 +9,9 @@ export interface INodeGroupProps {
   keyAccessor: (data: any, index: number) => string | number;
   interpolation?: GetInterpolator;
   start: (data: any, index: number) => HashMap;
-  enter?: (data: any, index: number) => (Config | Array<Config>);
-  update?: (data: any, index: number) => (Config | Array<Config>);
-  leave?: (data: any, index: number) => (Config | Array<Config>);
+  enter?: (data: any, index: number) => (HashMap | Array<HashMap>);
+  update?: (data: any, index: number) => (HashMap | Array<HashMap>);
+  leave?: (data: any, index: number) => (HashMap | Array<HashMap>);
   children: (nodes: Array<any>) => React.ReactElement<any>;
 }
 
