@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { feature } from 'topojson'
 import { easeQuadOut } from 'd3-ease'
-import Animate from 'docs/src/components/Animate'
+import { Animate } from 'react-move'
 import { interpolate } from 'flubber'
 import Surface from 'docs/src/components/Surface' // this is just a responsive SVG
 import statesJSON from './states.json'
