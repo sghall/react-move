@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
-  Transition,
-  PlainObject,
-} from '../core';
+  Config,
+  HashMap,
+} from 'kapellmeister';
 import { GetInterpolator } from '..'
 
 export interface INodeGroupProps {
@@ -17,19 +17,19 @@ export interface INodeGroupProps {
   /**
   * A function that returns the starting state.  The function is passed the data and index and must return an object.
   */
-  start: (data: any, index: number) => PlainObject;
+  start: (data: any, index: number) => HashMap;
   /**
    * A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index.
    */
-  enter?: (data: any, index: number) => Transition | Array<Transition>;
+  enter?: (data: any, index: number) => (Config | Array<Config>);
   /**
    * A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index.
    */
-  update?: (data: any, index: number) => Transition | Array<Transition>;
+  update?: (data: any, index: number) => (Config | Array<Config>);
   /**
    * A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index.
    */
-  leave?: (data: any, index: number) => Transition | Array<Transition>;
+  leave?: (data: any, index: number) => (Config | Array<Config>);
   /**
    * A function that renders the nodes. It should accept an array of nodes as its only argument.  Each node is an object with the key, data, state and a type of 'ENTER', 'UPDATE' or 'LEAVE'.
    */
@@ -38,4 +38,4 @@ export interface INodeGroupProps {
 
 export declare class INodeGroup extends React.Component<INodeGroupProps> { }
 
-export default function createNodeGroup(func: GetInterpolator, displayName?: string): typeof INodeGroup;
+export default INodeGroup

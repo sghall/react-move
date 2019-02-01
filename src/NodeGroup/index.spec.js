@@ -1,19 +1,10 @@
 /* eslint-env mocha */
 
 import React, { Component } from 'react'
-import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import sinon from 'sinon'
 import { assert } from 'chai'
 import { shallow, mount } from 'enzyme'
-import createNodeGroup from '.'
-
-const NodeGroup = createNodeGroup(function getInterpolator(begValue, endValue, attr) {
-  if (attr === 'transform') {
-    return interpolateTransformSvg(begValue, endValue)
-  }
-
-  return interpolate(begValue, endValue)
-})
+import NodeGroup from '.'
 
 function getData() {
   return [1, 2, 3, 4, 5].map(d => ({ val: d, key: `key-${d}` }))

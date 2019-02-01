@@ -1,10 +1,8 @@
 import * as React from "react";
 import {
-  Transition,
-  TransitionFunction,
-  PlainObject,
-  PlainObjectFunction,
-} from '../core';
+  HashMap,
+  Config
+} from 'kapellmeister';
 import { GetInterpolator } from '..'
 
 export interface IAnimateProps {
@@ -15,25 +13,25 @@ export interface IAnimateProps {
   /**
   * An object or function that returns an obejct to be used as the starting state. 
   */
-  start: PlainObjectFunction | PlainObject;
+  start: () => HashMap | HashMap;
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.
    */
-  enter?: TransitionFunction | Transition | Array<Transition>
+  enter?: () => (Config| Array<Config>) | Config | Array<Config>
   /**
-   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions.
+   * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave Configs.
    */
-  update?: TransitionFunction | Transition | Array<Transition>
+  update?: () => (Config | Array<Config>) | Config | Array<Config>
   /**
    * An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.
    */
-  leave?: TransitionFunction | Transition | Array<Transition>
+  leave?: () => (Config| Array<Config>) | Config | Array<Config>
   /**
    * A function that renders the node.  The function is passed the data and state.
    */
-  children: (state: PlainObject) => React.ReactElement<any>;
+  children: (state: HashMap) => React.ReactElement<any>;
 }
 
 declare class IAnimate extends React.Component<IAnimateProps> { }
 
-export default function createAnimate(func: GetInterpolator, displayName?: string): typeof IAnimate;
+export default IAnimate

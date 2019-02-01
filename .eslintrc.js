@@ -21,6 +21,7 @@ module.exports = {
   },
   rules: {
     'react/jsx-uses-vars': 2,
+    'react/no-direct-mutation-state': 0,
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
