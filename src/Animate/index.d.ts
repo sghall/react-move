@@ -7,10 +7,10 @@ import { GetInterpolator } from '..'
 export interface IAnimateProps {
   show?: boolean;
   interpolation?: GetInterpolator;
-  start: () => HashMap | HashMap;
-  enter?: () => (HashMap| Array<HashMap>) | HashMap | Array<HashMap>;
-  update?: () => (HashMap | Array<HashMap>) | HashMap | Array<HashMap>;
-  leave?: () => (HashMap| Array<HashMap>) | HashMap | Array<HashMap>;
+  start: any;
+  enter?: any;
+  update?: any;
+  leave?: any;
   children: (state: HashMap) => React.ReactElement<any>;
 }
 
