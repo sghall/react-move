@@ -116,6 +116,35 @@ React Move exports just two components:
 - NodeGroup - If you have an **array of items** that enter, update and leave
 - Animate - If you have a **singe item** that enters, updates and leaves
 
+## <NodeGroup />
+
+### Component Props
+
+| Name | Type | Default | Description |
+|:-----|:-----|:-----|:-----|
+| <span style="color: #31a148">data *</span> | array |  |  An array. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data. |
+| <span style="color: #31a148">keyAccessor *</span> | function |  |  Function that returns a string key given the data and its index. Used to track which nodes are entering, updating and leaving. |
+| interpolation | function | numeric |  A function that returns an interpolator given the begin value, end value, attr and namespace. Defaults to numeric interpolation. See docs for more. |
+| <span style="color: #31a148">start *</span> | function |  |  A function that returns the starting state. The function is passed the data and index and must return an object. |
+| enter | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index. |
+| update | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index. |
+| leave | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index. |
+| <span style="color: #31a148">children *</span> | function |  |  A function that receives an array of nodes. |
+
+## <Animate />
+
+### Component Props
+
+| Name | Type | Default | Description |
+|:-----|:-----|:-----|:-----|
+| show | bool | true |  Boolean value that determines if the child should be rendered or not. |
+| interpolation | function | numeric |  A function that returns an interpolator given the begin value, end value, atrr and namespace. See docs for more. |
+| start | union:<br>&nbsp;func<br>&nbsp;object<br> |  |  An object or function that returns an obejct to be used as the starting state. |
+| enter | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter. |
+| update | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions. |
+| leave | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave. |
+| <span style="color: #31a148">children *</span> | function |  |  A function that receives the state. |
+
 ## Starting state
 
 Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with React Move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as "attrs" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
@@ -412,9 +441,7 @@ Using Events:
 ```
 
 
-## < NodeGroup />
 
-### Component Props
 
 | Name                                               | Type     | Default  | Description                                                                                                                                                                              |
 | :------------------------------------------------- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
