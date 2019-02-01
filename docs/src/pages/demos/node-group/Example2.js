@@ -1,7 +1,6 @@
-// @flow weak
-
 import React, { Component } from 'react'
 import { shuffle, range } from 'd3-array'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import { easeBackOut, easeBackInOut } from 'd3-ease'
 import { NodeGroup } from 'react-move'
 
@@ -81,6 +80,14 @@ export default class Example extends Component {
                 timing: { delay: 750, duration: 500 },
               },
             ])}
+
+            interpolation={(begValue, endValue, attr) => {
+              if (attr === 'transform') {
+                return interpolateTransformSvg(begValue, endValue)
+              }
+            
+              return interpolate(begValue, endValue)
+            }}
           >
             {(nodes) => (
               <div style={{ margin: 10, height: count * 20, position: 'relative' }}>
