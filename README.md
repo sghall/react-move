@@ -495,7 +495,6 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 </NodeGroup>
 ```
 
-```
 This setup mimics how `d3.js` works for selecting interpolators and will not force you to think too much about the values your are using.  For example, if you use colors (in any format) they will be recognized and interpolated correctly. The `interpolate` function exported from d3-interpolate does a great job of guessing what you're trying to do and handles it for you but it also includes a lot of code (e.g. d3-color) that may not be needed for your project.
 
 #### Numeric Interpolation Only - Default - No dependencies
