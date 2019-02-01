@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import NodeGroup from 'docs/src/components/NodeGroup'
+import { NodeGroup } from 'react-move'
 import Surface from 'docs/src/components/Surface'
 import { scaleBand } from 'd3-scale'
 import { shuffle } from 'd3-array'

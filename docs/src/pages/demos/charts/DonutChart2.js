@@ -5,7 +5,7 @@ import { easeExpOut } from 'd3-ease'
 import sortBy from 'lodash/sortBy'
 import Surface from 'docs/src/components/Surface'
 import React, { PureComponent } from 'react'
-import NodeGroup from 'docs/src/components/NodeGroup'
+import { NodeGroup } from 'react-move'
 
 const colors = scaleOrdinal()
   .range(['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'])
