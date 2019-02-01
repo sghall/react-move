@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 import { NodeGroup } from 'react-move'
 import Surface from 'docs/src/components/Surface'
 import { easeExpInOut } from 'd3-ease'
@@ -133,6 +134,14 @@ class Example extends PureComponent {
               },
               timing: { duration: 1000, ease: easeExpInOut },
             })}
+
+            interpolation={(begValue, endValue, attr) => {
+              if (attr === 'transform') {
+                return interpolateTransformSvg(begValue, endValue)
+              }
+            
+              return interpolate(begValue, endValue)
+            }}
           >
             {(nodes) => {
               return (
