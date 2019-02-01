@@ -40,8 +40,6 @@ const mockData = [
     name: 'Layo',
   }, {
     name: 'Oyoba',
-  }, {
-    name: 'Ntags',
   },
 ]
 
