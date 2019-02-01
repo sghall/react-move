@@ -39,9 +39,9 @@ npm install react-move
 
 ### Upgrading to 5.0
 
-This version of React Move breaks the hard dependency on d3-interpolate. By default `react-move` will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
+This version of React Move breaks the hard dependency on d3-interpolate. By default React Move will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
-To get the same interpolation found in `react-move` 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
+To get the same interpolation found in React Move 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
 
 Install d3-interpolate:
 ```
@@ -74,7 +74,7 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
     ...
   })}
   
-  interpolation ={(begValue, endValue, attr, namespace) => { // pass as prop
+  interpolation ={(begValue, endValue, attr) => { // pass as prop
     if (attr === 'transform') {
       return interpolateTransformSvg(begValue, endValue)
     }
