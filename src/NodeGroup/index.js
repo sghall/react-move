@@ -231,7 +231,6 @@ NodeGroup.defaultProps = {
   enter: () => {},
   update: () => {},
   leave: () => {},
-  wrapper: 'div',
   interpolation: numeric,
 }
 
