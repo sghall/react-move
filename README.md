@@ -232,7 +232,7 @@ In `Animate` you are animating a single item and pass a start prop that is an ob
 
 ## Transitioning state
 
-You return an object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate`. Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
+You return a config object or an array of config objects in your **enter**, **update** and **leave** props functions for both `NodeGroup` and `Animate`. Instead of simply returning the next state these objects describe how to transform the state. Each config object can specify its own duration, delay, easing and events independently.
 
 There are two special keys you can use: **timing** and **events**. Both are optional.
 Timing and events are covered in more detail below.
@@ -381,7 +381,7 @@ const defaultTiming = {
 
 For the ease key, just provide the function. You can use any easing function, like those from d3-ease...
 
-[List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/index.js)
+[List of ease functions exported from d3-ease](https://github.com/d3/d3-ease/blob/master/src/index.js)
 
 ## Events
 
