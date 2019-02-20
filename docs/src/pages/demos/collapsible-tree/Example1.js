@@ -5,7 +5,7 @@ const Example = () => {
     <div>
       <iframe
         title="Collapsible Tree"
-        src="https://codesandbox.io/s/ww0xkyqonk"
+        src="https://codesandbox.io/embed/ww0xkyqonk?view=preview"
         style={{ width: '100%', height: '500px', border: 0, borderRadius: 4, overflow: 'hidden' }}
         sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
       />
