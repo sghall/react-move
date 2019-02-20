@@ -92,6 +92,7 @@ The big change in this release is the `interpolation` prop. This function opens 
 ## Demos
 
 * [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
+* Peter Cook [Blog Post](https://frontendcharts.com/react-move-barchart/) 
 * [CodeSandbox - Collapsible Tree](https://codesandbox.io/s/ww0xkyqonk) ([@techniq](https://github.com/techniq))
 * [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
 * [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
