@@ -1,24 +1,17 @@
 import * as React from "react";
-import {
-  Config,
-} from 'kapellmeister';
-import { GetInterpolator } from '..'
+import { HashMap, GetInterpolator } from '..'
 
-export type AddArrayLike<T> = unknown extends T ? Config | Config[] : {
-  [P in keyof T]: T[P] | T[P][]
-}
-
-export interface INodeGroupProps<T = unknown, State = unknown> {
-  data: T[];
-  keyAccessor: (data: T, index: number) => string | number;
+export interface INodeGroupProps {
+  data: Array<any>;
+  keyAccessor: (data: any, index: number) => string | number;
   interpolation?: GetInterpolator;
-  start: (data: T, index: number) =>  unknown extends State ? Config : State;
-  enter?: (data: T, index: number) => AddArrayLike<State>;
-  update?: (data: T, index: number) => AddArrayLike<State>;
-  leave?: (data: T, index: number) => AddArrayLike<State>;
-  children: (nodes: T & { key: string | number, data: T, state: unknown extends State ? Config : State }[]) => React.ReactElement<any>;
+  start: (data: any, index: number) => HashMap;
+  enter?: (data: any, index: number) => (HashMap | Array<HashMap>);
+  update?: (data: any, index: number) => (HashMap | Array<HashMap>);
+  leave?: (data: any, index: number) => (HashMap | Array<HashMap>);
+  children: (nodes: Array<any>) => React.ReactElement<any>;
 }
 
-export declare class INodeGroup<T = unknown, State = unknown> extends React.Component<INodeGroupProps<T, State>> { }
+export declare class INodeGroup extends React.Component<INodeGroupProps> { }
 
 export default INodeGroup
