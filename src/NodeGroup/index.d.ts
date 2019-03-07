@@ -1,24 +1,19 @@
-import * as React from "react";
-import {
-  Config,
-} from 'kapellmeister';
-import { GetInterpolator } from '..'
+import * as React from 'react';
+import { Config } from 'kapellmeister';
+import { GetInterpolator } from '..';
 
-export type AddArrayLike<T> = unknown extends T ? Config | Config[] : {
-  [P in keyof T]: T[P] | T[P][]
-}
+export type MakeState<T> = { [P in keyof T]: T[P] extends number | string ? T[P] | T[P][] : MakeState<T[P]> };
 
-export interface INodeGroupProps<T = unknown, State = unknown> {
+export interface INodeGroupProps<T = any, State = any> {
   data: T[];
   keyAccessor: (data: T, index: number) => string | number;
-  interpolation?: GetInterpolator;
-  start: (data: T, index: number) =>  unknown extends State ? Config : State;
-  enter?: (data: T, index: number) => AddArrayLike<State>;
-  update?: (data: T, index: number) => AddArrayLike<State>;
-  leave?: (data: T, index: number) => AddArrayLike<State>;
-  children: (nodes: T & { key: string | number, data: T, state: unknown extends State ? Config : State }[]) => React.ReactElement<any>;
+  start: (data: T, index: number) => State & Partial<Config>;
+  enter?: (data: T, index: number) => MakeState<State> & Partial<Config>;
+  update?: (data: T, index: number) => MakeState<State> & Partial<Config>;
+  leave?: (data: T, index: number) => (MakeState<State> & Partial<Config>) | undefined;
+  children: (nodes: T & { key: string | number; data: T; state: State }[]) => React.ReactElement<any>;
 }
 
-export declare class INodeGroup<T = unknown, State = unknown> extends React.Component<INodeGroupProps<T, State>> { }
+export declare class INodeGroup<T = any, State = any> extends React.Component<INodeGroupProps<T, State>> {}
 
-export default INodeGroup
+export default INodeGroup;
