@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  HashMap
-} from 'kapellmeister';
-import { GetInterpolator } from '..'
+import { HashMap, GetInterpolator } from '..'
 
 export interface IAnimateProps {
   show?: boolean;
