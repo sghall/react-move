@@ -33,7 +33,7 @@ npm install react-move@^5.0.0
 
 **Note:** The API for React Move 5.x and 6.x is exactly the same.  The 5.x version just includes [react-lifecycles-compat](https://www.npmjs.com/package/react-lifecycles-compat) to make the library work with earlier versions of React.  This adds a little to the bundle so use 6.x if you're using React 16.3+.
 
-### Upgrading 2.x and 3.x  
+### Upgrading from React Move 2.x and 3.x  
 
 The API for React Move has been stable since the 2.0 version.  The one change in the 4.0 version of React Move broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version React Move will by default only do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
