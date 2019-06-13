@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { polyfill } from 'react-lifecycles-compat'
 import PropTypes from 'prop-types'
 import { BaseNode, interval } from 'kapellmeister'
 import mergeKeys from '../core/mergeKeys'
@@ -233,8 +232,6 @@ NodeGroup.defaultProps = {
   leave: () => {},
   interpolation: numeric,
 }
-
-polyfill(NodeGroup)
 
 export default NodeGroup
 
