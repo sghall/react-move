@@ -56,8 +56,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "kapellmeister": "^3.0.1",
-    "prop-types": "^15.7.2",
-    "react-lifecycles-compat": "^3.0.4"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
