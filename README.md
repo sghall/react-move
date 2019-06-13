@@ -4,13 +4,12 @@
 
 # React-Move
 
-Beautiful, data-driven animations for React. Just 4kb (gzipped)!
+Beautiful, data-driven animations for React. Just 3.5kb (gzipped)!
 ### [Documentation and Examples](https://react-move.js.org)
 
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
-![gzip size](http://img.badgesize.io/https://npmcdn.com/react-move/dist/react-move.min.js?compression=gzip)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/react-tools/react-move/blob/master/LICENSE)
 
 ## Features
@@ -25,22 +24,18 @@ Beautiful, data-driven animations for React. Just 4kb (gzipped)!
 ## Installation
 
 ```bash
-// React ^0.14.9 || ^15.3.0 || ^16.0.0
+// React ^16.3.0
 npm install react-move
+
+// React ^0.14.9 || ^15.3.0 || ^16.0.0
+npm install react-move@^5.0.0
 ```
 
-## React Move 5.0 is here.
+**Note:** The API for React Move 5.x and 6.x is exactly the same.  The 5.x version just includes [react-lifecycles-compat](https://www.npmjs.com/package/react-lifecycles-compat) to make the library work with earlier versions of React.  This adds a little to the bundle so use 6.x if you're using React 16.3+.
 
-### 5.0 Highlights
-- React Move is now just **4kb (gzipped)! Almost 60% smaller.**
-- Application developers and package maintainers can now make much smaller bundles.
-- You can now use any interpolator you want which opens new creative doors for designers.
-- Tons of performance improvements. 🚀 
-- Much easier debugging of animations.
+### Upgrading 2.x and 3.x  
 
-### Upgrading to 5.0
-
-This version of React Move breaks the hard dependency on d3-interpolate. By default React Move will do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
+The API for React Move has been stable since the 2.0 version.  The one change in the 4.0 version of React Move broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version React Move will by default only do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
 To get the same interpolation found in React Move 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
 
@@ -87,8 +82,6 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 </NodeGroup>
 ```
 
-The big change in this release is the `interpolation` prop. This function opens up a lot of doors to be more efficient and creative with your animations. You can also debug your animations much more easily by console logging in your `interpolation` function to check if your animations are working as expected. 
-
 ## Demos
 
 * [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
@@ -101,16 +94,17 @@ The big change in this release is the `interpolation` prop. This function opens 
 
 # Documentation
 
-The docs below are for version **5.x.x** of React-Move.
+The docs below are for version **6.x.x** of React-Move.
 
 Older versions:
 
 * [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
 
-The API for `NodeGroup` and `Animate` have not changed in 5.0, but if you want to refer back:
+The API for `NodeGroup` and `Animate` have not changed except for the `interpolation`xw prop, but if you want to refer back:
 * [Version 2.x.x](https://github.com/react-tools/react-move/tree/v2.9.1)
 * [Version 3.x.x](https://github.com/react-tools/react-move/tree/v3.1.0)
 * [Version 4.x.x](https://github.com/react-tools/react-move/tree/v4.0.0)
+* [Version 5.x.x](https://github.com/react-tools/react-move/tree/v5.0.0)
 
 # Getting Started
 
