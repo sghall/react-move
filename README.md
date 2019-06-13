@@ -35,7 +35,7 @@ npm install react-move@^5.0.0
 
 ### Upgrading from React Move 2.x and 3.x  
 
-The API for React Move has been stable since the 2.0 version.  The one change in the 4.0 version of React Move broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version React Move will by default only do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
+The API for React Move has been essentially stable since the 2.0 version.  The 4.0 version of React Move introduced a change that broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version of React Move will by default only do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
 To get the same interpolation found in React Move 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
 
