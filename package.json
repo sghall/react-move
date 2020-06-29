@@ -5,7 +5,7 @@
   "description": "Beautiful, data-driven animations for React.",
   "main": "./index.js",
   "types": "./index.d.ts",
-  "repository": "git+https://github.com/react-tools/react-move.git",
+  "repository": "git+https://github.com/sghall/react-move.git",
   "keywords": [
     "react-move",
     "resonance",
@@ -32,9 +32,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/react-tools/react-move/issues"
+    "url": "https://github.com/sghall/react-move/issues"
   },
-  "homepage": "https://github.com/react-tools/react-move#readme",
+  "homepage": "https://github.com/sghall/react-move#readme",
   "scripts": {
     "docs": "cd docs && npm install && npm run start",
     "prebuild": "npm run build:cln",

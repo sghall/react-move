@@ -5,7 +5,7 @@
   "description": "React move docs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-tools/react-move.git"
+    "url": "https://github.com/sghall/react-move.git"
   },
   "scripts": {
     "start": "cross-env npm run clean && ../node_modules/.bin/babel-node webpack.dev.server.js",
