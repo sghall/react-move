@@ -1,6 +1,6 @@
 {
   "name": "react-move",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "private": true,
   "description": "Beautiful, data-driven animations for React.",
   "main": "./index.js",
@@ -21,8 +21,7 @@
   "contributors": [
     {
       "name": "Steven Hall",
-      "email": "hall.steven.g@gmail.com",
-      "url": "http://www.delimited.io"
+      "email": "hall.steven.g@gmail.com"
     },
     {
       "name": "Tanner Linsley",
