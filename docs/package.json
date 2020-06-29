@@ -46,7 +46,7 @@
     "style-loader": "^0.23.1",
     "topojson": "^3.0.2",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
