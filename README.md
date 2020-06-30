@@ -1,25 +1,26 @@
 <div style="text-align:center;">
-  <a href="https://github.com/react-tools/react-move" target="\_parent"><img src="https://github.com/react-tools/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
+  <a href="https://github.com/sghall/react-move" target="\_parent"><img src="https://github.com/react-tools/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
 </div>
 
 # React-Move
 
 Beautiful, data-driven animations for React. Just 3.5kb (gzipped)!
-### [Documentation and Examples](https://react-move.js.org)
+
+### [Documentation and Examples](https://react-move-docs.netlify.app)
 
 [![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/react-tools/react-move/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/sghall/react-move/blob/master/LICENSE)
 
 ## Features
 
-* Animate HTML, SVG & React-Native
-* Fine-grained control of delay, duration and easing
-* Animation lifecycle events: start, interrupt, end
-* Custom tweening functions
-* Awesome documentation and lots of examples
-* Supports TypeScript
+- Animate HTML, SVG & React-Native
+- Fine-grained control of delay, duration and easing
+- Animation lifecycle events: start, interrupt, end
+- Custom tweening functions
+- Awesome documentation and lots of examples
+- Supports TypeScript
 
 ## Installation
 
@@ -31,20 +32,22 @@ npm install react-move
 npm install react-move@^5.0.0
 ```
 
-**Note:** The API for React Move 5.x and 6.x is exactly the same.  The 5.x version just includes [react-lifecycles-compat](https://www.npmjs.com/package/react-lifecycles-compat) to make the library work with earlier versions of React.  This adds a little to the bundle so use 6.x if you're using React 16.3+.
+**Note:** The API for React Move 5.x and 6.x is exactly the same. The 5.x version just includes [react-lifecycles-compat](https://www.npmjs.com/package/react-lifecycles-compat) to make the library work with earlier versions of React. This adds a little to the bundle so use 6.x if you're using React 16.3+.
 
-### Upgrading from React Move 2.x and 3.x  
+### Upgrading from React Move 2.x and 3.x
 
-The API for React Move has been essentially stable since the 2.0 version.  The 4.0 version of React Move introduced a change that broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version of React Move will by default only do numeric interpolation and apply easing functions.  **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
+The API for React Move has been essentially stable since the 2.0 version. The 4.0 version of React Move introduced a change that broke the hard dependency on d3-interpolate and introduced the `interpolation` prop. The current version of React Move will by default only do numeric interpolation and apply easing functions. **If you only need to do numeric interpolation you don't need to do anything. Just upgrade and done.**
 
 To get the same interpolation found in React Move 2.x and 3.x which includes support for colors, paths and SVG transforms do this:
 
 Install d3-interpolate:
+
 ```
 npm install d3-interpolate
 ```
 
 Then in your app:
+
 ```js
 import { NodeGroup } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
@@ -69,7 +72,7 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
   leave={() => ({
     ...
   })}
-  
+
   interpolation ={(begValue, endValue, attr) => { // pass as prop
     if (attr === 'transform') {
       return interpolateTransformSvg(begValue, endValue)
@@ -84,13 +87,13 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
 ## Demos
 
-* [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
-* [Blog Post by Peter Cook](https://frontendcharts.com/react-move-barchart/) 
-* [CodeSandbox - Collapsible Tree](https://codesandbox.io/s/ww0xkyqonk) ([@techniq](https://github.com/techniq))
-* [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
-* [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
-* [CodeSandbox - Animated Mount/Unmount](https://codesandbox.io/s/9z04rpypny)
-* [Examples](https://react-move.js.org)
+- [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
+- [Blog Post by Peter Cook](https://frontendcharts.com/react-move-barchart/)
+- [CodeSandbox - Collapsible Tree](https://codesandbox.io/s/ww0xkyqonk) ([@techniq](https://github.com/techniq))
+- [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
+- [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
+- [CodeSandbox - Animated Mount/Unmount](https://codesandbox.io/s/9z04rpypny)
+- [Examples](https://react-move-docs.netlify.app)
 
 # Documentation
 
@@ -98,17 +101,19 @@ The docs below are for version **6.x.x** of React-Move.
 
 Older versions:
 
-* [Version 1.x.x](https://github.com/react-tools/react-move/tree/v1.6.1)
+- [Version 1.x.x](https://github.com/sghall/react-move/tree/v1.6.1)
 
 The API for `NodeGroup` and `Animate` have not changed except for the `interpolation`xw prop, but if you want to refer back:
-* [Version 2.x.x](https://github.com/react-tools/react-move/tree/v2.9.1)
-* [Version 3.x.x](https://github.com/react-tools/react-move/tree/v3.1.0)
-* [Version 4.x.x](https://github.com/react-tools/react-move/tree/v4.0.0)
-* [Version 5.x.x](https://github.com/react-tools/react-move/tree/v5.0.0)
+
+- [Version 2.x.x](https://github.com/sghall/react-move/tree/v2.9.1)
+- [Version 3.x.x](https://github.com/sghall/react-move/tree/v3.1.0)
+- [Version 4.x.x](https://github.com/sghall/react-move/tree/v4.0.0)
+- [Version 5.x.x](https://github.com/sghall/react-move/tree/v5.0.0)
 
 # Getting Started
 
 React Move exports just two components:
+
 - NodeGroup - If you have an **array of items** that enter, update and leave
 - Animate - If you have a **singe item** that enters, updates and leaves
 
@@ -116,40 +121,42 @@ React Move exports just two components:
 
 ### Component Props
 
-| Name | Type | Default | Description |
-|:-----|:-----|:-----|:-----|
-| <span style="color: #31a148">data *</span> | array |  |  An array. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data. |
-| <span style="color: #31a148">keyAccessor *</span> | function |  |  Function that returns a string key given the data and its index. Used to track which nodes are entering, updating and leaving. |
-| interpolation | function | numeric |  A function that returns an interpolator given the begin value, end value, attr and namespace. Defaults to numeric interpolation. See docs for more. |
-| <span style="color: #31a148">start *</span> | function |  |  A function that returns the starting state. The function is passed the data and index and must return an object. |
-| enter | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on enter.  The function is passed the data and index. |
-| update | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on update.  The function is passed the data and index. |
-| leave | function | () => {} |  A function that **returns an object or array of objects** describing how the state should transform on leave.  The function is passed the data and index. |
-| <span style="color: #31a148">children *</span> | function |  |  A function that receives an array of nodes. |
+| Name                                               | Type     | Default  | Description                                                                                                                                               |
+| :------------------------------------------------- | :------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span style="color: #31a148">data \*</span>        | array    |          | An array. The data prop is treated as immutable so the nodes will only update if prev.data !== next.data.                                                 |
+| <span style="color: #31a148">keyAccessor \*</span> | function |          | Function that returns a string key given the data and its index. Used to track which nodes are entering, updating and leaving.                            |
+| interpolation                                      | function | numeric  | A function that returns an interpolator given the begin value, end value, attr and namespace. Defaults to numeric interpolation. See docs for more.       |
+| <span style="color: #31a148">start \*</span>       | function |          | A function that returns the starting state. The function is passed the data and index and must return an object.                                          |
+| enter                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on enter. The function is passed the data and index.  |
+| update                                             | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on update. The function is passed the data and index. |
+| leave                                              | function | () => {} | A function that **returns an object or array of objects** describing how the state should transform on leave. The function is passed the data and index.  |
+| <span style="color: #31a148">children \*</span>    | function |          | A function that receives an array of nodes.                                                                                                               |
 
 ## < Animate />
 
 ### Component Props
 
-| Name | Type | Default | Description |
-|:-----|:-----|:-----|:-----|
-| show | bool | true |  Boolean value that determines if the child should be rendered or not. |
-| interpolation | function | numeric |  A function that returns an interpolator given the begin value, end value, atrr and namespace. See docs for more. |
-| start | union:<br>&nbsp;func<br>&nbsp;object<br> |  |  An object or function that returns an obejct to be used as the starting state. |
-| enter | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter. |
-| update | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. ***Note:*** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions. |
-| leave | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |  |  An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave. |
-| <span style="color: #31a148">children *</span> | function |  |  A function that receives the state. |
+| Name                                            | Type                                                    | Default | Description                                                                                                                                                                                                                                                                          |
+| :---------------------------------------------- | :------------------------------------------------------ | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| show                                            | bool                                                    | true    | Boolean value that determines if the child should be rendered or not.                                                                                                                                                                                                                |
+| interpolation                                   | function                                                | numeric | A function that returns an interpolator given the begin value, end value, atrr and namespace. See docs for more.                                                                                                                                                                     |
+| start                                           | union:<br>&nbsp;func<br>&nbsp;object<br>                |         | An object or function that returns an obejct to be used as the starting state.                                                                                                                                                                                                       |
+| enter                                           | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |         | An object, array of objects, or function that returns an object or array of objects describing how the state should transform on enter.                                                                                                                                              |
+| update                                          | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |         | An object, array of objects, or function that returns an object or array of objects describing how the state should transform on update. **_Note:_** although not required, in most cases it make sense to specify an update prop to handle interrupted enter and leave transitions. |
+| leave                                           | union:<br>&nbsp;func<br>&nbsp;array<br>&nbsp;object<br> |         | An object, array of objects, or function that returns an object or array of objects describing how the state should transform on leave.                                                                                                                                              |
+| <span style="color: #31a148">children \*</span> | function                                                |         | A function that receives the state.                                                                                                                                                                                                                                                  |
 
 ## Starting state
 
-Before looking at the components it might be good to look at starting state.  You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with React Move.  The starting state for each item is always **an object with string or number leaves**.  The leaf keys are referred to as "attrs" as in "attribute."  There are also "namespaces" which are a purely organizational concept.
+Before looking at the components it might be good to look at starting state. You are going to be asked to define starting states for each item in your `NodeGroup` and `Animate` components. This is a key concept and probably the most error prone for developers working with React Move. The starting state for each item is always **an object with string or number leaves**. The leaf keys are referred to as "attrs" as in "attribute." There are also "namespaces" which are a purely organizational concept.
 
 Two rules to live by for starting states:
+
 - Don't use the strings "timing" or "events" as an attr or namespace.
 - There should never be an array anywhere in your object.
 
 Example starting state:
+
 ```js
 // GOOD
 {
@@ -167,6 +174,7 @@ Example starting state:
 ```
 
 A more concrete example might be:
+
 ```js
 {
   opacity: 0.1,
@@ -177,6 +185,7 @@ A more concrete example might be:
 ```
 
 You can add "namespaces" to help organize your state:
+
 ```js
 {
   attr1: 100,
@@ -188,7 +197,9 @@ You can add "namespaces" to help organize your state:
   }
 }
 ```
+
 Or something like:
+
 ```js
 {
   namespace1: {
@@ -201,7 +212,9 @@ Or something like:
   }
 }
 ```
+
 You might use namespaces like so:
+
 ```js
 {
   inner: {
@@ -219,7 +232,7 @@ You might use namespaces like so:
 
 #### Starting state in NodeGroup
 
-In `NodeGroup` you are working with an array of items and you pass a start prop (a function) that receives the data item and its index.  The start prop will be called when that data item (identified by its key) enters.  Note it could leave and come back and that prop will be called again.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
+In `NodeGroup` you are working with an array of items and you pass a start prop (a function) that receives the data item and its index. The start prop will be called when that data item (identified by its key) enters. Note it could leave and come back and that prop will be called again. Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
 ```js
 <NodeGroup
@@ -241,7 +254,7 @@ In `NodeGroup` you are working with an array of items and you pass a start prop 
 
 #### Starting state in Animate
 
-In `Animate` you are animating a single item and pass a start prop that is an object or a function.  The start prop will be called when that the item enters.  Note it could leave and come back by toggling the show prop.  Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
+In `Animate` you are animating a single item and pass a start prop that is an object or a function. The start prop will be called when that the item enters. Note it could leave and come back by toggling the show prop. Immediately after the starting state is set your enter transition (optional) is called allowing you to transform that state.
 
 ```js
 <Animate
@@ -266,16 +279,16 @@ If you aren't transitioning anything then it wouldn't make sense to be using Nod
 That said, it's convenient to be able to set a key to value when a node enters, updates or leaves without transitioning.
 To support this you can return four different types of values to specify how you want to transform the state.
 
-* `string or number`: Set the key to the value immediately with no transition.  Ignores all timing values.
+- `string or number`: Set the key to the value immediately with no transition. Ignores all timing values.
 
-* `array [value]`: Transition from the key's current value to the specified value. Value is a string or number.
+- `array [value]`: Transition from the key's current value to the specified value. Value is a string or number.
 
-* `array [value, value]`: Transition from the first value to the second value. Each value is a string or number.
+- `array [value, value]`: Transition from the first value to the second value. Each value is a string or number.
 
-* `function`: Function will be used as a custom tween function.
-
+- `function`: Function will be used as a custom tween function.
 
 Example config object:
+
 ```js
 {
   attr1: [200],
@@ -286,6 +299,7 @@ Example config object:
 ```
 
 Using namespaces:
+
 ```js
 {
   attr1: [100],
@@ -299,6 +313,7 @@ Using namespaces:
 ```
 
 To have different timing for some keys use an array of config objects:
+
 ```js
 [
   {
@@ -348,6 +363,7 @@ To have different timing for some keys use an array of config objects:
 ```
 
 Using an array of config objects:
+
 ```js
 import { easeQuadInOut } from 'd3-ease';
 
@@ -410,9 +426,10 @@ For the ease key, just provide the function. You can use any easing function, li
 
 ## Events
 
-You can add events on your config objects.  You can pass a function that will run when the transition starts, is interrupted (an update to the data occurs) or ends.
+You can add events on your config objects. You can pass a function that will run when the transition starts, is interrupted (an update to the data occurs) or ends.
 
 Using Events:
+
 ```js
 {
   attr1: [100],
@@ -438,11 +455,11 @@ Using Events:
 
 ### Interpolation
 
-You can wire your components in `react-move` to handle different types of interpolation using the `interpolation` prop in both `NodeGroup` and `Animate`.  The code for interpolating strings or SVG paths can be bulky and, in many cases, it's not needed so by default components only handle numeric interpolation. 
+You can wire your components in `react-move` to handle different types of interpolation using the `interpolation` prop in both `NodeGroup` and `Animate`. The code for interpolating strings or SVG paths can be bulky and, in many cases, it's not needed so by default components only handle numeric interpolation.
 
-Your `interpolation` prop is a function that should avoid a lot of logic and computation.  It will get called at high frequency when transitions fire in your components.  You get the begin and end values and what the attribute name (string) is.  You will also get the namespace string (less common) if you are using them in your state.  **See the sections on starting states and transitions for more on attrs and namespaces.**
+Your `interpolation` prop is a function that should avoid a lot of logic and computation. It will get called at high frequency when transitions fire in your components. You get the begin and end values and what the attribute name (string) is. You will also get the namespace string (less common) if you are using them in your state. **See the sections on starting states and transitions for more on attrs and namespaces.**
 
-#### Cadillac Interpolation  - Depends on d3-interpolate
+#### Cadillac Interpolation - Depends on d3-interpolate
 
 To wire up a full service interpolation that will interpolate colors, paths, numbers and SVG transforms you can use a setup like this:
 
@@ -451,6 +468,7 @@ npm install react-move d3-interpolate
 ```
 
 Then in your app:
+
 ```js
 import { NodeGroup, Animate } from 'react-move'
 import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
@@ -475,7 +493,7 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
   leave={() => ({
     ...
   })}
-  
+
   interpolation ={(begValue, endValue, attr, namespace) => { // pass as prop
     if (attr === 'transform') {
       return interpolateTransformSvg(begValue, endValue)
@@ -488,62 +506,61 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 </NodeGroup>
 ```
 
-This setup mimics how `d3.js` works for selecting interpolators and will not force you to think too much about the values your are using.  For example, if you use colors (in any format) they will be recognized and interpolated correctly. The `interpolate` function exported from d3-interpolate does a great job of guessing what you're trying to do and handles it for you but it also includes a lot of code (e.g. d3-color) that may not be needed for your project.
+This setup mimics how `d3.js` works for selecting interpolators and will not force you to think too much about the values your are using. For example, if you use colors (in any format) they will be recognized and interpolated correctly. The `interpolate` function exported from d3-interpolate does a great job of guessing what you're trying to do and handles it for you but it also includes a lot of code (e.g. d3-color) that may not be needed for your project.
 
 #### Numeric Interpolation Only - Default - No dependencies
- 
-To do numeric interpolation you don't need to do anything in your components.  The default numeric interpolator looks like this:
+
+To do numeric interpolation you don't need to do anything in your components. The default numeric interpolator looks like this:
 
 ```js
 // The default interpolator used in NodeGroup and Animate
 
 const numeric = (beg, end) => {
-  const a = +beg
-  const b = +end - a
-  
-  return function(t) {
-    return a + b * t
-  } 
-}
+  const a = +beg;
+  const b = +end - a;
 
+  return function(t) {
+    return a + b * t;
+  };
+};
 ```
 
 ## React-Move vs React-Motion
 
-* React-move allows you to define your animations using durations, delays and ease functions.
+- React-move allows you to define your animations using durations, delays and ease functions.
   In react-motion you use spring configurations to define your animations.
 
-* React-move is designed to easily plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
+- React-move is designed to easily plugin interpolation for strings, numbers, colors, SVG paths and SVG transforms.
   With react-motion you can only interpolate numbers so you have to do a bit more work use colors, paths, etc.
 
-* In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
+- In react-move you can define different animations for entering, updating and leaving with the ability to specify delay, duration and ease on each individual key.
   React-motion allows you to define a spring configuration for each key in the "style" object.
 
-* React-move has lifecycle events on its transitions.
+- React-move has lifecycle events on its transitions.
   You can pass a function to be called on transition start, interrupt or end.
   React-motion has an "onRest" prop that fires a callback when the animation stops (just the `Motion` component not `TransitionMotion` or `StaggeredMotion`).
 
-* React-move also allows you to pass your own custom tween functions. It's all springs in react-motion.
+- React-move also allows you to pass your own custom tween functions. It's all springs in react-motion.
 
 ## Contributing
 
-We love contributions from the community! Read the [contributing info here](https://github.com/react-tools/react-move/blob/master/CONTRIBUTING.md).
+We love contributions from the community! Read the [contributing info here](https://github.com/sghall/react-move/blob/master/CONTRIBUTING.md).
 
 #### Run the repo locally
 
-* Fork this repo
-* `npm install`
-* `cd docs`
-* `npm install`
-* `npm start`
+- Fork this repo
+- `npm install`
+- `cd docs`
+- `npm install`
+- `npm start`
 
 #### Scripts
 
 Run these from the root of the repo
 
-* `npm run lint` Lints all files in src and docs
-* `npm run test` Runs the test suite locally
-* `npm run test:coverage` Get a coverage report in the console
-* `npm run test:coverage:html` Get an HTML coverage report in coverage folder
+- `npm run lint` Lints all files in src and docs
+- `npm run test` Runs the test suite locally
+- `npm run test:coverage` Get a coverage report in the console
+- `npm run test:coverage:html` Get an HTML coverage report in coverage folder
 
-Go to [live examples, code and docs](https://react-move.js.org)!
+Go to [live examples, code and docs](https://react-move-docs.netlify.app)!
