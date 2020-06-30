@@ -8,9 +8,9 @@
     "url": "https://github.com/sghall/react-move.git"
   },
   "scripts": {
-    "start": "cross-env npm run clean && ../node_modules/.bin/babel-node webpack.dev.server.js",
-    "build": "cross-env npm run clean && NODE_ENV=production webpack --config webpack.prd.config.js",
-    "clean": "../node_modules/.bin/rimraf build"
+    "start": "cross-env ../node_modules/.bin/babel-node webpack.dev.server.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prd.config.js",
+    "clean": "../node_modules/.bin/rimraf node_modules"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.4",
