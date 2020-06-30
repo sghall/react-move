@@ -7,10 +7,11 @@ Thanks for contributing! If you think you have found a bug, or have a new featur
 Next, create a new issue that briefly explains the problem, and provides a bit of background as to the circumstances that triggered it, and steps to reproduce it.
 
 For code issues please include:
-* React-Move version
-* React version
-* Browser version
-* A code example or link to a repo, gist or running site.
+
+- React-Move version
+- React version
+- Browser version
+- A code example or link to a repo, gist or running site.
 
 ## Submitting a Pull Request
 
@@ -22,7 +23,7 @@ When adding new features or modifying existing, please attempt to include tests 
 
 ### Branch Structure
 
-All stable releases are tagged ([view tags](https://github.com/react-tools/react-move/tags)). At any given time, `master` represents the latest development version of the library. Patches or hotfix releases are prepared on an independent branch.
+All stable releases are tagged ([view tags](https://github.com/sghall/react-move/tags)). At any given time, `master` represents the latest development version of the library. Patches or hotfix releases are prepared on an independent branch.
 
 ## Getting started
 
@@ -35,8 +36,9 @@ Please create a new branch from an up to date master on your fork. (Note, urgent
 5. Visit github and make your pull request.
 
 If you have an existing local repository, please update it before you start, to minimise the chance of merge conflicts.
+
 ```js
-git remote add upstream git@github.com:react-tools/react-move.git
+git remote add upstream git@github.com:sghall/react-move.git
 git checkout master
 git pull upstream master
 git checkout -b my-topic-branch
@@ -51,6 +53,7 @@ cd docs
 npm install
 npm start
 ```
+
 You can now access the documentation site [locally](http://localhost:3000).
 
 ### Coding style

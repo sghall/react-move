@@ -1,5 +1,5 @@
 <div style="text-align:center;">
-  <a href="https://github.com/sghall/react-move" target="\_parent"><img src="https://github.com/react-tools/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
+  <a href="https://github.com/sghall/react-move" target="\_parent"><img src="https://github.com/sghall/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
 </div>
 
 # React-Move
@@ -8,7 +8,6 @@ Beautiful, data-driven animations for React. Just 3.5kb (gzipped)!
 
 ### [Documentation and Examples](https://react-move-docs.netlify.app)
 
-[![Build Status](https://travis-ci.org/react-tools/react-move.svg?branch=master)](https://travis-ci.org/react-tools/react-move)
 [![npm version](https://img.shields.io/npm/v/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![npm downloads](https://img.shields.io/npm/dm/react-move.svg)](https://www.npmjs.com/package/react-move)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/sghall/react-move/blob/master/LICENSE)
