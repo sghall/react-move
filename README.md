@@ -1,5 +1,5 @@
 <div style="text-align:center;">
-  <a href="https://github.com/sghall/react-move" target="\_parent"><img src="https://github.com/sghall/media/raw/master/logo-react-move.png" alt="React Table Logo" style="width:450px;"/></a>
+  <a href="https://github.com/sghall/react-move" target="\_parent"><img src="https://user-images.githubusercontent.com/4615775/86074106-161b9f80-ba3a-11ea-84dd-04845dd51582.png" alt="React Table Logo" style="width:450px;"/></a>
 </div>
 
 # React-Move
