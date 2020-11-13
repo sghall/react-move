@@ -42,7 +42,7 @@
     "build:lib": "node ./scripts/build.js",
     "build:cpy": "cross-env BABEL_ENV=cjs babel-node ./scripts/copy-files.js",
     "lint": "eslint --fix src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
-    "test": "cross-env BABEL_ENV=test mocha \"src/**/*.spec.js\"",
+    "test": "cross-env BABEL_ENV=test mocha --exit \"src/**/*.spec.js\"",
     "test:watch": "npm run test -- -w",
     "test:coverage": "cross-env BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=lcov",
     "test:coverage:html": "cross-env BABEL_ENV=coverage nyc mocha \"src/**/*.spec.js\" && nyc report --reporter=html",
