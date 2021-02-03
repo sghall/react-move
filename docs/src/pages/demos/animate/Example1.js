@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { feature } from 'topojson'
+import { feature } from 'topojson-client'
 import { easeQuadOut } from 'd3-ease'
 import { Animate } from 'react-move'
 import { interpolate } from 'flubber'
@@ -14,23 +14,23 @@ const trbl = [10, 10, 10, 10] // [top, right, bottom, left] margins
 
 class Example extends PureComponent {
   state = {
-    states: feature(statesJSON, statesJSON.objects.states)
-      .features.map((d) => {
-        return d.geometry.coordinates[0]
-      }),
+    states: feature(statesJSON, statesJSON.objects.states).features.map(d => {
+      return d.geometry.coordinates[0]
+    }),
   }
 
-  update = () => { // take the first one, put it at the end
+  update = () => {
+    // take the first one, put it at the end
     this.setState(({ states }) => ({
-      states: [
-        ...states.slice(1),
-        states[0],
-      ],
+      states: [...states.slice(1), states[0]],
     }))
   }
 
   render() {
-    const { update, state: { states } } = this
+    const {
+      update,
+      state: { states },
+    } = this
     const interpolator = interpolate(states[0], states[1])
 
     return (
@@ -42,26 +42,21 @@ class Example extends PureComponent {
               opacity: 0,
               d: interpolator(1),
             }}
-
             enter={[
               {
                 opacity: [0.7],
                 timing: { duration: 1000 },
               },
             ]}
-
             update={{
               d: interpolator,
               timing: { duration: 1000, ease: easeQuadOut },
             }}
           >
-            {(state) => {
+            {state => {
               return (
                 <g transform="translate(100, 0) scale(0.8)">
-                  <path
-                    fill="#ff69b4"
-                    {...state}
-                  />
+                  <path fill="#ff69b4" {...state} />
                 </g>
               )
             }}
