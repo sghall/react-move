@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from "react"
 import { HashMap, GetInterpolator } from '..'
 
 export interface INodeGroupProps<T> {
