@@ -86,8 +86,8 @@ import { interpolate, interpolateTransformSvg } from 'd3-interpolate'
 
 ## Demos
 
-- [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@animateddata](https://github.com/animateddata))
-- [Blog Post by Peter Cook](https://frontendcharts.com/react-move-barchart/)
+- [CodeSandbox - Animated Bars](https://codesandbox.io/s/w0ol90x9z5) ([@peterrcook](https://github.com/peterrcook))
+- [Blog Post by Peter Cook](https://www.createwithdata.com/react-move-bar-chart)
 - [CodeSandbox - Collapsible Tree](https://codesandbox.io/s/ww0xkyqonk) ([@techniq](https://github.com/techniq))
 - [CodeSandbox - Draggable List](https://codesandbox.io/s/j2povnz8ly)
 - [CodeSandbox - Circle Inferno](https://codesandbox.io/s/n033m6nw00)
