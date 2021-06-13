@@ -53,15 +53,11 @@ describe('<NodeGroup />', () => {
     )
   })
 
-  it('should remove nodes that are not transitioning', (done) => {
+  it('should remove nodes that are not transitioning', done => {
     const data = getData()
 
     const wrapper = mount(
-      <NodeGroup
-        data={data}
-        keyAccessor={keyAccessor}
-        start={() => ({})}
-      >
+      <NodeGroup data={data} keyAccessor={keyAccessor} start={() => ({})}>
         {renderChildren}
       </NodeGroup>,
     )

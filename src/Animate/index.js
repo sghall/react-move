@@ -7,7 +7,15 @@ const keyAccessor = () => '$$key$$'
 
 class Animate extends Component {
   render() {
-    const { show, start, enter, update, leave, interpolation, children } = this.props
+    const {
+      show,
+      start,
+      enter,
+      update,
+      leave,
+      interpolation,
+      children,
+    } = this.props
     const data = typeof start === 'function' ? start() : start
 
     return (
@@ -24,7 +32,7 @@ class Animate extends Component {
           if (!nodes[0]) {
             return null
           }
-  
+
           const renderedChildren = children(nodes[0].state)
           return renderedChildren && React.Children.only(renderedChildren)
         }}
@@ -83,4 +91,3 @@ Animate.defaultProps = {
 }
 
 export default Animate
-

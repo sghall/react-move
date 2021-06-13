@@ -31,7 +31,7 @@ class NodeGroup extends Component {
       data: null,
     }
   }
-  
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data !== prevState.data) {
       const { data, keyAccessor, start, enter, update, leave } = nextProps
@@ -45,7 +45,7 @@ class NodeGroup extends Component {
 
       const nextKeyIndex = {}
       const nextNodeKeys = []
-  
+
       for (let i = 0; i < data.length; i++) {
         const d = data[i]
         const k = keyAccessor(d, i)
@@ -61,7 +61,7 @@ class NodeGroup extends Component {
           nodeHash[k] = node
         }
       }
-  
+
       for (let i = 0; i < nodeKeys.length; i++) {
         const k = nodeKeys[i]
         const n = nodeHash[k]
@@ -73,14 +73,14 @@ class NodeGroup extends Component {
           n.type = LEAVE
         }
       }
-  
+
       const mergedNodeKeys = mergeKeys(
         nodeKeys,
         keyIndex,
         nextNodeKeys,
         nextKeyIndex,
       )
-  
+
       for (let i = 0; i < mergedNodeKeys.length; i++) {
         const k = mergedNodeKeys[i]
         const n = nodeHash[k]
@@ -95,7 +95,7 @@ class NodeGroup extends Component {
           n.transition(update(d, nextKeyIndex[k]))
         }
       }
-  
+
       return {
         data,
         nodes: mergedNodeKeys.map(key => {
@@ -108,17 +108,17 @@ class NodeGroup extends Component {
 
     return null
   }
-  
+
   componentDidMount() {
     this.startInterval()
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps.data !== this.props.data && !this.unmounting) {
       this.startInterval()
     }
   }
-  
+
   startInterval() {
     if (!this.interval) {
       this.interval = interval(this.animate)
@@ -126,7 +126,7 @@ class NodeGroup extends Component {
       this.interval.restart(this.animate)
     }
   }
-  
+
   componentWillUnmount() {
     const { nodeKeys, nodeHash } = this.state
 
@@ -140,7 +140,7 @@ class NodeGroup extends Component {
       nodeHash[key].stopTransitions()
     })
   }
-  
+
   animate = () => {
     const { nodeKeys, nodeHash } = this.state
 
@@ -152,7 +152,7 @@ class NodeGroup extends Component {
 
     const nextNodeKeys = []
     const length = nodeKeys.length
-  
+
     for (let i = 0; i < length; i++) {
       const k = nodeKeys[i]
       const n = nodeHash[k]
@@ -169,7 +169,7 @@ class NodeGroup extends Component {
         nextNodeKeys.push(k)
       }
     }
-  
+
     if (!pending) {
       this.interval.stop()
     }
@@ -181,7 +181,7 @@ class NodeGroup extends Component {
       }),
     }))
   }
-  
+
   interval = null
   unmounting = false
 
@@ -234,4 +234,3 @@ NodeGroup.defaultProps = {
 }
 
 export default NodeGroup
-
