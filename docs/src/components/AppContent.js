@@ -1,10 +1,7 @@
-// @flow
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import MarkdownElement from 'docs/src/components/MarkdownElement'
 
 const styles = theme => ({
   content: theme.mixins.gutters({
@@ -20,20 +17,7 @@ const styles = theme => ({
 })
 
 function AppContent(props) {
-  const { className, classes, children: childrenProp, route } = props
-
-  //   let children = childrenProp
-
-  //   if (!children) {
-  //     const text = `
-  // # Summary
-
-  // ${route.childRoutes
-  //     .map(childRoute => `- [${childRoute.title}](${childRoute.path})`)
-  //     .join('\n')}
-  // `
-  //     children = <MarkdownElement text={text} />
-  //   }
+  const { className, classes, children } = props
 
   return (
     <div className={classNames(classes.content, className)}>{children}</div>

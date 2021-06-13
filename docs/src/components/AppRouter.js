@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  IndexRoute,
-  Switch,
-} from 'react-router-dom'
-import { titleize } from 'docs/src/utils/helpers'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AppFrame from 'docs/src/components/AppFrame'
 import AppContent from 'docs/src/components/AppContent'
 import MarkdownDocs from 'docs/src/components/MarkdownDocs'
@@ -53,7 +47,9 @@ export function AppRouter() {
               {demo.map(d => {
                 return (
                   <Route key={d.name} path={`/demos/${d.name}`}>
-                    <MarkdownDocs content={requireDemo(d.path)} />
+                    <AppContent>
+                      <MarkdownDocs content={requireDemo(d.path)} />
+                    </AppContent>
                   </Route>
                 )
               })}
