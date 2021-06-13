@@ -1,5 +1,3 @@
-// @flow weak
-
 const path = require('path')
 
 module.exports = {
@@ -30,10 +28,7 @@ module.exports = {
               ],
               '@babel/preset-react',
             ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              ['transform-react-remove-prop-types', { mode: 'remove' }],
-            ],
+            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
@@ -42,8 +37,16 @@ module.exports = {
         loader: 'raw-loader',
       },
       {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
