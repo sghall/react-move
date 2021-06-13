@@ -107,9 +107,7 @@ function generateDescription(required, description, type) {
       .map(tag => `*${tag.name}:* ${tag.description}`)
       .join('<br>')
     if (parsedReturns.description) {
-      signature += `<br> *returns* (${parsedReturns.type.name}): ${
-        parsedReturns.description
-      }`
+      signature += `<br> *returns* (${parsedReturns.type.name}): ${parsedReturns.description}`
     }
   }
 
@@ -180,8 +178,6 @@ class PropTypeDescription extends Component {
         : requiredProps > 1
         ? ''
         : '* required properties'
-
-    console.log(text)
 
     return (
       <div className="propTypeDescription" style={{ paddingTop: 10 }}>

@@ -17,21 +17,19 @@ const styles = {
   },
 }
 
-function ComponentDoc({ classes, route: { code, content } }) {
+function ComponentDoc({ classes, code, content }) {
   return (
     <div className={classes.root}>
-      <MarkdownElement text={content} />
-      <PropsDescription code={code} />
+      <MarkdownElement text={content.default} />
+      <PropsDescription code={code.default} />
     </div>
   )
 }
 
 ComponentDoc.propTypes = {
   classes: PropTypes.object.isRequired,
-  route: PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired,
+  code: PropTypes.object.isRequired,
+  content: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(ComponentDoc)

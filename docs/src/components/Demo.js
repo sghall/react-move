@@ -83,7 +83,7 @@ class Demo extends Component {
           <h3 style={{ fontWeight: 300, marginLeft: 10 }}>Example Source</h3>
           <MarkdownElement
             className={classes.code}
-            text={`\`\`\`js\n${demoSource}\n\`\`\``}
+            text={`\`\`\`js\n${demoSource.default}\n\`\`\``}
           />
         </Collapse>
         <Paper className={classes.paper}>

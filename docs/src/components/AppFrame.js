@@ -1,73 +1,73 @@
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Home from "@material-ui/icons/HomeRounded";
-import ListItemText from "@material-ui/core/ListItemText";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router";
-import GitHub from "./Github";
+import React from 'react'
+import PropTypes from 'prop-types'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Home from '@material-ui/icons/HomeRounded'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
+import GitHub from './Github'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const styles = theme => ({
   root: {
-    display: "flex",
-    color: theme.palette.text.primary
+    display: 'flex',
+    color: theme.palette.text.primary,
   },
   navTitle: {
-    marginLeft: 10
+    marginLeft: 10,
   },
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   content: {
-    flexGrow: 1
-  }
-});
+    flexGrow: 1,
+  },
+})
 
 class ResponsiveDrawer extends React.Component {
   state = {
-    mobileOpen: false
-  };
+    mobileOpen: false,
+  }
 
   handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
-  };
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
+  }
 
   render() {
-    const { theme, classes, children } = this.props;
+    const { theme, classes, children } = this.props
 
     const drawer = (
       <div style={{ marginBottom: 100 }}>
@@ -77,12 +77,12 @@ class ResponsiveDrawer extends React.Component {
           Documentation
         </Typography>
         <List>
-          <Link to="/getting-started/installation">
+          <Link style={{ color: 'inherit' }} to="/getting-started/installation">
             <ListItem button>
               <ListItemText primary="Installation" />
             </ListItem>
           </Link>
-          <Link to="/getting-started/features">
+          <Link style={{ color: 'inherit' }} to="/getting-started/features">
             <ListItem button>
               <ListItemText primary="Features" />
             </ListItem>
@@ -93,12 +93,12 @@ class ResponsiveDrawer extends React.Component {
           Component API
         </Typography>
         <List>
-          <Link to="/component-api/node-group">
+          <Link style={{ color: 'inherit' }} to="/component-api/node-group">
             <ListItem button>
               <ListItemText primary="NodeGroup" />
             </ListItem>
           </Link>
-          <Link to="/component-api/animate">
+          <Link style={{ color: 'inherit' }} to="/component-api/animate">
             <ListItem button>
               <ListItemText primary="Animate" />
             </ListItem>
@@ -109,50 +109,50 @@ class ResponsiveDrawer extends React.Component {
           Demos
         </Typography>
         <List>
-          <Link to="/demos/node-group">
+          <Link style={{ color: 'inherit' }} to="/demos/node-group">
             <ListItem button>
               <ListItemText primary="NodeGroup" />
             </ListItem>
           </Link>
-          <Link to="/demos/animate">
+          <Link style={{ color: 'inherit' }} to="/demos/animate">
             <ListItem button>
               <ListItemText primary="Animate" />
             </ListItem>
           </Link>
-          <Link to="/demos/charts">
+          <Link style={{ color: 'inherit' }} to="/demos/charts">
             <ListItem button>
               <ListItemText primary="SVG Charts" />
             </ListItem>
           </Link>
-          <Link to="/demos/simple">
+          <Link style={{ color: 'inherit' }} to="/demos/simple">
             <ListItem button>
               <ListItemText primary="Simple" />
             </ListItem>
           </Link>
-          <Link to="/demos/animated-bar">
+          <Link style={{ color: 'inherit' }} to="/demos/animated-bar">
             <ListItem button>
-              <ListItemText primary="Animated Bars" secondary={"CodeSandbox"} />
+              <ListItemText primary="Animated Bars" secondary={'CodeSandbox'} />
             </ListItem>
           </Link>
-          <Link to="/demos/collapsible-tree">
+          <Link style={{ color: 'inherit' }} to="/demos/collapsible-tree">
             <ListItem button>
               <ListItemText
                 primary="Collapsible Tree"
-                secondary={"CodeSandbox"}
+                secondary={'CodeSandbox'}
               />
             </ListItem>
           </Link>
-          <Link to="/demos/draggable-list">
+          <Link style={{ color: 'inherit' }} to="/demos/draggable-list">
             <ListItem button>
               <ListItemText
                 primary="Draggable List"
-                secondary={"CodeSandbox"}
+                secondary={'CodeSandbox'}
               />
             </ListItem>
           </Link>
         </List>
       </div>
-    );
+    )
 
     return (
       <div className={classes.root}>
@@ -175,13 +175,17 @@ class ResponsiveDrawer extends React.Component {
             >
               React Move
             </Typography>
-            <Link style={{ color: "inherit" }} to="/">
+            <Link
+              style={{ color: 'inherit' }}
+              style={{ color: 'inherit' }}
+              to="/"
+            >
               <IconButton color="inherit">
                 <Home />
               </IconButton>
             </Link>
             <a
-              style={{ color: "inherit" }}
+              style={{ color: 'inherit' }}
               href="https://github.com/sghall/react-move"
             >
               <IconButton color="inherit">
@@ -194,11 +198,11 @@ class ResponsiveDrawer extends React.Component {
           <Hidden smUp implementation="css">
             <Drawer
               variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
             >
               {drawer}
@@ -207,7 +211,7 @@ class ResponsiveDrawer extends React.Component {
           <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               variant="permanent"
               open
@@ -221,14 +225,14 @@ class ResponsiveDrawer extends React.Component {
           {children}
         </main>
       </div>
-    );
+    )
   }
 }
 
 ResponsiveDrawer.propTypes = {
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired
-};
+  children: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(ResponsiveDrawer)

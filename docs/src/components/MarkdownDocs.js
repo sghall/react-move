@@ -22,8 +22,9 @@ const demoRegexp = /^demo='(.*)'$/
 const emptyRegexp = /^\s*$/
 
 function MarkdownDocs(props) {
-  const { classes, route } = props
-  const contents = route.content
+  const { classes } = props
+
+  const contents = props.content.default
     .replace(headerRegexp, '') // Remove header information
     .split(/^{{|}}$/gm) // Split markdown into an array, separating demos
     .filter(content => !emptyRegexp.test(content)) // Remove empty lines
@@ -43,12 +44,7 @@ function MarkdownDocs(props) {
 
 MarkdownDocs.propTypes = {
   classes: PropTypes.object.isRequired,
-  route: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    componentAPI: PropTypes.object,
-    demo: PropTypes.object,
-  }).isRequired,
+  content: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(MarkdownDocs)

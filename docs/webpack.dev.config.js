@@ -71,13 +71,11 @@ module.exports = {
     ],
   },
   resolve: {
+    fallback: { os: require.resolve('os-browserify/browser') },
     alias: {
       docs: path.resolve(__dirname, '../docs'),
       'react-move': path.resolve(__dirname, '../src'),
     },
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ],
+  plugins: [],
 }

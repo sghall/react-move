@@ -16,6 +16,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "babel-loader": "^8.1.0",
+    "classnames": "^2.3.1",
     "cross-env": "^5.2.1",
     "css-loader": "^5.2.6",
     "d3-array": "^2.4.0",
@@ -37,6 +38,7 @@
     "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "recast": "^0.16.2",
     "redux": "^4.0.5",
     "sass-loader": "^12.1.0",
@@ -45,5 +47,8 @@
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "devDependencies": {
+    "os-browserify": "^0.3.0"
   }
 }

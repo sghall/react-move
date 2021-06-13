@@ -22,18 +22,18 @@ const styles = theme => ({
 function AppContent(props) {
   const { className, classes, children: childrenProp, route } = props
 
-  let children = childrenProp
+  //   let children = childrenProp
 
-  if (!children) {
-    const text = `
-# Summary
+  //   if (!children) {
+  //     const text = `
+  // # Summary
 
-${route.childRoutes
-    .map(childRoute => `- [${childRoute.title}](${childRoute.path})`)
-    .join('\n')}
-`
-    children = <MarkdownElement text={text} />
-  }
+  // ${route.childRoutes
+  //     .map(childRoute => `- [${childRoute.title}](${childRoute.path})`)
+  //     .join('\n')}
+  // `
+  //     children = <MarkdownElement text={text} />
+  //   }
 
   return (
     <div className={classNames(classes.content, className)}>{children}</div>
