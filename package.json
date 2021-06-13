@@ -96,8 +96,7 @@
     "rollup-plugin-size-snapshot": "^0.11.0",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "sinon": "^7.5.0",
-    "webpack": "^4.43.0"
+    "sinon": "^7.5.0"
   },
   "nyc": {
     "include": [
