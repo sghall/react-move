@@ -1,15 +1,8 @@
 // @flow
 
 import React from 'react'
-import {
-  applyRouterMiddleware,
-  useRouterHistory,
-  Router,
-  Route,
-  IndexRoute,
-} from 'react-router'
+import { useRouterHistory, Router, Route, IndexRoute } from 'react-router'
 import { createHashHistory } from 'history'
-import { useScroll } from 'react-router-scroll'
 import { titleize } from 'docs/src/utils/helpers'
 import AppFrame from 'docs/src/components/AppFrame'
 import AppContent from 'docs/src/components/AppContent'
@@ -25,10 +18,7 @@ import {
 
 export default function AppRouter() {
   return (
-    <Router
-      history={useRouterHistory(createHashHistory)()}
-      render={applyRouterMiddleware(useScroll())}
-    >
+    <Router history={useRouterHistory(createHashHistory)()}>
       <Route title="React Move" path="/" component={AppFrame}>
         <IndexRoute dockDrawer component={Home} title={null} />
         <Route
