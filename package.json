@@ -50,7 +50,7 @@
     "pretty-docs": "prettier-eslint docs/src/**/*.js --write --no-semi --single-quote --trailing-comma=all --print-width 80"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": ">=16.3.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.5",
