@@ -50,7 +50,7 @@
     "pretty-docs": "prettier-eslint docs/src/**/*.js --write --no-semi --single-quote --trailing-comma=all --print-width 80"
   },
   "peerDependencies": {
-    "react": "^16.3.0"
+    "react": "^17.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.3",
@@ -66,6 +66,7 @@
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.1",
     "@babel/register": "^7.10.3",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-istanbul": "^5.2.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
@@ -74,7 +75,6 @@
     "cross-env": "^5.2.1",
     "d3-interpolate": "^1.4.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-react": "^7.20.2",
@@ -85,8 +85,8 @@
     "mocha": "^7.2.0",
     "nyc": "^14.1.1",
     "prettier-eslint-cli": "^5.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "17",
+    "react-dom": "^17.0.2",
     "rimraf": "^2.7.1",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
